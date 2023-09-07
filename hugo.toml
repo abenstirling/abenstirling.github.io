@@ -1,0 +1,4 @@
+baseURL = 'https://abenstirling.com'
+languageCode = 'en-us'
+title = 'Ben Stirling'
+theme = 'dead-simple'
