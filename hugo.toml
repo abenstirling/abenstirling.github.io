@@ -1,7 +1,7 @@
 baseURL = 'https://abenstirling.github.io/'
 languageCode = 'en-us'
 title = 'Ben Stirling'
-theme = "paper"
+theme = 'paper'
 
 [params]
   # color style
@@ -23,5 +23,4 @@ theme = "paper"
   disablePostNavigation = true              # disable post navigation
   monoDarkIcon = true                       # show monochrome dark mode icon
   gravatarCdn = 'https://avatars.githubusercontent.com/u/33791408?v=4'         # e.g. 'https://cdn.v2ex.com/gravatar/'
-  graphCommentId = "YOUR_GRAPH_COMMENT_ID"  # use graph comment (disqus alternative)
   math = true   

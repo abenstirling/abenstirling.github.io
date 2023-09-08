@@ -1,7 +1,7 @@
 +++
 title = 'Test'
 date = 2023-09-07T19:30:54-07:00
-draft = true
+draft = false
 thumbnail = '/logo_black.png'
 +++
 ## Introduction
