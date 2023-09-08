@@ -27,6 +27,8 @@ jobs:
           extended: true
       - name: Build Hugo
         run: hugo --minify
+      - name: Add CNAME
+        run: echo "abenstirling.com" > ./public/CNAME
       - name: Deploy to gh-pages
         uses: crazy-max/ghaction-github-pages@v3
         if: github.ref == 'refs/heads/master' || github.ref == 'refs/heads/main'
