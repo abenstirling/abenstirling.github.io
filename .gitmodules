@@ -1,6 +1,0 @@
-[submodule "themes/dead-simple"]
-	path = themes/dead-simple
-	url = https://github.com/barklan/hugo-dead-simple.git
-[submodule "themes/paper"]
-	path = themes/paper
-	url = https://github.com/nanxiaobei/hugo-paper
