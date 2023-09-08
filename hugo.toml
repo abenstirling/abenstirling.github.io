@@ -1,26 +1,103 @@
-baseURL = 'https://abenstirling.github.io/'
-languageCode = 'en-us'
-title = 'Ben Stirling'
-theme = 'paper'
+baseURL = "https://abenstirling.github.io/"
+title = "Ben Stirling"
+paginate = 50
+theme = "PaperMod"
+
+enableRobotsTXT = true
+buildDrafts = true
+buildFuture = false
+buildExpired = false
+
+
+[minify]
+  disableXML = true
+  minifyOutput = true
 
 [params]
-  # color style
-  color = 'linen'                           # linen, wheat, gray, light
+  env = "production"
+  title = "Ben Stirling"
+  description = "Ben Stirling"
+  keywords = ["Blog", "Portfolio", "PaperMod"]
+  author = "Ben Stirling"
+  images = ["<link or path of image for opengraph, twitter-cards>"]
+  DateFormat = "January 2, 2006"
+  defaultTheme = "auto"
+  disableThemeToggle = false
+  ShowReadingTime = true
+  ShowShareButtons = false
+  ShowPostNavLinks = true
+  ShowBreadCrumbs = true
+  ShowCodeCopyButtons = false
+  ShowWordCount = true
+  ShowRssButtonInSectionTermList = true
+  UseHugoToc = true
+  disableSpecial1stPost = false
+  disableScrollToTop = false
+  comments = false
+  hidemeta = false
+  hideSummary = false
+  showtoc = false
+  tocopen = false
 
-  # header social icons
-  github = 'abenstirling'                 # github.com/YOUR_GITHUB_ID
-  instagram = 'abenstirling'           # instagram.com/YOUR_INSTAGRAM_ID
-  linkedin = 'abenstirling'             # linkedin.com/in/YOUR_LINKEDIN_ID
+  [params.assets]
+    favicon = "/logo.ico"
+    favicon16x16 = "/logo.ico"
+    favicon32x32 = "/logo.ico"
+    apple_touch_icon = "/logo.ico"
+    safari_pinned_tab = "/logo.ico"
 
-  # home page profile
-  avatar = 'GRAVATAR_EMAIL'                 # gravatar email or image url
-  name = 'Ben Stirling'
-  bio = 'Computer Engineer'
+  [params.label]
+    text = "Ben Stirling"
+    icon = "https://avatars.githubusercontent.com/u/33791408?v=4"
+    iconHeight = 35
+
+  [params.homeInfoParams]
+    Title = "Computer Engineer"
+    Content = "Bots & Watts, Surfing & Turfing"
+
+  [[params.socialIcons]]
+    name = "shopify"
+    url = "https://shopify.com"
+
+  [[params.socialIcons]]
+    name = "linkedin"
+    url = "https://linkedin.com/in/abenstirling"
+
+  [[params.socialIcons]]
+    name = "github"
+    url = "https://github.com/abenstirling"
 
 
-  # misc
-  disableHLJS = true                        # disable highlight.js
-  disablePostNavigation = true              # disable post navigation
-  monoDarkIcon = true                       # show monochrome dark mode icon
-  gravatarCdn = 'https://avatars.githubusercontent.com/u/33791408?v=4'         # e.g. 'https://cdn.v2ex.com/gravatar/'
-  math = true   
+  [params.cover]
+    hidden = true
+    hiddenInList = true
+    hiddenInSingle = true
+
+  
+
+  [params.fuseOpts]
+    isCaseSensitive = false
+    shouldSort = true
+    location = 0
+    distance = 1000
+    threshold = 0.4
+    minMatchCharLength = 0
+    keys = ["title", "permalink", "summary", "content"]
+
+[[menu.main]]
+  identifier = "Engineering"
+  name = "Engineering"
+  url = "/categories/"
+  weight = 10
+
+
+[[menu.main]]
+  identifier = "example"
+  name = "example.org"
+  url = "https://example.org"
+  weight = 30
+
+pygmentsUseClasses = true
+
+[markup.highlight]
+  noClasses = false
