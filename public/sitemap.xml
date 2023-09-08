@@ -2,13 +2,16 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>https://abenstirling.github.io/</loc>
-    <lastmod>2023-09-08T09:13:15-07:00</lastmod>
+    <loc>https://abenstirling.github.io/posts/airpark/airpark/</loc>
+    <lastmod>2023-09-08T15:48:34-07:00</lastmod>
   </url><url>
-    <loc>https://abenstirling.github.io/posts/picky/</loc>
-    <lastmod>2023-09-08T09:13:15-07:00</lastmod>
+    <loc>https://abenstirling.github.io/</loc>
+    <lastmod>2023-09-08T15:48:34-07:00</lastmod>
   </url><url>
     <loc>https://abenstirling.github.io/posts/</loc>
+    <lastmod>2023-09-08T15:48:34-07:00</lastmod>
+  </url><url>
+    <loc>https://abenstirling.github.io/posts/picky/picky/</loc>
     <lastmod>2023-09-08T09:13:15-07:00</lastmod>
   </url><url>
     <loc>https://abenstirling.github.io/categories/</loc>

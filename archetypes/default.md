@@ -1,5 +1,8 @@
 +++
 title = '{{ replace .File.ContentBaseName "-" " " | title }}'
 date = {{ .Date }}
-draft = true
+draft = false
+[cover]
+    image = "/posts/"
+    relative = true
 +++
