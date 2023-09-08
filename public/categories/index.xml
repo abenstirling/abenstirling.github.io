@@ -2,9 +2,9 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Categories on Ben Stirling</title>
-    <link>https://abenstirling.com/categories/</link>
+    <link>https://abenstirling.github.io/categories/</link>
     <description>Recent content in Categories on Ben Stirling</description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>en-us</language><atom:link href="https://abenstirling.com/categories/index.xml" rel="self" type="application/rss+xml" />
+    <language>en-us</language><atom:link href="https://abenstirling.github.io/categories/index.xml" rel="self" type="application/rss+xml" />
   </channel>
 </rss>
