@@ -1,4 +1,4 @@
-baseURL = 'https://abenstirling.com'
+baseURL = 'https://abenstirling.github.io/'
 languageCode = 'en-us'
 title = 'Ben Stirling'
 theme = 'dead-simple'
