@@ -1,4 +1,27 @@
 baseURL = 'https://abenstirling.github.io/'
 languageCode = 'en-us'
 title = 'Ben Stirling'
-theme = 'dead-simple'
+theme = "paper"
+
+[params]
+  # color style
+  color = 'linen'                           # linen, wheat, gray, light
+
+  # header social icons
+  github = 'abenstirling'                 # github.com/YOUR_GITHUB_ID
+  instagram = 'abenstirling'           # instagram.com/YOUR_INSTAGRAM_ID
+  linkedin = 'abenstirling'             # linkedin.com/in/YOUR_LINKEDIN_ID
+
+  # home page profile
+  avatar = 'GRAVATAR_EMAIL'                 # gravatar email or image url
+  name = 'Ben Stirling'
+  bio = 'Computer Engineer'
+
+
+  # misc
+  disableHLJS = true                        # disable highlight.js
+  disablePostNavigation = true              # disable post navigation
+  monoDarkIcon = true                       # show monochrome dark mode icon
+  gravatarCdn = 'https://avatars.githubusercontent.com/u/33791408?v=4'         # e.g. 'https://cdn.v2ex.com/gravatar/'
+  graphCommentId = "YOUR_GRAPH_COMMENT_ID"  # use graph comment (disqus alternative)
+  math = true   

@@ -1,225 +1,330 @@
-<!DOCTYPE html>
-<html lang="en-us">
+<!doctype html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<html
+  class="not-ready lg:text-base"
+  style="--bg: #faf8f1"
+  lang="en-us"
+>
   <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1, shrink-to-fit=no"
+  />
 
-    <meta http-equiv="cache-control" content="max-age=0" />
-    <meta http-equiv="cache-control" content="no-cache" />
-    <meta http-equiv="expires" content="0" />
-    <meta http-equiv="expires" content="Tue, 01 Jan 1980 1:00:00 GMT" />
-    <meta http-equiv="pragma" content="no-cache" />
-
-    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"}>
-    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
-    <link rel="manifest" href="/site.webmanifest">
-
-    <meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff" />
-    <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#1b1b1b" />
-
-    <link rel="alternate" type="application/rss+xml" href="https://abenstirling.github.io/categories/index.xml" title="Ben Stirling" />
-    
-        <title>Categories | Ben Stirling</title>
-    
-
-    
-    <style>
-        :root {
-          --background: #ffffff;
-        }
-        @media (prefers-color-scheme: dark) {
-          :root {
-            --background: #1b1b1b;
-          }
-        }
-        html {
-            background-color: var(--background);
-        }
-        body {
-            background-color: var(--background);
-        }
-    </style>
-
-    
-    <link href="/fonts/Inter-Regular.woff2?v=4.0" rel="preload" type="font/woff2" as="font" crossorigin="">
-    <link href="/fonts/Inter-Italic.woff2?v=4.0" rel="preload" type="font/woff2" as="font" crossorigin="">
-    <link href="/fonts/Inter-Bold.woff2?v=4.0" rel="preload" type="font/woff2" as="font" crossorigin="">
-    <link href="/fonts/iosevka-regular.woff2" rel="preload" type="font/woff2" as="font" crossorigin="">
-    <link href="/fonts/iosevka-extended.woff2" rel="preload" type="font/woff2" as="font" crossorigin="">
-
-    
-    <link rel="stylesheet" type="text/css" href="/style.min.fb0debc69e4260e5a2ede92cf03e2e587daecd85ea13d9402ae769bc33266214.css" media="all">
-  </head>
-
-  <body>
-        
-        <nav>
-          <ul class="menu">
-            
-          </ul>
-        </nav>
-        
-
-
-
-<h1>Categories</h1>
-
-<ul class="terms">
   
-</ul>
+  <title>Categories - Ben Stirling</title>
 
-<br>
+  
+  <meta name="theme-color" />
 
+  
+  
+  
+  
+  <meta
+    name="description"
+    content="A personal blog"
+  />
+  <meta name="author" content="Ben Stirling" />
+  
 
+  
+  
+  
+  
+  
+  
+  <link rel="preload stylesheet" as="style" href="https://abenstirling.github.io/main.min.css" />
 
-<footer>
+  
 
-<script defer>
-  document.addEventListener("keydown", function (e) {
-    if (document.activeElement.isContentEditable) {
-      return false;
-    }
-    if (document.activeElement.tagName == "INPUT") {
-      return false;
-    }
-    if (e.altKey || e.ctrlKey || e.shiftKey) {
-      return false;
-    }
-    var key = e.key;
-    if (key === "h") {
-      e.preventDefault();
-      e.stopPropagation();
-      window.location.href = "/";
-    } else if (key === "t") {
-      e.preventDefault();
-      e.stopPropagation();
-      window.location.href = "/tags";
-    } else if (key === "i") {
-      e.preventDefault();
-      e.stopPropagation();
-      const inputs = document.querySelectorAll("input");
-      for (let i = 0; i < inputs.length; i++) {
-        if (inputs[i].offsetParent !== null) {
-          inputs[i].selectionStart = inputs[i].selectionEnd =
-            inputs[i].value.length;
-          inputs[i].focus();
-          break;
-        }
-      }
-    }
-    return false;
-  });
-</script>
+  
+     
+  <link rel="preload" as="image" href="https://abenstirling.github.io/theme.svg" />
 
+  
+  
+  
+  <link rel="preload" as="image" href="https://avatars.githubusercontent.com/u/33791408?v=46fd8df4abe41f17fd8e2dd7d97b5cc8c?s=160&amp;d=identicon" />
+  
+  
 
-<script defer>
-  function scrollHandler() {
-    const anchors = Array.from(document.querySelectorAll("body h2, body h3"));
+  
+  <link rel="preload" as="image" href="https://abenstirling.github.io/github.svg" />
+  
+  <link rel="preload" as="image" href="https://abenstirling.github.io/instagram.svg" />
+  
+  <link rel="preload" as="image" href="https://abenstirling.github.io/linkedin.svg" />
+  
+  
 
-    window.addEventListener("scroll", function () {
-      var scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-
-      
-      for (var i = 0; i < anchors.length; i++) {
-        var anchorId = anchors[i].getAttribute("id");
-        var link = document.querySelector(
-          'nav ul li a[href="#' + anchorId + '"]'
-        );
-        if (link) {
-          link.classList.remove("active-toc");
-        }
-      }
-
-      
-      for (var i = anchors.length - 1; i >= 0; i--) {
-        var offsetTop = anchors[i].offsetTop;
-        if (scrollTop > offsetTop - 75) {
-          var anchorId = anchors[i].getAttribute("id");
-          var link = document.querySelector(
-            'nav ul li a[href="#' + anchorId + '"]'
-          );
-          if (link) {
-            link.classList.add("active-toc");
-            break;
-          }
-        }
-      }
-    });
-  }
-  setTimeout(scrollHandler, 100)
-</script>
-
-<script defer>
-  function addCopyButtonToCodeBlocks() {
-    
-    const codeBlocks = document.querySelectorAll('code[class^="language-"]');
-
-    codeBlocks.forEach((codeBlock) => {
-      const copyButton = document.createElement("button");
-      copyButton.classList.add("copy-code-button");
-      copyButton.innerHTML = "copy";
-
-      
-      copyButton.addEventListener("click", () => {
-        
-        const elements = codeBlock.querySelectorAll(".cl");
-        let codeToCopy = "";
-        elements.forEach((element) => {
-          codeToCopy += element.innerText;
-        });
-        navigator.clipboard.writeText(codeToCopy);
-
-        
-        copyButton.innerHTML = "copied!";
-        setTimeout(() => {
-          copyButton.innerHTML = "copy";
-        }, 1500);
-      });
-
-      
-      codeBlock.parentNode.before(copyButton);
-    });
-  }
-  setTimeout(function () {
-    addCopyButtonToCodeBlocks();
-  }, 100);
-</script>
+  
+  
+  <link
+  rel="stylesheet"
+  href="https://cdn.jsdelivr.net/npm/katex@0.16.7/dist/katex.min.css"
+  integrity="sha384-3UiQGuEI4TTMaFmGIZumfRPtfKQ3trwQE2JgosJxCnGmQpL/lJdjpcHkaaFwHlcI"
+  crossorigin="anonymous"
+/>
+<script
+  defer
+  src="https://cdn.jsdelivr.net/npm/katex@0.16.7/dist/katex.min.js"
+  integrity="sha384-G0zcxDFp5LWZtDuRMnBkk3EphCK1lhEf4UEyEM693ka574TZGwo4IWwS6QLzM/2t"
+  crossorigin="anonymous"
+></script>
+<script
+  defer
+  src="https://cdn.jsdelivr.net/npm/katex@0.16.7/dist/contrib/auto-render.min.js"
+  integrity="sha384-+VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4+/RRE05"
+  crossorigin="anonymous"
+></script>
 
 <script>
-window.store = {
-    
-    "https:\/\/abenstirling.github.io\/": {
-        "title": "Ben Stirling",
-        "tags": [],
-        "content": "", 
-        "url": "https:\/\/abenstirling.github.io\/"
-    },
-    
-    "https:\/\/abenstirling.github.io\/categories\/": {
-        "title": "Categories",
-        "tags": [],
-        "content": "", 
-        "url": "https:\/\/abenstirling.github.io\/categories\/"
-    },
-    
-    "https:\/\/abenstirling.github.io\/tags\/": {
-        "title": "Tags",
-        "tags": [],
-        "content": "", 
-        "url": "https:\/\/abenstirling.github.io\/tags\/"
-    },
-    
-}
+    document.addEventListener("DOMContentLoaded", () =>
+        renderMathInElement(document.body, {
+          
+          
+          delimiters: [
+              {left: '$$', right: '$$', display: true},
+              {left: '$', right: '$', display: false},
+          ],
+          
+          throwOnError : false
+        })
+    );
 </script>
-<script defer src="/js/lunr.js"></script>
-<script defer src="/js/search.js"></script>
+
+  
+  
+  
+
+  
+  <link rel="icon" href="https://abenstirling.github.io/favicon.ico" />
+  <link rel="apple-touch-icon" href="https://abenstirling.github.io/apple-touch-icon.png" />
+
+  
+  <meta name="generator" content="Hugo 0.118.2">
+
+  
+  
+  <link
+    rel="alternate"
+    type="application/rss&#43;xml"
+    href="https://abenstirling.github.io/categories/index.xml"
+    title="Ben Stirling"
+  />
+  
+
+  
+  
+  
+  
+  
+  <meta itemprop="name" content="Categories">
+<meta itemprop="description" content="">
+  
+  <meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Categories"/>
+<meta name="twitter:description" content=""/>
+
+  
+  
+</head>
+
+  <body class="text-black duration-200 ease-out dark:text-white">
+    <header class="mx-auto flex h-[4.5rem] max-w-3xl px-8 lg:justify-center">
+  <div class="relative z-50 mr-auto flex items-center">
+    <a
+      class="-translate-x-[1px] -translate-y-[1px] text-2xl font-semibold"
+      href="https://abenstirling.github.io/"
+      >Ben Stirling</a
+    >
+    <div
+      class="btn-dark text-[0] ml-4 h-6 w-6 shrink-0 cursor-pointer [background:url(./theme.svg)_left_center/cover_no-repeat] dark:invert dark:[background-position:right]"
+      role="button"
+      aria-label="Dark"
+    ></div>
+  </div>
+
+  <div
+    class="btn-menu relative z-50 -mr-8 flex h-[4.5rem] w-[5rem] shrink-0 cursor-pointer flex-col items-center justify-center gap-2.5 lg:hidden"
+    role="button"
+    aria-label="Menu"
+  ></div>
+
+  
+  <script>
+    
+    const htmlClass = document.documentElement.classList;
+    setTimeout(() => {
+      htmlClass.remove('not-ready');
+    }, 10);
+
+    
+    const btnMenu = document.querySelector('.btn-menu');
+    btnMenu.addEventListener('click', () => {
+      htmlClass.toggle('open');
+    });
+
+    
+    const metaTheme = document.querySelector('meta[name="theme-color"]');
+    const lightBg = '#faf8f1'.replace(/"/g, '');
+    const setDark = (isDark) => {
+      metaTheme.setAttribute('content', isDark ? '#000' : lightBg);
+      htmlClass[isDark ? 'add' : 'remove']('dark');
+      localStorage.setItem('dark', isDark);
+    };
+
+    
+    const darkScheme = window.matchMedia('(prefers-color-scheme: dark)');
+    if (htmlClass.contains('dark')) {
+      setDark(true);
+    } else {
+      const darkVal = localStorage.getItem('dark');
+      setDark(darkVal ? darkVal === 'true' : darkScheme.matches);
+    }
+
+    
+    darkScheme.addEventListener('change', (event) => {
+      setDark(event.matches);
+    });
+
+    
+    const btnDark = document.querySelector('.btn-dark');
+    btnDark.addEventListener('click', () => {
+      setDark(localStorage.getItem('dark') !== 'true');
+    });
+  </script>
+
+  <div
+    class="nav-wrapper fixed inset-x-0 top-full z-40 flex h-full select-none flex-col justify-center pb-16 duration-200 dark:bg-black lg:static lg:h-auto lg:flex-row lg:!bg-transparent lg:pb-0 lg:transition-none"
+  >
+    
+    
+
+    
+    <nav
+      class="mt-12 flex justify-center space-x-10 dark:invert lg:ml-12 lg:mt-0 lg:items-center lg:space-x-6"
+    >
+      
+      <a
+        class="h-8 w-8 text-[0] [background:var(--url)_center_center/cover_no-repeat] lg:h-6 lg:w-6"
+        style="--url: url(./github.svg)"
+        href="https://github.com/abenstirling"
+        target="_blank"
+        rel="me"
+      >
+        github
+      </a>
+      
+      <a
+        class="h-8 w-8 text-[0] [background:var(--url)_center_center/cover_no-repeat] lg:h-6 lg:w-6"
+        style="--url: url(./instagram.svg)"
+        href="https://instagram.com/abenstirling"
+        target="_blank"
+        rel="me"
+      >
+        instagram
+      </a>
+      
+      <a
+        class="h-8 w-8 text-[0] [background:var(--url)_center_center/cover_no-repeat] lg:h-6 lg:w-6"
+        style="--url: url(./linkedin.svg)"
+        href="https://linkedin.com/in/abenstirling"
+        target="_blank"
+        rel="me"
+      >
+        linkedin
+      </a>
+      
+    </nav>
+    
+  </div>
+</header>
+
+
+    <main
+      class="prose prose-neutral relative mx-auto min-h-[calc(100%-9rem)] max-w-3xl px-8 pb-16 pt-12 dark:prose-invert"
+    >
+      
 
 
 
 
+
+
+
+
+
+ 
+
+
+
+
+
+    </main>
+
+    <footer
+  class="opaco mx-auto flex h-[4.5rem] max-w-3xl items-center px-8 text-[0.9em] opacity-60"
+>
+  <div class="mr-auto">
+    &copy; 2023
+    <a class="link" href="https://abenstirling.github.io/">Ben Stirling</a>
+  </div>
+  <a class="link mx-6" href="https://gohugo.io/" rel="noopener" target="_blank"
+    >Powered by Hugo️️</a
+  >️
+  <a
+    class="link"
+    href="https://github.com/nanxiaobei/hugo-paper"
+    rel="noopener"
+    target="_blank"
+    >✎ Paper</a
+  >
 </footer>
 
-</body>
+  </body>
 </html>
-
