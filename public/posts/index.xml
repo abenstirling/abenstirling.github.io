@@ -11,26 +11,73 @@
     </image>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Fri, 08 Sep 2023 15:48:34 -0700</lastBuildDate><atom:link href="https://abenstirling.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
-    <item>
-      <title>Airpark</title>
-      <link>https://abenstirling.github.io/posts/airpark/airpark/</link>
-      <pubDate>Fri, 08 Sep 2023 15:48:34 -0700</pubDate>
-      
-      <guid>https://abenstirling.github.io/posts/airpark/airpark/</guid>
-      <description></description>
-    </item>
-    
+    <lastBuildDate>Thu, 14 Sep 2023 09:13:15 -0700</lastBuildDate><atom:link href="https://abenstirling.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Pick &#43; Place Machine</title>
-      <link>https://abenstirling.github.io/posts/picky/picky/</link>
-      <pubDate>Fri, 08 Sep 2023 09:13:15 -0700</pubDate>
+      <link>https://abenstirling.github.io/posts/picky/</link>
+      <pubDate>Thu, 14 Sep 2023 09:13:15 -0700</pubDate>
       
-      <guid>https://abenstirling.github.io/posts/picky/picky/</guid>
+      <guid>https://abenstirling.github.io/posts/picky/</guid>
       <description>I Made a Pick + Place Machine Because My University Didn&amp;rsquo;t Have One. | 💡 Update: Join the Pick + Place Club Of UCSD: https://discord.gg/KQ8bMdYnwB
 The main requirements:
 Be useful Be somewhat affordable Be finish-able I have followed Stephen Hawes on youtube since 2020, and have danced around with the idea of making his pick and place since it was open source.
 After he launched his company, I figured I could order the COTS parts and machine the rest at my school makerspace.</description>
+    </item>
+    
+    <item>
+      <title>Custom Split Keyboard</title>
+      <link>https://abenstirling.github.io/posts/keeb/</link>
+      <pubDate>Sat, 09 Sep 2023 18:46:00 -0700</pubDate>
+      
+      <guid>https://abenstirling.github.io/posts/keeb/</guid>
+      <description>I made a custom split keyboard becuase I didn&amp;rsquo;t have one. Demo Video I built a split keyboard with my friend Ari.
+BOM Switches https://www.amazon.com/Matcha-Switches-Mechanical-Keyboard-Linear/dp/B0BJ2266X4 $20 Stablizers https://www.amazon.com/GLORIOUS-Stabilizer-Mechanical-Keyboards-Compatible/dp/B09MZKFLXP/ $16 Caps https://www.amazon.com/Guffercty-kred-Keycaps-Keyboards-Mechanical/dp/B0B48RDDZT $20 Wood https://www.walmart.com/ip/Wenge-Exotic-Hardwood-Turning-Stock-3-4-x-3-x-24/150520201 $37 PCB https://keeb.io/collections/sinc/products/sinc-split-staggered-75-keyboard $85 Cord https://keeb.io/collections/diy-parts/products/coiled-usb-c-to-usb-c-cable $4 Rubber Feet https://www.amazon.com/Self-Adhesive-Bumper-82-Piece-Spherical-Square/dp/B06XCLYL53/ $8 GRAND TOTAL: ~$190 Below is a photo montage of the build!</description>
+    </item>
+    
+    <item>
+      <title>AirPark</title>
+      <link>https://abenstirling.github.io/posts/airpark/</link>
+      <pubDate>Fri, 08 Sep 2023 15:48:34 -0700</pubDate>
+      
+      <guid>https://abenstirling.github.io/posts/airpark/</guid>
+      <description>Problem: Garage Parking is difficult and dangerous Having a tight parking garage and having to perfectly position the vehicle to have enough space to get out while trying to maximize usable space and not risk dents and scratches, not even including the fact that north of 20% of accidents occur in parking situations.
+Solution: We want to provide drivers with accurate distance from their desired parking spot through an app interface.</description>
+    </item>
+    
+    <item>
+      <title>Botion</title>
+      <link>https://abenstirling.github.io/posts/botion/</link>
+      <pubDate>Sat, 02 Sep 2023 16:34:25 -0700</pubDate>
+      
+      <guid>https://abenstirling.github.io/posts/botion/</guid>
+      <description>I Wrote An App Because I Didn&amp;rsquo;t Have One. Demo Video </description>
+    </item>
+    
+    <item>
+      <title>Aeroknob</title>
+      <link>https://abenstirling.github.io/posts/aeroknob/</link>
+      <pubDate>Fri, 01 Sep 2023 19:41:55 -0700</pubDate>
+      
+      <guid>https://abenstirling.github.io/posts/aeroknob/</guid>
+      <description>My good CEO friend and I built a FlightSim controller from scratch.</description>
+    </item>
+    
+    <item>
+      <title>DeepWater Exploration</title>
+      <link>https://abenstirling.github.io/posts/deepwaterexploration/</link>
+      <pubDate>Mon, 14 Aug 2023 13:34:11 -0700</pubDate>
+      
+      <guid>https://abenstirling.github.io/posts/deepwaterexploration/</guid>
+      <description>Co-Founder. DWE.ai.</description>
+    </item>
+    
+    <item>
+      <title>Autoprint</title>
+      <link>https://abenstirling.github.io/posts/autoprint/</link>
+      <pubDate>Fri, 14 Jul 2023 13:46:34 -0700</pubDate>
+      
+      <guid>https://abenstirling.github.io/posts/autoprint/</guid>
+      <description>Co-Founder. We tried to simplify 3D printing. We developed a functional product and had an unsuccessful Kickstarter campaign.</description>
     </item>
     
   </channel>

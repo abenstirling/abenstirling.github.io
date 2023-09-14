@@ -1,6 +1,6 @@
 +++
 title = 'Pick + Place Machine'
-date = 2023-09-08T09:13:15-07:00
+date = 2023-09-14T09:13:15-07:00
 draft = false
 [cover]
     image = "/posts/picky_cover.gif"
