@@ -11,7 +11,16 @@
     </image>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Thu, 14 Sep 2023 09:13:15 -0700</lastBuildDate><atom:link href="https://abenstirling.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 19 Sep 2023 15:57:22 -0700</lastBuildDate><atom:link href="https://abenstirling.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>PCB Business Card</title>
+      <link>https://abenstirling.github.io/posts/businesscard/</link>
+      <pubDate>Tue, 19 Sep 2023 15:57:22 -0700</pubDate>
+      
+      <guid>https://abenstirling.github.io/posts/businesscard/</guid>
+      <description>I Made a Business Card Because I Didn&amp;rsquo;t Have One. Demo Video I sell them on Etsy now, per demand..</description>
+    </item>
+    
     <item>
       <title>Pick &#43; Place Machine</title>
       <link>https://abenstirling.github.io/posts/picky/</link>

@@ -34,7 +34,6 @@ I built a split keyboard with my friend
 ---
 Below is a photo montage of the build!
 
-![Alt Text](/posts/keeb_0.jpg)
 ![Alt Text](/posts/keeb_1.jpg)
 ![Alt Text](/posts/keeb_2.jpg)
 ![Alt Text](/posts/keeb_3.jpg)
