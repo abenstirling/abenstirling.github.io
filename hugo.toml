@@ -55,7 +55,9 @@ buildExpired = false
     Title = "Computer Engineer"
     Content = "Bots & Watts, Surfing & Turfing"
 
-
+  [[params.socialIcons]]
+    name = "email"
+    url = "mailto:abenstirling@pm.me"
 
   [[params.socialIcons]]
     name = "linkedin"
