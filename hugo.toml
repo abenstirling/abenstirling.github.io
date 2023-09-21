@@ -101,7 +101,7 @@ buildExpired = false
 [[menu.main]]
   identifier = "resume"
  name = "Resume"
- url = "https://file.notion.so/f/s/0381ae1c-da24-475e-b06a-3db4b35100c0/Ben_Stirling_Resume_2023.pdf?id=aca32d40-7edf-46cf-9b42-c5fee9a840dd&table=block&spaceId=b27e04fa-bada-4c3d-9c7e-b368d46f2082&expirationTimestamp=1694304000000&signature=zm8diRcvQ-5suCzabZgO_5h_pz7Kh2YA3W1R3ZK_OQk&downloadName=Ben+Stirling+Resume+2023.pdf"
+ url = "https://github.com/abenstirling/resume_cv/blob/main/Ben%20Stirling%20Resume%202023.pdf"
 #  weight = 30
 
 pygmentsUseClasses = true
