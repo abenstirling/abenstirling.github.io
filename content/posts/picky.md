@@ -94,3 +94,19 @@ Below is a photo montage of the build!
 ![Alt Text](/posts/picky_5.jpeg)
 ![Alt Text](/posts/picky_6.jpeg)
 
+So. I was never able to get it reliable enough to populate in the first month of me making the machine. 
+
+Here is a video demonstrating some issues I encountered: 
+
+{{<youtube K3m6R3-U0Sc>}}
+
+I adjusted the bottom camera, and got more reliable Computer Vision. 
+
+![Alt Text](/posts/picky_7.png)
+
+I added Linear rails and now I am testing with that!
+![Alt Text](/posts/picky_8.png)
+![Alt Text](/posts/picky_9.png)
+
+
+

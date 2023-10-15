@@ -11,7 +11,16 @@
     </image>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Tue, 19 Sep 2023 15:57:22 -0700</lastBuildDate><atom:link href="https://abenstirling.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 15 Oct 2023 10:42:20 -0700</lastBuildDate><atom:link href="https://abenstirling.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Macropad</title>
+      <link>https://abenstirling.github.io/posts/macropad/</link>
+      <pubDate>Sun, 15 Oct 2023 10:42:20 -0700</pubDate>
+      
+      <guid>https://abenstirling.github.io/posts/macropad/</guid>
+      <description></description>
+    </item>
+    
     <item>
       <title>PCB Business Card</title>
       <link>https://abenstirling.github.io/posts/businesscard/</link>
