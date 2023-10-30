@@ -13,12 +13,17 @@
     <language>en</language>
     <lastBuildDate>Sun, 15 Oct 2023 10:42:20 -0700</lastBuildDate><atom:link href="https://abenstirling.github.io/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>Macropad</title>
+      <title>MACropad</title>
       <link>https://abenstirling.github.io/posts/macropad/</link>
       <pubDate>Sun, 15 Oct 2023 10:42:20 -0700</pubDate>
       
       <guid>https://abenstirling.github.io/posts/macropad/</guid>
-      <description></description>
+      <description>This is a quick project that Ari and I built. Link to repo:
+We built it with the Keyboard Club Event as the deadline.
+We went through several iterations, in software and hardware.
+Here was the first PCB: It had a scuffed USB-C arrangement, also we switched to use a epaper display.
+The second PCB was better, still a bit off though: Main issues were:
+TP2 and TP3 were reversed (spliced the cable) Bad solder joints on headphone jack (resoldered) Lights were 180 degrees off (resoldered) Ruined epaper display with wrong code Case needed to be adjusted to fit headphone jack (redesigned and printed 2x) Nevertheless, we are stoked to see how it turned out for the event!</description>
     </item>
     
     <item>
@@ -28,6 +33,21 @@
       
       <guid>https://abenstirling.github.io/posts/businesscard/</guid>
       <description>I Made a Business Card Because I Didn&amp;rsquo;t Have One. Demo Video I sell them on Etsy now, per demand..</description>
+    </item>
+    
+    <item>
+      <title>Coffeetable</title>
+      <link>https://abenstirling.github.io/posts/coffeetable/</link>
+      <pubDate>Fri, 15 Sep 2023 20:59:39 -0700</pubDate>
+      
+      <guid>https://abenstirling.github.io/posts/coffeetable/</guid>
+      <description>I built a coffee table with my girlfriend.
+Frankly, we stole the idea from another couple that did the exact same thing.
+Speaking of the exact same thing, they gave us their leftover lacuer.
+I&amp;rsquo;m not sponsored by them, so that is why the picture is blurry.
+I moved into CAD, as things naturally start.
+It was a &amp;ldquo;simple&amp;rdquo; build.
+BOM Wood (~18&amp;quot;) Local Wood Shop ~$50 0.75&amp;quot; Steel Boxtube Your Local Makerspace ?</description>
     </item>
     
     <item>

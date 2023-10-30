@@ -108,5 +108,14 @@ I added Linear rails and now I am testing with that!
 ![Alt Text](/posts/picky_8.png)
 ![Alt Text](/posts/picky_9.png)
 
+It is so good and reliable! My personal test is the "Double Cap Stack", which it did without hesitation. 
 
+Here are some GIFs of it in action:
+![Alt Text](/posts/picky_10.gif)
+![Alt Text](/posts/picky_11.gif)
+![Alt Text](/posts/picky_12.gif)
+
+Here is a video demonstrating some success I encountered: 
+
+{{<youtube noN5oz5rLbU>}}
 
