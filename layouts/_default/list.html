@@ -1,5 +1,6 @@
 {{- define "main" }}
 
+
 {{- if (and site.Params.profileMode.enabled .IsHome) }}
 {{- partial "index_profile.html" . }}
 {{- else }} {{/* if not profileMode */}}
@@ -42,7 +43,7 @@
 
 {{- if .IsHome }}
 {{- $pages = where site.RegularPages "Type" "in" site.Params.mainSections }}
-{{- $pages = where $pages "Params.hiddenInHomeList" "!=" "true"  }}
+{{- $pages = where $pages "Params.hiddenInHomeList" "!=" "true" }}
 {{- end }}
 
 {{- $paginator := .Paginate $pages }}
@@ -52,40 +53,88 @@
 {{- end }}
 
 {{- $term := .Data.Term }}
-{{- range $index, $page := $paginator.Pages }}
 
-{{- $class := "post-entry" }}
+<!--ADDING THIS for dual screen-->
+<div class="posts-row">
+  <style>
+    .posts-row {
+      display: flex;
+      flex-wrap: wrap;
 
-{{- $user_preferred := or site.Params.disableSpecial1stPost site.Params.homeInfoParams }}
-{{- if (and $.IsHome (eq $paginator.PageNumber 1) (eq $index 0) (not $user_preferred)) }}
-{{- $class = "first-entry" }}
-{{- else if $term }}
-{{- $class = "post-entry tag-entry" }}
-{{- end }}
+    }
 
-<article class="{{ $class }}">
-  {{- $isHidden := (site.Params.cover.hidden | default site.Params.cover.hiddenInList) }}
-  {{- partial "cover.html" (dict "cxt" . "IsHome" true "isHidden" $isHidden) }}
-  <header class="entry-header">
-    <h2>
-      {{- .Title }}
-      {{- if .Draft }}<sup><span class="entry-isdraft">&nbsp;&nbsp;[draft]</span></sup>{{- end }}
-    </h2>
-  </header>
-  {{- if (ne (.Param "hideSummary") true) }}
-  <div class="entry-content">
-    <p>{{ .Summary | plainify | htmlUnescape }}{{ if .Truncated }}...{{ end }}</p>
-  </div>
+    .posts-container {
+      width: 100%;
+      /* Adjust the width as needed */
+      padding-left: 15px;
+      /* Padding inside the container */
+      padding-right: 15px;
+      /* Padding inside the container */
+    }
+
+    @media (max-width: 600px) {
+      .post-entry {
+        flex: 0 0 100%;
+        /* Stacks posts on smaller screens */
+      }
+    }
+
+    .post-entry {
+      box-sizing: border-box;
+      /* Include padding and border in the element's total width and height */
+      width: calc(50% - 30px);
+      /* Adjust width to account for margins */
+      margin-left: 15px;
+
+      /* Remove left margin for the first post-entry */
+      .post-entry:first-child {
+        margin-left: 0;
+      }
+
+      /* Remove right margin for the last post-entry */
+      .post-entry:last-child {
+        margin-right: 0;
+      }
+  </style>
+
+  {{- range $index, $page := $paginator.Pages }}
+
+  {{- $class := "post-entry" }}
+
+  {{- $user_preferred := or site.Params.disableSpecial1stPost site.Params.homeInfoParams }}
+  {{- if (and $.IsHome (eq $paginator.PageNumber 1) (eq $index 0) (not $user_preferred)) }}
+  {{- $class = "first-entry" }}
+  {{- else if $term }}
+  {{- $class = "post-entry tag-entry" }}
   {{- end }}
-  {{- if not (.Param "hideMeta") }}
-  <footer class="entry-footer">
-    {{- partial "post_meta.html" . -}}
-  </footer>
-  {{- end }}
-  <a class="entry-link" aria-label="post link to {{ .Title | plainify }}" href="{{ .Permalink }}"></a>
-</article>
-{{- end }}
 
+  <article class="{{ $class }}">
+    {{- $isHidden := (site.Params.cover.hidden | default site.Params.cover.hiddenInList) }}
+    {{- partial "cover.html" (dict "cxt" . "IsHome" true "isHidden" $isHidden) }}
+    <header class="entry-header">
+      <h2>
+        {{- .Title }}
+        {{- if .Draft }}<sup><span class="entry-isdraft">&nbsp;&nbsp;[draft]</span></sup>{{- end }}
+      </h2>
+    </header>
+    {{- if (ne (.Param "hideSummary") true) }}
+    <div class="entry-content">
+      <p>{{ .Summary | plainify | htmlUnescape }}{{ if .Truncated }}...{{ end }}</p>
+    </div>
+    {{- end }}
+    {{- if not (.Param "hideMeta") }}
+    <footer class="entry-footer">
+      {{- partial "post_meta.html" . -}}
+    </footer>
+    {{- end }}
+    <a class="entry-link" aria-label="post link to {{ .Title | plainify }}" href="{{ .Permalink }}"></a>
+  </article>
+
+  {{- if modBool (add $index 1) 2 }}
+</div>
+<div class="posts-row"> {{ end }}
+  {{- end }}
+</div>
 {{- if gt $paginator.TotalPages 1 }}
 <footer class="page-footer">
   <nav class="pagination">
