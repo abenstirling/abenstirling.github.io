@@ -1,7 +1,7 @@
 +++
 title = 'PCB Business Card'
 date = 2023-09-19T15:57:22-07:00
-draft = false
+draft = true
 [cover]
     image = "/posts/businesscard_cover.png"
     relative = true
