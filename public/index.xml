@@ -11,7 +11,30 @@
     </image>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Sun, 15 Oct 2023 10:42:20 -0700</lastBuildDate><atom:link href="https://abenstirling.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 02 Mar 2024 09:07:47 -0800</lastBuildDate><atom:link href="https://abenstirling.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>.STL Files</title>
+      <link>https://abenstirling.github.io/posts/stl/</link>
+      <pubDate>Sat, 02 Mar 2024 09:07:47 -0800</pubDate>
+      
+      <guid>https://abenstirling.github.io/posts/stl/</guid>
+      <description>I am taking a very interesting computer graphics course class and finally learned about curves.
+Why do I care? Well, my background is in Computer Aided Design (CAD) and machining, so I have always been interested in the .STL file format which . I had always used the buzzword &amp;ldquo;interpolation&amp;rdquo; without really understanding what it meant.
+From my understanding, interpolation is used when we have a set of data points and we need to estimate values between these points.</description>
+    </item>
+    
+    <item>
+      <title>BotionNFC</title>
+      <link>https://abenstirling.github.io/posts/botionnfc/</link>
+      <pubDate>Sun, 04 Feb 2024 09:20:49 -0800</pubDate>
+      
+      <guid>https://abenstirling.github.io/posts/botionnfc/</guid>
+      <description>Simple, Open-source NFC-Writing App I published BotionNFC to the App Store on 2/1/2024. It is a simple, open-source app that allows you to write NFC tags.
+If you would like to try it out, you can download it here: App Store
+You can view the source code here: Github
+Demo Video </description>
+    </item>
+    
     <item>
       <title>MACropad</title>
       <link>https://abenstirling.github.io/posts/macropad/</link>
@@ -32,7 +55,8 @@ TP2 and TP3 were reversed (spliced the cable) Bad solder joints on headphone jac
       <pubDate>Tue, 19 Sep 2023 15:57:22 -0700</pubDate>
       
       <guid>https://abenstirling.github.io/posts/businesscard/</guid>
-      <description>I Made a Business Card Because I Didn&amp;rsquo;t Have One. Demo Video I sell them on Etsy now, per demand..</description>
+      <description>I Made a Business Card Because I Didn&amp;rsquo;t Have One. The thought behind this one is that I needed a way to stand out. I&amp;rsquo;ve always been a bit of a non-traditional student, and my background is unique. I wanted to highlight how I build real things. I don&amp;rsquo;t just build real things, I ship real things.
+I initially started with just a bare PCB with a QR code. Everyone always asked, &amp;ldquo;Does it work?</description>
     </item>
     
     <item>

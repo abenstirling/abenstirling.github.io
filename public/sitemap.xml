@@ -2,13 +2,19 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>https://abenstirling.github.io/</loc>
-    <lastmod>2023-10-15T10:42:20-07:00</lastmod>
+    <loc>https://abenstirling.github.io/posts/stl/</loc>
+    <lastmod>2024-03-02T09:07:47-08:00</lastmod>
   </url><url>
-    <loc>https://abenstirling.github.io/posts/macropad/</loc>
-    <lastmod>2023-10-15T10:42:20-07:00</lastmod>
+    <loc>https://abenstirling.github.io/</loc>
+    <lastmod>2024-03-02T09:07:47-08:00</lastmod>
   </url><url>
     <loc>https://abenstirling.github.io/posts/</loc>
+    <lastmod>2024-03-02T09:07:47-08:00</lastmod>
+  </url><url>
+    <loc>https://abenstirling.github.io/posts/botionnfc/</loc>
+    <lastmod>2024-02-04T09:20:49-08:00</lastmod>
+  </url><url>
+    <loc>https://abenstirling.github.io/posts/macropad/</loc>
     <lastmod>2023-10-15T10:42:20-07:00</lastmod>
   </url><url>
     <loc>https://abenstirling.github.io/posts/businesscard/</loc>
