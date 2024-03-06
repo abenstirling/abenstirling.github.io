@@ -118,6 +118,6 @@ mesh_data.save('output.stl')
 ```
 
 Fun fact... I have my brain as a `.STL` file. It took 48 hours to print and is 1:1 scale.
-![Brain](/posts/stl_15.png)
+![Brain](/posts/stl_11.png)
 
 I swear I didn't scale it up to make myself look smarter.

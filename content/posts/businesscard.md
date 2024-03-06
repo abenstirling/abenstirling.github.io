@@ -1,7 +1,8 @@
 +++
 title = 'PCB Business Card'
 date = 2023-09-19T15:57:22-07:00
-draft = true
+draft = false
+
 [cover]
     image = "/posts/businesscard_cover.png"
     relative = true
@@ -21,9 +22,7 @@ I couldn't figure it out, I would be down $200+ if my next version didn't work I
 
 The boards arrived and sure enough they worked. I went to the makerspace and made a nice metal jig for holding the cards in and just ripped them in one pass. Around 75% turned out great and the rest were tolerable. I also found out that I could program a link to the invoice on the card. I shipped off that afternoon and felt super great.
 
-From there it gets interesting. Etsy got me two random orders but that was all. I tried a google form and a custom site with shopify, nothing really converted into any sort of sales. 
 
-I would go to events and it would be so obvious people wanted them, especially after holding and using the card. I would always pose it as I could make them one. Then I would ask what seems reasonable, typically falling between $25-$30. In the past 6 months, I sold all 25 and am basically profitable.
 ---
 ### Demo Video
 
