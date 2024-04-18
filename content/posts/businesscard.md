@@ -30,4 +30,6 @@ The boards arrived and sure enough they worked. I went to the makerspace and mad
 
 ---
 
-Although 
+I have since made a thinner version and a version with two sides (business in the front and party in the back). I have also published the [app to program them](https://abenstirling.com/posts/botionnfc/), available on the App Store.
+
+I sell them for $25 a pop, [email me](mailto:abenstirling@pm.me) if you want one!
