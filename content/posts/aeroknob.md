@@ -19,4 +19,5 @@ The mechanical design was accelerated by my Bambu Mini [3D Printer](https://bamb
 The final product was a huge success. The controller was more realistic than the current offerings, and the demand was high.
 ![Aeroknob](/posts/aeroknob_3.png)
 
-Given the demand, we launched our site [Aeroknob.com](https://aeroknob.com) and have been selling them and have since paid off our R&D costs, which is a huge win for us.
+Given the demand, we launched our site [Aeroknob.com](https://aeroknob.com) and sell them there!
+

@@ -1,0 +1,8 @@
+<div style="display: flex; justify-content: center; align-items: center;">
+  <script async src="https://js.stripe.com/v3/buy-button.js"></script>
+  <stripe-buy-button
+    buy-button-id="{{ .Get "buy-button-id" }}"
+    publishable-key="{{ .Get "publishable-key" }}"
+  >
+  </stripe-buy-button>
+</div>
