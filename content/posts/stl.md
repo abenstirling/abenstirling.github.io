@@ -121,3 +121,6 @@ Fun fact... I have my brain as a `.STL` file. It took 48 hours to print and is 1
 ![Brain](/posts/stl_11.png)
 
 I swear I didn't scale it up to make myself look smarter.
+
+Here is a video of me talking about the assignment:
+{{<youtube 603dLCKmeD4>}}
