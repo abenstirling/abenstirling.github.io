@@ -53,7 +53,7 @@ buildExpired = false
 
   [params.homeInfoParams]
     Title = "Computer Engineer"
-    Content = "Real Engineers Ship."
+    Content = "🦾"
 
   [[params.socialIcons]]
     name = "email"
