@@ -1,4 +1,4 @@
-<div id="gltf-viewer-{{ .Get 0 }}" style="width: 100%; padding-bottom: 56.25%; position: relative; border-radius: 10px; overflow: hidden;"></div>
+<div id="gltf-viewer-{{ .Get 0 }}" style="width: 100%; position: relative; border-radius: 10px; overflow: hidden;"></div>
 
 <script type="importmap">
   {
@@ -21,7 +21,7 @@
 
     // Setup the scene, camera, and renderer
     var scene = new THREE.Scene();
-    var camera = new THREE.PerspectiveCamera(45, width / height, 0.1, 1000);
+    var camera = new THREE.PerspectiveCamera(45, width / height, 0.01, 1000); // Adjusted near clipping plane
     var renderer = new THREE.WebGLRenderer({ antialias: true });
     renderer.setSize(width, height);
     renderer.setClearColor(0xffffff);
@@ -78,4 +78,4 @@
       renderer.setSize(width, height);
     });
   })();
-</script> 
+</script>

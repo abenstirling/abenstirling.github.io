@@ -3,14 +3,14 @@ title = 'Botion Cube'
 date = 2024-04-18T09:46:08-07:00
 draft = false
 [cover]
-    image = "/posts/"
+    image = "/posts/botion_cube_cover.png"
     relative = true
 +++
 
 # Botion Cube
 The Botion Cube is a productivity cube that syncs with Notion. 
 
-# GLTF Test
+Feel free to play around with the 3D model below:
 {{< gltf-viewer "1" "/posts/notion_cube.gltf" >}}
 
 ## Technical Details
