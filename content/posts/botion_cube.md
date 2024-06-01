@@ -1,7 +1,7 @@
 +++
-title = 'Botion_cube'
+title = 'Botion Cube'
 date = 2024-04-18T09:46:08-07:00
-draft = true
+draft = false
 [cover]
     image = "/posts/"
     relative = true
