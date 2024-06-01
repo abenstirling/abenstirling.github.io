@@ -21,20 +21,32 @@
 
     // Setup the scene, camera, and renderer
     var scene = new THREE.Scene();
-    var camera = new THREE.PerspectiveCamera(45, width / height, 0.01, 1000); // Adjusted near clipping plane
+    var camera = new THREE.PerspectiveCamera(45, width / height, 0.01, 1000);
     var renderer = new THREE.WebGLRenderer({ antialias: true });
     renderer.setSize(width, height);
-    renderer.setClearColor(0xffffff);
+    renderer.setClearColor(0xf5f5f5);
     container.appendChild(renderer.domElement);
 
-    // Add ambient lighting
-    var ambientLight = new THREE.AmbientLight(0xffffff, 1);
-    scene.add(ambientLight);
+    // Add key light
+    var keyLight = new THREE.DirectionalLight(0xffffff, 1);
+    keyLight.position.set(5, 10, 7.5);
+    scene.add(keyLight);
 
-    // Add directional lighting
-    var directionalLight = new THREE.DirectionalLight(0xffffff, 1);
-    directionalLight.position.set(1, 1, 1);
-    scene.add(directionalLight);
+    // Add fill light
+    var fillLight = new THREE.DirectionalLight(0xffffff, 0.75);
+    fillLight.position.set(-5, 5, 5);
+    scene.add(fillLight);
+
+    // Add back light
+    var backLight = new THREE.DirectionalLight(0xffffff, 0.5);
+    backLight.position.set(5, 5, -5);
+    scene.add(backLight);
+
+    // add a VERY bright light to the bottom of the model
+    var bottomLight = new THREE.DirectionalLight(0xffffff, 1);
+    bottomLight.position.set(0, -5, 0);
+    scene.add(bottomLight);
+
 
     // Load the glTF file
     var loader = new GLTFLoader();

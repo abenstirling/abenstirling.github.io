@@ -10,12 +10,22 @@ draft = false
 # Botion Cube
 The Botion Cube is a productivity cube that syncs with Notion. 
 
+
+### Demo Video
+{{<youtube cf0ZuqxHve4>}}
+
+
+
+### Technical Details
+The Botion Cube is powered by an ESP32 and has a 128x64 OLED screen. The cube has 6 sides, each side representing a different task. The cube is powered by a 500mAh battery and can last up to 2 weeks on a single charge.
+
 Feel free to play around with the 3D model below:
-{{< gltf-viewer "1" "/posts/notion_cube.gltf" >}}
+{{< gltf-viewer "1" "/posts/botion_cube.gltf" >}}
 
-## Technical Details
+You can access all the code for the Botion Cube here: [Botion Cube Firmware](https://github.com/abenstirling/BotionCube)
 
-## Flashing Firmware
+
+### Flashing Firmware
 Flashing firmware to the Botion Cube is done through the Micro USB Port. 
 
 Please clone the code from here: [Botion Cube Firmware](https://github.com/abenstirling/BotionCube)
