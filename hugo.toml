@@ -52,7 +52,7 @@ buildExpired = false
     iconHeight = 35
 
   [params.homeInfoParams]
-    Title = "Computer Engineer"
+    Title = "Robotics Engineer"
     Content = "🦾"
 
   [[params.socialIcons]]

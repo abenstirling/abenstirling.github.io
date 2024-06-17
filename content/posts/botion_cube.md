@@ -1,6 +1,6 @@
 +++
-title = 'Botion Cube'
-date = 2024-04-18T09:46:08-07:00
+title = 'ECE140A: Botion Cube'
+date = 2021-09-02T16:34:25-08:00
 draft = false
 [cover]
     image = "/posts/botion_cube_cover.png"

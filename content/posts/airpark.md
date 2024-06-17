@@ -1,6 +1,6 @@
 +++
-title = 'AirPark'
-date = 2023-09-08T15:48:34-07:00
+title = 'ECE196: AirPark'
+date = 2023-01-08T15:48:34-07:00
 draft = false
 [cover]
     image = "/posts/airpark_cover.gif"

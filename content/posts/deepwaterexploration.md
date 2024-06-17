@@ -1,6 +1,6 @@
 +++
-title = 'DeepWater Exploration'
-date = 2023-08-14T13:34:11-07:00
+title = '2nd Startup: DeepWater Exploration'
+date = 2021-08-14T13:34:11-07:00
 draft = false
 [cover]
     image = "/posts/deepwaterexploration_cover.png"

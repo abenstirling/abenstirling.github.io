@@ -1,9 +1,9 @@
 +++
 title = 'Custom Split Keyboard'
-date = 2023-09-09T18:46:00-07:00
+date = 2023-10-04T18:46:00-07:00
 draft = false
 [cover]
-    image = "/posts/keeb_cover.gif"
+    image = "/posts/keeb_cover_2.png"
     relative = true
 +++
 

@@ -1,6 +1,6 @@
 +++
-title = 'Autoprint'
-date = 2023-07-14T13:46:34-07:00
+title = '1st Startup: Autoprint'
+date = 2020-07-14T13:46:34-07:00
 draft = false
 [cover]
     image = "/posts/autoprint_cover.png"
