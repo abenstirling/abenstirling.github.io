@@ -101,7 +101,7 @@ buildExpired = false
 [[menu.main]]
   identifier = "resume"
  name = "Resume"
- url = "https://github.com/abenstirling/resume_cv/blob/main/Ben%20Stirling%20Resume%202023.pdf"
+ url = "https://github.com/abenstirling/resume_cv/blob/main/ben_stirling_resume.pdf"
 #  weight = 30
 
 pygmentsUseClasses = true
