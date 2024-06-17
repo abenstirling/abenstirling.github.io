@@ -59,3 +59,14 @@ Our schematic for the solenoid driver is below.
 We also did a custom motherboard for the project, utilizing a STM32G4 microcontroller. Adin did a great job with the PCB design and programmed the microcontroller using Rust.
 
 ![Motherboard](/posts/cyberball_10.png)
+
+The wiring took forever, most of the time was us working together to land the 30 gague wire to the smd pads.
+![Motherboard](/posts/cyberball_8.jpeg)
+
+A nearly-assembled version ready to be programmed! 
+![Motherboard](/posts/cyberball_7.jpeg)
+
+Instead of doing a technical report, we did a sick poster! 
+![Motherboard](/posts/cyberball_9.png)
+
+We had a TON of fun with this project. It was a great way to end college and (continue to) build a great friendship with Adin.
