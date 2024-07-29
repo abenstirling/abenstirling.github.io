@@ -1,11 +1,27 @@
 +++
-title = '.STL Files'
+title = 'Raytracer & .STL Files'
 date = 2024-03-02T09:07:47-08:00
 draft = false
 [cover]
-    image = "/posts/stl_cover.png"
+    image = "/posts/raytracer_cover.png"
     relative = true
 +++
+I wrote a raytracer from scratch with my good friend [Nicco](https://www.linkedin.com/in/nicco-pompili-63730a19b/). 
+
+If your are looking for the code, you can find it [here](https://github.com/abenstirling/raytracer).
+
+Here are some close and epic fails along the way: 
+![Raytracer Image](/posts/raytracer_1.png)
+![Raytracer Image](/posts/raytracer_2.png)
+![Raytracer Image](/posts/raytracer_3.png)
+
+Our key takeaways were:
+1. It is simple concepts but implementing and debuggin the math was insanely tricky 
+2. Optimization is key to make it run in a reasonable amount of time
+3. We (Ben) should have payed more attention in physics class
+
+### .STL Files
+
 I am taking a very [interesting computer graphics course](https://www.edx.org/learn/computer-graphics/the-university-of-california-san-diego-computer-graphics?objectID=course-f6bc9b9c-e03f-4cde-b09d-bddd82dca299&webview=false&campaign=Computer+Graphics&source=edX&product_category=course&placement_url=https://www.edx.org/bio/ravi-ramamoorthi) class and finally learned about curves. 
 
 Why do I care about curves? My background is in Computer Aided Design (`CAD`) and machining, so I have always been interested in the `.STL` file format which .
