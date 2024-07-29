@@ -9,10 +9,6 @@ draft = false
 
 ## I Made a Pick + Place Machine Because My University Didn't Have One. 
 
-
-| 💡 Update: Join the Pick + Place Club Of UCSD: https://discord.gg/KQ8bMdYnwB
-
-
 The main requirements:
 
 - [x]  Be useful

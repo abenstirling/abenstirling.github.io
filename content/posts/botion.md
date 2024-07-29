@@ -1,6 +1,6 @@
 +++
 title = 'Botion'
-date = 2023-09-02T16:34:25-07:00
+date = 2023-10-18T16:34:25-07:00
 draft = false
 [cover]
     image = "/posts/botion_cover.gif"
