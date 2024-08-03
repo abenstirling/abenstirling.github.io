@@ -60,41 +60,24 @@
     .posts-row {
       display: flex;
       flex-wrap: wrap;
-
+      justify-content: center;
+      margin: -15px;  /* Negative margin to counteract post-entry margins */
     }
-
-    .posts-container {
-      width: 100%;
-      /* Adjust the width as needed */
-      padding-left: 15px;
-      /* Padding inside the container */
-      padding-right: 15px;
-      /* Padding inside the container */
-    }
-
-    @media (max-width: 600px) {
-      .post-entry {
-        flex: 0 0 100%;
-        /* Stacks posts on smaller screens */
-      }
-    }
-
+  
     .post-entry {
       box-sizing: border-box;
-      /* Include padding and border in the element's total width and height */
-      width: calc(50% - 30px);
-      /* Adjust width to account for margins */
-      margin-left: 15px;
-
-      /* Remove left margin for the first post-entry */
-      .post-entry:first-child {
-        margin-left: 0;
+      width: calc(50% - 30px);  /* 50% width minus margins */
+      margin: 15px;
+      /* Remove individual margin adjustments */
+    }
+  
+    @media (max-width: 600px) {
+      .post-entry {
+        width: calc(100% - 30px);  /* Full width on small screens */
       }
-
-      /* Remove right margin for the last post-entry */
-      .post-entry:last-child {
-        margin-right: 0;
-      }
+    }
+  
+    /* Remove unused .posts-container */
   </style>
 
   {{- range $index, $page := $paginator.Pages }}
