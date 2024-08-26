@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple Chatbot with Loading Bar</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            height: 100vh;
+            margin: 0;
+            padding-top: 20px;
+        }
+
+        #loading-bar-container {
+            width: 300px;
+            height: 20px;
+            background-color: #f0f0f0;
+            border-radius: 10px;
+            overflow: hidden;
+            margin-bottom: 20px;
+        }
+
+        #loading-bar {
+            width: 0%;
+            height: 100%;
+            background-color: #4CAF50;
+            transition: width 0.3s ease;
+        }
+
+        #loading-text {
+            margin-bottom: 10px;
+            text-align: center;
+        }
+
+        #chatbox {
+            width: 300px;
+            height: 400px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            padding: 10px;
+            display: flex;
+            flex-direction: column;
+            overflow-y: auto;
+        }
+
+        .message {
+            margin: 5px 0;
+            padding: 5px;
+            border-radius: 5px;
+            max-width: 80%;
+        }
+
+        .user-message {
+            align-self: flex-end;
+            background-color: #e6f2ff;
+        }
+
+        .bot-message {
+            align-self: flex-start;
+            background-color: #f0f0f0;
+        }
+
+        #input-container {
+            margin-top: 10px;
+            display: flex;
+            width: 300px;
+        }
+
+        #user-input {
+            flex-grow: 1;
+            padding: 8px;
+            border-radius: 8px;
+            border: 1px solid #ccc;
+        }
+
+        #send-btn {
+            padding: 8px 15px;
+            border-radius: 8px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            margin-left: 5px;
+            cursor: pointer;
+        }
+
+        #send-btn:disabled {
+            background-color: #cccccc;
+            cursor: not-allowed;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="loading-text">Initializing model...</div>
+    <div id="loading-bar-container">
+        <div id="loading-bar"></div>
+    </div>
+
+    <div id="chatbox"></div>
+
+    <div id="input-container">
+        <input type="text" id="user-input" placeholder="Type a message" disabled>
+        <button id="send-btn" disabled>Send</button>
+    </div>
+
+    <script type="module">
+        import { CreateMLCEngine } from "https://esm.run/@mlc-ai/web-llm";
+
+        const chatbox = document.getElementById('chatbox');
+        const userInput = document.getElementById('user-input');
+        const sendBtn = document.getElementById('send-btn');
+        const loadingBar = document.getElementById('loading-bar');
+        const loadingText = document.getElementById('loading-text');
+
+        let engine;
+        const modelName = "Llama-3.1-8B-Instruct-q4f32_1-MLC";
+
+        async function initEngine() {
+            try {
+                engine = await CreateMLCEngine(modelName, {
+                    initProgressCallback: (progress) => {
+                        console.log('Loading progress:', progress);
+                        if (typeof progress === 'object' && progress.progress !== undefined) {
+                            const percentage = Math.round(progress.progress * 100);
+                            loadingBar.style.width = `${percentage}%`;
+                            loadingText.textContent = `Loading model: ${percentage}%`;
+                            if (progress.progress === 1) {
+                                modelLoaded();
+                            }
+                        }
+                    }
+                });
+            } catch (error) {
+                console.error('Error initializing engine:', error);
+                loadingText.textContent = 'Error loading model. Please check console and try again.';
+            }
+        }
+
+        function modelLoaded() {
+            sendBtn.disabled = false;
+            userInput.disabled = false;
+            loadingText.textContent = 'Model loaded successfully!';
+            addMessage("Model loaded. How can I help you?", false);
+        }
+
+        initEngine();
+
+        function addMessage(content, isUser) {
+            const messageElement = document.createElement('div');
+            messageElement.classList.add('message');
+            messageElement.classList.add(isUser ? 'user-message' : 'bot-message');
+            messageElement.textContent = content;
+            chatbox.appendChild(messageElement);
+            chatbox.scrollTop = chatbox.scrollHeight;
+        }
+
+        sendBtn.addEventListener('click', async () => {
+            const userMessage = userInput.value.trim();
+            if (!userMessage) return;
+
+            addMessage(userMessage, true);
+            userInput.value = '';
+            sendBtn.disabled = true;
+            userInput.disabled = true;
+
+            const messages = [
+                { role: 'system', content: 'You are a helpful AI assistant.' },
+                { role: 'user', content: userMessage }
+            ];
+
+            try {
+                const reply = await engine.chat.completions.create({ messages });
+                const botMessage = reply.choices[0]?.message?.content || "Error: No response.";
+                addMessage(botMessage, false);
+            } catch (error) {
+                console.error('Error:', error);
+                addMessage("Sorry, there was an error processing your request.", false);
+            } finally {
+                sendBtn.disabled = false;
+                userInput.disabled = false;
+                userInput.focus();
+            }
+        });
+
+        userInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter' && !sendBtn.disabled) {
+                sendBtn.click();
+            }
+        });
+    </script>
+</body>
+
+</html>

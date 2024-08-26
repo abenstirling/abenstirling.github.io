@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple Chatbot</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        #chatbox {
+            width: 300px;
+            height: 400px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            padding: 10px;
+            display: flex;
+            flex-direction: column;
+            overflow-y: auto;
+        }
+
+        .message {
+            margin: 5px 0;
+        }
+
+        .user-message {
+            text-align: right;
+            color: blue;
+        }
+
+        .bot-message {
+            text-align: left;
+            color: green;
+        }
+
+        #input-container {
+            margin-top: 10px;
+            display: flex;
+        }
+
+        #user-input {
+            width: 80%;
+            padding: 8px;
+            border-radius: 8px;
+            border: 1px solid #ccc;
+        }
+
+        #send-btn {
+            width: 20%;
+            padding: 8px;
+            border-radius: 8px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            margin-left: 5px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div id="chatbox"></div>
+
+    <div id="input-container">
+        <input type="text" id="user-input" placeholder="Type a message">
+        <button id="send-btn">Send</button>
+    </div>
+
+    <script type="module">
+        import { CreateMLCEngine } from "https://esm.run/@mlc-ai/web-llm";
+
+        // Initialize chatbox and button
+        const chatbox = document.getElementById('chatbox');
+        const userInput = document.getElementById('user-input');
+        const sendBtn = document.getElementById('send-btn');
+
+        // Initialize WebLLM engine
+        let engine;
+        const modelName = "Llama-3.1-8B-Instruct-q4f32_1-MLC";
+
+        async function initEngine() {
+            engine = await CreateMLCEngine(modelName, {
+                initProgressCallback: (progress) => console.log('Loading progress:', progress)
+            });
+        }
+
+        initEngine();
+
+        // Function to add messages to chatbox
+        function addMessage(content, isUser) {
+            const messageElement = document.createElement('div');
+            messageElement.classList.add('message');
+            messageElement.classList.add(isUser ? 'user-message' : 'bot-message');
+            messageElement.textContent = content;
+            chatbox.appendChild(messageElement);
+            chatbox.scrollTop = chatbox.scrollHeight;
+        }
+
+        // Handle message sending
+        sendBtn.addEventListener('click', async () => {
+            const userMessage = userInput.value.trim();
+            if (!userMessage) return;
+
+            // Display user message in chatbox
+            addMessage(userMessage, true);
+            userInput.value = '';
+
+            // Call WebLLM for response
+            const messages = [
+                { role: 'system', content: 'You are a helpful AI assistant.' },
+                { role: 'user', content: userMessage }
+            ];
+
+            const reply = await engine.chat.completions.create({ messages });
+            const botMessage = reply.choices[0]?.message?.content || "Error: No response.";
+
+            // Display bot response in chatbox
+            addMessage(botMessage, false);
+        });
+    </script>
+</body>
+
+</html>
