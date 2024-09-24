@@ -4,127 +4,338 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Simple Chatbot</title>
+    <title>Date Planner</title>
     <style>
         body {
             font-family: Arial, sans-serif;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            height: 100vh;
             margin: 0;
+            padding: 20px;
+            background: #f0f0f0;
         }
 
-        #chatbox {
-            width: 300px;
-            height: 400px;
-            border: 1px solid #ccc;
-            border-radius: 8px;
-            padding: 10px;
+        .container {
+            max-width: 500px;
+            margin: auto;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+
+        .card {
+            background: #fff;
+            border-radius: 10px;
+            padding: 20px;
+            margin-top: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .card img {
+            width: 100%;
+            border-radius: 10px;
+            margin-bottom: 10px;
+        }
+
+        .buttons {
             display: flex;
-            flex-direction: column;
-            overflow-y: auto;
+            justify-content: space-between;
+            margin-top: 20px;
         }
 
-        .message {
-            margin: 5px 0;
-        }
-
-        .user-message {
-            text-align: right;
-            color: blue;
-        }
-
-        .bot-message {
-            text-align: left;
-            color: green;
-        }
-
-        #input-container {
-            margin-top: 10px;
-            display: flex;
-        }
-
-        #user-input {
-            width: 80%;
-            padding: 8px;
-            border-radius: 8px;
-            border: 1px solid #ccc;
-        }
-
-        #send-btn {
-            width: 20%;
-            padding: 8px;
-            border-radius: 8px;
-            background-color: #4CAF50;
-            color: white;
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
             border: none;
-            margin-left: 5px;
+            border-radius: 5px;
+        }
+
+        .like {
+            background: #4CAF50;
+            color: white;
+        }
+
+        .dislike {
+            background: #f44336;
+            color: white;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        input[type="text"],
+        input[type="number"] {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+
+        #generate {
+            background: #2196F3;
+            color: white;
+            width: 100%;
         }
     </style>
 </head>
 
 <body>
-
-    <div id="chatbox"></div>
-
-    <div id="input-container">
-        <input type="text" id="user-input" placeholder="Type a message">
-        <button id="send-btn">Send</button>
+    <div class="container">
+        <h1>Date Planner</h1>
+        <div id="input-form">
+            <input type="number" id="age" placeholder="Age" min="18" max="100">
+            <input type="number" id="budget" placeholder="Budget ($)">
+            <input type="text" id="location" placeholder="Location">
+            <button id="generate">Generate Date Ideas</button>
+        </div>
+        <div id="date-cards" class="hidden"></div>
+        <div id="results" class="hidden"></div>
     </div>
 
-    <script type="module">
-        import { CreateMLCEngine } from "https://esm.run/@mlc-ai/web-llm";
+    <script>
+            const OPENAI_API_KEY = '';
+            const JSONBIN_API_KEY = '';
 
-        // Initialize chatbox and button
-        const chatbox = document.getElementById('chatbox');
-        const userInput = document.getElementById('user-input');
-        const sendBtn = document.getElementById('send-btn');
+            const app = {
+                dates: [],
+                currentIndex: 0,
+                liked: [],
+                disliked: [],
 
-        // Initialize WebLLM engine
-        let engine;
-        const modelName = "Llama-3.1-8B-Instruct-q4f32_1-MLC";
+                async init() {
+                    this.cacheDOMElements();
+                    this.addEventListeners();
+                    await this.checkSharedLink();
+                },
 
-        async function initEngine() {
-            engine = await CreateMLCEngine(modelName, {
-                initProgressCallback: (progress) => console.log('Loading progress:', progress)
-            });
-        }
+                cacheDOMElements() {
+                    this.elements = {
+                        inputForm: document.getElementById('input-form'),
+                        generateButton: document.getElementById('generate'),
+                        dateCards: document.getElementById('date-cards'),
+                        results: document.getElementById('results'),
+                        age: document.getElementById('age'),
+                        budget: document.getElementById('budget'),
+                        location: document.getElementById('location'),
+                        container: document.querySelector('.container')
+                    };
+                },
 
-        initEngine();
+                addEventListeners() {
+                    this.elements.generateButton.addEventListener('click', () => this.generateDates());
+                },
 
-        // Function to add messages to chatbox
-        function addMessage(content, isUser) {
-            const messageElement = document.createElement('div');
-            messageElement.classList.add('message');
-            messageElement.classList.add(isUser ? 'user-message' : 'bot-message');
-            messageElement.textContent = content;
-            chatbox.appendChild(messageElement);
-            chatbox.scrollTop = chatbox.scrollHeight;
-        }
+                async checkSharedLink() {
+                    const id = new URLSearchParams(window.location.search).get('id');
+                    if (id) {
+                        try {
+                            const response = await this.fetchWithRetry(`https://api.jsonbin.io/v3/b/${id}`, {
+                                headers: { 'X-Master-Key': JSONBIN_API_KEY }
+                            });
+                            const data = await response.json();
+                            if (data && data.record && Array.isArray(data.record.dates)) {
+                                this.dates = data.record.dates;
+                                this.showDateCards();
+                            } else {
+                                throw new Error("Invalid data structure in shared link");
+                            }
+                        } catch (error) {
+                            console.error("Error fetching shared data:", error);
+                            this.showError("Failed to load shared date ideas. Please try generating new ones.");
+                        }
+                    }
+                },
 
-        // Handle message sending
-        sendBtn.addEventListener('click', async () => {
-            const userMessage = userInput.value.trim();
-            if (!userMessage) return;
+                async generateDates() {
+                    const age = this.elements.age.value;
+                    const budget = this.elements.budget.value;
+                    const location = this.elements.location.value;
 
-            // Display user message in chatbox
-            addMessage(userMessage, true);
-            userInput.value = '';
+                    if (!age || !budget || !location) {
+                        this.showError("Please fill in all fields before generating date ideas.");
+                        return;
+                    }
 
-            // Call WebLLM for response
-            const messages = [
-                { role: 'system', content: 'You are a helpful AI assistant.' },
-                { role: 'user', content: userMessage }
-            ];
+                    const prompt = `Generate 3 unique date ideas for a ${age}-year-old with a budget of $${budget} in ${location}. Respond with a JSON array of objects. Each object should have 'title' and 'description' fields.`;
 
-            const reply = await engine.chat.completions.create({ messages });
-            const botMessage = reply.choices[0]?.message?.content || "Error: No response.";
+                    try {
+                        const response = await this.fetchWithRetry('https://api.openai.com/v1/chat/completions', {
+                            method: 'POST',
+                            headers: {
+                                'Authorization': `Bearer ${OPENAI_API_KEY}`,
+                                'Content-Type': 'application/json'
+                            },
+                            body: JSON.stringify({
+                                model: "gpt-3.5-turbo",
+                                messages: [
+                                    { role: "system", content: "You are a helpful AI assistant specialized in generating date ideas. Respond only with the requested JSON." },
+                                    { role: "user", content: prompt }
+                                ]
+                            })
+                        });
 
-            // Display bot response in chatbox
-            addMessage(botMessage, false);
-        });
+                        const data = await response.json();
+                        let content = data.choices[0].message.content;
+
+                        // Remove any markdown formatting or extra text
+                        content = content.replace(/```json\s?|\s?```/g, '').trim();
+
+                        // Attempt to parse the JSON
+                        try {
+                            this.dates = JSON.parse(content);
+                        } catch (parseError) {
+                            console.error("Error parsing JSON:", parseError);
+                            // If parsing fails, attempt to extract the array portion
+                            const match = content.match(/\[[\s\S]*\]/);
+                            if (match) {
+                                this.dates = JSON.parse(match[0]);
+                            } else {
+                                throw new Error("Unable to parse date ideas from API response");
+                            }
+                        }
+
+                        if (!Array.isArray(this.dates)) {
+                            throw new Error("Parsed result is not an array");
+                        }
+
+                        this.showDateCards();
+                    } catch (error) {
+                        console.error("Error generating dates:", error);
+                        this.showError("An error occurred while generating date ideas. Please try again.");
+                    }
+                },
+
+                showDateCards() {
+                    this.elements.inputForm.classList.add('hidden');
+                    this.elements.dateCards.classList.remove('hidden');
+                    this.currentIndex = 0;
+                    this.showCurrentDate();
+                },
+
+                showCurrentDate() {
+                    if (this.currentIndex < this.dates.length) {
+                        const date = this.dates[this.currentIndex];
+                        this.elements.dateCards.innerHTML = `
+                <div class="card">
+                    <h2>${this.escapeHtml(date.title)}</h2>
+                    <p>${this.escapeHtml(date.description)}</p>
+                    <div class="buttons">
+                        <button class="dislike" onclick="app.handleSwipe(false)">👎 Nope</button>
+                        <button class="like" onclick="app.handleSwipe(true)">👍 Like</button>
+                    </div>
+                </div>
+            `;
+                    } else {
+                        this.showResults();
+                    }
+                },
+
+                handleSwipe(liked) {
+                    if (liked) {
+                        this.liked.push(this.dates[this.currentIndex]);
+                    } else {
+                        this.disliked.push(this.dates[this.currentIndex]);
+                    }
+                    this.currentIndex++;
+                    this.showCurrentDate();
+                },
+
+                showResults() {
+                    this.elements.dateCards.classList.add('hidden');
+                    this.elements.results.classList.remove('hidden');
+
+                    let html = '<h2>Results</h2>';
+                    this.liked.forEach(date => {
+                        html += `
+                <div class="card">
+                    <h3>${this.escapeHtml(date.title)}</h3>
+                    <p>${this.escapeHtml(date.description)}</p>
+                </div>
+            `;
+                    });
+
+                    html += '<button onclick="app.generateShareableLink()">Share Results</button>';
+                    this.elements.results.innerHTML = html;
+                },
+
+                async generateShareableLink() {
+                    const data = {
+                        dates: this.dates,
+                        liked: this.liked.map(date => this.dates.indexOf(date))
+                    };
+
+                    try {
+                        const response = await this.fetchWithRetry('https://api.jsonbin.io/v3/b', {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json',
+                                'X-Master-Key': JSONBIN_API_KEY
+                            },
+                            body: JSON.stringify(data)
+                        });
+
+                        const result = await response.json();
+                        const shareableLink = `${window.location.origin}${window.location.pathname}?id=${result.metadata.id}`;
+
+                        this.elements.results.innerHTML += `
+                <input type="text" value="${this.escapeHtml(shareableLink)}" readonly>
+                <button onclick="app.copyToClipboard('${this.escapeHtml(shareableLink)}')">Copy Link</button>
+            `;
+                    } catch (error) {
+                        console.error("Error generating shareable link:", error);
+                        this.showError("Failed to generate shareable link. Please try again.");
+                    }
+                },
+
+                copyToClipboard(text) {
+                    navigator.clipboard.writeText(text).then(() => {
+                        alert('Link copied to clipboard!');
+                    }, (err) => {
+                        console.error('Could not copy text: ', err);
+                        this.showError('Failed to copy link. Please try again.');
+                    });
+                },
+
+                showError(message) {
+                    const errorDiv = document.createElement('div');
+                    errorDiv.textContent = message;
+                    errorDiv.style.color = 'red';
+                    errorDiv.style.marginTop = '10px';
+                    this.elements.container.appendChild(errorDiv);
+                    setTimeout(() => errorDiv.remove(), 5000);  // Remove error after 5 seconds
+                },
+
+                escapeHtml(unsafe) {
+                    return unsafe
+                        .replace(/&/g, "&amp;")
+                        .replace(/</g, "&lt;")
+                        .replace(/>/g, "&gt;")
+                        .replace(/"/g, "&quot;")
+                        .replace(/'/g, "&#039;");
+                },
+
+                async fetchWithRetry(url, options, retries = 3) {
+                    try {
+                        return await fetch(url, options);
+                    } catch (err) {
+                        if (retries > 0) {
+                            await new Promise(resolve => setTimeout(resolve, 1000));
+                            return this.fetchWithRetry(url, options, retries - 1);
+                        }
+                        throw err;
+                    }
+                }
+            };
+
+            document.addEventListener('DOMContentLoaded', () => app.init());
+            window.app = app;
     </script>
 </body>
 
