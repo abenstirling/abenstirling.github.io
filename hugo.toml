@@ -10,85 +10,86 @@ buildExpired = false
 
 
 [minify]
-  disableXML = true
-  minifyOutput = true
+disableXML = true
+minifyOutput = true
 
 [params]
-  env = "production"
-  title = "Ben Stirling"
-  description = "Ben Stirling"
-  keywords = ["Blog", "Portfolio", "PaperMod"]
-  author = "Ben Stirling"
-  images = ["<link or path of image for opengraph, twitter-cards>"]
-  DateFormat = "January 2, 2006"
-  defaultTheme = "auto"
-  disableThemeToggle = false
-  ShowReadingTime = false
-  ShowShareButtons = false
-  ShowPostNavLinks = true
-  ShowBreadCrumbs = false
-  ShowCodeCopyButtons = false
-  ShowWordCount = false
-  ShowRssButtonInSectionTermList = false
-  UseHugoToc = true
-  disableSpecial1stPost = false
-  disableScrollToTop = false
-  comments = false
-  hidemeta = false
-  hideSummary = false
-  showtoc = false
-  tocopen = false
+env = "production"
+title = "Ben Stirling"
+description = "Ben Stirling"
+keywords = ["Blog", "Portfolio", "PaperMod"]
+author = "Ben Stirling"
+images = ["<link or path of image for opengraph, twitter-cards>"]
+DateFormat = "January 2, 2006"
+defaultTheme = "auto"
+disableThemeToggle = false
+ShowReadingTime = false
+ShowShareButtons = false
+ShowPostNavLinks = true
+ShowBreadCrumbs = false
+ShowCodeCopyButtons = false
+ShowWordCount = false
+ShowRssButtonInSectionTermList = false
+UseHugoToc = true
+disableSpecial1stPost = false
+disableScrollToTop = false
+comments = false
+hidemeta = false
+hideSummary = false
+showtoc = false
+tocopen = false
 
-  [params.assets]
-    favicon = "/logo.ico"
-    favicon16x16 = "/logo.ico"
-    favicon32x32 = "/logo.ico"
-    apple_touch_icon = "/logo.ico"
-    safari_pinned_tab = "/logo.ico"
+[params.assets]
+favicon = "/logo.ico"
+favicon16x16 = "/logo.ico"
+favicon32x32 = "/logo.ico"
+apple_touch_icon = "/logo.ico"
+safari_pinned_tab = "/logo.ico"
 
-  [params.label]
-    text = "Ben Stirling"
-    icon = "https://avatars.githubusercontent.com/u/33791408?v=4"
-    iconHeight = 35
+[params.label]
+text = "Ben Stirling"
+icon = "https://avatars.githubusercontent.com/u/33791408?v=4"
+iconHeight = 35
 
-  [params.homeInfoParams]
-    Title = "Robotics Engineer"
-    Content = "🦾"
+[params.homeInfoParams]
+Title = "Robotics Engineer"
+Content = "🦾"
 
-  [[params.socialIcons]]
-    name = "email"
-    url = "mailto:abenstirling@pm.me"
+[[params.socialIcons]]
+name = "email"
+url = "mailto:abenstirling@pm.me"
 
-  [[params.socialIcons]]
-    name = "linkedin"
-    url = "https://linkedin.com/in/abenstirling"
+[[params.socialIcons]]
+name = "linkedin"
+url = "https://linkedin.com/in/abenstirling"
 
-  [[params.socialIcons]]
-    name = "github"
-    url = "https://github.com/abenstirling"
+[[params.socialIcons]]
+name = "github"
+url = "https://github.com/abenstirling"
 
-  [[params.socialIcons]]
-    name = "youtube"
-    url = "https://youtube.com/@abenstirling"
-  
+[[params.socialIcons]]
+name = "youtube"
+url = "https://youtube.com/@abenstirling"
+
+[[params.socialIcons]]
+name = "twitter"
+url = "https://x.com/@abenstirling"
 
 
+[params.cover]
+hidden = false
+hiddenInList = false
+hiddenInSingle = false
 
-  [params.cover]
-    hidden = false
-    hiddenInList = false
-    hiddenInSingle = false
 
-  
-
-  [params.fuseOpts]
-    isCaseSensitive = false
-    shouldSort = true
-    location = 0
-    distance = 1000
-    threshold = 0.4
-    minMatchCharLength = 0
-    keys = ["title", "permalink", "summary", "content"]
+[params.fuseOpts]
+isCaseSensitive = false
+shouldSort = true
+location = 0
+distance = 1000
+threshold = 0.4
+minMatchCharLength = 0
+keys = ["title", "permalink", "summary", "content"]
 
 
 #[[menu.main]]
@@ -100,19 +101,23 @@ buildExpired = false
 
 [[menu.main]]
 
-  identifier = "resume"
- name = "Resume"
- url = "https://github.com/abenstirling/resume_cv/blob/main/ben_stirling_resume.pdf"
+identifier = "resume"
+name = "Resume"
+url = "https://github.com/abenstirling/resume_cv/blob/main/ben_stirling_resume.pdf"
 #  weight = 30
 
 [[menu.main]]
-  identifier = "about"
-  name = "About"
-  url = "/about/"
-  weight = 20
+identifier = "about"
+name = "About"
+url = "/about/"
+weight = 20
 
+[[menu.main]]
+identifier = "memos"
+name = "Memos"
+url = "/memos/"
 
 pygmentsUseClasses = true
 
 [markup.highlight]
-  noClasses = false
+noClasses = false
