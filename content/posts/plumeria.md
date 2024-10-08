@@ -1,7 +1,7 @@
 +++
 title = 'Plumeria'
 date = 2024-09-24T12:33:50-07:00
-draft = false
+draft = true
 [cover]
     image = "/posts/plumeria_cover.gif"
     relative = true
