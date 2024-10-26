@@ -13,4 +13,4 @@ I really enjoy building products. This is because building a product is obviousl
 During college, I published two apps (Botion, BotionNFC) and created two products (PCB Business Cards, Aeroknob). Given I was quite studious, I am very proud of doing what I did and don't have any regrets. I spent most of my time in the makerspaces because I found people with similar interests.
 
 What am I doing now?
-Working on [metal 3D printing](https://fabric8labs.com) & writing [an AI-powered date planning app](https://goplumeria.com) in my free time!
+Working on [metal 3D printing](https://fabric8labs.com)!
