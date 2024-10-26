@@ -52,8 +52,8 @@ icon = "https://avatars.githubusercontent.com/u/33791408?v=4"
 iconHeight = 35
 
 [params.homeInfoParams]
-Title = "Robotics Engineer"
-Content = "🦾"
+Title = "computer engineer"
+Content = "real engineers ship"
 
 [[params.socialIcons]]
 name = "email"
