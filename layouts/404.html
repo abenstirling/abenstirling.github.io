@@ -1,3 +1,257 @@
 {{- define "main" }}
-<div class="not-found">404</div>
+<!DOCTYPE html>
+<html>
+
+<head>
+    <style>
+        body {
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background: #222;
+            font-family: 'Courier New', monospace;
+            color: #33ff33;
+        }
+
+        .container {
+            text-align: center;
+        }
+
+        .header {
+            font-size: 48px;
+            margin-bottom: 20px;
+            text-shadow: 0 0 10px #33ff33;
+            animation: glow 1.5s ease-in-out infinite alternate;
+        }
+
+        @keyframes glow {
+            from {
+                text-shadow: 0 0 5px #33ff33;
+            }
+
+            to {
+                text-shadow: 0 0 20px #33ff33;
+            }
+        }
+
+        .game-container {
+            border: 2px solid #33ff33;
+            margin: 20px;
+            box-shadow: 0 0 20px rgba(51, 255, 51, 0.3);
+        }
+
+        .score {
+            font-size: 24px;
+            margin: 10px 0;
+        }
+
+        .instructions {
+            margin: 20px 0;
+            font-size: 16px;
+            color: #22aa22;
+        }
+
+        .home-button {
+            padding: 10px 20px;
+            font-size: 16px;
+            background: transparent;
+            color: #33ff33;
+            border: 2px solid #33ff33;
+            cursor: pointer;
+            font-family: 'Courier New', monospace;
+            transition: all 0.3s;
+        }
+
+        .home-button:hover {
+            background: #33ff33;
+            color: #222;
+        }
+
+        canvas {
+            background: #000;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="header">404 - PAGE NOT FOUND</div>
+        <div class="score">Score: <span id="score">0</span></div>
+        <div class="game-container">
+            <canvas id="gameCanvas" width="400" height="400"></canvas>
+        </div>
+        <div class="instructions">
+            Use Arrow Keys or WASD to play<br>
+            Press Space to start/restart
+        </div>
+        <button class="home-button" onclick="window.location.href='/'">Return Home</button>
+    </div>
+
+    <script>
+        const canvas = document.getElementById('gameCanvas');
+        const ctx = canvas.getContext('2d');
+        const gridSize = 20;
+        const tileCount = canvas.width / gridSize;
+
+        let snake = [
+            { x: 10, y: 10 },
+        ];
+        let food = { x: 15, y: 15 };
+        let dx = 0;
+        let dy = 0;
+        let score = 0;
+        let gameStarted = false;
+        let gameOver = false;
+
+        function drawGame() {
+            clearCanvas();
+
+            if (!gameStarted) {
+                drawStartScreen();
+                return;
+            }
+
+            if (gameOver) {
+                drawGameOver();
+                return;
+            }
+
+            moveSnake();
+            checkCollision();
+            drawSnake();
+            drawFood();
+        }
+
+        function clearCanvas() {
+            ctx.fillStyle = 'black';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+        }
+
+        function drawStartScreen() {
+            ctx.fillStyle = '#33ff33';
+            ctx.font = '20px "Courier New"';
+            ctx.textAlign = 'center';
+            ctx.fillText('Press SPACE to Start', canvas.width / 2, canvas.height / 2);
+        }
+
+        function drawGameOver() {
+            ctx.fillStyle = '#33ff33';
+            ctx.font = '20px "Courier New"';
+            ctx.textAlign = 'center';
+            ctx.fillText('GAME OVER', canvas.width / 2, canvas.height / 2 - 20);
+            ctx.fillText('Press SPACE to Restart', canvas.width / 2, canvas.height / 2 + 20);
+        }
+
+        function moveSnake() {
+            const head = { x: snake[0].x + dx, y: snake[0].y + dy };
+
+            // Wrap around screen edges
+            head.x = (head.x + tileCount) % tileCount;
+            head.y = (head.y + tileCount) % tileCount;
+
+            snake.unshift(head);
+
+            if (head.x === food.x && head.y === food.y) {
+                score += 10;
+                document.getElementById('score').textContent = score;
+                generateFood();
+            } else {
+                snake.pop();
+            }
+        }
+
+        function checkCollision() {
+            const head = snake[0];
+            for (let i = 1; i < snake.length; i++) {
+                if (head.x === snake[i].x && head.y === snake[i].y) {
+                    gameOver = true;
+                }
+            }
+        }
+
+        function drawSnake() {
+            ctx.fillStyle = '#33ff33';
+            snake.forEach((segment, index) => {
+                ctx.fillRect(segment.x * gridSize, segment.y * gridSize, gridSize - 2, gridSize - 2);
+
+                // Draw eyes on the head
+                if (index === 0) {
+                    ctx.fillStyle = 'black';
+                    const eyeSize = 4;
+                    // Adjust eye position based on direction
+                    const eyeOffset = 5;
+                    if (dx === 1 || dx === -1) {
+                        ctx.fillRect(segment.x * gridSize + (dx === 1 ? 12 : 4), segment.y * gridSize + eyeOffset, eyeSize, eyeSize);
+                        ctx.fillRect(segment.x * gridSize + (dx === 1 ? 12 : 4), segment.y * gridSize + gridSize - eyeOffset - eyeSize, eyeSize, eyeSize);
+                    } else {
+                        ctx.fillRect(segment.x * gridSize + eyeOffset, segment.y * gridSize + (dy === 1 ? 12 : 4), eyeSize, eyeSize);
+                        ctx.fillRect(segment.x * gridSize + gridSize - eyeOffset - eyeSize, segment.y * gridSize + (dy === 1 ? 12 : 4), eyeSize, eyeSize);
+                    }
+                    ctx.fillStyle = '#33ff33';
+                }
+            });
+        }
+
+        function drawFood() {
+            ctx.fillStyle = '#ff3333';
+            ctx.fillRect(food.x * gridSize, food.y * gridSize, gridSize - 2, gridSize - 2);
+        }
+
+        function generateFood() {
+            food = {
+                x: Math.floor(Math.random() * tileCount),
+                y: Math.floor(Math.random() * tileCount)
+            };
+            // Make sure food doesn't spawn on snake
+            while (snake.some(segment => segment.x === food.x && segment.y === food.y)) {
+                food = {
+                    x: Math.floor(Math.random() * tileCount),
+                    y: Math.floor(Math.random() * tileCount)
+                };
+            }
+        }
+
+        function resetGame() {
+            snake = [{ x: 10, y: 10 }];
+            food = { x: 15, y: 15 };
+            dx = 0;
+            dy = 0;
+            score = 0;
+            document.getElementById('score').textContent = score;
+            gameOver = false;
+            gameStarted = true;
+        }
+
+        document.addEventListener('keydown', (e) => {
+            if ((e.code === 'Space' || e.key === ' ') && (!gameStarted || gameOver)) {
+                resetGame();
+                return;
+            }
+
+            if (!gameStarted) return;
+
+            // Prevent reversing direction
+            if ((e.key === 'ArrowUp' || e.key === 'w') && dy !== 1) {
+                dx = 0;
+                dy = -1;
+            } else if ((e.key === 'ArrowDown' || e.key === 's') && dy !== -1) {
+                dx = 0;
+                dy = 1;
+            } else if ((e.key === 'ArrowLeft' || e.key === 'a') && dx !== 1) {
+                dx = -1;
+                dy = 0;
+            } else if ((e.key === 'ArrowRight' || e.key === 'd') && dx !== -1) {
+                dx = 1;
+                dy = 0;
+            }
+        });
+
+        setInterval(drawGame, 100);
+    </script>
+</body>
+
+</html>
 {{- end }}{{/* end main */ -}}
