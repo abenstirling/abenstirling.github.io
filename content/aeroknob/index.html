@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel='icon' type='image/x-icon' href='aeroknob_icon.png'>
+    <title>Aeroknob Tester</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+        }
+
+        body {
+            background-color: #f0f2f5;
+            padding: 20px;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .container {
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 800px;
+            padding: 20px;
+            margin-top: 20px;
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .title {
+            font-size: 24px;
+            font-weight: bold;
+            color: #1a1a1a;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo {
+            height: 32px;
+            width: auto;
+        }
+
+        .device-info {
+            margin-top: 10px;
+            padding: 15px;
+            background: #f8fafc;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+
+        .device-info p {
+            color: #64748b;
+            margin-bottom: 5px;
+            font-size: 14px;
+        }
+
+        .connection-status {
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        .connected {
+            background-color: #dcfce7;
+            color: #166534;
+        }
+
+        .disconnected {
+            background-color: #fee2e2;
+            color: #991b1b;
+        }
+
+        .section {
+            margin-bottom: 30px;
+        }
+
+        .section-title {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 15px;
+            color: #374151;
+        }
+
+        .buttons-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
+            gap: 10px;
+        }
+
+        .button {
+            aspect-ratio: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #f1f5f9;
+            border-radius: 8px;
+            font-weight: 500;
+            transition: all 0.1s ease;
+            font-size: 16px;
+        }
+
+        .button.pressed {
+            background: #3b82f6;
+            color: white;
+            transform: scale(0.95);
+        }
+
+        .no-gamepad {
+            text-align: center;
+            padding: 40px 20px;
+            color: #64748b;
+        }
+
+        .info-text {
+            font-size: 18px;
+            margin-bottom: 15px;
+            color: #1e293b;
+        }
+
+        .sub-text {
+            font-size: 14px;
+            color: #64748b;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="header">
+            <h1 class="title">
+                <!-- Simple "AK" text logo since we can't use external images -->
+                <img src="./aeroknob_icon.png" alt="Aeroknob Logo" class="logo">
+                Aeroknob Tester
+            </h1>
+            <div id="connectionStatus" class="connection-status disconnected">Not Connected</div>
+        </div>
+
+        <div id="noGamepad" class="no-gamepad">
+            <p class="info-text">No Aeroknob device detected</p>
+            <p class="sub-text">Connect your Aeroknob device to begin testing</p>
+        </div>
+
+        <div id="gamepadDisplay" style="display: none;">
+            <div class="device-info">
+                <p><strong>Device ID:</strong> <span id="deviceId">-</span></p>
+                <p><strong>Device Name:</strong> <span id="deviceName">-</span></p>
+                <p><strong>Firmware Version:</strong> <span id="firmwareVersion">-</span></p>
+            </div>
+
+            <div class="section">
+                <h2 class="section-title">Button States</h2>
+                <div id="buttonsContainer" class="buttons-container"></div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let gamepad = null;
+        let animationId = null;
+
+        function updateStatus() {
+            if (!gamepad) return;
+
+            const gamepads = navigator.getGamepads();
+            const currentGamepad = gamepads[gamepad.index];
+
+            if (currentGamepad) {
+                // Update buttons
+                currentGamepad.buttons.forEach((button, index) => {
+                    const buttonElement = document.getElementById(`button-${index}`);
+                    if (buttonElement) {
+                        buttonElement.classList.toggle('pressed', button.pressed);
+                    }
+                });
+            }
+
+            animationId = requestAnimationFrame(updateStatus);
+        }
+
+        function handleGamepadConnected(event) {
+            gamepad = event.gamepad;
+            document.getElementById('connectionStatus').className = 'connection-status connected';
+            document.getElementById('connectionStatus').textContent = 'Connected';
+            document.getElementById('noGamepad').style.display = 'none';
+            document.getElementById('gamepadDisplay').style.display = 'block';
+
+            // Update device info
+            document.getElementById('deviceId').textContent = gamepad.id;
+            document.getElementById('deviceName').textContent = 'Aeroknob Controller';
+            document.getElementById('firmwareVersion').textContent = '1.0.0';
+
+            // Create buttons display
+            const buttonsContainer = document.getElementById('buttonsContainer');
+            buttonsContainer.innerHTML = gamepad.buttons.map((button, index) => `
+                <div class="button" id="button-${index}">BTN ${index + 1}</div>
+            `).join('');
+
+            // Start the update loop
+            updateStatus();
+        }
+
+        function handleGamepadDisconnected(event) {
+            if (gamepad && gamepad.index === event.gamepad.index) {
+                gamepad = null;
+                document.getElementById('connectionStatus').className = 'connection-status disconnected';
+                document.getElementById('connectionStatus').textContent = 'Not Connected';
+                document.getElementById('noGamepad').style.display = 'block';
+                document.getElementById('gamepadDisplay').style.display = 'none';
+                cancelAnimationFrame(animationId);
+            }
+        }
+
+        window.addEventListener('gamepadconnected', handleGamepadConnected);
+        window.addEventListener('gamepaddisconnected', handleGamepadDisconnected);
+    </script>
+</body>
+
+</html>
