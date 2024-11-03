@@ -6,3 +6,8 @@
 
 `KORAD KA3005P` must be programmed by copy/pasting serial commands, not typing them out.
 Source: Jon O'Brien
+
+### 11/2/2024
+
+`false positive > false negative`
+Source: Adin Ackerman
