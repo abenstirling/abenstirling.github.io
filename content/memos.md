@@ -11,3 +11,8 @@ Source: Jon O'Brien
 
 `false positive > false negative`
 Source: Adin Ackerman
+
+### 11/4/2024
+
+the demo curse is a myth, but there is a demo effect  
+Source: ben stirling
