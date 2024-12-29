@@ -110,7 +110,7 @@ url = "https://github.com/abenstirling/resume_cv/blob/main/ben_stirling_resume.p
 
 [[menu.main]]
 identifier = "Tools"
-name = "Tools"
+name = "Toolbox"
 url = "/tools/"
 
 [[menu.main]]
