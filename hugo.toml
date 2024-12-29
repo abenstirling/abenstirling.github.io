@@ -38,6 +38,8 @@ hidemeta = false
 hideSummary = false
 showtoc = false
 tocopen = false
+google_analytics_id = "G-3YPTGE6JH6"
+
 
 [params.assets]
 favicon = "/logo.ico"
@@ -107,6 +109,11 @@ url = "https://github.com/abenstirling/resume_cv/blob/main/ben_stirling_resume.p
 #  weight = 30
 
 [[menu.main]]
+identifier = "Tools"
+name = "Tools"
+url = "/tools/"
+
+[[menu.main]]
 identifier = "about"
 name = "About"
 url = "/about/"
@@ -116,6 +123,7 @@ weight = 20
 identifier = "memos"
 name = "Memos"
 url = "/memos/"
+
 
 pygmentsUseClasses = true
 
