@@ -11,7 +11,7 @@ Here are some of the top tools I use:
 - [Mitutoyo Digital Micrometer](https://amzn.to/49WdeX3)
 - [Bondhus Allen Wrench Set](https://amzn.to/41Uchg3)
 
-  Non-engineering related:
+Non-engineering related:
 
 - [AeroPress Coffee Maker](https://amzn.to/3BJYJcr)
 - [Metal Filter For AeroPress](https://amzn.to/408XTiF)
