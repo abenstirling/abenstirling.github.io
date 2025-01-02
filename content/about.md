@@ -4,7 +4,7 @@
 
 I am born and raised in sunny San Diego, CA.
 
-I got my degree in Computer Engineering from UC San Diego, and
+I got my degree in Computer Engineering from UC San Diego.
 
 I helped start two companies, one failed (Autoprint Inc.) and the other (DeepWater Exploration Inc.) I had to step down so I could pursue my degree. It was a very painful period, but it was needed for me to focus. I matured through that experience, and the hard break was really necessary for me to push myself to grow. I still love the excitement and flexibility and determination it takes to be in a startup, and I aim to be of value wherever I work.
 
