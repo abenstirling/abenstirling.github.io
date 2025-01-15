@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Botion</title>
+    <style>
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        .pronunciation {
+            font-style: italic;
+            color: #666;
+            margin-bottom: 2rem;
+        }
+        .project {
+            margin-bottom: 1rem;
+        }
+        .project-header {
+            cursor: pointer;
+            padding: 1rem;
+            background-color: #f5f5f5;
+            border-radius: 4px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .project-content {
+            display: none;
+            padding: 1rem;
+            border: 1px solid #f5f5f5;
+            border-top: none;
+            border-radius: 0 0 4px 4px;
+        }
+        .status {
+            font-size: 0.9rem;
+            padding: 0.25rem 0.5rem;
+            border-radius: 4px;
+        }
+        .published {
+            background-color: #d4edda;
+            color: #155724;
+        }
+        .in-progress {
+            background-color: #fff3cd;
+            color: #856404;
+        }
+        .archived {
+            background-color: #f8d7da;
+            color: #721c24;
+        }
+        .support-section {
+            margin-top: 3rem;
+        }
+        .question {
+            margin-bottom: 1.5rem;
+        }
+        .privacy-policy {
+            margin-top: 3rem;
+            padding-top: 2rem;
+            border-top: 1px solid #eee;
+        }
+        .project-link {
+            color: #0366d6;
+            text-decoration: none;
+        }
+        .project-link:hover {
+            text-decoration: underline;
+        }
+        .project-date {
+            font-size: 0.9rem;
+            color: #666;
+            margin-top: 0.5rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Botion</h1>
+        <p>The future of anything and everything.</p>
+        <p class="pronunciation">Pronunciation: /boʊˈʃən/ (bow-shun)</p>
+
+        <div class="projects">
+
+
+            <div class="project">
+                <div class="project-header">
+                    <span>Botion Fitness</span>
+                    <span class="status in-progress">In Progress</span>
+                </div>
+                <div class="project-content">
+                    <p>Coming soon...</p>
+                    <p class="project-date">Expected: Spring 2024</p>
+                </div>
+            </div>
+
+            <div class="project">
+                <div class="project-header">
+                    <span>Botion Times</span>
+                    <span class="status published">Live</span>
+                </div>
+                <div class="project-content">
+                    <p>Live news aggregator for all things Botion.</p>
+                    <p class="project-date">Released: February 2024</p>
+                    <p><a href="https://abenstirling.com/news" class="project-link">Visit Botion Times →</a></p>
+                </div>
+            </div>
+
+            <div class="project">
+                <div class="project-header">
+                    <span>Botion Checklist</span>
+                    <span class="status published">Published on App Store</span>
+                </div>
+                <div class="project-content">
+                    <p>A simple task list app that syncs with your Notion page.</p>
+                    <p class="project-date">Released: October 2023</p>
+                    <p><a href="https://apps.apple.com/us/app/botion-checklist/id6477213069" class="project-link">Download on App Store →</a></p>
+                    <p><a href="/posts/botion" class="project-link">Learn More →</a></p>
+
+                    <h3>Support</h3>
+                    <p>For any urgent bugs or issues, please email <a href="mailto:help@botion.app">help@botion.app</a>.</p>
+
+                    <div class="faq">
+                        <div class="question">
+                            <h4>Q1: How do I sign up for the app?</h4>
+                            <p>To sign up, download the app from the App Store, open it, and follow the on-screen instructions. You can sign up using your Notion account via secure OAuth.</p>
+                        </div>
+
+                        <div class="question">
+                            <h4>Q2: What features does the app offer?</h4>
+                            <p>Our app offers:</p>
+                            <ul>
+                                <li>Customizable task lists for daily planning</li>
+                                <li>Integration with calendars for event tracking</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="privacy-policy">
+                        <h3>Privacy Policy</h3>
+                        <p>Last updated: 1/14/25</p>
+
+                        <h4>Information We Don't Collect</h4>
+                        <p>We do not collect any information from you when you use our app. There is no registration required, and we don't gather data through the app's features. Therefore, you can use our app anonymously.</p>
+
+                        <h4>Data Usage</h4>
+                        <p>Since we don't collect any data, there is no data usage to discuss. Our app is designed to respect your privacy fully.</p>
+
+                        <h4>Security Measures</h4>
+                        <p>Although we don't collect information, we still prioritize the security of our app to protect any interactions you may have while using it.</p>
+
+                        <h4>Data Retention Policy</h4>
+                        <p>There is no data retention policy to discuss, as we do not collect or store any data.</p>
+
+                        <h4>Cookies and Similar Technologies</h4>
+                        <p>Our app does not use cookies or similar tracking technologies.</p>
+
+                        <h4>Third-Party Involvement</h4>
+                        <p>We do not share any information with third parties, primarily because we don't collect any. There are no third-party products or services integrated into our app that would require us to share data.</p>
+
+                        <h4>Children's Online Privacy Protection Act Compliance</h4>
+                        <p>Our app is directed to people who are at least 13 years old or older. However, since we do not collect data, there are no COPPA compliance requirements.</p>
+
+                        <h4>Applicability</h4>
+                        <p>This privacy policy applies only to the use of this app and not to any other interactions you may have with us.</p>
+
+                        <h4>Your Consent</h4>
+                        <p>By using our app, you acknowledge that you have read and understand this privacy policy.</p>
+
+                        <h4>Changes to Our Privacy Policy</h4>
+                        <p>If there are any changes to this privacy policy, they will be updated here.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="project">
+                <div class="project-header">
+                    <span>Botion Checker</span>
+                    <span class="status published">Published on Chrome Web Store</span>
+                </div>
+                <div class="project-content">
+                    <p>Chrome extension for checking broken links in static sites.</p>
+                    <p class="project-date">Released: October 2023</p>
+                    <p><a href="https://chromewebstore.google.com/detail/botion-checker/pijjpphcmcffakcaggdibkmnkkcmccdm" class="project-link">Download on Chrome Web Store →</a></p>
+                    <p><a href="/posts/botionchecker" class="project-link">Learn More →</a></p>
+                </div>
+            </div>
+
+            <div class="project">
+                <div class="project-header">
+                    <span>Botion Loom (Bloom)</span>
+                    <span class="status published">Published on Chrome Web Store</span>
+                </div>
+                <div class="project-content">
+                    <p>Chrome extension for Notion integration with Loom.</p>
+                    <p class="project-date">Released: January 2024</p>
+                    <p><a href="https://chromewebstore.google.com/detail/bloom/onbgnfldfbkmimeikiaegemcfnclhdlm?authuser=0&hl=en" class="project-link">Download on Chrome Web Store →</a></p>
+                </div>
+            </div>
+
+            <div class="project">
+                <div class="project-header">
+                    <span>Botion NFC</span>
+                    <span class="status published">Published on App Store</span>
+                </div>
+                <div class="project-content">
+                    <p>Simple, open-source NFC tag writing app.</p>
+                    <p class="project-date">Released: February 2024</p>
+                    <p><a href="https://apps.apple.com/us/app/botionnfc/id6476791734" class="project-link">Download on App Store →</a></p>
+                    <p><a href="https://github.com/abenstirling/BotionNFC" class="project-link">View on GitHub →</a></p>
+                    <p><a href="/posts/botionnfc" class="project-link">Learn More →</a></p>
+                </div>
+            </div>
+
+            <div class="project">
+                <div class="project-header">
+                    <span>Botion Cards</span>
+                    <span class="status archived">Archived</span>
+                </div>
+                <div class="project-content">
+                    <p>NFC-enabled business cards.</p>
+                    <p class="project-date">Released: October 2023</p>
+                    <p><a href="/posts/businesscard" class="project-link">Learn More →</a></p>
+                </div>
+            </div>
+
+            <div class="project">
+                <div class="project-header">
+                    <span>Botion Cube</span>
+                    <span class="status archived">Archived</span>
+                </div>
+                <div class="project-content">
+                    <p>A productivity cube that syncs with Notion.</p>
+                    <p class="project-date">Released: September 2021</p>
+                    <p><a href="https://github.com/abenstirling/BotionCube" class="project-link">View on GitHub →</a></p>
+                    <p><a href="/posts/botion_cube" class="project-link">Learn More →</a></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.querySelectorAll('.project-header').forEach(header => {
+            header.addEventListener('click', () => {
+                const content = header.nextElementSibling;
+                content.style.display = content.style.display === 'block' ? 'none' : 'block';
+            });
+        });
+    </script>
+</body>
+</html>
