@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Botion Heavyweight - Combat Robot</title>
+    <link rel="icon" type="image/png" href="/botion/botion_heavyweight.png">
     <style>
         .container {
             max-width: 800px;
@@ -38,6 +39,61 @@
         .back-link:hover {
             text-decoration: underline;
         }
+        .hero-image {
+            width: 100%;
+            max-height: 400px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin: 1rem 0;
+        }
+        .tournament-results {
+            background-color: #f8f9fa;
+            padding: 1rem;
+            border-radius: 4px;
+            margin: 1rem 0;
+            text-align: center;
+        }
+        .placement {
+            font-size: 1.5rem;
+            font-weight: bold;
+            background: linear-gradient(to right, #BF953F, #FCF6BA, #B38728, #FBF5B7, #AA771C);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+            padding: 0.5rem;
+            display: inline-block;
+        }
+        .video-container {
+            position: relative;
+            padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
+            height: 0;
+            overflow: hidden;
+            margin: 2rem 0;
+        }
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+        .bracket-container {
+            width: 100%;
+            height: 500px;
+            margin: 2rem 0;
+        }
+        .recap-section {
+            margin: 2rem 0;
+            padding: 1rem;
+            background-color: #f8f9fa;
+            border-radius: 4px;
+        }
+        .recap-item {
+            margin: 1rem 0;
+            padding-left: 1rem;
+            border-left: 3px solid #0366d6;
+        }
     </style>
 </head>
 <body>
@@ -45,14 +101,53 @@
         <a href="/botion" class="back-link">← Back to Botion Projects</a>
         
         <h1>Botion Heavyweight</h1>
-        <p>1lb Plastic Antweight Combat Robot</p>
+        <p>1lb PLA-printed Combat Robot</p>
+
+        <img src="botion_heavyweight.png" alt="Botion Heavyweight Robot" class="hero-image">
+
+        <div class="tournament-results">
+            <h2>Tournament Performance</h2>
+            <p class="placement">🏆 5th Place Overall (out of 25) UCI ACE 2025 🏆</p>
+        </div>
+
+        <div class="video-container">
+            <iframe width="560" height="315" src="https://www.youtube.com/embed/s7Mer7IG9no" title="Botion Heavyweight Combat Robot" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        </div>
+
+        <div class="bracket-container">
+            <iframe src="https://challonge.com/ACE_UCI_2025/module" width="100%" height="500" frameborder="0" scrolling="auto" allowtransparency="true"></iframe>
+        </div>
+
+        <div class="recap-section">
+            <h2>Tournament Recap & Future Improvements</h2>
+            
+            <div class="recap-item">
+                <h3>1. Drive System Upgrade</h3>
+                <p>Need to implement brushless drive motors for improved power and control during matches.</p>
+            </div>
+
+            <div class="recap-item">
+                <h3>2. Structural Reinforcement</h3>
+                <p>Switch to PLA+ material with thicker walls (3/4 inch) to improve durability and impact resistance.</p>
+            </div>
+
+            <div class="recap-item">
+                <h3>3. Flip Recovery</h3>
+                <p>Enhance self-righting capabilities to ensure better recovery from flips during combat.</p>
+            </div>
+
+            <div class="recap-item">
+                <h3>4. Weapon System Enhancement</h3>
+                <p>Develop a more powerful weapon system with better weight distribution for increased effectiveness.</p>
+            </div>
+        </div>
 
         <div class="strategy-section">
             <h2>Combat Strategy</h2>
             
             <div class="strategy-point">
                 <h3>1. High Strength-to-Weight Ratio</h3>
-                <p>Utilizing plastic construction to maximize the strength-to-weight ratio in the 1lb weight class. This approach prioritizes maneuverability and structural integrity over raw damage output.</p>
+                <p>Utilizing PLA 3D printing to maximize the strength-to-weight ratio in the 1lb weight class. Strategic infill patterns and wall thickness optimization allow for robust construction while maintaining weight requirements.</p>
             </div>
 
             <div class="strategy-point">
@@ -62,22 +157,40 @@
 
             <div class="strategy-point">
                 <h3>3. Wedge Design</h3>
-                <p>Front-mounted wedge design to get under opponents and control the fight. The wedge serves as both offensive and defensive elements.</p>
+                <p>Front-mounted wedge design with optimized PLA layer orientation for maximum strength. The wedge serves as both offensive and defensive elements, with carefully considered angles for optimal opponent control.</p>
             </div>
 
             <div class="strategy-point">
                 <h3>4. Centered Weapon System</h3>
-                <p>Single, centrally-mounted weapon integrated into the wedge design for maximum effectiveness while maintaining balance and control.</p>
+                <p>Single, centrally-mounted weapon integrated into the wedge design. The weapon housing is reinforced with additional PLA thickness at stress points while maintaining weight efficiency.</p>
             </div>
 
             <div class="strategy-point">
                 <h3>5. Reversible Drive System</h3>
-                <p>Designed to be driven from either orientation, ensuring the robot can continue fighting effectively even if flipped.</p>
+                <p>Designed to be driven from either orientation, ensuring the robot can continue fighting effectively even if flipped. The symmetrical design allows for consistent performance in any orientation.</p>
             </div>
 
-            <div class="strategy-point">
-                <h3>6. TPU Entanglement Features</h3>
-                <p>Rear-mounted TPU stringy elements designed to entangle and further immobilize opponent robots, adding another layer to the control-based strategy.</p>
+            <div class="materials-section">
+                <h3>Construction Details</h3>
+                <ul>
+                    <li>Primary Material: PLA (Polylactic Acid)</li>
+                    <li>Print Settings:
+                        <ul>
+                            <li>Infill: Variable (15-100% depending on component stress requirements)</li>
+                            <li>Layer Height: 0.2mm for general parts, 0.12mm for detailed components</li>
+                            <li>Wall Thickness: Minimum 1.2mm, reinforced up to 2.4mm in high-stress areas</li>
+                            <li>Top/Bottom Layers: Minimum 4 layers for structural integrity</li>
+                        </ul>
+                    </li>
+                    <li>Key Reinforcement Areas:
+                        <ul>
+                            <li>Weapon mount points</li>
+                            <li>Drive system housing</li>
+                            <li>Wedge impact zones</li>
+                            <li>Armor panels</li>
+                        </ul>
+                    </li>
+                </ul>
             </div>
         </div>
 
