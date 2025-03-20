@@ -22,4 +22,6 @@ I have since made a thinner version.
 
 I have also published the [app to program them](https://abenstirling.com/posts/botionnfc/), available on the App Store.
 
-You can order them [here](https://botioncards.com) now!
+I was excited to see the [Envision Makerspace](https://jacobsschool.ucsd.edu/envision/team-building) pilot them for their team building events!
+
+I have currently archived them due to my lack of marketing abilities, but feel [free to reach out](mailto:bstirling@ucsd.edu) if you'd like to order some! 
