@@ -1,6 +1,6 @@
 ### Hey, Ben Stirling here!
 
-![Ben](/ben_summer_2024.jpg)
+![Ben](/ben_summer_2024_2.jpg)
 
 I am born and raised in sunny San Diego, CA.
 
