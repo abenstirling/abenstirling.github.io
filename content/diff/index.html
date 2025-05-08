@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Heatmap Diff</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background-color: #f5f5f5;
+            display: flex;
+            justify-content: center;
+            padding: 20px;
+            margin: 0;
+        }
+        .container {
+            max-width: 1000px;
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            align-items: center;
+            min-height: 100vh; /* Ensure container takes full height */
+            box-sizing: border-box;
+        }
+        h1 {
+            color: #333;
+            margin: 0;
+        }
+        .input-group {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            align-items: center;
+        }
+        .file-input-wrapper {
+            position: relative;
+            overflow: hidden;
+            display: inline-block;
+        }
+        .file-input-wrapper input[type="file"] {
+            font-size: 100px;
+            position: absolute;
+            left: 0;
+            top: 0;
+            opacity: 0;
+            cursor: pointer;
+        }
+        .file-input-button {
+            display: inline-block;
+            padding: 12px 24px;
+            background: #007bff;
+            color: white;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background 0.3s ease;
+            text-align: center;
+            font-weight: 500;
+        }
+        .file-input-button:hover {
+            background: #0056b3;
+        }
+        .image-container {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        .image-placeholder {
+            width: 300px;
+            height: 200px;
+            background: #e9ecef;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        .image-placeholder svg {
+            width: 50px;
+            height: 50px;
+            fill: #6c757d;
+        }
+        img {
+            max-width: 300px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            display: none;
+        }
+        img.loaded {
+            display: block;
+        }
+        canvas {
+            max-width: 300px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        .scale-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+        }
+        .scale {
+            width: 300px;
+            height: 20px;
+            border-radius: 5px;
+            background: linear-gradient(to right, blue, green, yellow, red);
+        }
+        .scale-labels {
+            display: flex;
+            justify-content: space-between;
+            width: 300px;
+            font-size: 12px;
+            color: #666;
+        }
+        .scale-units {
+            font-size: 12px;
+            color: #666;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Image Heatmap Difference</h1>
+        <div class="input-group">
+            <label for="image1">Upload First Image:</label>
+            <div class="file-input-wrapper">
+                <span class="file-input-button">Choose File</span>
+                <input type="file" id="image1" accept="image/*">
+            </div>
+        </div>
+        <div class="input-group">
+            <label for="image2">Upload Second Image:</label>
+            <div class="file-input-wrapper">
+                <span class="file-input-button">Choose File</span>
+                <input type="file" id="image2" accept="image/*">
+            </div>
+        </div>
+        <div class="image-container">
+            <div class="image-placeholder" id="placeholder1">
+                <svg viewBox="0 0 24 24">
+                    <path d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z"/>
+                </svg>
+            </div>
+            <img id="img1" alt="First Image">
+            <div class="image-placeholder" id="placeholder2">
+                <svg viewBox="0 0 24 24">
+                    <path d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z"/>
+                </svg>
+            </div>
+            <img id="img2" alt="Second Image">
+        </div>
+        <h2>Heatmap Difference</h2>
+        <canvas id="diffCanvas"></canvas>
+        <div class="scale-container">
+            <div class="scale"></div>
+            <div class="scale-labels">
+                <span>0 (No Difference)</span>
+                <span>255 (Max Difference)</span>
+            </div>
+            <div class="scale-units">Units: Grayscale Intensity Difference</div>
+        </div>
+    </div>
+
+    <script>
+        const image1Input = document.getElementById('image1');
+        const image2Input = document.getElementById('image2');
+        const img1 = document.getElementById('img1');
+        const img2 = document.getElementById('img2');
+        const placeholder1 = document.getElementById('placeholder1');
+        const placeholder2 = document.getElementById('placeholder2');
+        const diffCanvas = document.getElementById('diffCanvas');
+        const ctx = diffCanvas.getContext('2d');
+
+        let img1Loaded = false;
+        let img2Loaded = false;
+
+        function interpolateColor(value, maxValue) {
+            const t = Math.min(value / maxValue, 1);
+            let r, g, b;
+
+            if (t < 0.25) {
+                r = 0;
+                g = t * 4 * 255;
+                b = 255;
+            } else if (t < 0.5) {
+                r = (t - 0.25) * 4 * 255;
+                g = 255;
+                b = 255 - (t - 0.25) * 4 * 255;
+            } else if (t < 0.75) {
+                r = 255;
+                g = 255 - (t - 0.5) * 4 * 255;
+                b = 0;
+            } else {
+                r = 255;
+                g = (1 - t) * 4 * 255;
+                b = 0;
+            }
+
+            return [r, g, b];
+        }
+
+        function loadImage(input, imgElement, placeholder, callback) {
+            const file = input.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    imgElement.src = e.target.result;
+                    imgElement.onload = () => {
+                        imgElement.classList.add('loaded');
+                        placeholder.style.display = 'none';
+                        callback();
+                    };
+                };
+                reader.readAsDataURL(file);
+            }
+        }
+
+        function computeHeatmapDiff() {
+            if (!img1Loaded || !img2Loaded) return;
+
+            const width = Math.min(img1.width, img2.width);
+            const height = Math.min(img1.height, img2.height);
+            diffCanvas.width = width;
+            diffCanvas.height = height;
+
+            const tempCanvas1 = document.createElement('canvas');
+            tempCanvas1.width = width;
+            tempCanvas1.height = height;
+            const ctx1 = tempCanvas1.getContext('2d');
+            ctx1.drawImage(img1, 0, 0, width, height);
+
+            const tempCanvas2 = document.createElement('canvas');
+            tempCanvas2.width = width;
+            tempCanvas2.height = height;
+            const ctx2 = tempCanvas2.getContext('2d');
+            ctx2.drawImage(img2, 0, 0, width, height);
+
+            const imgData1 = ctx1.getImageData(0, 0, width, height);
+            const imgData2 = ctx2.getImageData(0, 0, width, height);
+            const diffData = ctx.createImageData(width, height);
+
+            for (let i = 0; i < imgData1.data.length; i += 4) {
+                const gray1 = 0.299 * imgData1.data[i] + 0.587 * imgData1.data[i + 1] + 0.114 * imgData1.data[i + 2];
+                const gray2 = 0.299 * imgData2.data[i] + 0.587 * imgData2.data[i + 1] + 0.114 * imgData2.data[i + 2];
+                
+                const diff = Math.abs(gray1 - gray2);
+                
+                const [r, g, b] = interpolateColor(diff, 255);
+                
+                diffData.data[i] = r;
+                diffData.data[i + 1] = g;
+                diffData.data[i + 2] = b;
+                diffData.data[i + 3] = 255;
+            }
+
+            ctx.putImageData(diffData, 0, 0);
+        }
+
+        image1Input.addEventListener('change', () => {
+            loadImage(image1Input, img1, placeholder1, () => {
+                img1Loaded = true;
+                computeHeatmapDiff();
+            });
+        });
+
+        image2Input.addEventListener('change', () => {
+            loadImage(image2Input, img2, placeholder2, () => {
+                img2Loaded = true;
+                computeHeatmapDiff();
+            });
+        });
+    </script>
+</body>
+</html>
