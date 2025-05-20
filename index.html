@@ -222,6 +222,30 @@
             </div>
         </section>
 
+        <!-- Stats Section -->
+        <details class="style-guidelines mb-8">
+            <summary>Stats</summary>
+            <div class="style-guidelines-content py-4">
+                <div class="mb-8">
+                    <canvas id="projectsPerYearChart" height="80"></canvas>
+                </div>
+                <div class="flex flex-wrap gap-4 mb-6">
+                    <div class="border rounded p-4 min-w-[160px] text-center">
+                        <div class="text-2xl font-bold" id="totalProjectCount">0</div>
+                        <div class="text-sm text-gray-600">Total Projects</div>
+                    </div>
+                    <div class="border rounded p-4 min-w-[160px] text-center">
+                        <div class="text-2xl font-bold" id="avgProjectsPerYear">0</div>
+                        <div class="text-sm text-gray-600">Avg Projects/Year</div>
+                    </div>
+                    <div class="border rounded p-4 min-w-[160px] text-center">
+                        <div class="text-lg font-semibold mb-2">Top Teamups</div>
+                        <ul id="topTeamups" class="text-sm"></ul>
+                    </div>
+                </div>
+            </div>
+        </details>
+
         <!-- Branding Standards -->
         <details class="style-guidelines">
             <summary>Branding Standards</summary>
@@ -296,57 +320,46 @@
         </footer>
     </main>
 
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script>
         // Function to create project card HTML
         function createProjectCard(project) {
-            const statusStyle = `background-color: ${project.status.color}20; color: ${project.status.color};`;
+            // Always use black for status label
+            const statusStyle = `background: none; color: #000; border-radius: 0.25rem; font-size: 0.9rem; padding: 0.1rem 0.5rem; border: 1px solid #e5e7eb;`;
 
-            const collaboratorsHtml = project.collaborators && project.collaborators.length > 0
-                ? project.collaborators
-                    .map(collab => `<a href="${collab.linkedin}"><u>${collab.name}</u></a>`)
-                    .join(', ')
+            // Collaborators inline (with ...)
+            const collaboratorsInline = project.collaborators && project.collaborators.length > 0
+                ? `<div class=\"text-sm text-gray-700 mt-1\">with ${project.collaborators.map(collab => `<a href=\"${collab.linkedin}\"><u>${collab.name}</u></a>`).join(', ')}</div>`
                 : '';
 
-            const statsHtml = project.stats
-                ? `<div class="mb-4">
-                    <span class="font-medium">Stats:</span>
-                    <div class="grid grid-cols-2 gap-4 mt-2">
-                        ${project.stats.map(stat => `
-                            <div class="text-center p-2 border border-[#00ff00] rounded">
-                                <div class="text-xl font-semibold">${stat.value}</div>
-                                <div class="text-sm text-gray-600">${stat.unit}</div>
-                            </div>
-                        `).join('')}
-                    </div>
-                   </div>`
+            // Stats as bullet points (unordered list)
+            const statsInline = project.stats && project.stats.length > 0
+                ? `<ul class=\"list-disc list-inside text-sm text-gray-700 mt-3 mb-2\">${project.stats.map(stat => `<li>${stat.value} ${stat.unit}</li>`).join('')}</ul>`
                 : '';
 
             return `
-                <div class="project-card group">
-                    <div class="overflow-hidden rounded-lg mb-6 flex justify-center">
-                        <img src="${project.image}" 
-                             alt="${project.title} Project" 
-                             class="project-image">
+                <div class=\"project-card group\">
+                    <div class=\"overflow-hidden rounded-lg mb-4 flex justify-center\">
+                        <img src=\"${project.image}\" 
+                             alt=\"${project.title} Project\" 
+                             class=\"project-image\">
                     </div>
                     <div>
-                        <div class="flex justify-between items-start">
-                            <div>
-                                <h3 class="text-2xl font-semibold">${project.title}</h3>
-                                ${project.date ? `<p class="text-sm text-gray-600 mt-1">${project.date}</p>` : ''}
+                        <div class=\"flex justify-between items-start mb-1\">
+                            <div class=\"w-full\">
+                                <h3 class=\"text-2xl font-semibold\">${project.title}</h3>
+                                ${collaboratorsInline}
+                                ${project.date ? `<div class=\"text-xs text-gray-600 mt-1\">${project.date}</div>` : ''}
+                                ${statsInline}
+                                <div class=\"mb-3\"></div>
+                                <p class=\"text-base mb-4\">${project.description}</p>
                             </div>
-                            <span class="px-3 py-1 text-sm rounded-full capitalize" style="${statusStyle}">${project.status.label}</span>
+                            <span class=\"status-label\" style=\"${statusStyle}\">${project.status.label}</span>
                         </div>
-                        <p class="text-base my-6">${project.description}</p>
-                        ${collaboratorsHtml ? `
-                            <div class="mb-4">
-                                <span class="font-medium">Collaborators:</span> ${collaboratorsHtml}
-                            </div>
-                        ` : ''}
-                        ${statsHtml}
                         ${project.link ? `
-                            <a href="${project.link}" 
-                               target="_blank" 
-                               class="inline-block text-lg font-medium">
+                            <a href=\"${project.link}\" 
+                               target=\"_blank\" 
+                               class=\"inline-block text-lg font-medium\">
                                 <u>Learn More →</u>
                             </a>
                         ` : ''}
@@ -374,6 +387,63 @@
                 projectsContainer.innerHTML = sortedProjects
                     .map(project => createProjectCard(project))
                     .join('');
+
+                // --- Stats Section Logic ---
+                // 1. Projects per year
+                const yearCounts = {};
+                data.projects.forEach(p => {
+                    const year = p.date ? p.date.slice(0, 4) : null;
+                    if (year) yearCounts[year] = (yearCounts[year] || 0) + 1;
+                });
+                const years = Object.keys(yearCounts).sort();
+                const counts = years.map(y => yearCounts[y]);
+                // Chart: plot actual projects per year, not moving average
+                if (window.Chart) {
+                    const ctx = document.getElementById('projectsPerYearChart').getContext('2d');
+                    new Chart(ctx, {
+                        type: 'line',
+                        data: {
+                            labels: years,
+                            datasets: [{
+                                label: 'Projects per Year',
+                                data: counts,
+                                borderColor: '#000',
+                                backgroundColor: 'rgba(0,0,0,0.1)',
+                                fill: true,
+                                tension: 0.3,
+                                pointRadius: 3,
+                            }]
+                        },
+                        options: {
+                            plugins: { legend: { display: false } },
+                            scales: {
+                                y: { beginAtZero: true, ticks: { precision: 0 } }
+                            }
+                        }
+                    });
+                }
+                // 2. Total project count
+                document.getElementById('totalProjectCount').textContent = data.projects.length;
+                // 3. Average projects per year
+                const avg = (data.projects.length / years.length).toFixed(2);
+                document.getElementById('avgProjectsPerYear').textContent = avg;
+                // 4. Top 3 teamups
+                const collabCounts = {};
+                data.projects.forEach(p => {
+                    if (p.collaborators) {
+                        p.collaborators.forEach(c => {
+                            collabCounts[c.name] = (collabCounts[c.name] || 0) + 1;
+                        });
+                    }
+                });
+                const topTeamups = Object.entries(collabCounts)
+                    .sort((a, b) => b[1] - a[1])
+                    .slice(0, 3);
+                const topTeamupsList = document.getElementById('topTeamups');
+                topTeamupsList.innerHTML = topTeamups.length
+                    ? topTeamups.map(([name, count]) => `<li>${name} (${count})</li>`).join('')
+                    : '<li>No collaborators yet</li>';
+                // --- End Stats Section Logic ---
             } catch (error) {
                 console.error('Error loading projects:', error);
                 document.getElementById('projects-container').innerHTML =
