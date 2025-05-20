@@ -1,0 +1,252 @@
+projects:
+  - id: vibesecurity
+    title: Vibe Security
+    description: Automatic security scanning and prompts to fix for vibe-coded applications.
+    status:
+      label: V1.0 website live
+      color: "#1B9C85"
+    date: "2025-04-01"
+    image: ./images/vibe_cover.gif
+    link: https://vibesecurity.co
+    collaborators:
+      - name: "Eugene Van Der Watt"
+        linkedin: "https://www.linkedin.com/in/eugene-van-der-watt-8593a52a8/"
+    stats:
+      - value: "1st"
+        unit: "SDx 2025 hackday"
+      - value: "150+"
+        unit: "scans"
+
+  - id: plumeria
+    title: Plumeria
+    description: Perfect date plans.
+    status:
+      label: V2.0 on App Store
+      color: "#1B9C85"
+    date: "2024-09-01"
+    image: ./images/plumeria_cover.png
+    link: https://goplumeria.com
+    collaborators:
+      - name: "Mois Cohen"
+        linkedin: "https://www.linkedin.com/in/moiscohen/"
+    stats:
+      - value: "5000+"
+        unit: "dates"
+      - value: "200+"
+        unit: "users"
+
+  - id: capstan
+    title: Dual-Capstan Flexture Gantry
+    description: Perfect date plans.
+    status:
+      label: V1.0 complete
+      color: "#1B9C85"
+    date: "2024-08-01"
+    image: ./images/plumeria_cover.png
+
+  - id: bcc
+    title: BCC Mod
+    description: GCC MCU modification. ATTINY breakout on flex PCB.
+    status:
+      label: V2.0 Incomplete
+      color: "#1B9C85"
+    date: "2024-07-01"
+    image: ./images/plumeria_cover.png
+    collaborators:
+      - name: "Nicco Pompili"
+        linkedin: "https://www.linkedin.com/in/nicco-pompili-63730a19b/"
+
+  - id: opentags
+    title: Opentag
+    description: Open source alternative to Apple's AirTags, providing a customizable and privacy-focused solution for tracking belongings using Ultra-Wideband technology.
+    status:
+      label: v1.0 released
+      color: "#1B9C85"
+    date: "2024-01-01"
+    image: ./images/opentags_cover.png
+    link: https://github.com/open-tags/opentag
+    collaborators:
+      - name: "Jad Ariss"
+        linkedin: "https://www.linkedin.com/in/jad-ariss/"
+    stats:
+      - value: "14+"
+        unit: "stars"
+
+  - id: autoprint
+    title: Autoprint
+    description: Automated 3D printing system with advanced monitoring and quality control features, designed for high-volume production environments.
+    status:
+      label: active
+      color: "#00ff00"
+    date: "2021-06-01"
+    image: ./images/autoprint_cover.png
+    link: "#"
+    collaborators:
+      - name: "Sam McDowell"
+        linkedin: "https://www.linkedin.com/in/samuelmcdowell64/"
+      - name: "Jeremiah Shue"
+        linkedin: "https://www.linkedin.com/in/jeremiah-shue-2b7487201/"
+      - name: "Mois Cohen"
+        linkedin: "https://www.linkedin.com/in/moiscohen/"
+    stats:
+      - value: "24/7"
+        unit: "operation"
+
+  - id: deep-water-exploration
+    title: DeepWater Exploration
+    description: Autonomous underwater vehicle designed for deep sea exploration and data collection, featuring advanced sensor integration and robust pressure housing.
+    status:
+      label: cofounder
+      color: "#2C7865"
+    date: "2022-01-01"
+    image: ./images/deepwaterexploration_cover.png
+    link: "#"
+    collaborators:
+      - name: "Jiajer Ho"
+        linkedin: "https://www.linkedin.com/in/jiajer-ho-b70000100/"
+    stats:
+      - value: "Issued"
+        unit: "Patent"
+      - value: "Accepted"
+        unit: "Evonexus Incubator"
+
+  - id: cyberball
+    title: CyberBall
+    description: Interactive robotic ball with embedded sensors and wireless communication, designed for educational and entertainment purposes.
+    status:
+      label: completed
+      color: "#2C7865"
+    date: "2024-06-01"
+    image: ./images/cyberball_cover.png
+    link: "#"
+    collaborators:
+      - name: "Adin Ackerman"
+        linkedin: "https://www.linkedin.com/in/adinackerman/"
+
+  - id: macropad
+    title: MacroPad
+    description: Custom mechanical keyboard macro pad with programmable keys and RGB lighting, designed for productivity and workflow optimization.
+    status:
+      label: completed
+      color: "#2C7865"
+    date: "2023-08-01"
+    image: ./images/macropad_cover.png
+    link: "#"
+    collaborators:
+      - name: "Ari Young"
+        linkedin: "https://www.linkedin.com/in/ariel--young/"
+    stats:
+      - value: "Tabled"
+        unit: "UCSD Keyboard Club Event"
+
+  - id: keeb
+    title: Split Keyboard
+    description: Custom mechanical keyboard macro pad with programmable keys and RGB lighting, designed for productivity and workflow optimization.
+    status:
+      label: completed
+      color: "#2C7865"
+    date: "2023-06-01"
+    image: ./images/keeb_cover.png
+    link: "#"
+    collaborators:
+      - name: "Ari Young"
+        linkedin: "https://www.linkedin.com/in/ariel--young/"
+    stats:
+      - value: "12"
+        unit: "programmable keys"
+
+  - id: raytracer
+    title: Raytracer
+    description: Custom raytracing engine built from scratch, featuring advanced lighting models and material systems for photorealistic rendering.
+    status:
+      label: completed
+      color: "#2C7865"
+    date: "2024-03-15"
+    image: ./images/raytracer_cover.png
+    link: "https://github.com/abenstirling/raytracer"
+    collaborators:
+      - name: "Nicco Pompili"
+        linkedin: "https://www.linkedin.com/in/nicco-pompili-63730a19b/"
+    stats:
+      - value: "A"
+        unit: "grade"
+
+  - id: coffee-table
+    title: Smart Coffee Table
+    description: Interactive coffee table with embedded display and touch interface, featuring smart home integration and ambient lighting.
+    status:
+      label: completed
+      color: "#2C7865"
+    date: "2023-05-01"
+    image: ./images/coffeetable_cover.png
+    collaborators:
+      - name: "Caytre Ede"
+        linkedin: "https://www.linkedin.com/in/caytre-e-6b110b20b/"
+
+  - id: botion-cube
+    title: Botion Cube
+    description: Interactive LED cube with motion sensing capabilities, creating dynamic light patterns and visual effects.
+    status:
+      label: completed
+      color: "#2C7865"
+    date: "2024-03-01"
+    image: ./images/botion_cube_cover.png
+    collaborators:
+      - name: "Anshal Jain"
+        linkedin: "https://scholar.google.com/citations?user=h-W8IeQAAAAJ&hl=en"
+      - name: "Daniel Weng"
+        linkedin: "https://www.linkedin.com/in/danielweng002/"
+      - name: "Pranav Mehta"
+        linkedin: "https://www.linkedin.com/in/pranav-mehta-4b23931b5/"
+    stats:
+      - value: "A+"
+        unit: "Grade"
+
+  - id: circuit-generator
+    title: Circuit Generator
+    description: CNN for creating simple LCR circuits from a set of components.
+    status:
+      label: completed
+      color: "#2C7865"
+    date: "2024-03-01"
+    image: ./images/botion_cube_cover.png
+    link: "https://github.com/abenstirling/CircuitGenerator"
+    stats:
+      - value: "Winner"
+        unit: "SDx 2023 hackathon"
+
+  - id: business-card
+    title: Botion Cards
+    description: Electronic business card with embedded display and NFC capabilities, showcasing contact information and portfolio highlights.
+    status:
+      label: inactive
+      color: "#13005A"
+    date: "2023-09-01"
+    image: ./images/businesscard_cover.png
+    stats:
+      - value: "100+"
+        unit: "units sold"
+
+  - id: robot-2021
+    title: 2021 FRC Robot
+    description: Electronic business card with embedded display and NFC capabilities, showcasing contact information and portfolio highlights.
+    status:
+      label: complete
+      color: "#13005A"
+    date: "2021-05-01"
+    image: ./images/2021_robot_cover.gif
+    stats:
+      - value: "Winner"
+        unit: "Industrial Design Award"
+
+  - id: robot-2019
+    title: 2019 FRC Robot
+    description: Electronic business card with embedded display and NFC capabilities, showcasing contact information and portfolio highlights.
+    status:
+      label: complete
+      color: "#13005A"
+    date: "2021-05-01"
+    image: ./images/2021_robot_cover.gif
+    stats:
+      - value: "Winner"
+        unit: "San Diego Regional"
