@@ -3,7 +3,7 @@ projects:
     title: Vibe Security
     description: Automatic security scanning and prompts to fix for vibe-coded applications.
     status:
-      label: V1.0 website live
+      label: V1.0 website
       color: "#1B9C85"
     date: "2025-04-01"
     image: ./images/vibe_cover.gif
@@ -42,7 +42,7 @@ projects:
       label: V1.0 complete
       color: "#1B9C85"
     date: "2024-08-01"
-    image: ./images/plumeria_cover.png
+    image: ./images/capstan_cover.gif
 
   - id: bcc
     title: BCC Mod
