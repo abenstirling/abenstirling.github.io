@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ben Stirling</title>
+    <link rel="icon" type="image/png" href="./images/favicon.png">
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-3YPTGE6JH6"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+        gtag('config', 'G-3YPTGE6JH6');
+    </script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Work+Sans:ital,wght@0,100..900;1,100..900&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/js-yaml/4.1.0/js-yaml.min.js"></script>
+    <style>
+        body {
+            font-family: 'Work Sans', sans-serif;
+        }
+
+        .project-image {
+            aspect-ratio: 1/1;
+            width: 100%;
+            max-width: 400px;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+
+        .project-card:hover .project-image {
+            transform: scale(1.02);
+        }
+
+        .project-card {
+            max-width: 400px;
+            border: 1px solid #e5e7eb;
+            border-radius: 0.5rem;
+            padding: 1rem;
+            transition: border-color 0.2s ease;
+        }
+
+        .project-card:hover {
+            border-color: #00ff00;
+        }
+
+        @media (min-width: 1024px) {
+            .projects-grid {
+                display: grid;
+                grid-template-columns: repeat(2, minmax(0, 400px));
+                gap: 3rem;
+                justify-content: center;
+            }
+
+            .projects-grid .project-card {
+                max-width: none;
+            }
+        }
+
+        @media (max-width: 1023px) {
+            .projects-grid {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                gap: 4rem;
+            }
+        }
+
+        a {
+            color: #000000;
+            transition: color 0.2s ease;
+        }
+
+        a:hover {
+            color: #00ff00 !important;
+        }
+
+        /* Style Guidelines Styles */
+        .style-guidelines {
+            border-top: 1px solid #e5e7eb;
+            margin-top: 4rem;
+            padding-top: 2rem;
+        }
+
+        .style-guidelines summary {
+            cursor: pointer;
+            font-size: 1.25rem;
+            font-weight: 500;
+            padding: 1rem;
+            border-radius: 0.5rem;
+            transition: background-color 0.2s;
+        }
+
+        .style-guidelines summary:hover {
+            background-color: #f9fafb;
+        }
+
+        .style-guidelines-content {
+            padding: 1rem;
+            margin-top: 1rem;
+        }
+
+        .logo-section {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .logo-section img {
+            width: 48px;
+            height: 48px;
+            border-radius: 0.5rem;
+        }
+
+        .color-palette {
+            display: flex;
+            gap: 1rem;
+            margin: 1rem 0;
+        }
+
+        .color-swatch {
+            width: 60px;
+            height: 60px;
+            border-radius: 0.5rem;
+            border: 1px solid #e5e7eb;
+            cursor: pointer;
+            position: relative;
+            transition: transform 0.2s;
+        }
+
+        .color-swatch:hover {
+            transform: scale(1.05);
+        }
+
+        .color-swatch::after {
+            content: attr(data-color);
+            position: absolute;
+            bottom: -1.5rem;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 0.75rem;
+            white-space: nowrap;
+            opacity: 0;
+            transition: opacity 0.2s;
+        }
+
+        .color-swatch:hover::after {
+            opacity: 1;
+        }
+
+        .principles-section {
+            margin-top: 1.5rem;
+        }
+
+        .principles-section h3 {
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .principles-list {
+            list-style-type: none;
+            padding-left: 1rem;
+        }
+
+        .principles-list li {
+            position: relative;
+            margin-bottom: 0.5rem;
+        }
+
+        .principles-list li::before {
+            content: "•";
+            position: absolute;
+            left: -1rem;
+            color: #000000;
+        }
+
+        /* Override for specific links that shouldn't be underlined */
+        .no-underline {
+            text-decoration: none;
+        }
+
+        /* Override for social icons to maintain their appearance */
+        .social-icon {
+            text-decoration: none;
+            font-size: 1.5rem;
+        }
+    </style>
+</head>
+
+<body class="bg-white min-h-screen">
+    <main class="container mx-auto px-8 md:px-16 lg:px-32 py-12">
+        <!-- Header Section -->
+        <header class="text-center mb-20">
+            <h1 class="text-5xl font-bold mb-3">Ben Stirling</h1>
+            <p class="text-xl">real engineers ship</p>
+        </header>
+
+        <!-- Contact Icons -->
+        <div class="flex justify-center space-x-8 mb-20">
+            <a href="mailto:abenstirling@pm.me" class="social-icon">
+                <i class="fas fa-envelope"></i>
+            </a>
+            <a href="https://github.com/abenstirling" target="_blank" class="social-icon">
+                <i class="fab fa-github"></i>
+            </a>
+            <a href="https://linkedin.com/in/abenstirling" target="_blank" class="social-icon">
+                <i class="fab fa-linkedin"></i>
+            </a>
+        </div>
+
+        <!-- Projects -->
+        <section class="mb-20">
+            <div id="projects-container" class="projects-grid">
+                <!-- Projects will be dynamically inserted here -->
+            </div>
+        </section>
+
+        <!-- Branding Standards -->
+        <details class="style-guidelines">
+            <summary>Branding Standards</summary>
+            <div class="style-guidelines-content">
+                <div class="logo-section">
+                    <img src="./images/favicon.png" alt="Logo" class="logo">
+                    <div>
+                        <h3 class="text-lg font-semibold">Iconic B Logo</h3>
+                        <p class="text-sm text-gray-600">Primary brand mark</p>
+                    </div>
+                </div>
+
+                <div class="mb-8">
+                    <h3 class="text-lg font-semibold mb-2">Font</h3>
+                    <p>
+                        <a href="https://fonts.google.com/specimen/Work+Sans" target="_blank" class="no-underline">
+                            <u>Work Sans</u>
+                        </a>
+                    </p>
+                </div>
+
+                <div class="mb-8">
+                    <h3 class="text-lg font-semibold mb-2">Color Palette</h3>
+                    <div class="color-palette">
+                        <div class="color-swatch bg-white" data-color="#FFFFFF" onclick="copyToClipboard('#FFFFFF')">
+                        </div>
+                        <div class="color-swatch bg-black" data-color="#000000" onclick="copyToClipboard('#000000')">
+                        </div>
+                        <div class="color-swatch" style="background-color: #00ff00" data-color="#00FF00"
+                            onclick="copyToClipboard('#00FF00')"></div>
+                    </div>
+                </div>
+
+                <div class="principles-section">
+                    <h3 class="text-lg font-semibold">Principles</h3>
+                    <ul class="principles-list">
+                        <li>KISS</li>
+                        <li>Function, Form, Aesthetics (in that order)</li>
+                    </ul>
+                </div>
+
+                <div class="principles-section">
+                    <h3 class="text-lg font-semibold">Writing</h3>
+                    <ul class="principles-list">
+                        <li>Business casual</li>
+                    </ul>
+                </div>
+
+                <div class="principles-section">
+                    <h3 class="text-lg font-semibold">Engineering</h3>
+                    <ul class="principles-list">
+                        <li>Speed is key</li>
+                        <li>"Do the math, save the world"</li>
+                        <li>Measure thrice, cut once</li>
+                        <li>Continuity is arguably the most common electrical issue, so start there</li>
+                    </ul>
+                </div>
+
+                <div class="principles-section">
+                    <h3 class="text-lg font-semibold">Business</h3>
+                    <ul class="principles-list">
+                        <li>Test your assumptions fast</li>
+                        <li>Don't optimize something that doesn't need to exist</li>
+                    </ul>
+                </div>
+            </div>
+        </details>
+
+        <!-- Footer -->
+        <footer class="text-center text-sm mt-8">
+            © 2025 Ben Stirling
+        </footer>
+    </main>
+
+    <script>
+        // Function to create project card HTML
+        function createProjectCard(project) {
+            const statusStyle = `background-color: ${project.status.color}20; color: ${project.status.color};`;
+
+            const collaboratorsHtml = project.collaborators && project.collaborators.length > 0
+                ? project.collaborators
+                    .map(collab => `<a href="${collab.linkedin}"><u>${collab.name}</u></a>`)
+                    .join(', ')
+                : '';
+
+            const statsHtml = project.stats
+                ? `<div class="mb-4">
+                    <span class="font-medium">Stats:</span>
+                    <div class="grid grid-cols-2 gap-4 mt-2">
+                        ${project.stats.map(stat => `
+                            <div class="text-center p-2 border border-[#00ff00] rounded">
+                                <div class="text-xl font-semibold">${stat.value}</div>
+                                <div class="text-sm text-gray-600">${stat.unit}</div>
+                            </div>
+                        `).join('')}
+                    </div>
+                   </div>`
+                : '';
+
+            return `
+                <div class="project-card group">
+                    <div class="overflow-hidden rounded-lg mb-6 flex justify-center">
+                        <img src="${project.image}" 
+                             alt="${project.title} Project" 
+                             class="project-image">
+                    </div>
+                    <div>
+                        <div class="flex justify-between items-start">
+                            <div>
+                                <h3 class="text-2xl font-semibold">${project.title}</h3>
+                                ${project.date ? `<p class="text-sm text-gray-600 mt-1">${project.date}</p>` : ''}
+                            </div>
+                            <span class="px-3 py-1 text-sm rounded-full capitalize" style="${statusStyle}">${project.status.label}</span>
+                        </div>
+                        <p class="text-base my-6">${project.description}</p>
+                        ${collaboratorsHtml ? `
+                            <div class="mb-4">
+                                <span class="font-medium">Collaborators:</span> ${collaboratorsHtml}
+                            </div>
+                        ` : ''}
+                        ${statsHtml}
+                        ${project.link ? `
+                            <a href="${project.link}" 
+                               target="_blank" 
+                               class="inline-block text-lg font-medium">
+                                <u>Learn More →</u>
+                            </a>
+                        ` : ''}
+                    </div>
+                </div>
+            `;
+        }
+
+        // Function to load and render projects
+        async function loadProjects() {
+            try {
+                const response = await fetch('posts.yaml');
+                const yamlText = await response.text();
+                const data = jsyaml.load(yamlText);
+                const projectsContainer = document.getElementById('projects-container');
+
+                // Sort projects: active first, then by date (newest first)
+                const sortedProjects = data.projects.sort((a, b) => {
+                    if (a.status === 'active' && b.status !== 'active') return -1;
+                    if (a.status !== 'active' && b.status === 'active') return 1;
+                    return b.date.localeCompare(a.date);
+                });
+
+                // Render each project
+                projectsContainer.innerHTML = sortedProjects
+                    .map(project => createProjectCard(project))
+                    .join('');
+            } catch (error) {
+                console.error('Error loading projects:', error);
+                document.getElementById('projects-container').innerHTML =
+                    '<p class="text-center text-red-600">Error loading projects. Please try again later.</p>';
+            }
+        }
+
+        // Load projects when the page loads
+        document.addEventListener('DOMContentLoaded', loadProjects);
+
+        // Function to copy color code to clipboard
+        function copyToClipboard(text) {
+            navigator.clipboard.writeText(text).then(() => {
+                // Optional: Show a temporary tooltip or notification
+                const tooltip = document.createElement('div');
+                tooltip.textContent = 'Copied!';
+                tooltip.style.position = 'fixed';
+                tooltip.style.bottom = '20px';
+                tooltip.style.left = '50%';
+                tooltip.style.transform = 'translateX(-50%)';
+                tooltip.style.backgroundColor = '#000';
+                tooltip.style.color = '#fff';
+                tooltip.style.padding = '0.5rem 1rem';
+                tooltip.style.borderRadius = '0.25rem';
+                tooltip.style.zIndex = '1000';
+                document.body.appendChild(tooltip);
+                setTimeout(() => tooltip.remove(), 2000);
+            });
+        }
+    </script>
+</body>
+
+</html>
