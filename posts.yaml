@@ -17,13 +17,26 @@ projects:
       - value: "150+"
         unit: "scans"
 
+  - id: botion-heavyweight
+    title: Botion Heavyweight
+    description: 1lb battlebot. Built in 1 week.
+    status:
+      label: competed
+      color: "#2C7865"
+    date: "2025-02-01"
+    image: ./images/botion_heavyweight_cover.png
+    link: https://youtu.be/s7Mer7IG9no
+    stats:
+      - value: "5th"
+        unit: "Place UCI ACE 2025"
+
   - id: plumeria
     title: Plumeria
     description: Perfect date plans.
     status:
       label: V2.0 on App Store
       color: "#1B9C85"
-    date: "2024-09-01"
+    date: "2025-04-01"
     image: ./images/plumeria_cover.png
     link: https://goplumeria.com
     collaborators:
@@ -37,12 +50,15 @@ projects:
 
   - id: capstan
     title: Dual-Capstan Flexture Gantry
-    description: Perfect date plans.
+    description: Super creative and experimental motion control system.
     status:
       label: V1.0 complete
       color: "#1B9C85"
     date: "2024-08-01"
     image: ./images/capstan_cover.gif
+    collaborators:
+      - name: "Nicco Pompili"
+        linkedin: "https://www.linkedin.com/in/nicco-pompili-63730a19b/"
 
   - id: bcc
     title: BCC Mod
@@ -51,7 +67,7 @@ projects:
       label: V2.0 Incomplete
       color: "#1B9C85"
     date: "2024-07-01"
-    image: ./images/plumeria_cover.png
+    image: ./images/bcc_cover.png
     collaborators:
       - name: "Nicco Pompili"
         linkedin: "https://www.linkedin.com/in/nicco-pompili-63730a19b/"
@@ -80,7 +96,6 @@ projects:
       color: "#00ff00"
     date: "2021-06-01"
     image: ./images/autoprint_cover.png
-    link: "#"
     collaborators:
       - name: "Sam McDowell"
         linkedin: "https://www.linkedin.com/in/samuelmcdowell64/"
@@ -89,8 +104,8 @@ projects:
       - name: "Mois Cohen"
         linkedin: "https://www.linkedin.com/in/moiscohen/"
     stats:
-      - value: "24/7"
-        unit: "operation"
+      - value: "$11K+"
+        unit: "kickstarter pre-orders"
 
   - id: deep-water-exploration
     title: DeepWater Exploration
@@ -100,10 +115,14 @@ projects:
       color: "#2C7865"
     date: "2022-01-01"
     image: ./images/deepwaterexploration_cover.png
-    link: "#"
+    link: "https://patents.google.com/patent/US20230341750A1/en?oq=20230341750"
     collaborators:
       - name: "Jiajer Ho"
         linkedin: "https://www.linkedin.com/in/jiajer-ho-b70000100/"
+      - name: "Brandon Stevens"
+        linkedin: "https://www.linkedin.com/in/brandonhs/"
+      - name: "Warren Chang"
+        linkedin: "https://www.linkedin.com/in/warren--chang/"
     stats:
       - value: "Issued"
         unit: "Patent"
@@ -112,7 +131,7 @@ projects:
 
   - id: cyberball
     title: CyberBall
-    description: Interactive robotic ball with embedded sensors and wireless communication, designed for educational and entertainment purposes.
+    description: STM32G4-based robotic pinball machine. Running Rust, 3+ custom PCBs.
     status:
       label: completed
       color: "#2C7865"
@@ -125,7 +144,7 @@ projects:
 
   - id: macropad
     title: MacroPad
-    description: Custom mechanical keyboard macro pad with programmable keys and RGB lighting, designed for productivity and workflow optimization.
+    description: Custom mechanical keyboard macro pad to celebrate the 40th anniversary of the Apple Macintosh.
     status:
       label: completed
       color: "#2C7865"
@@ -172,8 +191,8 @@ projects:
         unit: "grade"
 
   - id: coffee-table
-    title: Smart Coffee Table
-    description: Interactive coffee table with embedded display and touch interface, featuring smart home integration and ambient lighting.
+    title: Coffee Table
+    description: I worked with the best welder I knew to pull off this beautiful piece of furniture.
     status:
       label: completed
       color: "#2C7865"
@@ -182,6 +201,26 @@ projects:
     collaborators:
       - name: "Caytre Ede"
         linkedin: "https://www.linkedin.com/in/caytre-e-6b110b20b/"
+
+  - id: botion-nfc
+    title: BotionNFC
+    description: Simplest NFC programming app. Open-source and available on the App Store.
+    status:
+      label: V1.0 on App Store
+      color: "#2C7865"
+    date: "2024-02-01"
+    image: ./images/botionnfc_cover.gif
+    link: "https://apps.apple.com/us/app/botionnfc/id6476791734"
+
+  - id: botion
+    title: Botion
+    description: Notion-based to-do list app.
+    status:
+      label: V1.0 on App Store
+      color: "#2C7865"
+    date: "2024-02-01"
+    image: ./images/botion_cover.gif
+    link: "https://apps.apple.com/us/app/botion-checklist/id6477213069"
 
   - id: botion-cube
     title: Botion Cube
@@ -209,11 +248,30 @@ projects:
       label: completed
       color: "#2C7865"
     date: "2024-03-01"
-    image: ./images/botion_cube_cover.png
+    image: ./images/circuit_cover.png
     link: "https://github.com/abenstirling/CircuitGenerator"
+    collaborators:
+      - name: "Nicco Pompili"
+        linkedin: "https://www.linkedin.com/in/nicco-pompili-63730a19b/"
     stats:
       - value: "Winner"
         unit: "SDx 2023 hackathon"
+
+  - id: aeroknob
+    title: Aeroknob
+    description: Next-gen flight sim equipment. First product we released was a 737 landing gear.
+    status:
+      label: active
+      color: "#13005A"
+    date: "2024-01-01"
+    image: ./images/aeroknob_cover.gif
+    link: aeroknob.com
+    collaborators:
+      - name: "Jiajer Ho"
+        linkedin: "https://www.linkedin.com/in/jiajer-ho-b70000100/"
+    stats:
+      - value: "20+"
+        unit: "units sold"
 
   - id: business-card
     title: Botion Cards
@@ -227,6 +285,19 @@ projects:
       - value: "100+"
         unit: "units sold"
 
+  - id: picky
+    title: Pick-and-place machine
+    description: Custom pick-and-place machine for assembling PCBs.
+    status:
+      label: completed
+      color: "#2C7865"
+    date: "2023-04-01"
+    image: ./images/picky_cover.gif
+    link: "https://youtu.be/noN5oz5rLbU"
+    stats:
+      - value: "$2K+"
+        unit: "profit from assembly"
+
   - id: robot-2021
     title: 2021 FRC Robot
     description: Electronic business card with embedded display and NFC capabilities, showcasing contact information and portfolio highlights.
@@ -235,9 +306,22 @@ projects:
       color: "#13005A"
     date: "2021-05-01"
     image: ./images/2021_robot_cover.gif
+    link: https://www.instagram.com/frc6995nomad/reels/
     stats:
       - value: "Winner"
         unit: "Industrial Design Award"
+
+  - id: commute
+    title: commute.site
+    description: The tool was a simple web app that took in a list of addresses and calculated the average commute time between them. It used the Google Maps API to get the commute times.
+    status:
+      label: complete
+      color: "#13005A"
+    date: "2020-05-01"
+    image: ./images/commute_cover.gif
+    collaborators:
+      - name: "Sam McDowell"
+        linkedin: "https://www.linkedin.com/in/samuelmcdowell64/"
 
   - id: robot-2019
     title: 2019 FRC Robot
@@ -245,8 +329,9 @@ projects:
     status:
       label: complete
       color: "#13005A"
-    date: "2021-05-01"
-    image: ./images/2021_robot_cover.gif
+    date: "2019-01-01"
+    image: ./images/robot_2019_cover.png
+    link: https://www.instagram.com/frc6995nomad/reels/
     stats:
       - value: "Winner"
         unit: "San Diego Regional"
