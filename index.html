@@ -83,9 +83,8 @@
 
         /* Style Guidelines Styles */
         .style-guidelines {
-            border-top: 1px solid #e5e7eb;
-            margin-top: 4rem;
-            padding-top: 2rem;
+            margin-top: 0.5rem;
+            padding-top: 0rem;
         }
 
         .style-guidelines summary {
@@ -222,8 +221,9 @@
             </div>
         </section>
 
-        <!-- Stats Section -->
-        <details class="style-guidelines mb-8">
+        <hr style="border-top: 1px solid #e5e7eb; margin: 1.5rem 0 0.5rem 0;" />
+        <!-- Branding Standards -->
+        <details class="style-guidelines">
             <summary>Stats</summary>
             <div class="style-guidelines-content py-4">
                 <div class="mb-8">
@@ -246,7 +246,6 @@
             </div>
         </details>
 
-        <!-- Branding Standards -->
         <details class="style-guidelines">
             <summary>Branding Standards</summary>
             <div class="style-guidelines-content">
@@ -371,7 +370,7 @@
         // Function to load and render projects
         async function loadProjects() {
             try {
-                const response = await fetch('posts.yaml');
+                const response = await fetch(`posts.yaml?t=${Date.now()}`);
                 const yamlText = await response.text();
                 const data = jsyaml.load(yamlText);
                 const projectsContainer = document.getElementById('projects-container');
