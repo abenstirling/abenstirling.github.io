@@ -10,7 +10,6 @@
     <meta http-equiv="Content-Security-Policy" content="
         default-src 'self' https:;
         script-src 'self' 'unsafe-inline' 
-            https://cdn.tailwindcss.com 
             https://www.googletagmanager.com 
             https://cdnjs.cloudflare.com 
             https://cdn.jsdelivr.net;
@@ -25,19 +24,16 @@
     ">
 
     <meta http-equiv="X-Content-Type-Options" content="nosniff">
-    <meta http-equiv="X-Frame-Options" content="SAMEORIGIN">
     <meta name="referrer" content="strict-origin-when-cross-origin">
-
-    <!-- Permissions Policy -->
     <meta http-equiv="Permissions-Policy" content="
-        geolocation=(),
-        microphone=(),
+        accelerometer=(),
         camera=(),
-        payment=(),
-        usb=(),
-        magnetometer=(),
+        geolocation=(),
         gyroscope=(),
-        speaker=()
+        magnetometer=(),
+        microphone=(),
+        payment=(),
+        usb=()
     ">
 
     <link rel="icon" type="image/png" href="./images/favicon.png">
@@ -52,7 +48,7 @@
     </script>
 
     <!-- External Resources -->
-    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="./style/tailwind.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Work+Sans:ital,wght@0,100..900;1,100..900&display=swap"
@@ -167,26 +163,70 @@
             width: 60px;
             height: 60px;
             border-radius: 0.5rem;
-            border: 1px solid #e5e7eb;
             cursor: pointer;
             position: relative;
-            transition: transform 0.2s;
+            transition: all 0.2s ease;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
         }
 
         .color-swatch:hover {
             transform: scale(1.05);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+        }
+
+        .color-swatch.copied {
+            animation: pulse 0.5s ease;
+        }
+
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.1);
+            }
+
+            100% {
+                transform: scale(1);
+            }
+        }
+
+        .copy-tooltip {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: #000;
+            color: #fff;
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.5rem;
+            font-size: 0.875rem;
+            z-index: 1000;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            opacity: 0;
+            transition: opacity 0.2s ease;
+        }
+
+        .copy-tooltip.show {
+            opacity: 1;
         }
 
         .color-swatch::after {
             content: attr(data-color);
             position: absolute;
-            bottom: -1.5rem;
+            bottom: -2rem;
             left: 50%;
             transform: translateX(-50%);
             font-size: 0.75rem;
             white-space: nowrap;
             opacity: 0;
             transition: opacity 0.2s;
+            background-color: #000;
+            color: #fff;
+            padding: 0.25rem 0.5rem;
+            border-radius: 0.25rem;
+            pointer-events: none;
         }
 
         .color-swatch:hover::after {
@@ -229,29 +269,67 @@
             text-decoration: none;
             font-size: 1.5rem;
         }
+
+        /* Custom header styles */
+        .main-title {
+            font-size: 2.5rem;
+            font-weight: 400;
+            line-height: 1.1;
+            letter-spacing: -0.01em;
+        }
+
+        @media (min-width: 768px) {
+            .main-title {
+                font-size: 3.5rem;
+            }
+        }
+
+        .subtitle {
+            font-size: 1.25rem;
+            /* ~20px */
+            color: #6b7280;
+            /* Tailwind gray-500 */
+            font-weight: 400;
+            margin-bottom: 0.5rem;
+        }
+
+        .social-icon {
+            font-size: 1.6rem !important;
+            margin: 0 0.7rem;
+        }
+
+        @media (min-width: 768px) {
+            .social-icon {
+                font-size: 2rem !important;
+                margin: 0 1.2rem;
+            }
+        }
     </style>
 </head>
 
 <body class="bg-white min-h-screen">
     <main class="container mx-auto px-8 md:px-16 lg:px-32 py-12">
         <!-- Header Section -->
-        <header class="text-center mb-20">
-            <h1 class="text-5xl font-bold mb-3">Ben Stirling</h1>
-            <p class="text-xl">real engineers ship</p>
+        <header class="text-center py-8">
+            <div class="py-8"></div>
+            <h1 class="main-title">Ben Stirling</h1>
+            <p class="subtitle">real engineers ship</p>
         </header>
 
         <!-- Contact Icons -->
-        <div class="flex justify-center space-x-8 mb-20">
-            <a href="mailto:abenstirling@pm.me" class="social-icon">
-                <i class="fas fa-envelope"></i>
-            </a>
-            <a href="https://github.com/abenstirling" target="_blank" class="social-icon">
-                <i class="fab fa-github"></i>
-            </a>
-            <a href="https://linkedin.com/in/abenstirling" target="_blank" class="social-icon">
-                <i class="fab fa-linkedin"></i>
-            </a>
+        <div class="flex justify-center">
+            <div class="py-8"></div>
+            <div class="py-8"></div>
+            <div class="py-8"></div>
+            <a href="mailto:abenstirling@pm.me" class="social-icon text-3xl"><i class="fas fa-envelope"></i></a>
+            <a href="https://github.com/abenstirling" target="_blank" class="social-icon text-3xl"><i
+                    class="fab fa-github"></i></a>
+            <a href="https://linkedin.com/in/abenstirling" target="_blank" class="social-icon text-3xl"><i
+                    class="fab fa-linkedin"></i></a>
+
         </div>
+        <div class="py-8"></div>
+
 
         <!-- Projects -->
         <section class="mb-20">
@@ -266,21 +344,27 @@
             <summary>Stats</summary>
             <div class="style-guidelines-content py-4">
                 <div class="mb-8">
-                    <canvas id="projectsPerYearChart" height="80"></canvas>
+                    <div id="projectsPerYearChartContainer">
+                        <svg id="projectsPerYearChart" width="100%" height="200"></svg>
+                    </div>
                 </div>
-                <div class="flex flex-wrap gap-4 mb-6">
-                    <div class="border rounded p-4 min-w-[160px] text-center">
-                        <div class="text-2xl font-bold" id="totalProjectCount">0</div>
-                        <div class="text-sm text-gray-600">Total Projects</div>
-                    </div>
-                    <div class="border rounded p-4 min-w-[160px] text-center">
-                        <div class="text-2xl font-bold" id="avgProjectsPerYear">0</div>
-                        <div class="text-sm text-gray-600">Avg Projects/Year</div>
-                    </div>
-                    <div class="border rounded p-4 min-w-[160px] text-center">
-                        <div class="text-lg font-semibold mb-2">Top Teamups</div>
-                        <ul id="topTeamups" class="text-sm"></ul>
-                    </div>
+                <div class="mb-6">
+                    <table id="statsTable" class="min-w-full text-center border rounded">
+                        <thead>
+                            <tr>
+                                <th class="p-2 border">Total Projects</th>
+                                <th class="p-2 border">Avg Projects/Year</th>
+                                <th class="p-2 border">Top Teamups</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="p-2 border" id="totalProjectCount">0</td>
+                                <td class="p-2 border" id="avgProjectsPerYear">0</td>
+                                <td class="p-2 border" id="topTeamupsCell"></td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </details>
@@ -308,10 +392,10 @@
                 <div class="mb-8">
                     <h3 class="text-lg font-semibold mb-2">Color Palette</h3>
                     <div class="color-palette">
-                        <div class="color-swatch bg-white" data-color="#FFFFFF" onclick="copyToClipboard('#FFFFFF')">
-                        </div>
-                        <div class="color-swatch bg-black" data-color="#000000" onclick="copyToClipboard('#000000')">
-                        </div>
+                        <div class="color-swatch" style="background-color: #FFFFFF; border: 1px solid #e5e7eb;"
+                            data-color="#FFFFFF" onclick="copyToClipboard('#FFFFFF')"></div>
+                        <div class="color-swatch" style="background-color: #000000;" data-color="#000000"
+                            onclick="copyToClipboard('#000000')"></div>
                         <div class="color-swatch" style="background-color: #00ff00" data-color="#00FF00"
                             onclick="copyToClipboard('#00FF00')"></div>
                     </div>
@@ -353,12 +437,13 @@
         </details>
 
         <!-- Footer -->
-        <footer class="text-center text-sm mt-8">
+        <footer class="text-center text-sm">
+            <div class="py-4"></div>
             © 2025 Ben Stirling
+            <div class="py-4"></div>
         </footer>
     </main>
 
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script>
         // Function to create project card HTML
         function createProjectCard(project) {
@@ -372,7 +457,7 @@
 
             // Stats as bullet points (unordered list)
             const statsInline = project.stats && project.stats.length > 0
-                ? `<ul class=\"list-disc list-inside text-sm text-gray-700 mt-3 mb-2\">${project.stats.map(stat => `<li>${stat.value} ${stat.unit}</li>`).join('')}</ul>`
+                ? `<ul class=\"text-xs text-gray-700 mt-2 mb-3\" style=\"font-size:0.92em;margin-top:0.5em;margin-bottom:0.7em;list-style-type:disc;padding-left:1.25em;\">${project.stats.map(stat => `<li>${stat.value} ${stat.unit}</li>`).join('')}</ul>`
                 : '';
 
             return `
@@ -387,7 +472,7 @@
                             <div class=\"w-full\">
                                 <h3 class=\"text-2xl font-semibold\">${project.title}</h3>
                                 ${collaboratorsInline}
-                                ${project.date ? `<div class=\"text-xs text-gray-600 mt-1\">${project.date}</div>` : ''}
+                                ${project.date ? `<div class=\"text-xs text-gray-600 mt-1 mb-1\" style=\"margin-top:0.4em;margin-bottom:0.4em;\">${project.date}</div>` : ''}
                                 ${statsInline}
                                 <div class=\"mb-3\"></div>
                                 <p class=\"text-base mb-4\">${project.description}</p>
@@ -435,37 +520,71 @@
                 });
                 const years = Object.keys(yearCounts).sort();
                 const counts = years.map(y => yearCounts[y]);
-                // Chart: plot actual projects per year, not moving average
-                if (window.Chart) {
-                    const ctx = document.getElementById('projectsPerYearChart').getContext('2d');
-                    new Chart(ctx, {
-                        type: 'line',
-                        data: {
-                            labels: years,
-                            datasets: [{
-                                label: 'Projects per Year',
-                                data: counts,
-                                borderColor: '#000',
-                                backgroundColor: 'rgba(0,0,0,0.1)',
-                                fill: true,
-                                tension: 0.3,
-                                pointRadius: 3,
-                            }]
-                        },
-                        options: {
-                            plugins: { legend: { display: false } },
-                            scales: {
-                                y: { beginAtZero: true, ticks: { precision: 0 } }
-                            }
-                        }
+
+                // Draw SVG line chart
+                function drawLineChartSVG(years, counts) {
+                    const svg = document.getElementById('projectsPerYearChart');
+                    const width = svg.parentElement.offsetWidth || 800;
+                    const height = 200;
+                    svg.setAttribute('width', width);
+                    svg.setAttribute('height', height);
+                    svg.innerHTML = '';
+
+                    // Padding for axes
+                    const padX = 50, padY = 30;
+                    const chartW = width - padX * 2;
+                    const chartH = height - padY * 2;
+
+                    // Y axis range
+                    const maxY = Math.max(10, ...counts);
+                    const minY = 0;
+
+                    // X axis
+                    const n = years.length;
+                    const x = i => padX + (chartW * i) / (n - 1);
+                    // Y axis (invert for SVG)
+                    const y = v => padY + chartH - ((v - minY) / (maxY - minY)) * chartH;
+
+                    // Draw axes
+                    svg.innerHTML += `<line x1="${padX}" y1="${padY}" x2="${padX}" y2="${padY + chartH}" stroke="#bbb" stroke-width="1" />`;
+                    svg.innerHTML += `<line x1="${padX}" y1="${padY + chartH}" x2="${padX + chartW}" y2="${padY + chartH}" stroke="#bbb" stroke-width="1" />`;
+
+                    // Draw grid lines and y labels
+                    for (let i = 0; i <= maxY; i++) {
+                        const gy = y(i);
+                        svg.innerHTML += `<line x1="${padX}" y1="${gy}" x2="${padX + chartW}" y2="${gy}" stroke="#eee" stroke-width="1" />`;
+                        svg.innerHTML += `<text x="${padX - 8}" y="${gy + 4}" font-size="12" text-anchor="end" fill="#888">${i}</text>`;
+                    }
+
+                    // Draw x labels
+                    years.forEach((year, i) => {
+                        svg.innerHTML += `<text x="${x(i)}" y="${padY + chartH + 18}" font-size="13" text-anchor="middle" fill="#888">${year}</text>`;
                     });
+
+                    // Draw area under line
+                    let areaPath = `M${x(0)},${y(0)}`;
+                    for (let i = 0; i < n; i++) areaPath += ` L${x(i)},${y(counts[i])}`;
+                    areaPath += ` L${x(n - 1)},${y(0)} Z`;
+                    svg.innerHTML += `<path d="${areaPath}" fill="#000" fill-opacity="0.08" />`;
+
+                    // Draw line
+                    let linePath = `M${x(0)},${y(counts[0])}`;
+                    for (let i = 1; i < n; i++) linePath += ` L${x(i)},${y(counts[i])}`;
+                    svg.innerHTML += `<path d="${linePath}" fill="none" stroke="#000" stroke-width="3" />`;
+
+                    // Draw points
+                    for (let i = 0; i < n; i++) {
+                        svg.innerHTML += `<circle cx="${x(i)}" cy="${y(counts[i])}" r="4" fill="#fff" stroke="#000" stroke-width="2" />`;
+                    }
                 }
+                drawLineChartSVG(years, counts);
+
                 // 2. Total project count
                 document.getElementById('totalProjectCount').textContent = data.projects.length;
                 // 3. Average projects per year
                 const avg = (data.projects.length / years.length).toFixed(2);
                 document.getElementById('avgProjectsPerYear').textContent = avg;
-                // 4. Top 3 teamups
+                // 4. Top teamups
                 const collabCounts = {};
                 data.projects.forEach(p => {
                     if (p.collaborators) {
@@ -476,11 +595,11 @@
                 });
                 const topTeamups = Object.entries(collabCounts)
                     .sort((a, b) => b[1] - a[1])
-                    .slice(0, 3);
-                const topTeamupsList = document.getElementById('topTeamups');
-                topTeamupsList.innerHTML = topTeamups.length
-                    ? topTeamups.map(([name, count]) => `<li>${name} (${count})</li>`).join('')
-                    : '<li>No collaborators yet</li>';
+                    .slice(0, 5);
+                const topTeamupsCell = document.getElementById('topTeamupsCell');
+                topTeamupsCell.innerHTML = topTeamups.length
+                    ? `<ul style='list-style:none;padding:0;margin:0;'>${topTeamups.map(([name, count]) => `<li>${name} (${count})</li>`).join('')}</ul>`
+                    : 'No collaborators yet';
                 // --- End Stats Section Logic ---
             } catch (error) {
                 console.error('Error loading projects:', error);
@@ -493,23 +612,54 @@
         document.addEventListener('DOMContentLoaded', loadProjects);
 
         // Function to copy color code to clipboard
-        function copyToClipboard(text) {
-            navigator.clipboard.writeText(text).then(() => {
-                // Optional: Show a temporary tooltip or notification
-                const tooltip = document.createElement('div');
-                tooltip.textContent = 'Copied!';
-                tooltip.style.position = 'fixed';
-                tooltip.style.bottom = '20px';
-                tooltip.style.left = '50%';
-                tooltip.style.transform = 'translateX(-50%)';
-                tooltip.style.backgroundColor = '#000';
-                tooltip.style.color = '#fff';
-                tooltip.style.padding = '0.5rem 1rem';
-                tooltip.style.borderRadius = '0.25rem';
-                tooltip.style.zIndex = '1000';
-                document.body.appendChild(tooltip);
-                setTimeout(() => tooltip.remove(), 2000);
-            });
+        async function copyToClipboard(text) {
+            try {
+                // Create tooltip element if it doesn't exist
+                let tooltip = document.querySelector('.copy-tooltip');
+                if (!tooltip) {
+                    tooltip = document.createElement('div');
+                    tooltip.className = 'copy-tooltip';
+                    document.body.appendChild(tooltip);
+                }
+
+                // Add the copied class to the clicked swatch
+                const swatch = event.currentTarget;
+                swatch.classList.add('copied');
+                setTimeout(() => swatch.classList.remove('copied'), 500);
+
+                // Remove the # symbol for copying
+                const textToCopy = text.replace('#', '');
+
+                // Try to copy using the modern API first
+                if (navigator.clipboard && window.isSecureContext) {
+                    await navigator.clipboard.writeText(textToCopy);
+                } else {
+                    // Fallback for older browsers
+                    const textArea = document.createElement('textarea');
+                    textArea.value = textToCopy;
+                    textArea.style.position = 'fixed';
+                    textArea.style.left = '-999999px';
+                    textArea.style.top = '-999999px';
+                    document.body.appendChild(textArea);
+                    textArea.focus();
+                    textArea.select();
+                    document.execCommand('copy');
+                    textArea.remove();
+                }
+
+                // Show tooltip (still showing the # in the tooltip)
+                tooltip.textContent = `Copied ${text} to clipboard!`;
+                tooltip.classList.add('show');
+
+                // Hide tooltip after 2 seconds
+                setTimeout(() => {
+                    tooltip.classList.remove('show');
+                }, 2000);
+
+            } catch (err) {
+                console.error('Failed to copy text: ', err);
+                alert('Failed to copy to clipboard. Please try again.');
+            }
         }
     </script>
 </body>
