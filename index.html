@@ -52,6 +52,94 @@
     <style>
         body {
             font-family: 'Work Sans', sans-serif;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        /* Dark mode styles */
+        body.dark-mode {
+            background-color: #1a1a1a;
+            color: #ffffff;
+        }
+
+        body.dark-mode .project-card {
+            border-color: #333333;
+            background-color: #242424;
+        }
+
+        body.dark-mode .project-card:hover {
+            border-color: #00ff00;
+        }
+
+        body.dark-mode .style-guidelines summary:hover {
+            background-color: #333333;
+        }
+
+        body.dark-mode .color-swatch {
+            box-shadow: 0 2px 4px rgba(255, 255, 255, 0.1);
+        }
+
+        body.dark-mode .color-swatch:hover {
+            box-shadow: 0 4px 8px rgba(255, 255, 255, 0.15);
+        }
+
+        body.dark-mode .copy-tooltip {
+            background-color: #333;
+            color: #fff;
+        }
+
+        body.dark-mode a {
+            color: #ffffff;
+        }
+
+        body.dark-mode .subtitle {
+            color: #a0a0a0;
+        }
+
+        body.dark-mode .status-label {
+            color: #ffffff !important;
+            border-color: #4a4a4a !important;
+        }
+
+        body.dark-mode .text-gray-600 {
+            color: #9ca3af !important;
+        }
+
+        body.dark-mode hr {
+            border-color: #333333;
+        }
+
+        /* Dark mode toggle button */
+        .dark-mode-toggle {
+            position: fixed;
+            top: 1rem;
+            right: 1rem;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 0.5rem;
+            border-radius: 50%;
+            transition: background-color 0.2s;
+            z-index: 1000;
+        }
+
+        .dark-mode-toggle:hover {
+            background-color: rgba(0, 0, 0, 0.1);
+        }
+
+        body.dark-mode .dark-mode-toggle:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+
+        .dark-mode-toggle i {
+            font-size: 1.5rem;
+            color: inherit;
+        }
+
+        @media (min-width: 768px) {
+            .dark-mode-toggle {
+                top: 2rem;
+                right: 2rem;
+            }
         }
 
         .project-image {
@@ -72,10 +160,24 @@
             border-radius: 0.5rem;
             padding: 1rem;
             transition: border-color 0.2s ease;
+            position: relative;
         }
 
-        .project-card:hover {
+        .project-card.has-link {
+            cursor: pointer;
+        }
+
+        .project-card.has-link:hover {
             border-color: #00ff00;
+        }
+
+        .project-card.has-link .project-link {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
         }
 
         @media (min-width: 1024px) {
@@ -248,7 +350,7 @@
             content: "•";
             position: absolute;
             left: -1rem;
-            color: #000000;
+            color: #ffffff;
         }
 
         /* Override for specific links that shouldn't be underlined */
@@ -300,6 +402,11 @@
 </head>
 
 <body class="bg-white min-h-screen">
+    <!-- Dark mode toggle button -->
+    <button class="dark-mode-toggle" aria-label="Toggle dark mode">
+        <i class="fas fa-moon"></i>
+    </button>
+
     <main class="container mx-auto px-4 sm:px-16 md:px-16 lg:px-32 py-12">
         <!-- Header Section -->
         <header class="text-center py-8">
@@ -439,6 +546,31 @@
     </main>
 
     <script>
+        // Dark mode functionality
+        function initDarkMode() {
+            const toggle = document.querySelector('.dark-mode-toggle');
+            const icon = toggle.querySelector('i');
+
+            // Check for saved preference
+            const darkMode = localStorage.getItem('darkMode') === 'true';
+            if (darkMode) {
+                document.body.classList.add('dark-mode');
+                icon.classList.replace('fa-moon', 'fa-sun');
+            }
+
+            toggle.addEventListener('click', () => {
+                const isDark = document.body.classList.toggle('dark-mode');
+                localStorage.setItem('darkMode', isDark);
+                icon.classList.replace(isDark ? 'fa-moon' : 'fa-sun', isDark ? 'fa-sun' : 'fa-moon');
+            });
+        }
+
+        // Initialize dark mode when the page loads
+        document.addEventListener('DOMContentLoaded', () => {
+            initDarkMode();
+            loadProjects();
+        });
+
         // Function to create project card HTML
         function createProjectCard(project) {
             // Always use black for status label
@@ -454,31 +586,33 @@
                 ? `<ul class=\"text-xs text-gray-700 mt-2 mb-3\" style=\"font-size:0.92em;margin-top:0.5em;margin-bottom:0.7em;list-style-type:disc;padding-left:1.25em;\">${project.stats.map(stat => `<li>${stat.value} ${stat.unit}</li>`).join('')}</ul>`
                 : '';
 
+            const hasLink = !!project.link;
+            const cardClass = `project-card group${hasLink ? ' has-link' : ''}`;
+
             return `
-                <div class=\"project-card group\">
-                    <div class=\"overflow-hidden rounded-lg mb-4 flex justify-center\">
-                        <img src=\"${project.image}\" 
-                             alt=\"${project.title} Project\" 
-                             class=\"project-image\">
+                <div class="${cardClass}">
+                    ${hasLink ? `<a href="${project.link}" target="_blank" class="project-link" aria-label="Learn more about ${project.title}"></a>` : ''}
+                    <div class="overflow-hidden rounded-lg mb-4 flex justify-center">
+                        <img src="${project.image}" 
+                             alt="${project.title} Project" 
+                             class="project-image">
                     </div>
                     <div>
-                        <div class=\"flex justify-between items-start mb-1\">
-                            <div class=\"w-full\">
-                                <h3 class=\"text-2xl\">${project.title}</h3>
+                        <div class="flex justify-between items-start mb-1">
+                            <div class="w-full">
+                                <h3 class="text-2xl">${project.title}</h3>
                                 ${collaboratorsInline}
-                                ${project.date ? `<div class=\"text-xs text-gray-600 mt-1 mb-1\" style=\"margin-top:0.4em;margin-bottom:0.4em;\">${project.date}</div>` : ''}
+                                ${project.date ? `<div class="text-xs text-gray-600 mt-1 mb-1" style="margin-top:0.4em;margin-bottom:0.4em;">${project.date}</div>` : ''}
                                 ${statsInline}
-                                <div class=\"mb-3\"></div>
-                                <p class=\"text-base mb-4\">${project.description}</p>
+                                <div class="mb-3"></div>
+                                <p class="text-base mb-4">${project.description}</p>
                             </div>
-                            <span class=\"status-label\" style=\"${statusStyle}\">${project.status.label}</span>
+                            <span class="status-label" style="${statusStyle}">${project.status.label}</span>
                         </div>
                         ${project.link ? `
-                            <a href=\"${project.link}\" 
-                               target=\"_blank\" 
-                               class=\"inline-block text-lg font-medium\">
+                            <div class="inline-block text-lg font-medium relative z-10">
                                 <u>Learn More →</u>
-                            </a>
+                            </div>
                         ` : ''}
                     </div>
                 </div>
@@ -564,11 +698,13 @@
                     // Draw line
                     let linePath = `M${x(0)},${y(counts[0])}`;
                     for (let i = 1; i < n; i++) linePath += ` L${x(i)},${y(counts[i])}`;
-                    svg.innerHTML += `<path d="${linePath}" fill="none" stroke="#000" stroke-width="3" />`;
+                    const lineColor = document.body.classList.contains('dark-mode') ? '#00ff00' : '#000000';
+                    svg.innerHTML += `<path d="${linePath}" fill="none" stroke="${lineColor}" stroke-width="3" />`;
 
                     // Draw points
                     for (let i = 0; i < n; i++) {
-                        svg.innerHTML += `<circle cx="${x(i)}" cy="${y(counts[i])}" r="4" fill="#fff" stroke="#000" stroke-width="2" />`;
+                        const pointColor = document.body.classList.contains('dark-mode') ? '#00ff00' : '#000000';
+                        svg.innerHTML += `<circle cx="${x(i)}" cy="${y(counts[i])}" r="4" fill="#fff" stroke="${pointColor}" stroke-width="2" />`;
                     }
                 }
                 drawLineChartSVG(years, counts);
@@ -601,9 +737,6 @@
                     '<p class="text-center text-red-600">Error loading projects. Please try again later.</p>';
             }
         }
-
-        // Load projects when the page loads
-        document.addEventListener('DOMContentLoaded', loadProjects);
 
         // Function to copy color code to clipboard
         async function copyToClipboard(text) {
@@ -655,6 +788,17 @@
                 alert('Failed to copy to clipboard. Please try again.');
             }
         }
+
+        // Update chart when dark mode changes
+        const darkModeToggle = document.querySelector('.dark-mode-toggle');
+        darkModeToggle.addEventListener('click', () => {
+            // Redraw chart after dark mode toggle
+            setTimeout(() => {
+                const years = Object.keys(yearCounts).sort();
+                const counts = years.map(y => yearCounts[y]);
+                drawLineChartSVG(years, counts);
+            }, 300); // Wait for transition
+        });
     </script>
 </body>
 

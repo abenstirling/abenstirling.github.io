@@ -137,7 +137,6 @@ projects:
       color: "#2C7865"
     date: "2024-06-01"
     image: ./images/cyberball_cover.png
-    link: "#"
     collaborators:
       - name: "Adin Ackerman"
         linkedin: "https://www.linkedin.com/in/adinackerman/"
