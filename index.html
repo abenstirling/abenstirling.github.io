@@ -464,6 +464,10 @@
                 margin: 0 1.2rem;
             }
         }
+
+        body.dark-mode .subtitle {
+            color: #e0e0e0;
+        }
     </style>
 
     <!-- Defer loading of non-critical styles -->
@@ -483,20 +487,23 @@
         </header>
 
         <!-- Contact Icons -->
-        <div class="flex justify-center">
+        <div class="flex justify-center" role="navigation" aria-label="Social media links">
             <div class="py-8"></div>
             <div class="py-8"></div>
             <div class="py-8"></div>
-            <a href="mailto:abenstirling@pm.me" class="social-icon text-3xl"><i class="fas fa-envelope"></i></a>
-            <a href="https://github.com/abenstirling" target="_blank" class="social-icon text-3xl"><i
-                    class="fab fa-github"></i></a>
-            <a href="https://linkedin.com/in/abenstirling" target="_blank" class="social-icon text-3xl"><i
-                    class="fab fa-linkedin"></i></a>
+            <a href="mailto:abenstirling@pm.me" class="social-icon text-3xl" aria-label="Send email to Ben Stirling"><i
+                    class="fas fa-envelope" aria-hidden="true"></i></a>
+            <a href="https://github.com/abenstirling" target="_blank" class="social-icon text-3xl"
+                aria-label="Visit Ben Stirling's GitHub profile"><i class="fab fa-github" aria-hidden="true"></i></a>
+            <a href="https://linkedin.com/in/abenstirling" target="_blank" class="social-icon text-3xl"
+                aria-label="Visit Ben Stirling's LinkedIn profile"><i class="fab fa-linkedin"
+                    aria-hidden="true"></i></a>
         </div>
         <div class="py-8"></div>
 
         <!-- Projects -->
-        <section class="mb-20">
+        <section class="mb-20" aria-labelledby="projects-heading">
+            <h2 id="projects-heading" class="sr-only">Projects</h2>
             <div id="projects-container" class="projects-grid">
                 <!-- Projects will be dynamically inserted here -->
             </div>
@@ -642,24 +649,24 @@
                     <div class="overflow-hidden rounded-lg mb-4 flex justify-center">
                         <picture>
                             <source srcset="${project.image}" type="image/webp" class="project-image">
-                            <img src="${project.fallbackImage}" alt="${project.title} Project" class="project-image" loading="lazy" decoding="async">
+                            <img src="${project.fallbackImage}" alt="${project.title} project screenshot" class="project-image" loading="lazy" decoding="async">
                         </picture>
                     </div>
                     <div>
                         <div class="flex justify-between items-start mb-1">
                             <div class="w-full">
-                                <h3 class="text-2xl">${project.title}</h3>
+                                <h2 class="text-2xl">${project.title}</h2>
                                 ${collaboratorsInline}
                                 ${project.date ? `<div class="text-xs text-gray-600 mt-1 mb-1" style="margin-top:0.4em;margin-bottom:0.4em;">${project.date}</div>` : ''}
                                 ${statsInline}
                                 <div class="mb-3"></div>
                                 <p class="text-base mb-4">${project.description}</p>
                             </div>
-                            <span class="status-label" style="${statusStyle}">${project.status.label}</span>
+                            <span class="status-label" style="${statusStyle}" aria-label="Project status: ${project.status.label}">${project.status.label}</span>
                         </div>
                         ${project.link ? `
                             <div class="inline-block text-lg font-medium relative z-10">
-                                <u>Learn More →</u>
+                                <a href="${project.link}" target="_blank" aria-label="Learn more about ${project.title}"><u>Learn More →</u></a>
                             </div>
                         ` : ''}
                     </div>

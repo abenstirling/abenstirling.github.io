@@ -9,8 +9,8 @@ body {
     flex-direction: column;
     /* Prevent layout shifts during font loading */
     font-display: swap;
-    /* Enforce dark mode */
-    background-color: #1a1a1a;
+    /* Enforce dark mode with better contrast */
+    background-color: #121212;
     color: #ffffff;
 }
 
@@ -37,7 +37,8 @@ h1 {
 
 .subtitle {
     font-size: 1.25rem;
-    color: #a0a0a0;
+    color: #fff;
+    font-weight: 500;
     margin: 0.5rem 0 0;
 }
 
