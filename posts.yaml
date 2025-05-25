@@ -6,7 +6,7 @@ projects:
       label: V1.0 website
       color: "#1B9C85"
     date: "2025-04-01"
-    image: ./images/vibe_cover.gif
+    image: ./images/vibe_cover.webp
     link: https://vibesecurity.co
     collaborators:
       - name: "Eugene Van Der Watt"
@@ -24,7 +24,7 @@ projects:
       label: competed
       color: "#2C7865"
     date: "2025-02-01"
-    image: ./images/botion_heavyweight_cover.png
+    image: ./images/botion_heavyweight_cover.webp
     link: https://youtu.be/s7Mer7IG9no
     stats:
       - value: "5th"
@@ -37,7 +37,7 @@ projects:
       label: V2.0 on App Store
       color: "#1B9C85"
     date: "2025-04-01"
-    image: ./images/plumeria_cover.png
+    image: ./images/plumeria_cover.webp
     link: https://goplumeria.com
     collaborators:
       - name: "Mois Cohen"
@@ -55,7 +55,7 @@ projects:
       label: V1.0 complete
       color: "#1B9C85"
     date: "2024-08-01"
-    image: ./images/capstan_cover.gif
+    image: ./images/capstan_cover.webp
     collaborators:
       - name: "Nicco Pompili"
         linkedin: "https://www.linkedin.com/in/nicco-pompili-63730a19b/"
@@ -67,7 +67,7 @@ projects:
       label: V2.0 Incomplete
       color: "#1B9C85"
     date: "2024-07-01"
-    image: ./images/bcc_cover.png
+    image: ./images/bcc_cover.webp
     collaborators:
       - name: "Nicco Pompili"
         linkedin: "https://www.linkedin.com/in/nicco-pompili-63730a19b/"
@@ -79,7 +79,7 @@ projects:
       label: v1.0 released
       color: "#1B9C85"
     date: "2024-01-01"
-    image: ./images/opentags_cover.png
+    image: ./images/opentags_cover.webp
     link: https://github.com/open-tags/opentag
     collaborators:
       - name: "Jad Ariss"
@@ -95,7 +95,7 @@ projects:
       label: active
       color: "#00ff00"
     date: "2021-06-01"
-    image: ./images/autoprint_cover.png
+    image: ./images/autoprint_cover.webp
     collaborators:
       - name: "Sam McDowell"
         linkedin: "https://www.linkedin.com/in/samuelmcdowell64/"
@@ -114,7 +114,7 @@ projects:
       label: cofounder
       color: "#2C7865"
     date: "2022-01-01"
-    image: ./images/deepwaterexploration_cover.png
+    image: ./images/deepwaterexploration_cover.webp
     link: "https://patents.google.com/patent/US20230341750A1/en?oq=20230341750"
     collaborators:
       - name: "Jiajer Ho"
@@ -136,7 +136,7 @@ projects:
       label: completed
       color: "#2C7865"
     date: "2024-06-01"
-    image: ./images/cyberball_cover.png
+    image: ./images/cyberball_cover.webp
     collaborators:
       - name: "Adin Ackerman"
         linkedin: "https://www.linkedin.com/in/adinackerman/"
@@ -148,7 +148,7 @@ projects:
       label: completed
       color: "#2C7865"
     date: "2023-08-01"
-    image: ./images/macropad_cover.png
+    image: ./images/macropad_cover.webp
     link: "#"
     collaborators:
       - name: "Ari Young"
@@ -164,7 +164,7 @@ projects:
       label: completed
       color: "#2C7865"
     date: "2023-06-01"
-    image: ./images/keeb_cover.png
+    image: ./images/keeb_cover.webp
     link: "#"
     collaborators:
       - name: "Ari Young"
@@ -180,7 +180,7 @@ projects:
       label: completed
       color: "#2C7865"
     date: "2024-03-15"
-    image: ./images/raytracer_cover.png
+    image: ./images/raytracer_cover.webp
     link: "https://github.com/abenstirling/raytracer"
     collaborators:
       - name: "Nicco Pompili"
@@ -196,7 +196,7 @@ projects:
       label: completed
       color: "#2C7865"
     date: "2023-05-01"
-    image: ./images/coffeetable_cover.png
+    image: ./images/coffeetable_cover.webp
     collaborators:
       - name: "Caytre Ede"
         linkedin: "https://www.linkedin.com/in/caytre-e-6b110b20b/"
@@ -208,7 +208,7 @@ projects:
       label: V1.0 on App Store
       color: "#2C7865"
     date: "2024-02-01"
-    image: ./images/botionnfc_cover.gif
+    image: ./images/botionnfc_cover.webp
     link: "https://apps.apple.com/us/app/botionnfc/id6476791734"
 
   - id: botion
@@ -218,7 +218,7 @@ projects:
       label: V1.0 on App Store
       color: "#2C7865"
     date: "2024-02-01"
-    image: ./images/botion_cover.gif
+    image: ./images/botion_cover.webp
     link: "https://apps.apple.com/us/app/botion-checklist/id6477213069"
 
   - id: botion-cube
@@ -228,7 +228,7 @@ projects:
       label: completed
       color: "#2C7865"
     date: "2024-03-01"
-    image: ./images/botion_cube_cover.png
+    image: ./images/botion_cube_cover.webp
     collaborators:
       - name: "Anshal Jain"
         linkedin: "https://scholar.google.com/citations?user=h-W8IeQAAAAJ&hl=en"
@@ -247,7 +247,7 @@ projects:
       label: completed
       color: "#2C7865"
     date: "2024-03-01"
-    image: ./images/circuit_cover.png
+    image: ./images/circuit_cover.webp
     link: "https://github.com/abenstirling/CircuitGenerator"
     collaborators:
       - name: "Nicco Pompili"
@@ -263,7 +263,7 @@ projects:
       label: active
       color: "#13005A"
     date: "2024-01-01"
-    image: ./images/aeroknob_cover.gif
+    image: ./images/aeroknob_cover.webp
     link: aeroknob.com
     collaborators:
       - name: "Jiajer Ho"
@@ -279,7 +279,7 @@ projects:
       label: inactive
       color: "#13005A"
     date: "2023-09-01"
-    image: ./images/businesscard_cover.png
+    image: ./images/businesscard_cover.webp
     stats:
       - value: "100+"
         unit: "units sold"
@@ -291,7 +291,7 @@ projects:
       label: completed
       color: "#2C7865"
     date: "2023-04-01"
-    image: ./images/picky_cover.gif
+    image: ./images/picky_cover.webp
     link: "https://youtu.be/noN5oz5rLbU"
     stats:
       - value: "$2K+"
@@ -304,7 +304,7 @@ projects:
       label: complete
       color: "#13005A"
     date: "2021-05-01"
-    image: ./images/2021_robot_cover.gif
+    image: ./images/2021_robot_cover.webp
     link: https://www.instagram.com/frc6995nomad/reels/
     stats:
       - value: "Winner"
@@ -317,7 +317,7 @@ projects:
       label: complete
       color: "#13005A"
     date: "2020-05-01"
-    image: ./images/commute_cover.gif
+    image: ./images/commute_cover.webp
     collaborators:
       - name: "Sam McDowell"
         linkedin: "https://www.linkedin.com/in/samuelmcdowell64/"
@@ -329,7 +329,7 @@ projects:
       label: complete
       color: "#13005A"
     date: "2019-01-01"
-    image: ./images/robot_2019_cover.png
+    image: ./images/robot_2019_cover.webp
     link: https://www.instagram.com/frc6995nomad/reels/
     stats:
       - value: "Winner"

@@ -1,0 +1,134 @@
+/* Critical styles for initial render */
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    line-height: 1.6;
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    /* Prevent layout shifts during font loading */
+    font-display: swap;
+    /* Enforce dark mode */
+    background-color: #1a1a1a;
+    color: #ffffff;
+}
+
+main {
+    flex: 1;
+    padding: 2rem 1rem;
+    max-width: 1200px;
+    margin: 0 auto;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+header {
+    padding: 1rem;
+    text-align: center;
+    position: relative;
+}
+
+h1 {
+    font-size: 2rem;
+    margin: 0;
+    font-weight: 600;
+}
+
+.subtitle {
+    font-size: 1.25rem;
+    color: #a0a0a0;
+    margin: 0.5rem 0 0;
+}
+
+.projects-section {
+    margin-top: 3rem;
+}
+
+.projects-section h2 {
+    font-size: 1.5rem;
+    margin-bottom: 2rem;
+    font-weight: 600;
+}
+
+.project-title {
+    font-size: 1.25rem;
+    margin: 1rem 0 0.5rem;
+    font-weight: 400;
+}
+
+.project-description {
+    margin: 0.5rem 0;
+    font-size: 1rem;
+}
+
+.status-label {
+    display: inline-block;
+    padding: 0.25rem 0.75rem;
+    border-radius: 1rem;
+    font-size: 0.875rem;
+    border: 1px solid #e5e7eb;
+    color: #374151;
+    margin-top: 0.5rem;
+}
+
+.status-label.completed {
+    background-color: #f0fdf4;
+    border-color: #86efac;
+    color: #166534;
+}
+
+.status-label.in-progress {
+    background-color: #fefce8;
+    border-color: #fef08a;
+    color: #854d0e;
+}
+
+.status-label.planned {
+    background-color: #f1f5f9;
+    border-color: #cbd5e1;
+    color: #475569;
+}
+
+/* Reserve space for project images */
+.project-image {
+    aspect-ratio: 1/1;
+    width: 100%;
+    max-width: 400px;
+    background-color: #f3f4f6;
+    /* Light gray placeholder */
+    min-height: 400px;
+    /* Reserve space */
+}
+
+/* Reserve space for main title */
+.main-title {
+    min-height: 3.5rem;
+    /* Reserve space for largest font size */
+    font-size: 2.5rem;
+    font-weight: 400;
+    line-height: 1.1;
+    letter-spacing: -0.01em;
+    margin: 0;
+}
+
+/* Reserve space for social icons */
+.social-icon {
+    min-width: 2rem;
+    min-height: 2rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Reserve space for container */
+.mx-auto {
+    min-height: 100px;
+    width: 100%;
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* Load non-critical styles */
+@import url('style/non-critical.css');
