@@ -1,6 +1,6 @@
 /* Critical styles for initial render */
 body {
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    font-family: 'Work Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
     line-height: 1.6;
     margin: 0;
     padding: 0;
@@ -14,6 +14,7 @@ body {
     color: #ffffff;
 }
 
+/* Critical layout containers */
 main {
     flex: 1;
     padding: 2rem 1rem;
@@ -23,16 +24,24 @@ main {
     box-sizing: border-box;
 }
 
+/* Critical header styles */
 header {
     padding: 1rem;
     text-align: center;
     position: relative;
 }
 
-h1 {
-    font-size: 2rem;
+.main-title-container {
+    min-height: 3.5rem;
     margin: 0;
-    font-weight: 600;
+}
+
+.main-title {
+    font-size: 2.5rem;
+    font-weight: 400;
+    line-height: 1.1;
+    letter-spacing: -0.01em;
+    margin: 0;
 }
 
 .subtitle {
@@ -42,94 +51,67 @@ h1 {
     margin: 0.5rem 0 0;
 }
 
-.projects-section {
-    margin-top: 3rem;
+/* Critical social icons */
+.social-icons-container {
+    min-height: 2rem;
+    margin: 2rem 0;
+    display: flex;
+    justify-content: center;
+    gap: 1.5rem;
 }
 
-.projects-section h2 {
-    font-size: 1.5rem;
-    margin-bottom: 2rem;
-    font-weight: 600;
+.social-icon {
+    font-size: 1.6rem;
+    color: #ffffff;
+    text-decoration: none;
+    transition: color 0.2s ease;
 }
 
-.project-title {
-    font-size: 1.25rem;
-    margin: 1rem 0 0.5rem;
-    font-weight: 400;
+.social-icon:hover {
+    color: #00ff00;
 }
 
-.project-description {
-    margin: 0.5rem 0;
-    font-size: 1rem;
-}
-
-.status-label {
-    display: inline-block;
-    padding: 0.25rem 0.75rem;
-    border-radius: 1rem;
-    font-size: 0.875rem;
-    border: 1px solid #e5e7eb;
-    color: #374151;
-    margin-top: 0.5rem;
-}
-
-.status-label.completed {
-    background-color: #f0fdf4;
-    border-color: #86efac;
-    color: #166534;
-}
-
-.status-label.in-progress {
-    background-color: #fefce8;
-    border-color: #fef08a;
-    color: #854d0e;
-}
-
-.status-label.planned {
-    background-color: #f1f5f9;
-    border-color: #cbd5e1;
-    color: #475569;
-}
-
-/* Reserve space for project images */
-.project-image {
+/* Critical project card styles */
+.project-image-container {
     aspect-ratio: 1/1;
     width: 100%;
     max-width: 400px;
-    background-color: #f3f4f6;
-    /* Light gray placeholder */
-    min-height: 400px;
-    /* Reserve space */
+    position: relative;
+    background-color: #242424;
+    margin-bottom: 1rem;
 }
 
-/* Reserve space for main title */
-.main-title {
-    min-height: 3.5rem;
-    /* Reserve space for largest font size */
-    font-size: 2.5rem;
-    font-weight: 400;
-    line-height: 1.1;
-    letter-spacing: -0.01em;
-    margin: 0;
-}
-
-/* Reserve space for social icons */
-.social-icon {
-    min-width: 2rem;
-    min-height: 2rem;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-}
-
-/* Reserve space for container */
-.mx-auto {
-    min-height: 100px;
+.project-image {
     width: 100%;
-    max-width: 800px;
-    margin-left: auto;
-    margin-right: auto;
+    height: 100%;
+    object-fit: cover;
 }
 
-/* Load non-critical styles */
-@import url('style/non-critical.css');
+.project-card {
+    max-width: 400px;
+    border: 1px solid #333333;
+    border-radius: 0.5rem;
+    padding: 1rem;
+    background-color: #242424;
+    margin-bottom: 2rem;
+}
+
+/* Critical grid layout */
+.projects-grid {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2rem;
+}
+
+@media (min-width: 1024px) {
+    .projects-grid {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 400px));
+        gap: 3rem;
+        justify-content: center;
+    }
+}
+
+/* Load non-critical styles asynchronously */
+@import url('style/non-critical.css') print;

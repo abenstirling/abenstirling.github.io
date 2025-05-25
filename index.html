@@ -18,8 +18,9 @@
     <link rel="preload" href="./images/favicon.webp" as="image" type="image/webp">
     <link rel="preload" href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@400;500&display=swap" as="style">
     <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" as="style">
-    <!-- Preload first visible project image -->
-    <link rel="preload" href="./images/picky_cover.webp" as="image" type="image/webp" fetchpriority="high">
+    <!-- Preload first visible project image with correct size -->
+    <link rel="preload" href="./images/picky_cover.webp" as="image" type="image/webp" fetchpriority="high"
+        imagesizes="400px" imagesrcset="./images/picky_cover.webp 400w">
 
     <!-- SEO Meta Tags -->
     <meta name="description"
@@ -90,17 +91,48 @@
     <!-- Defer Non-Critical JavaScript -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/js-yaml/4.1.0/js-yaml.min.js" defer></script>
 
-    <!-- Google Analytics - Load asynchronously -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-3YPTGE6JH6"></script>
+    <!-- Google Analytics - Load asynchronously with improved performance -->
     <script>
+        // Initialize GA with performance optimizations
         window.dataLayer = window.dataLayer || [];
         function gtag() { dataLayer.push(arguments); }
-        gtag('js', new Date());
-        gtag('config', 'G-3YPTGE6JH6', { 'send_page_view': false });
-        // Defer sending pageview until after critical content loads
-        window.addEventListener('load', function () {
-            gtag('event', 'page_view');
-        });
+
+        // Defer GA loading until after critical content
+        requestIdleCallback(() => {
+            const script = document.createElement('script');
+            script.src = 'https://www.googletagmanager.com/gtag/js?id=G-3YPTGE6JH6';
+            script.async = true;
+            script.onload = () => {
+                gtag('js', new Date());
+                gtag('config', 'G-3YPTGE6JH6', {
+                    'send_page_view': false,
+                    'anonymize_ip': true,
+                    'cookie_flags': 'SameSite=None;Secure'
+                });
+                // Send pageview after critical content loads
+                if (document.readyState === 'complete') {
+                    gtag('event', 'page_view');
+                } else {
+                    window.addEventListener('load', () => {
+                        gtag('event', 'page_view');
+                    });
+                }
+            };
+            document.head.appendChild(script);
+        }, { timeout: 2000 });
+    </script>
+
+    <!-- Optimize Font Awesome loading -->
+    <script>
+        // Load Font Awesome CSS asynchronously
+        const faLink = document.createElement('link');
+        faLink.rel = 'stylesheet';
+        faLink.href = 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css';
+        faLink.media = 'print';
+        faLink.onload = () => {
+            faLink.media = 'all';
+        };
+        document.head.appendChild(faLink);
     </script>
 
     <style>
@@ -208,10 +240,17 @@
             }
         }
 
-        .project-image {
+        .project-image-container {
             aspect-ratio: 1/1;
             width: 100%;
             max-width: 400px;
+            position: relative;
+            background-color: #242424;
+        }
+
+        .project-image {
+            width: 100%;
+            height: 100%;
             object-fit: cover;
             transition: transform 0.3s ease;
         }
@@ -468,13 +507,32 @@
         body.dark-mode .subtitle {
             color: #e0e0e0;
         }
+
+        /* Reserve space for main title to prevent CLS */
+        .main-title-container {
+            min-height: 3.5rem;
+            margin: 0;
+        }
+
+        /* Reserve space for social icons to prevent CLS */
+        .social-icons-container {
+            min-height: 2rem;
+            margin: 2rem 0;
+        }
     </style>
 
     <!-- Defer loading of non-critical styles -->
-    <link rel="stylesheet" href="./style/non-critical.css" media="print" onload="this.media='all'">
-    <noscript>
-        <link rel="stylesheet" href="./style/non-critical.css">
-    </noscript>
+    <script>
+        // Load non-critical CSS asynchronously
+        const nonCriticalLink = document.createElement('link');
+        nonCriticalLink.rel = 'stylesheet';
+        nonCriticalLink.href = './style/non-critical.css';
+        nonCriticalLink.media = 'print';
+        nonCriticalLink.onload = () => {
+            nonCriticalLink.media = 'all';
+        };
+        document.head.appendChild(nonCriticalLink);
+    </script>
 </head>
 
 <body class="bg-white min-h-screen dark-mode">
@@ -646,10 +704,22 @@
             return `
                 <div class="${cardClass}">
                     ${hasLink ? `<a href="${project.link}" target="_blank" class="project-link" aria-label="Learn more about ${project.title}"></a>` : ''}
-                    <div class="overflow-hidden rounded-lg mb-4 flex justify-center">
+                    <div class="project-image-container">
                         <picture>
-                            <source srcset="${project.image}" type="image/webp" class="project-image">
-                            <img src="${project.fallbackImage}" alt="${project.title} project screenshot" class="project-image" loading="lazy" decoding="async">
+                            <source 
+                                srcset="${project.image} 400w"
+                                sizes="(max-width: 1023px) 400px, 400px"
+                                type="image/webp">
+                            <img 
+                                src="${project.fallbackImage}" 
+                                alt="${project.title} project screenshot" 
+                                class="project-image"
+                                width="400"
+                                height="400"
+                                loading="${project.isFirstVisible ? 'eager' : 'lazy'}"
+                                decoding="${project.isFirstVisible ? 'sync' : 'async'}"
+                                fetchpriority="${project.isFirstVisible ? 'high' : 'low'}"
+                            >
                         </picture>
                     </div>
                     <div>
@@ -851,11 +921,13 @@
 
         // Optimize image loading
         document.addEventListener('DOMContentLoaded', function () {
-            // Lazy load images
-            const images = document.querySelectorAll('img[loading="lazy"]');
+            // Use native lazy loading with fallback
             if ('loading' in HTMLImageElement.prototype) {
+                const images = document.querySelectorAll('img[loading="lazy"]');
                 images.forEach(img => {
-                    img.src = img.dataset.src;
+                    if (img.dataset.src) {
+                        img.src = img.dataset.src;
+                    }
                 });
             } else {
                 // Fallback for browsers that don't support lazy loading
@@ -863,12 +935,20 @@
                     entries.forEach(entry => {
                         if (entry.isIntersecting) {
                             const img = entry.target;
-                            img.src = img.dataset.src;
+                            if (img.dataset.src) {
+                                img.src = img.dataset.src;
+                            }
                             observer.unobserve(img);
                         }
                     });
+                }, {
+                    rootMargin: '50px 0px',
+                    threshold: 0.01
                 });
-                images.forEach(img => imageObserver.observe(img));
+
+                document.querySelectorAll('img[loading="lazy"]').forEach(img => {
+                    imageObserver.observe(img);
+                });
             }
         });
     </script>
