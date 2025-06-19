@@ -1,7 +1,7 @@
 # The URL the site will be built for
 base_url = "https://abenstirling.com"
 theme = "no-style-please"
-                                                                                            
+
 # Whether to automatically compile all Sass files in the sass directory
 compile_sass = true
 
@@ -15,3 +15,4 @@ highlight_code = true
 
 [extra]
 # Put all your custom variables here
+favicon = "/images/favicon.ico"

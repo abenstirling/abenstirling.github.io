@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div style="font-size: 1.2em;">
+{{ section.content | safe }}
+
+<h2>Projects</h2>
+
+<ul>
+{% for page in section.pages | sort(attribute="date") | reverse %}
+<li><a href="{{ page.permalink }}">{{ page.title }}</a> - {{ page.date }}</li>
+{% endfor %}
+</ul>
+</div>
+
+{% endblock content %}
