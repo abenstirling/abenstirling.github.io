@@ -6,9 +6,59 @@
 
 <h2>Projects</h2>
 
-<ul>
+<ul style="list-style: none; padding: 0;">
 {% for page in section.pages | sort(attribute="date") | reverse %}
-<li><a href="{{ page.permalink }}">{{ page.title }}</a> - {{ page.date }}</li>
+<li style="margin-bottom: 30px; padding: 15px; border: 1px solid #ddd; border-radius: 10px;">
+    <a href="{{ page.permalink }}" style="text-decoration: none; font-weight: bold;">{{ page.title }}</a> - {{ page.date }}
+    <br>
+    {% if page.slug == "vibe-security" %}
+    <img src="/images/vibe_cover.webp" alt="{{ page.title }}" style="max-width: 200px; margin-top: 10px; border-radius: 8px;">
+    {% elif page.slug == "plumeria" %}
+    <img src="/images/plumeria_cover.webp" alt="{{ page.title }}" style="max-width: 200px; margin-top: 10px; border-radius: 8px;">
+    {% elif page.slug == "botion-heavyweight" %}
+    <img src="/images/botion_heavyweight_cover.webp" alt="{{ page.title }}" style="max-width: 200px; margin-top: 10px; border-radius: 8px;">
+    {% elif page.slug == "dual-capstan-flexture-gantry" %}
+    <img src="/images/capstan_cover.webp" alt="{{ page.title }}" style="max-width: 200px; margin-top: 10px; border-radius: 8px;">
+    {% elif page.slug == "bcc-mod" %}
+    <img src="/images/bcc_cover.webp" alt="{{ page.title }}" style="max-width: 200px; margin-top: 10px; border-radius: 8px;">
+    {% elif page.slug == "cyberball" %}
+    <img src="/images/cyberball_cover.webp" alt="{{ page.title }}" style="max-width: 200px; margin-top: 10px; border-radius: 8px;">
+    {% elif page.slug == "raytracer" %}
+    <img src="/images/raytracer_cover.webp" alt="{{ page.title }}" style="max-width: 200px; margin-top: 10px; border-radius: 8px;">
+    {% elif page.slug == "botion-cube" %}
+    <img src="/images/botion_cube_cover.webp" alt="{{ page.title }}" style="max-width: 200px; margin-top: 10px; border-radius: 8px;">
+    {% elif page.slug == "circuit-generator" %}
+    <img src="/images/circuit_cover.webp" alt="{{ page.title }}" style="max-width: 200px; margin-top: 10px; border-radius: 8px;">
+    {% elif page.slug == "botionnfc" %}
+    <img src="/images/botionnfc_cover.webp" alt="{{ page.title }}" style="max-width: 200px; margin-top: 10px; border-radius: 8px;">
+    {% elif page.slug == "botion" %}
+    <img src="/images/botion_cover.webp" alt="{{ page.title }}" style="max-width: 200px; margin-top: 10px; border-radius: 8px;">
+    {% elif page.slug == "opentag" %}
+    <img src="/images/opentags_cover.webp" alt="{{ page.title }}" style="max-width: 200px; margin-top: 10px; border-radius: 8px;">
+    {% elif page.slug == "aeroknob" %}
+    <img src="/images/aeroknob_cover.webp" alt="{{ page.title }}" style="max-width: 200px; margin-top: 10px; border-radius: 8px;">
+    {% elif page.slug == "botion-cards" %}
+    <img src="/images/businesscard_cover.webp" alt="{{ page.title }}" style="max-width: 200px; margin-top: 10px; border-radius: 8px;">
+    {% elif page.slug == "macropad" %}
+    <img src="/images/macropad_cover.webp" alt="{{ page.title }}" style="max-width: 200px; margin-top: 10px; border-radius: 8px;">
+    {% elif page.slug == "split-keyboard" %}
+    <img src="/images/keeb_cover.webp" alt="{{ page.title }}" style="max-width: 200px; margin-top: 10px; border-radius: 8px;">
+    {% elif page.slug == "coffee-table" %}
+    <img src="/images/coffeetable_cover.webp" alt="{{ page.title }}" style="max-width: 200px; margin-top: 10px; border-radius: 8px;">
+    {% elif page.slug == "pick-and-place-machine" %}
+    <img src="/images/picky_cover.webp" alt="{{ page.title }}" style="max-width: 200px; margin-top: 10px; border-radius: 8px;">
+    {% elif page.slug == "deepwater-exploration" %}
+    <img src="/images/deepwaterexploration_cover.webp" alt="{{ page.title }}" style="max-width: 200px; margin-top: 10px; border-radius: 8px;">
+    {% elif page.slug == "autoprint" %}
+    <img src="/images/autoprint_cover.webp" alt="{{ page.title }}" style="max-width: 200px; margin-top: 10px; border-radius: 8px;">
+    {% elif page.slug == "2021-frc-robot" %}
+    <img src="/images/2021_robot_cover.webp" alt="{{ page.title }}" style="max-width: 200px; margin-top: 10px; border-radius: 8px;">
+    {% elif page.slug == "commute-site" %}
+    <img src="/images/commute_cover.webp" alt="{{ page.title }}" style="max-width: 200px; margin-top: 10px; border-radius: 8px;">
+    {% elif page.slug == "2019-frc-robot" %}
+    <img src="/images/robot_2019_cover.webp" alt="{{ page.title }}" style="max-width: 200px; margin-top: 10px; border-radius: 8px;">
+    {% endif %}
+</li>
 {% endfor %}
 </ul>
 </div>
