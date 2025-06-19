@@ -15,4 +15,4 @@ highlight_code = true
 
 [extra]
 # Put all your custom variables here
-favicon = "/images/favicon.ico"
+favicon = "/images/logo.ico"
