@@ -7,7 +7,14 @@
       "Bash(mkdir:*)",
       "Bash(rm:*)",
       "Bash(git submodule add:*)",
-      "Bash(git rm:*)"
+      "Bash(git rm:*)",
+      "Bash(find:*)",
+      "Bash(for file in keeb_*.jpg keeb_*.jpeg)",
+      "Bash(do [ -f \"$file\" ])",
+      "Bash(cwebp:*)",
+      "Bash(echo:*)",
+      "Bash(done)",
+      "Bash(cp:*)"
     ],
     "deny": []
   }

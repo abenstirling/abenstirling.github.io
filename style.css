@@ -62,7 +62,7 @@ header {
 
 .social-icon {
     font-size: 1.6rem;
-    color: #ffffff;
+    color: #000000; /* Black inverts to white */
     text-decoration: none;
     transition: color 0.2s ease;
 }
@@ -111,6 +111,47 @@ header {
         gap: 3rem;
         justify-content: center;
     }
+}
+
+/* Fix link colors for project cards - use black so it inverts to white */
+a.project-card,
+a.project-card:link,
+a.project-card:visited,
+a.project-card:hover,
+a.project-card:active {
+    color: #000000 !important;
+    text-decoration: none !important;
+}
+
+a.project-card:hover .project-title {
+    color: #ff00ff !important; /* Magenta inverts to green */
+}
+
+.project-title {
+    font-weight: bold;
+    color: #000000 !important; /* Black inverts to white */
+    margin-bottom: 5px;
+}
+
+.project-date {
+    color: #aaaaaa !important;
+    font-size: 0.9em;
+    margin-bottom: 10px;
+}
+
+/* Style images in post content - override theme styles */
+body main img,
+body .page-content img,
+body main.page-content img,
+.w main img {
+    max-width: 100% !important;
+    height: auto !important;
+    border-radius: 12px !important;
+    margin: 20px auto !important;
+    padding: 8px !important;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.3) !important;
+    display: block !important;
+    background-color: #1a1a1a !important;
 }
 
 /* Load non-critical styles asynchronously */
