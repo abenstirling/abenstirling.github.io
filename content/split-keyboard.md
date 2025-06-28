@@ -7,23 +7,15 @@ status = "completed"
 +++
 
 
-## I made a custom split keyboard becuase I didn't have one. 
----
-### Demo Video
-
-{{<youtube rvtPBNVsV0k>}}
-
----
 
 I built a split keyboard with my friend 
 [Ari](https://github.com/AriYoung00). 
 
-
 ---
 ### BOM
-
-| Switches | https://www.amazon.com/Matcha-Switches-Mechanical-Keyboard-Linear/dp/B0BJ2266X4 | $20 |
+| Part | Link | Price |
 | --- | --- | --- |
+| Switches | https://www.amazon.com/Matcha-Switches-Mechanical-Keyboard-Linear/dp/B0BJ2266X4 | $20 |
 | Stablizers | https://www.amazon.com/GLORIOUS-Stabilizer-Mechanical-Keyboards-Compatible/dp/B09MZKFLXP/ | $16 |
 | Caps | https://www.amazon.com/Guffercty-kred-Keycaps-Keyboards-Mechanical/dp/B0B48RDDZT | $20 |
 | Wood | https://www.walmart.com/ip/Wenge-Exotic-Hardwood-Turning-Stock-3-4-x-3-x-24/150520201 | $37 |

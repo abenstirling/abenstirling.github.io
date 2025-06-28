@@ -14,7 +14,8 @@
       "Bash(cwebp:*)",
       "Bash(echo:*)",
       "Bash(done)",
-      "Bash(cp:*)"
+      "Bash(cp:*)",
+      "Bash(zola build:*)"
     ],
     "deny": []
   }

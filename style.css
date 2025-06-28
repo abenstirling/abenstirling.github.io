@@ -143,7 +143,26 @@ a.project-card:hover .project-title {
 body main img,
 body .page-content img,
 body main.page-content img,
-.w main img {
+.w main img,
+.w img,
+main img,
+img {
+    max-width: 100% !important;
+    height: auto !important;
+    border-radius: 12px !important;
+    margin: 20px auto !important;
+    padding: 8px !important;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.3) !important;
+    display: block !important;
+    background-color: #1a1a1a !important;
+}
+
+/* Force image styles with maximum specificity */
+html body[theme] .w main img,
+html body[theme="auto"] .w main img,
+html body[theme="dark"] .w main img,
+html body .w main.page-content img,
+html body .w img {
     max-width: 100% !important;
     height: auto !important;
     border-radius: 12px !important;

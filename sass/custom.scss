@@ -1,0 +1,28 @@
+// Override theme styles for images
+.w main.page-content img,
+.w main img,
+.w img,
+body div.w main img,
+body[theme="auto"] div.w main img,
+body[theme="dark"] div.w main img {
+    max-width: 100% !important;
+    height: auto !important;
+    border-radius: 12px !important;
+    margin: 20px auto !important;
+    display: block !important;
+}
+
+// Fix YouTube videos in dark mode - prevent inversion
+body[theme="dark"] .video-container iframe,
+body[theme="auto"] .video-container iframe {
+    filter: invert(0) !important;
+}
+
+// Remove forward slashes from hr elements
+hr:before {
+    content: "" !important;
+}
+
+hr:after {
+    content: "" !important;
+}
