@@ -82,41 +82,84 @@ def convert_image_to_webp(input_path: Path, output_path: Path, quality: int = 80
         print(f"✗ Error converting {input_path.name}: {e}")
         return False
 
+def get_file_size_mb(file_path: Path) -> float:
+    """Get file size in MB."""
+    return file_path.stat().st_size / (1024 * 1024)
+
 def convert_video_to_webp(input_path: Path, output_path: Path, quality: int = 80) -> bool:
-    """Convert video file to WebP using ffmpeg."""
+    """Convert video file to WebP using 2-pass conversion: video -> gif -> webp."""
     try:
-        # First, get video duration to determine how many loops we need
-        duration_cmd = ['ffprobe', '-v', 'error', '-show_entries', 'format=duration', 
-                       '-of', 'csv=p=0', str(input_path)]
-        duration_result = subprocess.run(duration_cmd, capture_output=True, text=True)
+        file_size_mb = get_file_size_mb(input_path)
+        print(f"  Converting {file_size_mb:.1f}MB video file...")
         
-        try:
-            duration = float(duration_result.stdout.strip())
-            # Create a looped version that's about 10 seconds total
-            loops = max(1, int(10 / duration))
-        except:
-            loops = 3  # Default fallback
+        # Always use 2-pass conversion: mov/mp4 -> gif -> webp for better looping
+        temp_gif = input_path.parent / f"{input_path.stem}_temp.gif"
         
-        cmd = [
-            'ffmpeg', 
-            '-stream_loop', str(loops),  # Loop input a few times
+        # First pass: convert to GIF with compression
+        gif_cmd = [
+            'ffmpeg', '-y',
             '-i', str(input_path),
-            '-vf', 'scale=800:-1',  # Scale to max width 800px
-            '-vcodec', 'libwebp',
-            '-quality', str(quality),
-            '-loop', '0',  # Infinite loop for WebP output
-            '-y',  # Overwrite output file
+            '-vf', 'fps=10,scale=800:-1:flags=lanczos',
+            '-loop', '0',
+            str(temp_gif)
+        ]
+        
+        gif_result = subprocess.run(gif_cmd, capture_output=True, text=True, timeout=180)
+        if gif_result.returncode != 0:
+            print(f"✗ Failed to create temp GIF: {gif_result.stderr}")
+            return False
+        
+        # Second pass: convert GIF to WebP
+        webp_cmd = [
+            'ffmpeg', '-y',
+            '-i', str(temp_gif),
+            '-c:v', 'libwebp',
+            '-lossless', '0',
+            '-compression_level', '6',
+            '-q:v', str(quality),
+            '-loop', '0',
             str(output_path)
         ]
         
-        result = subprocess.run(cmd, capture_output=True, text=True, timeout=120)
+        webp_result = subprocess.run(webp_cmd, capture_output=True, text=True, timeout=180)
         
-        if result.returncode == 0:
-            print(f"✓ Converted video: {input_path.name} -> {output_path.name}")
+        # Clean up temp file
+        try:
+            temp_gif.unlink()
+        except:
+            pass
+        
+        if webp_result.returncode == 0:
+            # Check if output file is larger than 100MB and needs compression
+            output_size_mb = get_file_size_mb(output_path)
+            if output_size_mb > 100:
+                print(f"  Output is {output_size_mb:.1f}MB (>100MB), re-compressing...")
+                
+                # Re-compress with lower quality
+                compress_cmd = [
+                    'ffmpeg', '-y',
+                    '-i', str(temp_gif) if temp_gif.exists() else str(input_path),
+                    '-c:v', 'libwebp',
+                    '-lossless', '0',
+                    '-compression_level', '6',
+                    '-q:v', '60',  # Lower quality for compression
+                    '-loop', '0',
+                    str(output_path)
+                ]
+                
+                compress_result = subprocess.run(compress_cmd, capture_output=True, text=True, timeout=180)
+                if compress_result.returncode == 0:
+                    final_size_mb = get_file_size_mb(output_path)
+                    print(f"✓ Converted video with compression: {input_path.name} -> {output_path.name} ({final_size_mb:.1f}MB)")
+                else:
+                    print(f"✓ Converted video: {input_path.name} -> {output_path.name} (compression failed, using original)")
+            else:
+                print(f"✓ Converted video: {input_path.name} -> {output_path.name}")
             return True
         else:
-            print(f"✗ Failed to convert {input_path.name}: {result.stderr}")
+            print(f"✗ Failed to convert video {input_path.name}: {webp_result.stderr}")
             return False
+                
     except subprocess.TimeoutExpired:
         print(f"✗ Timeout converting {input_path.name}")
         return False
@@ -159,15 +202,12 @@ def main():
     
     print(f"Found {len(media_files)} files to convert:")
     for input_path, output_path in media_files:
-        relative_input = input_path.relative_to(script_dir)
+        try:
+            relative_input = input_path.relative_to(script_dir)
+        except ValueError:
+            relative_input = input_path
         relative_output = output_path.relative_to(script_dir)
         print(f"  - {relative_input} -> {relative_output}")
-    
-    # Ask for confirmation
-    response = input("\nProceed with conversion? (y/N): ").lower().strip()
-    if response != 'y':
-        print("Conversion cancelled.")
-        return
     
     # Convert files
     converted_count = 0

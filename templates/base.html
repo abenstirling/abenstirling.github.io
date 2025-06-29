@@ -122,8 +122,23 @@
             </footer>
         </div>
         <script>
-            // Add copy buttons to code blocks
+            // Add image captions from alt text
             document.addEventListener('DOMContentLoaded', function() {
+                const images = document.querySelectorAll('.w img[alt]');
+                
+                images.forEach(function(img) {
+                    const altText = img.getAttribute('alt');
+                    if (altText && altText.trim() !== '') {
+                        const caption = document.createElement('div');
+                        caption.className = 'image-caption';
+                        caption.textContent = altText;
+                        
+                        // Insert caption after the image
+                        img.parentNode.insertBefore(caption, img.nextSibling);
+                    }
+                });
+                
+                // Add copy buttons to code blocks
                 const codeBlocks = document.querySelectorAll('pre code');
                 
                 codeBlocks.forEach(function(codeBlock) {

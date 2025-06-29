@@ -28,7 +28,8 @@
       "Bash(mv:*)",
       "Bash(ffmpeg:*)",
       "Bash(chmod:*)",
-      "Bash(git clean:*)"
+      "Bash(git clean:*)",
+      "Bash(ffprobe:*)"
     ],
     "deny": []
   }
