@@ -6,4 +6,4 @@ stats = "$11K+ kickstarter pre-orders"
 status = "active"
 +++
 
-Automated 3D printing system with advanced monitoring and quality control features, designed for high-volume production environments.
+We tried to simplify 3D printing. We developed a functional product and had an [unsuccessful Kickstarter campaign](https://www.kickstarter.com/projects/autoprint/autoprint-one-3d-print-in-seconds?ref=discovery&term=autoprint). 

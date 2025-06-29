@@ -24,7 +24,8 @@
       "Bash(magick:*)",
       "Bash(for file in frc_*.jpg)",
       "Bash(gif2webp:*)",
-      "Bash(grep:*)"
+      "Bash(grep:*)",
+      "Bash(mv:*)"
     ],
     "deny": []
   }
