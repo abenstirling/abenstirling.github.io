@@ -25,7 +25,9 @@
       "Bash(for file in frc_*.jpg)",
       "Bash(gif2webp:*)",
       "Bash(grep:*)",
-      "Bash(mv:*)"
+      "Bash(mv:*)",
+      "Bash(ffmpeg:*)",
+      "Bash(chmod:*)"
     ],
     "deny": []
   }
