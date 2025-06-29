@@ -92,7 +92,7 @@ Colab → Setup LeRobot → Download training data (HF) → Train → Upload mod
 - **Cost:** $2.33
 - **Performance:** Still unsuccessful at completing the Move-T task
 
-![2nd Attempt]](/posts/lerobot_6.webp)
+![2nd Attempt](/posts/lerobot_6.webp)
 
 **Wandb metrics:**
 ![Attempt 2 wandb](/posts/lerobot_7.webp)
