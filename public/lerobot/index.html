@@ -1,0 +1,229 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta content="IE=edge" http-equiv="X-UA-Compatible"/>
+        <meta content="text/html; charset=UTF-8" http-equiv="content-type"/>
+        <meta content="width=device-width, initial-scale=1" name="viewport"/>
+
+        
+        
+        
+
+        
+
+        
+
+        
+
+        
+        
+        
+
+        <title>Ben Stirling - LeRobot</title>
+        
+        <meta name="title" content="Ben Stirling - LeRobot">
+        
+        
+        <meta name="generator" content="Zola v0.16.1">
+
+        <meta property="og:type" content="website">
+        <meta property="og:url" content="https://abenstirling.com/lerobot/">
+        <meta property="og:site_name" content="">
+        <meta property="og:title" content="Ben Stirling - LeRobot">
+        
+        
+
+        
+        
+        <meta property="twitter:card" content="summary_large_image">
+        <meta property="twitter:url" content="https://abenstirling.com/lerobot/">
+        <meta property="twitter:title" content="Ben Stirling - LeRobot">
+        
+        
+        
+        
+        <link rel="canonical" href="https://abenstirling.com/lerobot/">
+        <link rel="shortcut icon" type="image/x-icon" href="https://abenstirling.com/images/logo.ico">
+        <script type="application/ld+json">
+            {
+                
+                "url":"https://abenstirling.com/lerobot/",
+                "@type":"WebSite",
+                "headline":"Ben Stirling - LeRobot",
+                "name":"Ben Stirling - LeRobot",
+                
+                "@context":"https://schema.org"
+            }
+        </script>
+        
+        
+        
+        <link rel="stylesheet" href="https://abenstirling.com/style.css"/>
+        <link rel="stylesheet" href="https://abenstirling.com/custom.css"/>
+        
+    </head>
+    <body theme="auto">
+        <div class="w">
+            <header>
+                
+                
+<p><a href="..">..</a>/lerobot</p>
+<p class="post-meta"><time datetime="2025-06-15">2025-06-15</time></p>
+<h1>LeRobot</h1>
+
+            </header>
+            <main class="page-content" aria-label="Content">
+                
+
+
+
+<p>I took a break from robotics after a machine learning project on <a href="https://github.com/abenstirling/SemanticNavigation">semantic naviation</a>.</p>
+<p>I was at a christmas party and heard about an open-source initiative for 6 <a href="https://en.wikipedia.org/wiki/Degrees_of_freedom_(mechanics)">DoF</a>. There were even Bambu files, so I printed the SO-100 and got to assembling it as soon as my motors arrived.
+<img src="/posts/lerobot_1.webp" alt="LeRobot Implementation" /></p>
+<p>There was an issue where the motor (specifically just the 3rd joint from the bottom) would just be blinking and not work at all. I tried getting help, but I gave up and packed it away for a bit.</p>
+<p>After a 3 month break and moving to a different apartment, I pulled it out and debugged the motor and finally got it working</p>
+<p><img src="/posts/lerobot_3.webp" alt="LeRobot teleop" /></p>
+<p>The above ran with the following command:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>python lerobot/scripts/control_robot.py \
+</span><span>  --robot.type=so100 \
+</span><span>  --control.type=teleoperate
+</span></code></pre>
+<p>This is teleoperation "teleop" where I have the leader arm and the follower arm.</p>
+<h2 id="goals">Goals</h2>
+<p>Let us define goals for this project:</p>
+<ul>
+<li>train robot to do a custom task</li>
+<li>have it do it autonomously with a 80%+ success rate</li>
+</ul>
+<p><img src="/posts/lerobot_2.webp" alt="LeRobot working" /></p>
+<p><strong>Move-T</strong> is my challenge. The goal is to place the red T on the yellow outline.</p>
+<h3 id="1st-attempt">1st Attempt</h3>
+<ul>
+<li>macbook (weird front scene camera)</li>
+<li>iphone continuity (overhead camera)</li>
+<li>40 tests
+<ul>
+<li>10 repeats per initial spot</li>
+</ul>
+</li>
+</ul>
+<p>I ran the following command to get data:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>python lerobot/scripts/control_robot.py \
+</span><span>  --robot.type=so100 \
+</span><span>  --control.type=record \
+</span><span>  --control.fps=30 \
+</span><span>  --control.single_task=&quot;Move T to where it belongs.&quot; \
+</span><span>  --control.repo_id=${HF_USER}/so100_move_t2 \
+</span><span>  --control.tags=&#39;[&quot;so100&quot;,&quot;tutorial&quot;]&#39; \
+</span><span>  --control.warmup_time_s=10 \
+</span><span>  --control.episode_time_s=15 \
+</span><span>  --control.reset_time_s=15 \
+</span><span>  --control.num_episodes=40 \
+</span><span>  --control.push_to_hub=true
+</span></code></pre>
+<p>Note: I pushed to hugging face in case my macbook dies during training.</p>
+<p><strong>Results</strong>:
+<img src="/posts/lerobot_4.webp" alt="Results 1" />
+This took <strong>26 HOURS</strong> to train. This was eye-opening. It was garbage</p>
+<p>Learnings:</p>
+<ul>
+<li>need to find a way to train faster to shorten feedback loop</li>
+<li>need to debug data with wandb (weights and biases)</li>
+<li>review the data (literally comb through it to make sure that cameras aren't off or something)</li>
+</ul>
+<h3 id="2nd-attempt">2nd Attempt</h3>
+<p>I began to think about the problem from first principles.</p>
+<p>I was moving around from the laptop's perspective, and I believed that</p>
+<p>So I deleted my laptop footage from hugging face by simply deleting the folder via their website.</p>
+<p><img src="/posts/lerobot_5.webp" alt="Deleting data" /></p>
+<p>I also found that you could <a href="https://huggingface.co/docs/lerobot/notebooks">train your model by renting an A100</a>. This would help solve the long feedback loop issue.</p>
+<p>The workflow was:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>colab -&gt; setup lerobot -&gt; download training data (hf) -&gt; train -&gt; upload model (hf)
+</span></code></pre>
+<p><strong>Results</strong></p>
+<p>This took <strong>2h 14m 52s</strong> to train. The cost was $2.33.</p>
+<p><img src="/posts/lerobot_6.webp" alt="Attempt 2" /></p>
+<p>Here is the wandb results:
+<img src="/posts/lerobot_7.webp" alt="Attempt 2 wandb" /></p>
+<p>Ok so the task was not completed, but we learned the following:</p>
+<ul>
+<li>data is the large driver in the output of the arm</li>
+<li>colab is necessary for speed</li>
+</ul>
+<h2 id="3rd-attempt">3rd Attempt</h2>
+<p>I began researching what other successful systems did.</p>
+<p><img src="/posts/lerobot_8.webp" alt="Aloha setup" /></p>
+<p>and based on this meme of a statement:</p>
+<p><img src="/posts/lerobot_9.webp" alt="meme" /></p>
+<p>I added a wrist camera, and moved the overhead camera to be a side camera.</p>
+<p><img src="/posts/lerobot_10.webp" alt="wrist camera" /></p>
+<p><img src="/images/lerobot_cover.webp" alt="setup" /></p>
+<hr />
+<p>Still in progress:</p>
+<p>Q: My brother asked a good question, why do we have to have a leader and follower arm? Why can't you just guide a single arm?</p>
+<p>A: My response was that we are using a VLA, so having the human moving is throwing off the visual encoding.</p>
+
+
+            </main>
+            <footer>
+                
+<p class="taxonomies">
+
+</p>
+
+                
+                <p>&copy; Ben Stirling 2025</p>
+            </footer>
+        </div>
+        <script>
+            // Add copy buttons to code blocks
+            document.addEventListener('DOMContentLoaded', function() {
+                const codeBlocks = document.querySelectorAll('pre code');
+                
+                codeBlocks.forEach(function(codeBlock) {
+                    const pre = codeBlock.parentElement;
+                    
+                    // Create copy button
+                    const copyButton = document.createElement('button');
+                    copyButton.className = 'copy-button';
+                    copyButton.textContent = 'Copy';
+                    
+                    // Add click handler
+                    copyButton.addEventListener('click', function() {
+                        const text = codeBlock.textContent;
+                        
+                        navigator.clipboard.writeText(text).then(function() {
+                            copyButton.textContent = 'Copied!';
+                            copyButton.classList.add('copied');
+                            
+                            setTimeout(function() {
+                                copyButton.textContent = 'Copy';
+                                copyButton.classList.remove('copied');
+                            }, 2000);
+                        }).catch(function() {
+                            // Fallback for older browsers
+                            const textArea = document.createElement('textarea');
+                            textArea.value = text;
+                            document.body.appendChild(textArea);
+                            textArea.select();
+                            document.execCommand('copy');
+                            document.body.removeChild(textArea);
+                            
+                            copyButton.textContent = 'Copied!';
+                            copyButton.classList.add('copied');
+                            
+                            setTimeout(function() {
+                                copyButton.textContent = 'Copy';
+                                copyButton.classList.remove('copied');
+                            }, 2000);
+                        });
+                    });
+                    
+                    // Add button to pre element
+                    pre.appendChild(copyButton);
+                });
+            });
+        </script>
+    </body>
+</html>

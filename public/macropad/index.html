@@ -1,0 +1,146 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta content="IE=edge" http-equiv="X-UA-Compatible"/>
+        <meta content="text/html; charset=UTF-8" http-equiv="content-type"/>
+        <meta content="width=device-width, initial-scale=1" name="viewport"/>
+
+        
+        
+        
+
+        
+
+        
+
+        
+
+        
+        
+        
+
+        <title>Ben Stirling - MacroPad</title>
+        
+        <meta name="title" content="Ben Stirling - MacroPad">
+        
+        
+        <meta name="generator" content="Zola v0.16.1">
+
+        <meta property="og:type" content="website">
+        <meta property="og:url" content="https://abenstirling.com/macropad/">
+        <meta property="og:site_name" content="">
+        <meta property="og:title" content="Ben Stirling - MacroPad">
+        
+        
+
+        
+        
+        <meta property="twitter:card" content="summary_large_image">
+        <meta property="twitter:url" content="https://abenstirling.com/macropad/">
+        <meta property="twitter:title" content="Ben Stirling - MacroPad">
+        
+        
+        
+        
+        <link rel="canonical" href="https://abenstirling.com/macropad/">
+        <link rel="shortcut icon" type="image/x-icon" href="https://abenstirling.com/images/logo.ico">
+        <script type="application/ld+json">
+            {
+                
+                "url":"https://abenstirling.com/macropad/",
+                "@type":"WebSite",
+                "headline":"Ben Stirling - MacroPad",
+                "name":"Ben Stirling - MacroPad",
+                
+                "@context":"https://schema.org"
+            }
+        </script>
+        
+        
+        
+        <link rel="stylesheet" href="https://abenstirling.com/style.css"/>
+        <link rel="stylesheet" href="https://abenstirling.com/custom.css"/>
+        
+    </head>
+    <body theme="auto">
+        <div class="w">
+            <header>
+                
+                
+<p><a href="..">..</a>/macropad</p>
+<p class="post-meta"><time datetime="2023-08-01">2023-08-01</time></p>
+<h1>MacroPad</h1>
+
+            </header>
+            <main class="page-content" aria-label="Content">
+                
+
+
+
+<p>Custom mechanical keyboard macro pad to celebrate the 40th anniversary of the Apple Macintosh.</p>
+<p><a href="#">Learn More →</a></p>
+
+
+            </main>
+            <footer>
+                
+<p class="taxonomies">
+
+</p>
+
+                
+                <p>&copy; Ben Stirling 2025</p>
+            </footer>
+        </div>
+        <script>
+            // Add copy buttons to code blocks
+            document.addEventListener('DOMContentLoaded', function() {
+                const codeBlocks = document.querySelectorAll('pre code');
+                
+                codeBlocks.forEach(function(codeBlock) {
+                    const pre = codeBlock.parentElement;
+                    
+                    // Create copy button
+                    const copyButton = document.createElement('button');
+                    copyButton.className = 'copy-button';
+                    copyButton.textContent = 'Copy';
+                    
+                    // Add click handler
+                    copyButton.addEventListener('click', function() {
+                        const text = codeBlock.textContent;
+                        
+                        navigator.clipboard.writeText(text).then(function() {
+                            copyButton.textContent = 'Copied!';
+                            copyButton.classList.add('copied');
+                            
+                            setTimeout(function() {
+                                copyButton.textContent = 'Copy';
+                                copyButton.classList.remove('copied');
+                            }, 2000);
+                        }).catch(function() {
+                            // Fallback for older browsers
+                            const textArea = document.createElement('textarea');
+                            textArea.value = text;
+                            document.body.appendChild(textArea);
+                            textArea.select();
+                            document.execCommand('copy');
+                            document.body.removeChild(textArea);
+                            
+                            copyButton.textContent = 'Copied!';
+                            copyButton.classList.add('copied');
+                            
+                            setTimeout(function() {
+                                copyButton.textContent = 'Copy';
+                                copyButton.classList.remove('copied');
+                            }, 2000);
+                        });
+                    });
+                    
+                    // Add button to pre element
+                    pre.appendChild(copyButton);
+                });
+            });
+        </script>
+    </body>
+</html>

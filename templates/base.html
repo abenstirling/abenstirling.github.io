@@ -121,5 +121,92 @@
                 <p>&copy; Ben Stirling 2025</p>
             </footer>
         </div>
+        <script>
+            // Add copy buttons to code blocks
+            document.addEventListener('DOMContentLoaded', function() {
+                const codeBlocks = document.querySelectorAll('pre code');
+                
+                codeBlocks.forEach(function(codeBlock) {
+                    const pre = codeBlock.parentElement;
+                    
+                    // Create copy button
+                    const copyButton = document.createElement('button');
+                    copyButton.className = 'copy-button';
+                    copyButton.textContent = 'Copy';
+                    
+                    // Add click handler
+                    copyButton.addEventListener('click', function() {
+                        const text = codeBlock.textContent;
+                        
+                        navigator.clipboard.writeText(text).then(function() {
+                            copyButton.textContent = 'Copied!';
+                            copyButton.classList.add('copied');
+                            
+                            setTimeout(function() {
+                                copyButton.textContent = 'Copy';
+                                copyButton.classList.remove('copied');
+                            }, 2000);
+                        }).catch(function() {
+                            // Fallback for older browsers
+                            const textArea = document.createElement('textarea');
+                            textArea.value = text;
+                            document.body.appendChild(textArea);
+                            textArea.select();
+                            document.execCommand('copy');
+                            document.body.removeChild(textArea);
+                            
+                            copyButton.textContent = 'Copied!';
+                            copyButton.classList.add('copied');
+                            
+                            setTimeout(function() {
+                                copyButton.textContent = 'Copy';
+                                copyButton.classList.remove('copied');
+                            }, 2000);
+                        });
+                    });
+                    
+                    // Add button to pre element
+                    pre.appendChild(copyButton);
+                });
+            });
+            
+            // Share post function
+            function sharePost() {
+                const shareIcon = document.querySelector('.share-icon');
+                const shareText = document.querySelector('.share-text');
+                const shareButton = document.querySelector('.share-button');
+                const currentUrl = window.location.href;
+                
+                navigator.clipboard.writeText(currentUrl).then(function() {
+                    shareIcon.style.display = 'none';
+                    shareText.style.display = 'inline';
+                    shareButton.classList.add('shared');
+                    
+                    setTimeout(function() {
+                        shareIcon.style.display = 'inline';
+                        shareText.style.display = 'none';
+                        shareButton.classList.remove('shared');
+                    }, 2000);
+                }).catch(function() {
+                    // Fallback for older browsers
+                    const textArea = document.createElement('textarea');
+                    textArea.value = currentUrl;
+                    document.body.appendChild(textArea);
+                    textArea.select();
+                    document.execCommand('copy');
+                    document.body.removeChild(textArea);
+                    
+                    shareIcon.style.display = 'none';
+                    shareText.style.display = 'inline';
+                    shareButton.classList.add('shared');
+                    
+                    setTimeout(function() {
+                        shareIcon.style.display = 'inline';
+                        shareText.style.display = 'none';
+                        shareButton.classList.remove('shared');
+                    }, 2000);
+                });
+            }
+        </script>
     </body>
 </html>

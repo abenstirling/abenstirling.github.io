@@ -1,0 +1,65 @@
+{% extends "base.html" %}
+
+{% block header %}
+<p><a href="..">..</a>/{{ page.slug }}</p>
+<p class="post-meta">
+    <time datetime="{{ page.date }}">{{ page.date }}</time>
+    <br>
+    <button class="share-button" onclick="sharePost()">
+        <svg class="share-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="18" cy="5" r="3"/>
+            <circle cx="6" cy="12" r="3"/>
+            <circle cx="18" cy="19" r="3"/>
+            <line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/>
+            <line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/>
+        </svg>
+        <span class="share-text" style="display: none;">Copied!</span>
+    </button>
+</p>
+<h1>{{ page.title }}</h1>
+{% endblock header %}
+
+{% block content %}
+
+{% if page.toc and page.extra.add_toc %}
+Table of contents
+<ul>
+{% for h1 in page.toc %}
+    <li>
+        <a href="{{ h1.permalink | safe }}">{{ h1.title }}</a>
+        {% if h1.children %}
+            <ul>
+                {% for h2 in h1.children %}
+                    <li>
+                        <a href="{{ h2.permalink | safe }}">{{ h2.title }}</a>
+                    </li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+    </li>
+{% endfor %}
+</ul>
+{% endif %}
+
+{{ page.content | safe }}
+{% endblock content %}
+
+{% block footer %}
+<p class="taxonomies">
+{% if page.taxonomies.tags %}
+{% for tag in page.taxonomies.tags %}
+<a href="/tags/{{ tag | slugify }}">#{{ tag }}</a>
+{% endfor %}
+{% if page.taxonomies.categories %}
+{% for category in page.taxonomies.categories %}
+<a href="/categories/{{ category | slugify }}">+{{ category }}</a>
+{% endfor %}
+{% endif %}
+{% if page.taxonomies.contexts %}
+{% for context in page.taxonomies.contexts %}
+<a href="/contexts/{{ context | slugify }}">@{{ context }}</a>
+{% endfor %}
+{% endif %}
+{% endif %}
+</p>
+{% endblock footer %}

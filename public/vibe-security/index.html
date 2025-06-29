@@ -1,0 +1,159 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta content="IE=edge" http-equiv="X-UA-Compatible"/>
+        <meta content="text/html; charset=UTF-8" http-equiv="content-type"/>
+        <meta content="width=device-width, initial-scale=1" name="viewport"/>
+
+        
+        
+        
+
+        
+
+        
+
+        
+
+        
+        
+        
+
+        <title>Ben Stirling - Vibe Security</title>
+        
+        <meta name="title" content="Ben Stirling - Vibe Security">
+        
+        
+        <meta name="generator" content="Zola v0.16.1">
+
+        <meta property="og:type" content="website">
+        <meta property="og:url" content="https://abenstirling.com/vibe-security/">
+        <meta property="og:site_name" content="">
+        <meta property="og:title" content="Ben Stirling - Vibe Security">
+        
+        
+
+        
+        
+        <meta property="twitter:card" content="summary_large_image">
+        <meta property="twitter:url" content="https://abenstirling.com/vibe-security/">
+        <meta property="twitter:title" content="Ben Stirling - Vibe Security">
+        
+        
+        
+        
+        <link rel="canonical" href="https://abenstirling.com/vibe-security/">
+        <link rel="shortcut icon" type="image/x-icon" href="https://abenstirling.com/images/logo.ico">
+        <script type="application/ld+json">
+            {
+                
+                "url":"https://abenstirling.com/vibe-security/",
+                "@type":"WebSite",
+                "headline":"Ben Stirling - Vibe Security",
+                "name":"Ben Stirling - Vibe Security",
+                
+                "@context":"https://schema.org"
+            }
+        </script>
+        
+        
+        
+        <link rel="stylesheet" href="https://abenstirling.com/style.css"/>
+        <link rel="stylesheet" href="https://abenstirling.com/custom.css"/>
+        
+    </head>
+    <body theme="auto">
+        <div class="w">
+            <header>
+                
+                
+<p><a href="..">..</a>/vibe-security</p>
+<p class="post-meta"><time datetime="2025-04-01">2025-04-01</time></p>
+<h1>Vibe Security</h1>
+
+            </header>
+            <main class="page-content" aria-label="Content">
+                
+
+
+
+<p>The whole idea of this came from when <a href="../plumeria">Plumeria</a> was "hacked" one evening.</p>
+<p>What I mean by hacked is two things:</p>
+<ol>
+<li>Click-jacking</li>
+<li>Rate-limiting
+(some friends were spamming the request endpoint)</li>
+</ol>
+<p>How my workflow went to solve the problem:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>vulnerability memo -&gt; ai fixes backend -&gt; ai tests backend
+</span></code></pre>
+<p>I was blown away at how fast it fixed it. Since these security problems are likely common, the LLMs probably have great references on how to fix.</p>
+<p>Given I had a vibe hackathon coming up, I thought it would be a great hack: a security scanner for all the other vibe coded applications.</p>
+<p>My general plan was to follow the guidance from <a href="https://docs.replit.com/tutorials/vibe-code-security-checklist">this blog from replit</a> in an automated</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>put in url -&gt; run tests -&gt; give score (results too)
+</span></code></pre>
+
+
+            </main>
+            <footer>
+                
+<p class="taxonomies">
+
+</p>
+
+                
+                <p>&copy; Ben Stirling 2025</p>
+            </footer>
+        </div>
+        <script>
+            // Add copy buttons to code blocks
+            document.addEventListener('DOMContentLoaded', function() {
+                const codeBlocks = document.querySelectorAll('pre code');
+                
+                codeBlocks.forEach(function(codeBlock) {
+                    const pre = codeBlock.parentElement;
+                    
+                    // Create copy button
+                    const copyButton = document.createElement('button');
+                    copyButton.className = 'copy-button';
+                    copyButton.textContent = 'Copy';
+                    
+                    // Add click handler
+                    copyButton.addEventListener('click', function() {
+                        const text = codeBlock.textContent;
+                        
+                        navigator.clipboard.writeText(text).then(function() {
+                            copyButton.textContent = 'Copied!';
+                            copyButton.classList.add('copied');
+                            
+                            setTimeout(function() {
+                                copyButton.textContent = 'Copy';
+                                copyButton.classList.remove('copied');
+                            }, 2000);
+                        }).catch(function() {
+                            // Fallback for older browsers
+                            const textArea = document.createElement('textarea');
+                            textArea.value = text;
+                            document.body.appendChild(textArea);
+                            textArea.select();
+                            document.execCommand('copy');
+                            document.body.removeChild(textArea);
+                            
+                            copyButton.textContent = 'Copied!';
+                            copyButton.classList.add('copied');
+                            
+                            setTimeout(function() {
+                                copyButton.textContent = 'Copy';
+                                copyButton.classList.remove('copied');
+                            }, 2000);
+                        });
+                    });
+                    
+                    // Add button to pre element
+                    pre.appendChild(copyButton);
+                });
+            });
+        </script>
+    </body>
+</html>
