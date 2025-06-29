@@ -29,7 +29,8 @@
       "Bash(ffmpeg:*)",
       "Bash(chmod:*)",
       "Bash(git clean:*)",
-      "Bash(ffprobe:*)"
+      "Bash(ffprobe:*)",
+      "Bash(python3:*)"
     ],
     "deny": []
   }

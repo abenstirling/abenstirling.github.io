@@ -120,7 +120,7 @@ Based on this insight from the research:
 
 ![Wrist camera printing](/posts/lerobot_10.webp)
 
-![New setup data visualization](/images/lerobot_cover.webp)
+![New setup data visualization](/posts/lerobot_17.webp)
 
 **Training Workflow:** 
 This didn't train, but I had to run it twice because I didn't upload it to hf the first time, and the Colab kernel closed.    
@@ -137,7 +137,7 @@ This didn't train, but I had to run it twice because I didn't upload it to hf th
 ![3rd Attempt take 1](/posts/lerobot_11.webp)
 ![3rd Attempt take 2](/posts/lerobot_12.webp)
 ![3rd Attempt take 3](/posts/lerobot_13.webp)
-![3rd Attempt take 4](/posts/lerobot_14.webp)
+![3rd Attempt take 4 (only failed one)](/posts/lerobot_14.webp)
 
 
 ### Recap
