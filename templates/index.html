@@ -101,6 +101,8 @@
         <img src="/images/commute_cover.webp" alt="{{ page.title }}" style="width: 300px; height: 300px; object-fit: cover; margin-top: 10px; border-radius: 8px;">
         {% elif page.slug == "2019-frc-robot" %}
         <img src="/images/robot_2019_cover.webp" alt="{{ page.title }}" style="width: 300px; height: 300px; object-fit: cover; margin-top: 10px; border-radius: 8px;">
+        {% elif page.extra.cover and page.extra.cover.image %}
+        <img src="{{ page.extra.cover.image }}" alt="{{ page.title }}" style="width: 300px; height: 300px; object-fit: cover; margin-top: 10px; border-radius: 8px;">
         {% endif %}
     </a>
 </li>

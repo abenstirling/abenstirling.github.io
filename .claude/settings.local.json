@@ -15,7 +15,16 @@
       "Bash(echo:*)",
       "Bash(done)",
       "Bash(cp:*)",
-      "Bash(zola build:*)"
+      "Bash(zola build:*)",
+      "Bash(for file in cyberball_*.png cyberball_*.jpeg)",
+      "Bash(do if [ -f \"$file\" ])",
+      "Bash(then echo \"Converting $file to $file%.*.webp\")",
+      "Bash(fi)",
+      "Bash(convert:*)",
+      "Bash(magick:*)",
+      "Bash(for file in frc_*.jpg)",
+      "Bash(gif2webp:*)",
+      "Bash(grep:*)"
     ],
     "deny": []
   }
