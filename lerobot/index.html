@@ -1,0 +1,356 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta content="IE=edge" http-equiv="X-UA-Compatible"/>
+        <meta content="text/html; charset=UTF-8" http-equiv="content-type"/>
+        <meta content="width=device-width, initial-scale=1" name="viewport"/>
+
+        
+        
+        
+
+        
+
+        
+
+        
+
+        
+        
+        
+
+        <title>Ben Stirling - LeRobot</title>
+        
+        <meta name="title" content="Ben Stirling - LeRobot">
+        
+        
+        <meta name="generator" content="Zola v0.16.1">
+
+        <meta property="og:type" content="website">
+        <meta property="og:url" content="https://abenstirling.com/lerobot/">
+        <meta property="og:site_name" content="">
+        <meta property="og:title" content="Ben Stirling - LeRobot">
+        
+        
+
+        
+        
+        <meta property="twitter:card" content="summary_large_image">
+        <meta property="twitter:url" content="https://abenstirling.com/lerobot/">
+        <meta property="twitter:title" content="Ben Stirling - LeRobot">
+        
+        
+        
+        
+        <link rel="canonical" href="https://abenstirling.com/lerobot/">
+        <link rel="shortcut icon" type="image/x-icon" href="https://abenstirling.com/images/logo.ico">
+        <script type="application/ld+json">
+            {
+                
+                "url":"https://abenstirling.com/lerobot/",
+                "@type":"WebSite",
+                "headline":"Ben Stirling - LeRobot",
+                "name":"Ben Stirling - LeRobot",
+                
+                "@context":"https://schema.org"
+            }
+        </script>
+        
+        
+        
+        <link rel="stylesheet" href="https://abenstirling.com/style.css"/>
+        <link rel="stylesheet" href="https://abenstirling.com/custom.css"/>
+        
+    </head>
+    <body theme="auto">
+        <div class="w">
+            <header>
+                
+                
+<p><a href="..">..</a>/lerobot</p>
+<p class="post-meta">
+    <time datetime="2025-06-15">2025-06-15</time>
+    <br>
+    <button class="share-button" onclick="sharePost()">
+        <svg class="share-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="18" cy="5" r="3"/>
+            <circle cx="6" cy="12" r="3"/>
+            <circle cx="18" cy="19" r="3"/>
+            <line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/>
+            <line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/>
+        </svg>
+        <span class="share-text" style="display: none;">Copied!</span>
+    </button>
+</p>
+<h1>LeRobot</h1>
+
+            </header>
+            <main class="page-content" aria-label="Content">
+                
+
+
+
+<p>I took a break from robotics after a machine learning project on <a href="https://github.com/abenstirling/SemanticNavigation">semantic navigation</a>.</p>
+<p>I was at a Christmas party and heard about an open-source initiative for 6 DoF robotic arms called <a href="https://github.com/huggingface/lerobot">LeRobot</a>. There were even pre-arranged Bambu 3D printing files available, so I printed the SO-100 and got to assembling it as soon as my motors arrived.
+<img src="/posts/lerobot_1.webp" alt="Assembling LeRobot follower arm" /></p>
+<p>There was an issue where one motor (specifically the 3rd joint from the bottom) would just blink and not work at all. I tried getting help, but eventually gave up and packed it away for a bit.</p>
+<p>After a 3-month break and moving to a different apartment, I pulled it out, debugged the motor, and finally got it working.
+<img src="/posts/lerobot_2.5.webp" alt="Explaining solution to blinking motors" /></p>
+<p><img src="/posts/lerobot_3.webp" alt="LeRobot teleop demo" /></p>
+<p>The above ran with the following command:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>python lerobot/scripts/control_robot.py \
+</span><span>  --robot.type=so100 \
+</span><span>  --control.type=teleoperate
+</span></code></pre>
+<p>This is teleoperation ("teleop") where I control a leader arm that the follower arm mimics.</p>
+<h2 id="goals">Goals</h2>
+<p>Let me define goals for this project:</p>
+<ul>
+<li>Train the robot to do a custom task</li>
+<li>Have it perform autonomously with an 80%+ success rate</li>
+</ul>
+<p><img src="/posts/lerobot_2.webp" alt="Move T Demo" /></p>
+<p><strong>Move-T</strong> is my challenge. The goal is to place the red T on the yellow outline.</p>
+<p>How is something like this possible to do? How</p>
+<p>The magic is in the ACT (Action Chunking Transformer) model that we are training. It takes human demonstration data from teleoperated robots and trains a transformer model to predict sequences of future actions (called 'action chunks') rather than single actions, which reduces error accumulation and enables precise manipulation tasks with minimal training data. I have a picture below that somewhat explains it, but to learn more you can read about <a href="https://tonyzhaozh.github.io/aloha/">the ALOHA setup</a>.</p>
+<p><img src="/posts/lerobot_18.webp" alt="ACT Model Diagram" /></p>
+<h3 id="1st-attempt">1st Attempt</h3>
+<p><strong>Setup:</strong></p>
+<ul>
+<li>MacBook camera (front scene view)</li>
+<li>iPhone continuity camera (overhead view)</li>
+<li>40 episodes total (10 repeats per initial T position)</li>
+</ul>
+<p>I ran the following command to get data:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>python lerobot/scripts/control_robot.py \
+</span><span>  --robot.type=so100 \
+</span><span>  --control.type=record \
+</span><span>  --control.fps=30 \
+</span><span>  --control.single_task=&quot;Move T to where it belongs.&quot; \
+</span><span>  --control.repo_id=${HF_USER}/so100_move_t2 \
+</span><span>  --control.tags=&#39;[&quot;so100&quot;,&quot;tutorial&quot;]&#39; \
+</span><span>  --control.warmup_time_s=10 \
+</span><span>  --control.episode_time_s=15 \
+</span><span>  --control.reset_time_s=15 \
+</span><span>  --control.num_episodes=40 \
+</span><span>  --control.push_to_hub=true
+</span></code></pre>
+<p>Note: I pushed to Hugging Face in case my MacBook dies during training.</p>
+<p><strong>Results:</strong>
+<img src="/posts/lerobot_4.webp" alt="1st Attempt" />
+This took <strong>26 HOURS</strong> to train. The results were terrible - the robot couldn't complete the task reliably. It just kept slamming itself into the table.</p>
+<p><strong>Key learnings:</strong></p>
+<ul>
+<li>Need to find a way to train faster to shorten the feedback loop</li>
+<li>Need to debug data with wandb (Weights and Biases)</li>
+<li>Review the data quality (comb through it to ensure cameras are properly positioned)</li>
+</ul>
+<h3 id="2nd-attempt">2nd Attempt</h3>
+<p><strong>Problem Analysis:</strong>
+I began to think about the problem from first principles. The laptop camera was giving a poor perspective of the task, and I realized the camera angle was likely confusing the model.</p>
+<p><strong>Setup Changes:</strong></p>
+<ul>
+<li>Removed laptop camera footage (deleted from Hugging Face)</li>
+<li>Switched to cloud training using <a href="https://huggingface.co/docs/lerobot/notebooks">A100 rental via Colab</a></li>
+<li>Same iPhone overhead camera setup</li>
+</ul>
+<p><img src="/posts/lerobot_5.webp" alt="Deleting data" /></p>
+<p><strong>Training Workflow:</strong></p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>Colab → Setup LeRobot → Download training data (HF) → Train → Upload model (HF)
+</span></code></pre>
+<p><strong>Results:</strong></p>
+<ul>
+<li><strong>Training time:</strong> 2h 14m 52s</li>
+<li><strong>Cost:</strong> $2.33</li>
+<li><strong>Performance:</strong> Still unsuccessful at completing the Move-T task</li>
+</ul>
+<p><img src="/posts/lerobot_6.webp" alt="2nd Attempt" /></p>
+<p><strong>Wandb metrics:</strong>
+<img src="/posts/lerobot_7.webp" alt="Attempt 2 wandb" /></p>
+<p><strong>Key learnings:</strong></p>
+<ul>
+<li><strong>Data quality is the primary driver</strong> of robot performance</li>
+<li><strong>Cloud training is essential</strong> for reasonable iteration speeds (13x faster than local)</li>
+</ul>
+<h3 id="3rd-attempt">3rd Attempt</h3>
+<p><strong>Research Phase:</strong>
+I began researching what other successful robotic systems did for camera positioning. Looking at systems like ALOHA, I noticed they used multiple camera angles including wrist-mounted cameras.</p>
+<p><img src="/posts/lerobot_8.webp" alt="Aloha setup" /></p>
+<p><strong>Key Insight:</strong>
+Based on this insight from the research:</p>
+<p><img src="/posts/lerobot_9.webp" alt="Camera positioning research" /></p>
+<p><strong>Setup Changes:</strong></p>
+<ul>
+<li><strong>Added wrist camera:</strong> Provides detailed view of end-effector and object interactions</li>
+<li><strong>Repositioned overhead camera:</strong> Moved to side angle for better spatial relationship understanding</li>
+<li><strong>Multi-view approach:</strong> Combining close-up manipulation details with broader scene context</li>
+</ul>
+<p><img src="/posts/lerobot_10.webp" alt="Wrist camera printing" /></p>
+<p><img src="/posts/lerobot_17.webp" alt="New setup data visualization" /></p>
+<p><strong>Training Workflow:</strong>
+This didn't train, but I had to run it twice because I didn't upload it to hf the first time, and the Colab kernel closed.</p>
+<p><img src="/posts/lerobot_15.webp" alt="Wandb " />
+<img src="/posts/lerobot_16.webp" alt="Wandb results" /></p>
+<p><strong>Results:</strong></p>
+<ul>
+<li><strong>Training time:</strong> 2h 16m 19s (successful training)</li>
+<li><strong>Cost:</strong> $4.66 (inclusive of training I lost)</li>
+<li><strong>Performance:</strong> IT MOVED T! It had around a ~75% success rate.</li>
+</ul>
+<hr />
+<p><em>Warning: the following is <strong>completely</strong> autonomous</em>
+<img src="/posts/lerobot_11.webp" alt="3rd Attempt take 1" />
+<img src="/posts/lerobot_12.webp" alt="3rd Attempt take 2" />
+<img src="/posts/lerobot_13.webp" alt="3rd Attempt take 3" />
+<img src="/posts/lerobot_14.webp" alt="3rd Attempt take 4 (only failed one)" /></p>
+<h3 id="recap">Recap</h3>
+<p>Wow. This was such an amazing feeling to see that arm work and truly opens my eyes for the breakthroughs that are coming to civilization.</p>
+<p>Obviously, my arm isn't perfect. But the trajectory is heading towards a world where you verbally tell your robot to do <strong>anything</strong> and it can do it for you.</p>
+<ul>
+<li>"do my laundry"</li>
+<li>"organize my room"</li>
+<li>"clean the bathroom"</li>
+<li>"inventory the fridge"</li>
+<li>"make me a healthy pb banana smoothie"</li>
+</ul>
+<p>are just a few supremely useful examples that if they were removed would make living just more enjoyable.</p>
+<p>I discussed with my friend what an initial requirement would be a consumer robot and we came up with the following:</p>
+<ul>
+<li>puts dishes in dishwasher</li>
+<li>folds laundry</li>
+<li>gets you a beer (or kombucha for my fellow dd's)</li>
+<li>&lt; $1000</li>
+</ul>
+<h2 id="q-a">Q&amp;A</h2>
+<p><strong>Q:</strong> My brother asked a good question - why do we need both a leader and follower arm? Why can't you just guide a single arm directly?</p>
+<p><strong>A:</strong> We're using a Vision-Language-Action (VLA) model that learns from visual demonstrations. Having a human hand directly in the scene would interfere with the visual encoding, as the model would learn to expect human hands during execution. The leader-follower setup keeps the demonstration space clean while still capturing natural human movements.</p>
+<hr />
+<h2 id="next-steps">Next Steps</h2>
+<ul>
+<li>Explore more complex manipulation tasks</li>
+<li>Explore ugraded arm (bent sheet metal)</li>
+<li>Explore custom camera setup (small claw-mounted)</li>
+<li>Explore better motors
+<ul>
+<li>Ones that are stronger, faster, lighter</li>
+</ul>
+</li>
+</ul>
+
+
+            </main>
+            <footer>
+                
+<p class="taxonomies">
+
+</p>
+
+                
+                <p>&copy; Ben Stirling 2025</p>
+            </footer>
+        </div>
+        <script>
+            // Add image captions from alt text
+            document.addEventListener('DOMContentLoaded', function() {
+                const images = document.querySelectorAll('.w img[alt]');
+                
+                images.forEach(function(img) {
+                    const altText = img.getAttribute('alt');
+                    if (altText && altText.trim() !== '') {
+                        const caption = document.createElement('div');
+                        caption.className = 'image-caption';
+                        caption.textContent = altText;
+                        
+                        // Insert caption after the image
+                        img.parentNode.insertBefore(caption, img.nextSibling);
+                    }
+                });
+                
+                // Add copy buttons to code blocks
+                const codeBlocks = document.querySelectorAll('pre code');
+                
+                codeBlocks.forEach(function(codeBlock) {
+                    const pre = codeBlock.parentElement;
+                    
+                    // Create copy button
+                    const copyButton = document.createElement('button');
+                    copyButton.className = 'copy-button';
+                    copyButton.textContent = 'Copy';
+                    
+                    // Add click handler
+                    copyButton.addEventListener('click', function() {
+                        const text = codeBlock.textContent;
+                        
+                        navigator.clipboard.writeText(text).then(function() {
+                            copyButton.textContent = 'Copied!';
+                            copyButton.classList.add('copied');
+                            
+                            setTimeout(function() {
+                                copyButton.textContent = 'Copy';
+                                copyButton.classList.remove('copied');
+                            }, 2000);
+                        }).catch(function() {
+                            // Fallback for older browsers
+                            const textArea = document.createElement('textarea');
+                            textArea.value = text;
+                            document.body.appendChild(textArea);
+                            textArea.select();
+                            document.execCommand('copy');
+                            document.body.removeChild(textArea);
+                            
+                            copyButton.textContent = 'Copied!';
+                            copyButton.classList.add('copied');
+                            
+                            setTimeout(function() {
+                                copyButton.textContent = 'Copy';
+                                copyButton.classList.remove('copied');
+                            }, 2000);
+                        });
+                    });
+                    
+                    // Add button to pre element
+                    pre.appendChild(copyButton);
+                });
+            });
+            
+            // Share post function
+            function sharePost() {
+                const shareIcon = document.querySelector('.share-icon');
+                const shareText = document.querySelector('.share-text');
+                const shareButton = document.querySelector('.share-button');
+                const currentUrl = window.location.href;
+                
+                navigator.clipboard.writeText(currentUrl).then(function() {
+                    shareIcon.style.display = 'none';
+                    shareText.style.display = 'inline';
+                    shareButton.classList.add('shared');
+                    
+                    setTimeout(function() {
+                        shareIcon.style.display = 'inline';
+                        shareText.style.display = 'none';
+                        shareButton.classList.remove('shared');
+                    }, 2000);
+                }).catch(function() {
+                    // Fallback for older browsers
+                    const textArea = document.createElement('textarea');
+                    textArea.value = currentUrl;
+                    document.body.appendChild(textArea);
+                    textArea.select();
+                    document.execCommand('copy');
+                    document.body.removeChild(textArea);
+                    
+                    shareIcon.style.display = 'none';
+                    shareText.style.display = 'inline';
+                    shareButton.classList.add('shared');
+                    
+                    setTimeout(function() {
+                        shareIcon.style.display = 'inline';
+                        shareText.style.display = 'none';
+                        shareButton.classList.remove('shared');
+                    }, 2000);
+                });
+            }
+        </script>
+    </body>
+</html>
