@@ -11,7 +11,7 @@ draft = false
 
 I took a break from robotics after a machine learning project on [semantic navigation](https://github.com/abenstirling/SemanticNavigation). 
 
-I was at a Christmas party and heard about an open-source initiative for 6 [DoF](https://en.wikipedia.org/wiki/Degrees_of_freedom_(mechanics)) robotic arms. There were even Bambu files available, so I printed the SO-100 and got to assembling it as soon as my motors arrived. 
+I was at a Christmas party and heard about an open-source initiative for 6 DoF robotic arms called [LeRobot](https://github.com/huggingface/lerobot). There were even pre-arranged Bambu 3D printing files available, so I printed the SO-100 and got to assembling it as soon as my motors arrived. 
 ![Assembling LeRobot follower arm](/posts/lerobot_1.webp)
 
 There was an issue where one motor (specifically the 3rd joint from the bottom) would just blink and not work at all. I tried getting help, but eventually gave up and packed it away for a bit. 
@@ -37,6 +37,13 @@ Let me define goals for this project:
 ![Move T Demo](/posts/lerobot_2.webp)
 
 **Move-T** is my challenge. The goal is to place the red T on the yellow outline. 
+
+How is something like this possible to do? How 
+
+The magic is in the ACT (Action Chunking Transformer) model that we are training. It takes human demonstration data from teleoperated robots and trains a transformer model to predict sequences of future actions (called 'action chunks') rather than single actions, which reduces error accumulation and enables precise manipulation tasks with minimal training data. I have a picture below that somewhat explains it, but to learn more you can read about [the ALOHA setup](https://tonyzhaozh.github.io/aloha/). 
+
+![ACT Model Diagram](/posts/lerobot_18.webp)
+
 
 ### 1st Attempt
 **Setup:**
