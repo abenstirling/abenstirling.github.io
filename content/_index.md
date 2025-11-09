@@ -3,7 +3,6 @@ sort_by = "date"
 +++
 
 # Ben Stirling
-real engineers ship
 
 <a href="https://github.com/abenstirling" target="_blank" rel="noopener noreferrer" style="text-decoration: none; margin-right: 15px; color: black;">
 <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
