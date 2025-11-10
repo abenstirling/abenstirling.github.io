@@ -1,0 +1,234 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta content="IE=edge" http-equiv="X-UA-Compatible"/>
+        <meta content="text/html; charset=UTF-8" http-equiv="content-type"/>
+        <meta content="width=device-width, initial-scale=1" name="viewport"/>
+
+        
+        
+        
+
+        
+
+        
+
+        
+
+        
+        
+        
+
+        <title>Ben Stirling - Split Keyboard</title>
+        
+        <meta name="title" content="Ben Stirling - Split Keyboard">
+        
+        
+        <meta name="generator" content="Zola v0.16.1">
+
+        <meta property="og:type" content="website">
+        <meta property="og:url" content="https://abenstirling.com/split-keyboard/">
+        <meta property="og:site_name" content="">
+        <meta property="og:title" content="Ben Stirling - Split Keyboard">
+        
+        
+
+        
+        
+        <meta property="twitter:card" content="summary_large_image">
+        <meta property="twitter:url" content="https://abenstirling.com/split-keyboard/">
+        <meta property="twitter:title" content="Ben Stirling - Split Keyboard">
+        
+        
+        
+        
+        <link rel="canonical" href="https://abenstirling.com/split-keyboard/">
+        <link rel="shortcut icon" type="image/x-icon" href="https://abenstirling.com/images/logo.ico">
+        <script type="application/ld+json">
+            {
+                
+                "url":"https://abenstirling.com/split-keyboard/",
+                "@type":"WebSite",
+                "headline":"Ben Stirling - Split Keyboard",
+                "name":"Ben Stirling - Split Keyboard",
+                
+                "@context":"https://schema.org"
+            }
+        </script>
+        
+        
+        
+        <link rel="stylesheet" href="https://abenstirling.com/style.css"/>
+        <link rel="stylesheet" href="https://abenstirling.com/custom.css"/>
+        
+    </head>
+    <body theme="auto">
+        <div class="w">
+            <header>
+                
+                
+<p><a href="..">..</a>/split-keyboard</p>
+<p class="post-meta">
+    <time datetime="2023-06-01">2023-06-01</time>
+    <br>
+    <button class="share-button" onclick="sharePost()">
+        <svg class="share-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="18" cy="5" r="3"/>
+            <circle cx="6" cy="12" r="3"/>
+            <circle cx="18" cy="19" r="3"/>
+            <line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/>
+            <line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/>
+        </svg>
+        <span class="share-text" style="display: none;">Copied!</span>
+    </button>
+</p>
+<h1>Split Keyboard</h1>
+
+            </header>
+            <main class="page-content" aria-label="Content">
+                
+
+
+
+<p>I built a split keyboard with my friend
+<a href="https://github.com/AriYoung00">Ari</a>.</p>
+<hr />
+<h3 id="bom">BOM</h3>
+<table><thead><tr><th>Part</th><th>Link</th><th>Price</th></tr></thead><tbody>
+<tr><td>Switches</td><td>https://www.amazon.com/Matcha-Switches-Mechanical-Keyboard-Linear/dp/B0BJ2266X4</td><td>$20</td></tr>
+<tr><td>Stablizers</td><td>https://www.amazon.com/GLORIOUS-Stabilizer-Mechanical-Keyboards-Compatible/dp/B09MZKFLXP/</td><td>$16</td></tr>
+<tr><td>Caps</td><td>https://www.amazon.com/Guffercty-kred-Keycaps-Keyboards-Mechanical/dp/B0B48RDDZT</td><td>$20</td></tr>
+<tr><td>Wood</td><td>https://www.walmart.com/ip/Wenge-Exotic-Hardwood-Turning-Stock-3-4-x-3-x-24/150520201</td><td>$37</td></tr>
+<tr><td>PCB</td><td>https://keeb.io/collections/sinc/products/sinc-split-staggered-75-keyboard</td><td>$85</td></tr>
+<tr><td>Cord</td><td>https://keeb.io/collections/diy-parts/products/coiled-usb-c-to-usb-c-cable</td><td>$4</td></tr>
+<tr><td>Rubber Feet</td><td>https://www.amazon.com/Self-Adhesive-Bumper-82-Piece-Spherical-Square/dp/B06XCLYL53/</td><td>$8</td></tr>
+<tr><td></td><td>GRAND TOTAL:</td><td>~$190</td></tr>
+</tbody></table>
+<hr />
+<p>Below is a photo montage of the build!</p>
+<p><img src="/images/keeb_1.webp" alt="Keyboard Build Process" />
+<img src="/images/keeb_2.webp" alt="Keyboard Build Process" />
+<img src="/images/keeb_4.webp" alt="Keyboard Build Process" />
+<img src="/images/keeb_5.webp" alt="Keyboard Build Process" />
+<img src="/images/keeb_6.webp" alt="Keyboard Build Process" />
+<img src="/images/keeb_7.webp" alt="Keyboard Build Process" />
+<img src="/images/keeb_9.webp" alt="Keyboard Build Process" />
+<img src="/images/keeb_10.webp" alt="Keyboard Build Process" /></p>
+
+
+            </main>
+            <footer>
+                
+<p class="taxonomies">
+
+</p>
+
+                
+                <p>&copy; Ben Stirling 2025</p>
+            </footer>
+        </div>
+        <script>
+            // Add image captions from alt text
+            document.addEventListener('DOMContentLoaded', function() {
+                const images = document.querySelectorAll('.w img[alt]');
+                
+                images.forEach(function(img) {
+                    const altText = img.getAttribute('alt');
+                    if (altText && altText.trim() !== '') {
+                        const caption = document.createElement('div');
+                        caption.className = 'image-caption';
+                        caption.textContent = altText;
+                        
+                        // Insert caption after the image
+                        img.parentNode.insertBefore(caption, img.nextSibling);
+                    }
+                });
+                
+                // Add copy buttons to code blocks
+                const codeBlocks = document.querySelectorAll('pre code');
+                
+                codeBlocks.forEach(function(codeBlock) {
+                    const pre = codeBlock.parentElement;
+                    
+                    // Create copy button
+                    const copyButton = document.createElement('button');
+                    copyButton.className = 'copy-button';
+                    copyButton.textContent = 'Copy';
+                    
+                    // Add click handler
+                    copyButton.addEventListener('click', function() {
+                        const text = codeBlock.textContent;
+                        
+                        navigator.clipboard.writeText(text).then(function() {
+                            copyButton.textContent = 'Copied!';
+                            copyButton.classList.add('copied');
+                            
+                            setTimeout(function() {
+                                copyButton.textContent = 'Copy';
+                                copyButton.classList.remove('copied');
+                            }, 2000);
+                        }).catch(function() {
+                            // Fallback for older browsers
+                            const textArea = document.createElement('textarea');
+                            textArea.value = text;
+                            document.body.appendChild(textArea);
+                            textArea.select();
+                            document.execCommand('copy');
+                            document.body.removeChild(textArea);
+                            
+                            copyButton.textContent = 'Copied!';
+                            copyButton.classList.add('copied');
+                            
+                            setTimeout(function() {
+                                copyButton.textContent = 'Copy';
+                                copyButton.classList.remove('copied');
+                            }, 2000);
+                        });
+                    });
+                    
+                    // Add button to pre element
+                    pre.appendChild(copyButton);
+                });
+            });
+            
+            // Share post function
+            function sharePost() {
+                const shareIcon = document.querySelector('.share-icon');
+                const shareText = document.querySelector('.share-text');
+                const shareButton = document.querySelector('.share-button');
+                const currentUrl = window.location.href;
+                
+                navigator.clipboard.writeText(currentUrl).then(function() {
+                    shareIcon.style.display = 'none';
+                    shareText.style.display = 'inline';
+                    shareButton.classList.add('shared');
+                    
+                    setTimeout(function() {
+                        shareIcon.style.display = 'inline';
+                        shareText.style.display = 'none';
+                        shareButton.classList.remove('shared');
+                    }, 2000);
+                }).catch(function() {
+                    // Fallback for older browsers
+                    const textArea = document.createElement('textarea');
+                    textArea.value = currentUrl;
+                    document.body.appendChild(textArea);
+                    textArea.select();
+                    document.execCommand('copy');
+                    document.body.removeChild(textArea);
+                    
+                    shareIcon.style.display = 'none';
+                    shareText.style.display = 'inline';
+                    shareButton.classList.add('shared');
+                    
+                    setTimeout(function() {
+                        shareIcon.style.display = 'inline';
+                        shareText.style.display = 'none';
+                        shareButton.classList.remove('shared');
+                    }, 2000);
+                });
+            }
+        </script>
+    </body>
+</html>
