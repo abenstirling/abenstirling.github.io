@@ -1,7 +1,7 @@
 +++
 title = 'ECE115: Cyberball'
 date = 2024-04-21
-draft = false
+draft = true
 
 [extra]
 [extra.cover]
