@@ -1,37 +1,12 @@
 {
   "permissions": {
     "allow": [
-      "Bash(zola check:*)",
-      "mcp__ide__getDiagnostics",
-      "Bash(ls:*)",
-      "Bash(mkdir:*)",
       "Bash(rm:*)",
-      "Bash(git submodule add:*)",
       "Bash(git rm:*)",
-      "Bash(find:*)",
-      "Bash(for file in keeb_*.jpg keeb_*.jpeg)",
-      "Bash(do [ -f \"$file\" ])",
-      "Bash(cwebp:*)",
-      "Bash(echo:*)",
-      "Bash(done)",
-      "Bash(cp:*)",
-      "Bash(zola build:*)",
-      "Bash(for file in cyberball_*.png cyberball_*.jpeg)",
-      "Bash(do if [ -f \"$file\" ])",
-      "Bash(then echo \"Converting $file to $file%.*.webp\")",
-      "Bash(fi)",
-      "Bash(convert:*)",
-      "Bash(magick:*)",
-      "Bash(for file in frc_*.jpg)",
-      "Bash(gif2webp:*)",
-      "Bash(grep:*)",
-      "Bash(mv:*)",
-      "Bash(ffmpeg:*)",
-      "Bash(chmod:*)",
-      "Bash(git clean:*)",
-      "Bash(ffprobe:*)",
-      "Bash(python3:*)"
+      "Bash(git submodule add:*)",
+      "Bash(cat:*)"
     ],
-    "deny": []
+    "deny": [],
+    "ask": []
   }
 }
