@@ -4,7 +4,19 @@
       "Bash(rm:*)",
       "Bash(git rm:*)",
       "Bash(git submodule add:*)",
-      "Bash(cat:*)"
+      "Bash(cat:*)",
+      "Bash(timeout 15 zola serve)",
+      "Bash(zola build:*)",
+      "Bash(zola --help)",
+      "Bash(zola serve:*)",
+      "Bash(zola --version)",
+      "Bash(find /Users/abens/Documents/git/abenstirling.github.io/themes -name *.toml)",
+      "Bash(git -C /Users/abens/Documents/git/abenstirling.github.io submodule status)",
+      "Bash(git -C /Users/abens/Documents/git/abenstirling.github.io submodule update --init --recursive)",
+      "mcp__Claude_Preview__preview_start",
+      "Bash(find /Users/abens/Documents/git/abenstirling.github.io/themes/no-style-please -name *.css -o -name *.scss)",
+      "Bash(xargs ls:*)",
+      "Bash(grep -r \"filter.*invert\\\\|invert.*filter\\\\|theme.*dark\\\\|dark.*theme\" /Users/abens/Documents/git/abenstirling.github.io/themes/ --include=*.css --include=*.scss --include=*.js -l)"
     ],
     "deny": [],
     "ask": []

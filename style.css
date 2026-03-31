@@ -1,6 +1,14 @@
 /* Critical styles for initial render */
+@font-face {
+    font-family: 'Geist Mono';
+    src: url('/fonts/GeistMono-VariableFont_wght.ttf') format('truetype');
+    font-weight: 100 900;
+    font-style: normal;
+    font-display: swap;
+}
+
 body {
-    font-family: 'Work Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    font-family: 'Geist Mono', monospace;
     line-height: 1.6;
     margin: 0;
     padding: 0;
@@ -62,13 +70,13 @@ header {
 
 .social-icon {
     font-size: 1.6rem;
-    color: #000000; /* Black inverts to white */
+    color: #4F00CB;
     text-decoration: none;
     transition: color 0.2s ease;
 }
 
 .social-icon:hover {
-    color: #00ff00;
+    color: #4F00CB;
 }
 
 /* Critical project card styles */
@@ -124,7 +132,7 @@ a.project-card:active {
 }
 
 a.project-card:hover .project-title {
-    color: #ff00ff !important; /* Magenta inverts to green */
+    color: #4F00CB !important;
 }
 
 .project-title {

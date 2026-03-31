@@ -89,7 +89,7 @@
         <link rel="alternate" type="application/atom+xml" title="RSS" href="{{ get_url(path="atom.xml", trailing_slash=false) }}">
         {% endblock feed %}
         {% endif %}
-        {% block css %}
+{% block css %}
         <link rel="stylesheet" href="{{ get_url(path='style.css', trailing_slash=false) | safe }}"/>
         <link rel="stylesheet" href="{{ get_url(path='custom.css', trailing_slash=false) | safe }}"/>
         {% endblock css %}
@@ -125,8 +125,9 @@
             // Add image captions from alt text
             document.addEventListener('DOMContentLoaded', function() {
                 const images = document.querySelectorAll('.w img[alt]');
-                
+
                 images.forEach(function(img) {
+                    if (img.closest('.project-card')) return;
                     const altText = img.getAttribute('alt');
                     if (altText && altText.trim() !== '') {
                         const caption = document.createElement('div');

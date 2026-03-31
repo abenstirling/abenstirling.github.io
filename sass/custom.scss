@@ -1,3 +1,25 @@
+// Link colors: #4F00CB
+a,
+a:link,
+a:visited,
+a:hover,
+a:active {
+    color: #4F00CB !important;
+}
+
+// Social icons: white by default, green on hover
+.social-icon,
+.social-icon:link,
+.social-icon:visited {
+    color: black !important;
+    transition: color 0.2s ease;
+}
+
+.social-icon:hover,
+.social-icon:active {
+    color: #4F00CB !important;
+}
+
 // Override theme styles for images
 .w main.page-content img,
 .w main img,
@@ -63,9 +85,9 @@ pre code {
 }
 
 .copy-button.copied {
-    background: rgba(34, 197, 94, 0.2);
-    border-color: rgba(34, 197, 94, 0.3);
-    color: rgb(34, 197, 94);
+    background: rgba(79, 0, 203, 0.2);
+    border-color: rgba(79, 0, 203, 0.3);
+    color: #4F00CB;
 }
 
 // Dark mode adjustments for copy button
@@ -84,9 +106,9 @@ body[theme="auto"] .copy-button:hover {
 
 body[theme="dark"] .copy-button.copied,
 body[theme="auto"] .copy-button.copied {
-    background: rgba(34, 197, 94, 0.2);
-    border-color: rgba(34, 197, 94, 0.3);
-    color: rgb(34, 197, 94);
+    background: rgba(79, 0, 203, 0.2);
+    border-color: rgba(79, 0, 203, 0.3);
+    color: #4F00CB;
 }
 
 // Share button styling
@@ -109,7 +131,7 @@ body[theme="auto"] .copy-button.copied {
 }
 
 .share-button.shared {
-    color: rgba(34, 197, 94, 1);
+    color: #4F00CB;
 }
 
 // Dark mode adjustments for share button
@@ -125,7 +147,7 @@ body[theme="auto"] .share-button:hover {
 
 body[theme="dark"] .share-button.shared,
 body[theme="auto"] .share-button.shared {
-    color: rgba(34, 197, 94, 1);
+    color: #4F00CB;
 }
 
 // Image captions styling - shows alt text as subtitle

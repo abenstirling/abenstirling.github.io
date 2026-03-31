@@ -26,7 +26,7 @@
 }
 
 .project-card.has-link:hover {
-    border-color: #00ff00;
+    border-color: #4F00CB;
 }
 
 .project-card.has-link .project-link {
@@ -62,13 +62,16 @@
 }
 
 /* Link Styles */
-a {
-    color: #ffffff;
+a,
+a:link,
+a:visited {
+    color: #4F00CB;
     transition: color 0.2s ease;
 }
 
 a:hover {
-    color: #00ff00 !important;
+    color: #4F00CB !important;
+    opacity: 0.75;
 }
 
 /* Style Guidelines */
