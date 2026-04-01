@@ -1,7 +1,9 @@
 {
   "permissions": {
     "allow": [
-      "Bash(/opt/homebrew/bin/ffmpeg -y -i /Users/abens/Documents/git/abenstirling.github.io/IMG_8596.MOV -vf 'fps=10,scale=600:-1:flags=lanczos' -loop 0 /Users/abens/Documents/git/abenstirling.github.io/static/images/fingie_cover.gif)"
+      "Bash(/opt/homebrew/bin/ffmpeg -y -i /Users/abens/Documents/git/abenstirling.github.io/IMG_8596.MOV -vf 'fps=10,scale=600:-1:flags=lanczos' -loop 0 /Users/abens/Documents/git/abenstirling.github.io/static/images/fingie_cover.gif)",
+      "Bash(/opt/homebrew/bin/ffmpeg -y -ss 3 -i /Users/abens/Documents/git/abenstirling.github.io/blinds.mov -vf 'fps=10,scale=800:-1:flags=lanczos' -loop 0 /tmp/blinds_trimmed.gif)",
+      "Bash(/opt/homebrew/bin/gif2webp -q 80 -loop_compatibility /tmp/blinds_trimmed.gif -o /Users/abens/Documents/git/abenstirling.github.io/static/images/blinds_cover.webp)"
     ]
   }
 }
