@@ -16,6 +16,13 @@ This is a personal website built with Zola, a fast static site generator. The si
 - `zola build` - Build the static site (outputs to `public/` directory)
 - `zola check` - Validate links and content without building
 
+### Media Conversion
+- `uv run convert_to_webp.py` - Convert all media files in `images/` to WebP format
+  - Drop image/video files into the `images/` directory first
+  - Files ending with `_cover` → `static/images/` (used as post cover images)
+  - All other files → `static/posts/` (used inline in post content)
+  - Requires: `brew install ffmpeg webp`
+
 ### Content Management
 - Content files are in `content/` directory as Markdown files
 - Main site content is in `content/_index.md`

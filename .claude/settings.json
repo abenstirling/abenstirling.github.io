@@ -3,7 +3,17 @@
     "allow": [
       "Bash(/opt/homebrew/bin/ffmpeg -y -i /Users/abens/Documents/git/abenstirling.github.io/IMG_8596.MOV -vf 'fps=10,scale=600:-1:flags=lanczos' -loop 0 /Users/abens/Documents/git/abenstirling.github.io/static/images/fingie_cover.gif)",
       "Bash(/opt/homebrew/bin/ffmpeg -y -ss 3 -i /Users/abens/Documents/git/abenstirling.github.io/blinds.mov -vf 'fps=10,scale=800:-1:flags=lanczos' -loop 0 /tmp/blinds_trimmed.gif)",
-      "Bash(/opt/homebrew/bin/gif2webp -q 80 -loop_compatibility /tmp/blinds_trimmed.gif -o /Users/abens/Documents/git/abenstirling.github.io/static/images/blinds_cover.webp)"
+      "Bash(/opt/homebrew/bin/gif2webp -q 80 -loop_compatibility /tmp/blinds_trimmed.gif -o /Users/abens/Documents/git/abenstirling.github.io/static/images/blinds_cover.webp)",
+      "Bash(ls /Users/abens/Documents/git/abenstirling.github.io/README*)",
+      "Bash(grep \"\\\\.webp$\")",
+      "Bash(/opt/homebrew/bin/ffmpeg -y -i /Users/abens/Documents/git/abenstirling.github.io/static/posts/b24_1.webp -vf \"transpose=1\" /Users/abens/Documents/git/abenstirling.github.io/static/posts/b24_1.webp)",
+      "Bash(/opt/homebrew/bin/ffmpeg -y -i /Users/abens/Documents/git/abenstirling.github.io/static/posts/b24_1.webp -vf \"transpose=2\" /tmp/b24_1_orig.png)",
+      "Bash(/opt/homebrew/bin/cwebp -q 80 /tmp/b24_1_orig.png -o /Users/abens/Documents/git/abenstirling.github.io/static/posts/b24_1.webp)",
+      "Bash(/opt/homebrew/bin/ffmpeg -y -i /Users/abens/Documents/git/abenstirling.github.io/static/posts/b24_2.webp -vf \"transpose=1\" /tmp/b24_2_rotated.png)",
+      "Bash(/opt/homebrew/bin/cwebp -q 80 /tmp/b24_2_rotated.png -o /Users/abens/Documents/git/abenstirling.github.io/static/posts/b24_2.webp)"
+    ],
+    "additionalDirectories": [
+      "/Users/abens/Documents/git/abenstirling.github.io/images"
     ]
   }
 }
