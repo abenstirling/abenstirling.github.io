@@ -1,0 +1,7 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(/opt/homebrew/bin/ffmpeg -y -i /Users/abens/Documents/git/abenstirling.github.io/IMG_8596.MOV -vf 'fps=10,scale=600:-1:flags=lanczos' -loop 0 /Users/abens/Documents/git/abenstirling.github.io/static/images/fingie_cover.gif)"
+    ]
+  }
+}
