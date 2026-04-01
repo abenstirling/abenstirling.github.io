@@ -4,46 +4,47 @@ date = 2026-02-01
 status = "active"
 +++
 
-I have a 24 hour subscription. It isn’t the best gym, but the checking in is really annoying. 
+I have a 24 hour subscription, and checking in really sucks. 
 
 My options are as follows: 
 
 1. Use 24 hour app (laggy & bad UI) 
-2. scan my fingerprint and type my phone number on a keypad (ew)
+2. Scan my fingerprint and type my phone number on a keypad (ew)
 
 One day, I looked at my pass and noticed that it was a QR code. 
 
-![image.png](/posts/b24_1.webp)
+![Example pass](/posts/b24_1.webp)
 
-https://www.24hourfitness.com/programs/24go
+We are going to use this [example pass](https://www.24hourfitness.com/programs/24go), to make sure I can still use mine and for you to make your own if you are interested. 
 
-![IMG_8577.jpeg](/posts/b24_2.webp)
+I used another phone to scan the contents of the QR code to see if we could reverse engineer it!
 
-Key things: 
+![scanning the qr code](/posts/b24_2.webp)
 
+If we look at the content of the QR code we get the following: 
 ```jsx
 {"SR":"24GO","TP":"P","AP":"1.84.1","DT":1768963389103,"MB":"MBR123456","OS":"iOS","DI":"a7f3e8c2-91b4-4d6f-b5a2-3c9e7f1d4b6a"}
 ```
 
-Where DI is a UUID: 
+Ok this is interesting!
 
-```jsx
-8 hex digits (time_low)
-4 hex digits (time_mid)
-4 hex digits (time_hi_version)
-4 hex digits (clock_seq)
-12 hex digits (node)
-```
+Key things: 
+- `DT` (presumably datetime)
+- `MB` (member id, something I see on the app too, likely not to change) 
+
+I scanned it twice, one a few seconds later than the other and noticed that only the `DT` changed, and it got a bit larger. 
 
 ## Unix Timestamp
 
 A [unix timestamp](https://en.wikipedia.org/wiki/Unix_time) is a universal timestamp that number of non-leap seconds passed since `1970-01-01`. 
 
-This is critical because I would guess that the reason why 24 hour has a whole app is to make sure that you can’t have a “stale” qr code that you pass around. 
+This is critical because I would guess that the reason why 24 hour has a whole app is to make sure that you can’t have a “stale” qr code that you pass around to your gym buddies. 
 
-Now I have a QR code, but i need to add it to my apple wallet.
+I realized something: 
+- 24 checks for `time.now` > `DT` + ~1 min to make sure its a fresh pass
+- BUT do they check for the `time.now` < `DT`???
 
-I was messing around with 
+So if I set the `DT` variable, say 2 years in the future, would that just be valid because its just not more than a minute in the past?  
 
 ## QR Code
 
@@ -61,7 +62,7 @@ Single line to run:
 uv run --with qrcode[pil] qr.py
 ```
 
-![qr.png](/posts/b24_3.webp)
+![our pass qr code, from the future](/posts/b24_3.webp)
 
 ## Apple Wallet
 
@@ -70,22 +71,29 @@ I wanted to setup an application as follows:
 ```jsx
 scan pass -> generate qr code -> add to pass -> download
 ```
+But you can't make a dynamic QR code with `.pkpass` aka apple wallet, so that sucks. 
 
-But since I wasn’t sure about renewing my apple subscription PLUS
+But since I wasn’t sure about renewing my apple subscription PLUS [react-native-passkit-wallet](https://www.npmjs.com/package/react-native-passkit-wallet)
+ wasn't a trivial setup I decided to go the simplest past forward to get a gym pass in my wallet. 
 
-[Pass2U Wallet - Add store card App - App Store](https://apps.apple.com/us/app/pass2u-wallet-add-store-card/id1142473931)
+I used [Pass2U Wallet](https://apps.apple.com/us/app/pass2u-wallet-add-store-card/id1142473931). It took ~30 seconds and it looks like this: 
 
-ultimately, i needed to test my ideas. 
+![B-24 Gym Pass](/images/b24gympass_cover.webp)
 
-### Was it worth it?
+
+## The Test
+I walked into 24 hour after a week of stalling. 
+
+I was actually afraid I was gonna get banned, somehow. 
+
+But in the end, I walked up. Scanned it, the dude working there said welcome in and yeah it works! 
+
+## Was it worth it?
 
 Yes, for 3 reasons:
 
-- i deleted the app
-- there is joy for me just being the fastest 24 hour member to sign in.
-- successfully reverse engineered it
+- I deleted the app
+- There is joy for me just being the fastest 24 hour member to sign in
+- Successfully reverse engineered it
 
-good thing i don’t go to la fitness, cause they hash that sh**
-```
-@1HFP61657L3DKK
-```
+good thing i don’t go to la fitness, cause they hash that \s 
