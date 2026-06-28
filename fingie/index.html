@@ -1,0 +1,236 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <!-- Google tag (gtag.js) -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-3YPTGE6JH6"></script>
+        <script>
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'G-3YPTGE6JH6');
+        </script>
+        <meta charset="UTF-8">
+        <meta content="IE=edge" http-equiv="X-UA-Compatible"/>
+        <meta content="text/html; charset=UTF-8" http-equiv="content-type"/>
+        <meta content="width=device-width, initial-scale=1" name="viewport"/>
+
+        
+        
+        
+
+        
+
+        
+
+        
+
+        
+        
+        
+
+        <title>Ben Stirling - Fingie</title>
+        
+        <meta name="title" content="Ben Stirling - Fingie">
+        
+        
+        <meta name="generator" content="Zola v0.16.1">
+
+        <meta property="og:type" content="website">
+        <meta property="og:url" content="https://abenstirling.com/fingie/">
+        <meta property="og:site_name" content="">
+        <meta property="og:title" content="Ben Stirling - Fingie">
+        
+        
+
+        
+        
+        <meta property="twitter:card" content="summary_large_image">
+        <meta property="twitter:url" content="https://abenstirling.com/fingie/">
+        <meta property="twitter:title" content="Ben Stirling - Fingie">
+        
+        
+        
+        
+        <link rel="canonical" href="https://abenstirling.com/fingie/">
+        <link rel="shortcut icon" type="image/x-icon" href="https://abenstirling.com/images/logo.ico">
+        <script type="application/ld+json">
+            {
+                
+                "url":"https://abenstirling.com/fingie/",
+                "@type":"WebSite",
+                "headline":"Ben Stirling - Fingie",
+                "name":"Ben Stirling - Fingie",
+                
+                "@context":"https://schema.org"
+            }
+        </script>
+        
+        
+        
+        <link rel="alternate" type="application/atom+xml" title="RSS" href="https://abenstirling.com/atom.xml">
+        
+        
+
+        <link rel="stylesheet" href="https://abenstirling.com/style.css"/>
+        <link rel="stylesheet" href="https://abenstirling.com/custom.css"/>
+        
+    </head>
+    <body theme="auto">
+        <div class="w">
+            <header>
+                
+                
+<p><a href="..">..</a>/fingie</p>
+<p class="post-meta">
+    <time datetime="2026-03-01">2026-03-01</time>
+</p>
+<h1>Fingie</h1>
+
+            </header>
+            <main class="page-content" aria-label="Content">
+                
+
+
+
+<p>Typing passwords sucks.</p>
+<p>I have two issues:</p>
+<ul>
+<li>I really like having my laptop docked</li>
+<li>I like mechancial keyboards</li>
+</ul>
+<p>These two desires keep me gated from access to Apple's fingerprint to autofill passwords! Unfair.</p>
+<p>Lets change that...</p>
+<h2 id="inspo">Inspo</h2>
+<p>This has been done lots over the internet, but I referenced <a rel="external" href="https://www.jeffgeerling.com/blog/2025/why-doesnt-apple-make-standalone-touch-id/">Jeff Geerling's guide</a> so yeah follow that for instructions, this is just a commentary of my experience building one!</p>
+<p><img src="/posts/fingie_1.webp" alt="fingie_1" /></p>
+<p><img src="/posts/fingie_2.webp" alt="fingie_2" /></p>
+<p><img src="/posts/fingie_3.webp" alt="fingie_3" /></p>
+<p><img src="/posts/fingie_4.webp" alt="fingie_4" /></p>
+<p><img src="/posts/fingie_5.webp" alt="fingie_5" /></p>
+<p><img src="/posts/fingie_6.webp" alt="fingie_6" /></p>
+<p><img src="/posts/fingie_7.webp" alt="fingie_7" /></p>
+<p><img src="/posts/fingie_8.webp" alt="fingie_8" /></p>
+<p><img src="/posts/fingie_9.webp" alt="fingie_9" /></p>
+<p><img src="/posts/fingie_10.webp" alt="fingie_10" /></p>
+<p><img src="/posts/fingie_11.webp" alt="fingie_11" /></p>
+<p>The case design files can be found <a rel="external" href="https://www.printables.com/model/355924-clickable-touch-id-box-tkl-board-wired#instructions">here</a>. Key thing: 0.08mm height as it is very detailed on the inside. Had no trouble printing it on my A1 mini.</p>
+<p><img src="/posts/fingie_12.webp" alt="fingie_12" /></p>
+<p><img src="/posts/fingie_13.webp" alt="fingie_13" /></p>
+
+
+            </main>
+            <footer>
+                
+<p class="taxonomies">
+
+</p>
+
+                
+                <p>&copy; Ben Stirling 2025</p>
+            </footer>
+        </div>
+        <script>
+            // Add image captions from alt text
+            document.addEventListener('DOMContentLoaded', function() {
+                const images = document.querySelectorAll('.w img[alt]');
+
+                images.forEach(function(img) {
+                    if (img.closest('.project-card')) return;
+                    const altText = img.getAttribute('alt');
+                    if (altText && altText.trim() !== '') {
+                        const caption = document.createElement('div');
+                        caption.className = 'image-caption';
+                        caption.textContent = altText;
+                        
+                        // Insert caption after the image
+                        img.parentNode.insertBefore(caption, img.nextSibling);
+                    }
+                });
+                
+                // Add copy buttons to code blocks
+                const codeBlocks = document.querySelectorAll('pre code');
+                
+                codeBlocks.forEach(function(codeBlock) {
+                    const pre = codeBlock.parentElement;
+                    
+                    // Create copy button
+                    const copyButton = document.createElement('button');
+                    copyButton.className = 'copy-button';
+                    copyButton.textContent = 'Copy';
+                    
+                    // Add click handler
+                    copyButton.addEventListener('click', function() {
+                        const text = codeBlock.textContent;
+                        
+                        navigator.clipboard.writeText(text).then(function() {
+                            copyButton.textContent = 'Copied!';
+                            copyButton.classList.add('copied');
+                            
+                            setTimeout(function() {
+                                copyButton.textContent = 'Copy';
+                                copyButton.classList.remove('copied');
+                            }, 2000);
+                        }).catch(function() {
+                            // Fallback for older browsers
+                            const textArea = document.createElement('textarea');
+                            textArea.value = text;
+                            document.body.appendChild(textArea);
+                            textArea.select();
+                            document.execCommand('copy');
+                            document.body.removeChild(textArea);
+                            
+                            copyButton.textContent = 'Copied!';
+                            copyButton.classList.add('copied');
+                            
+                            setTimeout(function() {
+                                copyButton.textContent = 'Copy';
+                                copyButton.classList.remove('copied');
+                            }, 2000);
+                        });
+                    });
+                    
+                    // Add button to pre element
+                    pre.appendChild(copyButton);
+                });
+            });
+            
+            // Share post function
+            function sharePost() {
+                const shareIcon = document.querySelector('.share-icon');
+                const shareText = document.querySelector('.share-text');
+                const shareButton = document.querySelector('.share-button');
+                const currentUrl = window.location.href;
+                
+                navigator.clipboard.writeText(currentUrl).then(function() {
+                    shareIcon.style.display = 'none';
+                    shareText.style.display = 'inline';
+                    shareButton.classList.add('shared');
+                    
+                    setTimeout(function() {
+                        shareIcon.style.display = 'inline';
+                        shareText.style.display = 'none';
+                        shareButton.classList.remove('shared');
+                    }, 2000);
+                }).catch(function() {
+                    // Fallback for older browsers
+                    const textArea = document.createElement('textarea');
+                    textArea.value = currentUrl;
+                    document.body.appendChild(textArea);
+                    textArea.select();
+                    document.execCommand('copy');
+                    document.body.removeChild(textArea);
+                    
+                    shareIcon.style.display = 'none';
+                    shareText.style.display = 'inline';
+                    shareButton.classList.add('shared');
+                    
+                    setTimeout(function() {
+                        shareIcon.style.display = 'inline';
+                        shareText.style.display = 'none';
+                        shareButton.classList.remove('shared');
+                    }, 2000);
+                });
+            }
+        </script>
+    </body>
+</html>

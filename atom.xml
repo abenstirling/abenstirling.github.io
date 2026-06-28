@@ -1,0 +1,804 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en">
+    <title></title>
+    <link rel="self" type="application/atom+xml" href="https://abenstirling.com/atom.xml"/>
+    <link rel="alternate" type="text/html" href="https://abenstirling.com"/>
+    <generator uri="https://www.getzola.org/">Zola</generator>
+    <updated>2026-04-01T00:00:00+00:00</updated>
+    <id>https://abenstirling.com/atom.xml</id>
+    <entry xml:lang="en">
+        <title>traces</title>
+        <published>2026-04-01T00:00:00+00:00</published>
+        <updated>2026-04-01T00:00:00+00:00</updated>
+        
+        <author>
+          <name>
+            
+              Unknown
+            
+          </name>
+        </author>
+        
+        <link rel="alternate" type="text/html" href="https://abenstirling.com/traces/"/>
+        <id>https://abenstirling.com/traces/</id>
+        
+        <content type="html" xml:base="https://abenstirling.com/traces/">&lt;p&gt;TO-DO:&lt;&#x2F;p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;input disabled=&quot;&quot; type=&quot;checkbox&quot;&#x2F;&gt;
+add in the links &#x2F; photos&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;input disabled=&quot;&quot; type=&quot;checkbox&quot;&#x2F;&gt;
+discuss w&#x2F; nicco&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;input disabled=&quot;&quot; type=&quot;checkbox&quot;&#x2F;&gt;
+get traces in a state to open-source
+&lt;ul&gt;
+&lt;li&gt;&lt;input disabled=&quot;&quot; type=&quot;checkbox&quot;&#x2F;&gt;
+remove the website&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;input disabled=&quot;&quot; type=&quot;checkbox&quot;&#x2F;&gt;
+remove the stripe&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;input disabled=&quot;&quot; type=&quot;checkbox&quot;&#x2F;&gt;
+publish for a new repo&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;input disabled=&quot;&quot; type=&quot;checkbox&quot;&#x2F;&gt;
+have the following
+&lt;ul&gt;
+&lt;li&gt;&lt;input disabled=&quot;&quot; type=&quot;checkbox&quot;&#x2F;&gt;
+mcp
+&lt;ul&gt;
+&lt;li&gt;&lt;input disabled=&quot;&quot; type=&quot;checkbox&quot;&#x2F;&gt;
+w&#x2F; w&#x2F;o agent&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;input disabled=&quot;&quot; type=&quot;checkbox&quot;&#x2F;&gt;
+kicad extension working&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;p&gt;I have been getting back into hardware again. It is so frustrating its fun.&lt;&#x2F;p&gt;
+&lt;p&gt;I&#x27;ve noticed some pain-points in the the process, and developed a tool with a friend that is quite useful.&lt;&#x2F;p&gt;
+&lt;p&gt;I believe there are two valuable aspects to PCB design that can be automated with:&lt;&#x2F;p&gt;
+&lt;ol&gt;
+&lt;li&gt;Part sourcing&lt;&#x2F;li&gt;
+&lt;li&gt;Semantic Rule Check (SRC)&lt;&#x2F;li&gt;
+&lt;&#x2F;ol&gt;
+&lt;p&gt;&lt;strong&gt;traces&lt;&#x2F;strong&gt; is four pieces that form one loop: the &lt;strong&gt;mcp&lt;&#x2F;strong&gt; grounds an LLM in real supplier data so it can actually find parts, the &lt;strong&gt;KiCad extension&lt;&#x2F;strong&gt; uses that to populate your schematic so it becomes the source of truth, a tuned &lt;strong&gt;agent&lt;&#x2F;strong&gt; makes the sourcing cheap and fast enough to feel instant, and the &lt;strong&gt;SRC&lt;&#x2F;strong&gt; reads the now-complete schematic to catch the semantic bugs ERC can&#x27;t. Source the parts → fill the schematic → check the schematic.&lt;&#x2F;p&gt;
+&lt;h3 id=&quot;part-sourcing&quot;&gt;Part Sourcing&lt;&#x2F;h3&gt;
+&lt;hr &#x2F;&gt;
+&lt;p&gt;LLMs are horrible at finding parts for a project, mostly because all the part information are hosted on a few distributor sites that these labs weren&#x27;t able to train on.&lt;&#x2F;p&gt;
+&lt;p&gt;Let us say there are three main suppliers for electronic parts:&lt;&#x2F;p&gt;
+&lt;ul&gt;
+&lt;li&gt;Digikey&lt;&#x2F;li&gt;
+&lt;li&gt;Mouser&lt;&#x2F;li&gt;
+&lt;li&gt;LCSC&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;p&gt;The idea: ground a LLM query with real data from the supplier site.&lt;&#x2F;p&gt;
+&lt;p&gt;This is the &lt;strong&gt;traces mcp&lt;&#x2F;strong&gt;.&lt;&#x2F;p&gt;
+&lt;p&gt;It is very simple. You connect your LLM to the mcp, and ask it for a part.&lt;&#x2F;p&gt;
+&lt;p&gt;Ok very useful. &lt;strong&gt;Use it- its open-source.&lt;&#x2F;strong&gt;&lt;&#x2F;p&gt;
+&lt;p&gt;Wouldn&#x27;t it be nice if it could just populate the information so you can use the schematic as the source of truth so you didn&#x27;t have to run around copy&#x2F;pasting data...&lt;&#x2F;p&gt;
+&lt;h3 id=&quot;kicad-extension&quot;&gt;KiCad Extension&lt;&#x2F;h3&gt;
+&lt;hr &#x2F;&gt;
+&lt;p&gt;Imagine if your schematic was fully reconciled:&lt;&#x2F;p&gt;
+&lt;ul&gt;
+&lt;li&gt;each part had a&lt;&#x2F;li&gt;
+&lt;li&gt;each part had a datasheet downloaded locally&lt;&#x2F;li&gt;
+&lt;li&gt;each part had a price&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;p&gt;If you don&#x27;t have all the information filled, don&#x27;t worry. Press &lt;code&gt;Source&lt;&#x2F;code&gt; and&lt;&#x2F;p&gt;
+&lt;p&gt;![[Pasted image 20260620174134.png]]&lt;&#x2F;p&gt;
+&lt;p&gt;But you might have noticed, there needs to be a LLM to run the query in order to fill the proper information?&lt;&#x2F;p&gt;
+&lt;h3 id=&quot;traces-agent-eval&quot;&gt;traces agent &#x2F; eval&lt;&#x2F;h3&gt;
+&lt;hr &#x2F;&gt;
+&lt;p&gt;That &lt;code&gt;Source&lt;&#x2F;code&gt; button has to call &lt;em&gt;something&lt;&#x2F;em&gt;. The first version handed the request to a general-purpose Claude agent and let it drive the supplier APIs.&lt;&#x2F;p&gt;
+&lt;p&gt;It worked, but it was ~$0.10 per part. That doesn&#x27;t scale when a board has 80 parts.&lt;&#x2F;p&gt;
+&lt;p&gt;Oh, and it could take up to a minute per part. Horrid. I don&#x27;t have to have taste to know that is trash UX — if anything loads for more than 5 seconds my intuition is that it&#x27;s borked.&lt;&#x2F;p&gt;
+&lt;p&gt;So we treated model choice as a benchmark instead of a default. The sourcing work is small and well-defined — take a natural-language request, call a supplier tool, return a ranked in-stock part — so a frontier model is overkill. OpenRouter let us swap models behind one API and race them on the exact same workload:&lt;&#x2F;p&gt;
+&lt;pre&gt;&lt;code data-lang=&quot;python&quot;&gt;# bench.py — (model id, why test it, approx $&#x2F;Mtok in&#x2F;out)
+MODELS = [
+    (&amp;quot;google&#x2F;gemini-3.1-flash-lite&amp;quot;,             &amp;quot;Fast, cheap, Google-native tools, 1M ctx&amp;quot;,  &amp;quot;$0.25 &#x2F; $1.50&amp;quot;),
+    (&amp;quot;google&#x2F;gemini-3-flash-preview&amp;quot;,            &amp;quot;More accurate than Lite, agentic focus&amp;quot;,    &amp;quot;$0.50 &#x2F; $3&amp;quot;),
+    (&amp;quot;deepseek&#x2F;deepseek-v4-flash&amp;quot;,               &amp;quot;Best non-Google cheap MCP executor&amp;quot;,        &amp;quot;~$0.13 &#x2F; ~$0.26&amp;quot;),
+    (&amp;quot;qwen&#x2F;qwen3-coder-flash&amp;quot;,                   &amp;quot;Code&#x2F;tool agentic workflows&amp;quot;,               &amp;quot;$0.195 &#x2F; $0.975&amp;quot;),
+    (&amp;quot;x-ai&#x2F;grok-4.1-fast&amp;quot;,                       &amp;quot;Strong real-world tool calling, 2M ctx&amp;quot;,    &amp;quot;~$1.25 &#x2F; $2.50&amp;quot;),
+    (&amp;quot;mistralai&#x2F;mistral-small-3.2-24b-instruct&amp;quot;, &amp;quot;Very cheap, function calling + structured&amp;quot;, &amp;quot;$0.075 &#x2F; $0.20&amp;quot;),
+    (&amp;quot;openai&#x2F;gpt-oss-120b&amp;quot;,                      &amp;quot;Cheap planner&#x2F;validator&#x2F;JSON-repair&amp;quot;,       &amp;quot;~$0.039 &#x2F; ~$0.18&amp;quot;),
+    (&amp;quot;z-ai&#x2F;glm-4.6&amp;quot;,                             &amp;quot;Purpose-built-ish for tool use, mid tier&amp;quot;,  &amp;quot;~$0.50 &#x2F; ~$2.00&amp;quot;),
+    (&amp;quot;inclusionai&#x2F;ring-2.6-1t&amp;quot;,                  &amp;quot;Long-horizon tool agent&amp;quot;,                   &amp;quot;~$0.075 &#x2F; $0.625&amp;quot;),
+    (&amp;quot;google&#x2F;gemini-3.5-flash&amp;quot;,                  &amp;quot;Higher-end Google Flash lane&amp;quot;,              &amp;quot;~$1.50 &#x2F; $9&amp;quot;),
+]
+&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;The things we cared about, in order: &lt;strong&gt;accuracy, then cost, then speed.&lt;&#x2F;strong&gt;&lt;&#x2F;p&gt;
+&lt;p&gt;The harness spins up an isolated API + worker pair per model (unique queue and port so it never collides with a running stack), then runs the same sourcing eval &lt;code&gt;TRIES&lt;&#x2F;code&gt; times. The eval sources one real part — an &lt;code&gt;STM32G491C&lt;&#x2F;code&gt; in &lt;code&gt;LQFP48&lt;&#x2F;code&gt; — across all three suppliers (JLCPCB, Digi-Key, Mouser):&lt;&#x2F;p&gt;
+&lt;pre&gt;&lt;code data-lang=&quot;python&quot;&gt;# eval.py
+TIMEOUT_S = 30   # hard cutoff — job is killed after this
+SLOW_S    = 15   # pass&#x2F;fail threshold
+
+PART = &amp;quot;STM32G491C&amp;quot;
+FOOTPRINT = &amp;quot;LQFP48&amp;quot;
+&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;A try &quot;passes&quot; only if it returns a real part number &lt;em&gt;under&lt;&#x2F;em&gt; the 15s threshold; a timeout counts as the full 30s, so flaky or slow models sink to the bottom automatically. Models are ranked by total wall time across all tries, accuracy as the tiebreak:&lt;&#x2F;p&gt;
+&lt;pre&gt;&lt;code data-lang=&quot;python&quot;&gt;ranked = sorted(results, key=lambda r: (r[&amp;quot;grand_total&amp;quot;], -r[&amp;quot;total_passed&amp;quot;]))
+&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;Our results:&lt;&#x2F;p&gt;
+&lt;table&gt;&lt;thead&gt;&lt;tr&gt;&lt;th&gt;#&lt;&#x2F;th&gt;&lt;th&gt;Model&lt;&#x2F;th&gt;&lt;th style=&quot;text-align: right&quot;&gt;Avg&#x2F;try&lt;&#x2F;th&gt;&lt;th style=&quot;text-align: center&quot;&gt;Passed&lt;&#x2F;th&gt;&lt;th&gt;$&#x2F;Mtok (in&#x2F;out)&lt;&#x2F;th&gt;&lt;&#x2F;tr&gt;&lt;&#x2F;thead&gt;&lt;tbody&gt;
+&lt;tr&gt;&lt;td&gt;&lt;em&gt;TODO: paste the bench leaderboard output here&lt;&#x2F;em&gt;&lt;&#x2F;td&gt;&lt;td&gt;&lt;&#x2F;td&gt;&lt;td style=&quot;text-align: right&quot;&gt;&lt;&#x2F;td&gt;&lt;td style=&quot;text-align: center&quot;&gt;&lt;&#x2F;td&gt;&lt;td&gt;&lt;&#x2F;td&gt;&lt;&#x2F;tr&gt;
+&lt;&#x2F;tbody&gt;&lt;&#x2F;table&gt;
+&lt;p&gt;Net effect: dropping from a general-purpose agent to a benchmarked Flash-class model gave us a &lt;strong&gt;~2 order-of-magnitude improvement in both cost and latency per part&lt;&#x2F;strong&gt; — from ~$0.10 and up-to-a-minute down to fractions of a cent and a couple of seconds.&lt;&#x2F;p&gt;
+&lt;h3 id=&quot;semantic-rule-check-src&quot;&gt;Semantic Rule Check (SRC)&lt;&#x2F;h3&gt;
+&lt;hr &#x2F;&gt;
+&lt;p&gt;You already run a Design Rule Check (DRC) and Electrical Rule Check (ERC). Both are mechanical: spacing, connectivity, unconnected pins. Neither one reads your design.&lt;&#x2F;p&gt;
+&lt;p&gt;I would like to propose a third: the &lt;strong&gt;Semantic Rule Check (SRC)&lt;&#x2F;strong&gt; — the class of bugs that pass DRC and ERC clean but are still wrong.&lt;&#x2F;p&gt;
+&lt;p&gt;LLMs are good at language, so why not just have it find&lt;&#x2F;p&gt;
+&lt;ul&gt;
+&lt;li&gt;rotated a usb-c connector 180* and now the &lt;code&gt;d+&lt;&#x2F;code&gt; is connected to the &lt;code&gt;d-&lt;&#x2F;code&gt;![[Pasted image 20260620172340.png]]&lt;&#x2F;li&gt;
+&lt;li&gt;you change a netlist label from &lt;code&gt;CAN_RXD&lt;&#x2F;code&gt; to &lt;code&gt;CAN_RX&lt;&#x2F;code&gt; and don&#x27;t update all instances&lt;&#x2F;li&gt;
+&lt;li&gt;check the rating of the passives for power-related things&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;h2 id=&quot;ok-those-are-basic-imagine-if-the&quot;&gt;Ok those are basic. Imagine if the&lt;&#x2F;h2&gt;
+&lt;p&gt;Why now?&lt;&#x2F;p&gt;
+&lt;ol&gt;
+&lt;li&gt;KiCad is becoming widely adopted as a free and open-source EDA that is super capable&lt;&#x2F;li&gt;
+&lt;li&gt;It is a local program with a CLI, and its files are just plain text&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;strong&gt;You can use an agent like Claude Code or Codex to actually make the changes once they are detected!&lt;&#x2F;strong&gt;&lt;&#x2F;li&gt;
+&lt;&#x2F;ol&gt;
+&lt;h3 id=&quot;looking-forward&quot;&gt;Looking Forward&lt;&#x2F;h3&gt;
+&lt;hr &#x2F;&gt;
+&lt;p&gt;&quot;Automating electrical engineering&quot; would be the natural progression of these ideas.&lt;&#x2F;p&gt;
+&lt;p&gt;Economically, this is a juicy opportunity, and the value shows up in two places.&lt;&#x2F;p&gt;
+&lt;p&gt;&lt;strong&gt;The tools are expensive.&lt;&#x2F;strong&gt; A seat of Altium runs ~$4k–$10k&#x2F;yr; Siemens (Xpedition &#x2F; Capital) is enterprise-quote territory north of that. The market already pays a lot for software that helps engineers not make mistakes — and none of it reads the design the way an LLM can.&lt;&#x2F;p&gt;
+&lt;p&gt;&lt;strong&gt;The mistakes are more expensive than the tools.&lt;&#x2F;strong&gt; The real cost isn&#x27;t the license, it&#x27;s the respin. Walk one through:&lt;&#x2F;p&gt;
+&lt;ul&gt;
+&lt;li&gt;A semantic bug — a flipped USB-C connector, an underrated cap on a power rail — passes DRC and ERC clean and ships.&lt;&#x2F;li&gt;
+&lt;li&gt;You catch it on the bench. Now you eat a new fab + assembly run and the lead time that comes with it: call it ~2–4 weeks of slip plus ~10–20 hours of engineering time to diagnose, fix, and re-review at $100&#x2F;hr.&lt;&#x2F;li&gt;
+&lt;li&gt;If it slipped into a production batch instead — say 1,000 boards at ~$100 of raw material each — that&#x27;s up to &lt;strong&gt;$100k of inventory&lt;&#x2F;strong&gt; at risk over a single net-name typo.&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;p&gt;So the bet is simple: an SRC that runs in seconds against a fully-populated schematic is cheap insurance against a five-figure mistake. That&#x27;s the whole pitch.&lt;&#x2F;p&gt;
+&lt;p&gt;Electrical engineers are smart, and their jobs are complicated.&lt;&#x2F;p&gt;
+&lt;p&gt;To list a few of the main roles of their jobs:&lt;&#x2F;p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;supply chain management&lt;&#x2F;strong&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;strong&gt;update &#x2F; create PCB designs&lt;&#x2F;strong&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;physically testing&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;p&gt;The implications of a tool that ensures accuracy of PCB design likely means that there will be a consolidation of chips, biasing on ones that:&lt;&#x2F;p&gt;
+&lt;ol&gt;
+&lt;li&gt;have accessible information (datasheet, footprint, availability)&lt;&#x2F;li&gt;
+&lt;li&gt;have good data about them (i.e. ones on the internet that people use)&lt;&#x2F;li&gt;
+&lt;&#x2F;ol&gt;
+</content>
+        
+    </entry>
+    <entry xml:lang="en">
+        <title>Fingie</title>
+        <published>2026-03-01T00:00:00+00:00</published>
+        <updated>2026-03-01T00:00:00+00:00</updated>
+        
+        <author>
+          <name>
+            
+              Unknown
+            
+          </name>
+        </author>
+        
+        <link rel="alternate" type="text/html" href="https://abenstirling.com/fingie/"/>
+        <id>https://abenstirling.com/fingie/</id>
+        
+        <content type="html" xml:base="https://abenstirling.com/fingie/">&lt;p&gt;Typing passwords sucks.&lt;&#x2F;p&gt;
+&lt;p&gt;I have two issues:&lt;&#x2F;p&gt;
+&lt;ul&gt;
+&lt;li&gt;I really like having my laptop docked&lt;&#x2F;li&gt;
+&lt;li&gt;I like mechancial keyboards&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;p&gt;These two desires keep me gated from access to Apple&#x27;s fingerprint to autofill passwords! Unfair.&lt;&#x2F;p&gt;
+&lt;p&gt;Lets change that...&lt;&#x2F;p&gt;
+&lt;h2 id=&quot;inspo&quot;&gt;Inspo&lt;&#x2F;h2&gt;
+&lt;p&gt;This has been done lots over the internet, but I referenced &lt;a rel=&quot;external&quot; href=&quot;https:&#x2F;&#x2F;www.jeffgeerling.com&#x2F;blog&#x2F;2025&#x2F;why-doesnt-apple-make-standalone-touch-id&#x2F;&quot;&gt;Jeff Geerling&#x27;s guide&lt;&#x2F;a&gt; so yeah follow that for instructions, this is just a commentary of my experience building one!&lt;&#x2F;p&gt;
+&lt;p&gt;&lt;img src=&quot;&#x2F;posts&#x2F;fingie_1.webp&quot; alt=&quot;fingie_1&quot; &#x2F;&gt;&lt;&#x2F;p&gt;
+&lt;p&gt;&lt;img src=&quot;&#x2F;posts&#x2F;fingie_2.webp&quot; alt=&quot;fingie_2&quot; &#x2F;&gt;&lt;&#x2F;p&gt;
+&lt;p&gt;&lt;img src=&quot;&#x2F;posts&#x2F;fingie_3.webp&quot; alt=&quot;fingie_3&quot; &#x2F;&gt;&lt;&#x2F;p&gt;
+&lt;p&gt;&lt;img src=&quot;&#x2F;posts&#x2F;fingie_4.webp&quot; alt=&quot;fingie_4&quot; &#x2F;&gt;&lt;&#x2F;p&gt;
+&lt;p&gt;&lt;img src=&quot;&#x2F;posts&#x2F;fingie_5.webp&quot; alt=&quot;fingie_5&quot; &#x2F;&gt;&lt;&#x2F;p&gt;
+&lt;p&gt;&lt;img src=&quot;&#x2F;posts&#x2F;fingie_6.webp&quot; alt=&quot;fingie_6&quot; &#x2F;&gt;&lt;&#x2F;p&gt;
+&lt;p&gt;&lt;img src=&quot;&#x2F;posts&#x2F;fingie_7.webp&quot; alt=&quot;fingie_7&quot; &#x2F;&gt;&lt;&#x2F;p&gt;
+&lt;p&gt;&lt;img src=&quot;&#x2F;posts&#x2F;fingie_8.webp&quot; alt=&quot;fingie_8&quot; &#x2F;&gt;&lt;&#x2F;p&gt;
+&lt;p&gt;&lt;img src=&quot;&#x2F;posts&#x2F;fingie_9.webp&quot; alt=&quot;fingie_9&quot; &#x2F;&gt;&lt;&#x2F;p&gt;
+&lt;p&gt;&lt;img src=&quot;&#x2F;posts&#x2F;fingie_10.webp&quot; alt=&quot;fingie_10&quot; &#x2F;&gt;&lt;&#x2F;p&gt;
+&lt;p&gt;&lt;img src=&quot;&#x2F;posts&#x2F;fingie_11.webp&quot; alt=&quot;fingie_11&quot; &#x2F;&gt;&lt;&#x2F;p&gt;
+&lt;p&gt;The case design files can be found &lt;a rel=&quot;external&quot; href=&quot;https:&#x2F;&#x2F;www.printables.com&#x2F;model&#x2F;355924-clickable-touch-id-box-tkl-board-wired#instructions&quot;&gt;here&lt;&#x2F;a&gt;. Key thing: 0.08mm height as it is very detailed on the inside. Had no trouble printing it on my A1 mini.&lt;&#x2F;p&gt;
+&lt;p&gt;&lt;img src=&quot;&#x2F;posts&#x2F;fingie_12.webp&quot; alt=&quot;fingie_12&quot; &#x2F;&gt;&lt;&#x2F;p&gt;
+&lt;p&gt;&lt;img src=&quot;&#x2F;posts&#x2F;fingie_13.webp&quot; alt=&quot;fingie_13&quot; &#x2F;&gt;&lt;&#x2F;p&gt;
+</content>
+        
+    </entry>
+    <entry xml:lang="en">
+        <title>B-24 Gym Pass</title>
+        <published>2026-02-01T00:00:00+00:00</published>
+        <updated>2026-02-01T00:00:00+00:00</updated>
+        
+        <author>
+          <name>
+            
+              Unknown
+            
+          </name>
+        </author>
+        
+        <link rel="alternate" type="text/html" href="https://abenstirling.com/b24-gym-pass/"/>
+        <id>https://abenstirling.com/b24-gym-pass/</id>
+        
+        <content type="html" xml:base="https://abenstirling.com/b24-gym-pass/">&lt;p&gt;I have a 24 hour subscription, and checking in really sucks.&lt;&#x2F;p&gt;
+&lt;p&gt;My options are as follows:&lt;&#x2F;p&gt;
+&lt;ol&gt;
+&lt;li&gt;Use 24 hour app (laggy &amp;amp; bad UI)&lt;&#x2F;li&gt;
+&lt;li&gt;Scan my fingerprint and type my phone number on a keypad (ew)&lt;&#x2F;li&gt;
+&lt;&#x2F;ol&gt;
+&lt;p&gt;One day, I looked at my pass and noticed that it was a QR code.&lt;&#x2F;p&gt;
+&lt;p&gt;&lt;img src=&quot;&#x2F;posts&#x2F;b24_1.webp&quot; alt=&quot;Example pass&quot; &#x2F;&gt;&lt;&#x2F;p&gt;
+&lt;p&gt;We are going to use this &lt;a rel=&quot;external&quot; href=&quot;https:&#x2F;&#x2F;www.24hourfitness.com&#x2F;programs&#x2F;24go&quot;&gt;example pass&lt;&#x2F;a&gt;, to make sure I can still use mine and for you to make your own if you are interested.&lt;&#x2F;p&gt;
+&lt;p&gt;I used another phone to scan the contents of the QR code to see if we could reverse engineer it!&lt;&#x2F;p&gt;
+&lt;p&gt;&lt;img src=&quot;&#x2F;posts&#x2F;b24_2.webp&quot; alt=&quot;scanning the qr code&quot; &#x2F;&gt;&lt;&#x2F;p&gt;
+&lt;p&gt;If we look at the content of the QR code we get the following:&lt;&#x2F;p&gt;
+&lt;pre&gt;&lt;code data-lang=&quot;jsx&quot;&gt;{&amp;quot;SR&amp;quot;:&amp;quot;24GO&amp;quot;,&amp;quot;TP&amp;quot;:&amp;quot;P&amp;quot;,&amp;quot;AP&amp;quot;:&amp;quot;1.84.1&amp;quot;,&amp;quot;DT&amp;quot;:1768963389103,&amp;quot;MB&amp;quot;:&amp;quot;MBR123456&amp;quot;,&amp;quot;OS&amp;quot;:&amp;quot;iOS&amp;quot;,&amp;quot;DI&amp;quot;:&amp;quot;a7f3e8c2-91b4-4d6f-b5a2-3c9e7f1d4b6a&amp;quot;}
+&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;Ok this is interesting!&lt;&#x2F;p&gt;
+&lt;p&gt;Key things:&lt;&#x2F;p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;DT&lt;&#x2F;code&gt; (presumably datetime)&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;code&gt;MB&lt;&#x2F;code&gt; (member id, something I see on the app too, likely not to change)&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;p&gt;I scanned it twice, one a few seconds later than the other and noticed that only the &lt;code&gt;DT&lt;&#x2F;code&gt; changed, and it got a bit larger.&lt;&#x2F;p&gt;
+&lt;h2 id=&quot;unix-timestamp&quot;&gt;Unix Timestamp&lt;&#x2F;h2&gt;
+&lt;p&gt;A &lt;a rel=&quot;external&quot; href=&quot;https:&#x2F;&#x2F;en.wikipedia.org&#x2F;wiki&#x2F;Unix_time&quot;&gt;unix timestamp&lt;&#x2F;a&gt; is a universal timestamp that number of non-leap seconds passed since &lt;code&gt;1970-01-01&lt;&#x2F;code&gt;.&lt;&#x2F;p&gt;
+&lt;p&gt;This is critical because I would guess that the reason why 24 hour has a whole app is to make sure that you can’t have a “stale” qr code that you pass around to your gym buddies.&lt;&#x2F;p&gt;
+&lt;p&gt;I realized something:&lt;&#x2F;p&gt;
+&lt;ul&gt;
+&lt;li&gt;24 checks for &lt;code&gt;time.now&lt;&#x2F;code&gt; &amp;gt; &lt;code&gt;DT&lt;&#x2F;code&gt; + ~1 min to make sure its a fresh pass&lt;&#x2F;li&gt;
+&lt;li&gt;BUT do they check for the &lt;code&gt;time.now&lt;&#x2F;code&gt; &amp;lt; &lt;code&gt;DT&lt;&#x2F;code&gt;???&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;p&gt;So if I set the &lt;code&gt;DT&lt;&#x2F;code&gt; variable, say 2 years in the future, would that just be valid because its just not more than a minute in the past?&lt;&#x2F;p&gt;
+&lt;h2 id=&quot;qr-code&quot;&gt;QR Code&lt;&#x2F;h2&gt;
+&lt;p&gt;This is a simple python script:&lt;&#x2F;p&gt;
+&lt;pre&gt;&lt;code data-lang=&quot;jsx&quot;&gt;import json, time, qrcode
+DT = int((time.time() + 63072000) * 1000)
+qrcode.make(json.dumps({&amp;quot;SR&amp;quot;:&amp;quot;24GO&amp;quot;,&amp;quot;TP&amp;quot;:&amp;quot;P&amp;quot;,&amp;quot;AP&amp;quot;:&amp;quot;1.84.1&amp;quot;,&amp;quot;DT&amp;quot;:DT,&amp;quot;MB&amp;quot;:&amp;quot;MBR123456&amp;quot;,&amp;quot;OS&amp;quot;:&amp;quot;iOS&amp;quot;,&amp;quot;DI&amp;quot;:&amp;quot;a7f3e8c2-91b4-4d6f-b5a2-3c9e7f1d4b6a&amp;quot;})).save(&amp;quot;gym_pass.png&amp;quot;) 
+&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;Single line to run:&lt;&#x2F;p&gt;
+&lt;pre&gt;&lt;code data-lang=&quot;jsx&quot;&gt;uv run --with qrcode[pil] qr.py
+&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;&lt;img src=&quot;&#x2F;posts&#x2F;b24_3.webp&quot; alt=&quot;our pass qr code, from the future&quot; &#x2F;&gt;&lt;&#x2F;p&gt;
+&lt;h2 id=&quot;apple-wallet&quot;&gt;Apple Wallet&lt;&#x2F;h2&gt;
+&lt;p&gt;I wanted to setup an application as follows:&lt;&#x2F;p&gt;
+&lt;pre&gt;&lt;code data-lang=&quot;jsx&quot;&gt;scan pass -&amp;gt; generate qr code -&amp;gt; add to pass -&amp;gt; download
+&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;But you can&#x27;t make a dynamic QR code with &lt;code&gt;.pkpass&lt;&#x2F;code&gt; aka apple wallet, so that sucks.&lt;&#x2F;p&gt;
+&lt;p&gt;But since I wasn’t sure about renewing my apple subscription PLUS &lt;a rel=&quot;external&quot; href=&quot;https:&#x2F;&#x2F;www.npmjs.com&#x2F;package&#x2F;react-native-passkit-wallet&quot;&gt;react-native-passkit-wallet&lt;&#x2F;a&gt;
+wasn&#x27;t a trivial setup I decided to go the simplest past forward to get a gym pass in my wallet.&lt;&#x2F;p&gt;
+&lt;p&gt;I used &lt;a rel=&quot;external&quot; href=&quot;https:&#x2F;&#x2F;apps.apple.com&#x2F;us&#x2F;app&#x2F;pass2u-wallet-add-store-card&#x2F;id1142473931&quot;&gt;Pass2U Wallet&lt;&#x2F;a&gt;. It took ~30 seconds and it looks like this:&lt;&#x2F;p&gt;
+&lt;p&gt;&lt;img src=&quot;&#x2F;images&#x2F;b24gympass_cover.webp&quot; alt=&quot;B-24 Gym Pass&quot; &#x2F;&gt;&lt;&#x2F;p&gt;
+&lt;h2 id=&quot;the-test&quot;&gt;The Test&lt;&#x2F;h2&gt;
+&lt;p&gt;I walked into 24 hour after a week of stalling.&lt;&#x2F;p&gt;
+&lt;p&gt;I was actually afraid I was gonna get banned, somehow.&lt;&#x2F;p&gt;
+&lt;p&gt;But in the end, I walked up. Scanned it, the dude working there said welcome in and yeah it works!&lt;&#x2F;p&gt;
+&lt;h2 id=&quot;was-it-worth-it&quot;&gt;Was it worth it?&lt;&#x2F;h2&gt;
+&lt;p&gt;Yes, for 3 reasons:&lt;&#x2F;p&gt;
+&lt;ul&gt;
+&lt;li&gt;I deleted the app&lt;&#x2F;li&gt;
+&lt;li&gt;There is joy for me just being the fastest 24 hour member to sign in&lt;&#x2F;li&gt;
+&lt;li&gt;Successfully reverse engineered it&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;p&gt;good thing i don’t go to la fitness, cause they hash that \s&lt;&#x2F;p&gt;
+</content>
+        
+    </entry>
+    <entry xml:lang="en">
+        <title>Botion Blinds</title>
+        <published>2026-01-01T00:00:00+00:00</published>
+        <updated>2026-01-01T00:00:00+00:00</updated>
+        
+        <author>
+          <name>
+            
+              Unknown
+            
+          </name>
+        </author>
+        
+        <link rel="alternate" type="text/html" href="https://abenstirling.com/autoblinds/"/>
+        <id>https://abenstirling.com/autoblinds/</id>
+        
+        <content type="html" xml:base="https://abenstirling.com/autoblinds/"></content>
+        
+    </entry>
+    <entry xml:lang="en">
+        <title>LeRobot</title>
+        <published>2025-06-15T00:00:00+00:00</published>
+        <updated>2025-06-15T00:00:00+00:00</updated>
+        
+        <author>
+          <name>
+            
+              Unknown
+            
+          </name>
+        </author>
+        
+        <link rel="alternate" type="text/html" href="https://abenstirling.com/lerobot/"/>
+        <id>https://abenstirling.com/lerobot/</id>
+        
+        <content type="html" xml:base="https://abenstirling.com/lerobot/">&lt;p&gt;I took a break from robotics after a machine learning project on &lt;a rel=&quot;external&quot; href=&quot;https:&#x2F;&#x2F;github.com&#x2F;abenstirling&#x2F;SemanticNavigation&quot;&gt;semantic navigation&lt;&#x2F;a&gt;.&lt;&#x2F;p&gt;
+&lt;p&gt;I was at a Christmas party and heard about an open-source initiative for 6 DoF robotic arms called &lt;a rel=&quot;external&quot; href=&quot;https:&#x2F;&#x2F;github.com&#x2F;huggingface&#x2F;lerobot&quot;&gt;LeRobot&lt;&#x2F;a&gt;. There were even pre-arranged Bambu 3D printing files available, so I printed the SO-100 and got to assembling it as soon as my motors arrived.
+&lt;img src=&quot;&#x2F;posts&#x2F;lerobot_1.webp&quot; alt=&quot;Assembling LeRobot follower arm&quot; &#x2F;&gt;&lt;&#x2F;p&gt;
+&lt;p&gt;There was an issue where one motor (specifically the 3rd joint from the bottom) would just blink and not work at all. I tried getting help, but eventually gave up and packed it away for a bit.&lt;&#x2F;p&gt;
+&lt;p&gt;After a 3-month break and moving to a different apartment, I pulled it out, debugged the motor, and finally got it working.
+&lt;img src=&quot;&#x2F;posts&#x2F;lerobot_2.5.webp&quot; alt=&quot;Explaining solution to blinking motors&quot; &#x2F;&gt;&lt;&#x2F;p&gt;
+&lt;p&gt;&lt;img src=&quot;&#x2F;posts&#x2F;lerobot_3.webp&quot; alt=&quot;LeRobot teleop demo&quot; &#x2F;&gt;&lt;&#x2F;p&gt;
+&lt;p&gt;The above ran with the following command:&lt;&#x2F;p&gt;
+&lt;pre&gt;&lt;code&gt;python lerobot&#x2F;scripts&#x2F;control_robot.py \
+  --robot.type=so100 \
+  --control.type=teleoperate
+&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;This is teleoperation (&quot;teleop&quot;) where I control a leader arm that the follower arm mimics.&lt;&#x2F;p&gt;
+&lt;h2 id=&quot;goals&quot;&gt;Goals&lt;&#x2F;h2&gt;
+&lt;p&gt;Let me define goals for this project:&lt;&#x2F;p&gt;
+&lt;ul&gt;
+&lt;li&gt;Train the robot to do a custom task&lt;&#x2F;li&gt;
+&lt;li&gt;Have it perform autonomously with an 80%+ success rate&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;p&gt;&lt;img src=&quot;&#x2F;posts&#x2F;lerobot_2.webp&quot; alt=&quot;Move T Demo&quot; &#x2F;&gt;&lt;&#x2F;p&gt;
+&lt;p&gt;&lt;strong&gt;Move-T&lt;&#x2F;strong&gt; is my challenge. The goal is to place the red T on the yellow outline.&lt;&#x2F;p&gt;
+&lt;p&gt;How is something like this possible to do? How&lt;&#x2F;p&gt;
+&lt;p&gt;The magic is in the ACT (Action Chunking Transformer) model that we are training. It takes human demonstration data from teleoperated robots and trains a transformer model to predict sequences of future actions (called &#x27;action chunks&#x27;) rather than single actions, which reduces error accumulation and enables precise manipulation tasks with minimal training data. I have a picture below that somewhat explains it, but to learn more you can read about &lt;a rel=&quot;external&quot; href=&quot;https:&#x2F;&#x2F;tonyzhaozh.github.io&#x2F;aloha&#x2F;&quot;&gt;the ALOHA setup&lt;&#x2F;a&gt;.&lt;&#x2F;p&gt;
+&lt;p&gt;&lt;img src=&quot;&#x2F;posts&#x2F;lerobot_18.webp&quot; alt=&quot;ACT Model Diagram&quot; &#x2F;&gt;&lt;&#x2F;p&gt;
+&lt;h3 id=&quot;1st-attempt&quot;&gt;1st Attempt&lt;&#x2F;h3&gt;
+&lt;p&gt;&lt;strong&gt;Setup:&lt;&#x2F;strong&gt;&lt;&#x2F;p&gt;
+&lt;ul&gt;
+&lt;li&gt;MacBook camera (front scene view)&lt;&#x2F;li&gt;
+&lt;li&gt;iPhone continuity camera (overhead view)&lt;&#x2F;li&gt;
+&lt;li&gt;40 episodes total (10 repeats per initial T position)&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;p&gt;I ran the following command to get data:&lt;&#x2F;p&gt;
+&lt;pre&gt;&lt;code&gt;python lerobot&#x2F;scripts&#x2F;control_robot.py \
+  --robot.type=so100 \
+  --control.type=record \
+  --control.fps=30 \
+  --control.single_task=&amp;quot;Move T to where it belongs.&amp;quot; \
+  --control.repo_id=${HF_USER}&#x2F;so100_move_t2 \
+  --control.tags=&amp;#39;[&amp;quot;so100&amp;quot;,&amp;quot;tutorial&amp;quot;]&amp;#39; \
+  --control.warmup_time_s=10 \
+  --control.episode_time_s=15 \
+  --control.reset_time_s=15 \
+  --control.num_episodes=40 \
+  --control.push_to_hub=true
+&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;Note: I pushed to Hugging Face in case my MacBook dies during training.&lt;&#x2F;p&gt;
+&lt;p&gt;&lt;strong&gt;Results:&lt;&#x2F;strong&gt;
+&lt;img src=&quot;&#x2F;posts&#x2F;lerobot_4.webp&quot; alt=&quot;1st Attempt&quot; &#x2F;&gt;
+This took &lt;strong&gt;26 HOURS&lt;&#x2F;strong&gt; to train. The results were terrible - the robot couldn&#x27;t complete the task reliably. It just kept slamming itself into the table.&lt;&#x2F;p&gt;
+&lt;p&gt;&lt;strong&gt;Key learnings:&lt;&#x2F;strong&gt;&lt;&#x2F;p&gt;
+&lt;ul&gt;
+&lt;li&gt;Need to find a way to train faster to shorten the feedback loop&lt;&#x2F;li&gt;
+&lt;li&gt;Need to debug data with wandb (Weights and Biases)&lt;&#x2F;li&gt;
+&lt;li&gt;Review the data quality (comb through it to ensure cameras are properly positioned)&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;h3 id=&quot;2nd-attempt&quot;&gt;2nd Attempt&lt;&#x2F;h3&gt;
+&lt;p&gt;&lt;strong&gt;Problem Analysis:&lt;&#x2F;strong&gt;
+I began to think about the problem from first principles. The laptop camera was giving a poor perspective of the task, and I realized the camera angle was likely confusing the model.&lt;&#x2F;p&gt;
+&lt;p&gt;&lt;strong&gt;Setup Changes:&lt;&#x2F;strong&gt;&lt;&#x2F;p&gt;
+&lt;ul&gt;
+&lt;li&gt;Removed laptop camera footage (deleted from Hugging Face)&lt;&#x2F;li&gt;
+&lt;li&gt;Switched to cloud training using &lt;a rel=&quot;external&quot; href=&quot;https:&#x2F;&#x2F;huggingface.co&#x2F;docs&#x2F;lerobot&#x2F;notebooks&quot;&gt;A100 rental via Colab&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;Same iPhone overhead camera setup&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;p&gt;&lt;img src=&quot;&#x2F;posts&#x2F;lerobot_5.webp&quot; alt=&quot;Deleting data&quot; &#x2F;&gt;&lt;&#x2F;p&gt;
+&lt;p&gt;&lt;strong&gt;Training Workflow:&lt;&#x2F;strong&gt;&lt;&#x2F;p&gt;
+&lt;pre&gt;&lt;code&gt;Colab → Setup LeRobot → Download training data (HF) → Train → Upload model (HF)
+&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;&lt;strong&gt;Results:&lt;&#x2F;strong&gt;&lt;&#x2F;p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Training time:&lt;&#x2F;strong&gt; 2h 14m 52s&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;strong&gt;Cost:&lt;&#x2F;strong&gt; $2.33&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;strong&gt;Performance:&lt;&#x2F;strong&gt; Still unsuccessful at completing the Move-T task&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;p&gt;&lt;img src=&quot;&#x2F;posts&#x2F;lerobot_6.webp&quot; alt=&quot;2nd Attempt&quot; &#x2F;&gt;&lt;&#x2F;p&gt;
+&lt;p&gt;&lt;strong&gt;Wandb metrics:&lt;&#x2F;strong&gt;
+&lt;img src=&quot;&#x2F;posts&#x2F;lerobot_7.webp&quot; alt=&quot;Attempt 2 wandb&quot; &#x2F;&gt;&lt;&#x2F;p&gt;
+&lt;p&gt;&lt;strong&gt;Key learnings:&lt;&#x2F;strong&gt;&lt;&#x2F;p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Data quality is the primary driver&lt;&#x2F;strong&gt; of robot performance&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;strong&gt;Cloud training is essential&lt;&#x2F;strong&gt; for reasonable iteration speeds (13x faster than local)&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;h3 id=&quot;3rd-attempt&quot;&gt;3rd Attempt&lt;&#x2F;h3&gt;
+&lt;p&gt;&lt;strong&gt;Research Phase:&lt;&#x2F;strong&gt;
+I began researching what other successful robotic systems did for camera positioning. Looking at systems like ALOHA, I noticed they used multiple camera angles including wrist-mounted cameras.&lt;&#x2F;p&gt;
+&lt;p&gt;&lt;img src=&quot;&#x2F;posts&#x2F;lerobot_8.webp&quot; alt=&quot;Aloha setup&quot; &#x2F;&gt;&lt;&#x2F;p&gt;
+&lt;p&gt;&lt;strong&gt;Key Insight:&lt;&#x2F;strong&gt;
+Based on this insight from the research:&lt;&#x2F;p&gt;
+&lt;p&gt;&lt;img src=&quot;&#x2F;posts&#x2F;lerobot_9.webp&quot; alt=&quot;Camera positioning research&quot; &#x2F;&gt;&lt;&#x2F;p&gt;
+&lt;p&gt;&lt;strong&gt;Setup Changes:&lt;&#x2F;strong&gt;&lt;&#x2F;p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Added wrist camera:&lt;&#x2F;strong&gt; Provides detailed view of end-effector and object interactions&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;strong&gt;Repositioned overhead camera:&lt;&#x2F;strong&gt; Moved to side angle for better spatial relationship understanding&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;strong&gt;Multi-view approach:&lt;&#x2F;strong&gt; Combining close-up manipulation details with broader scene context&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;p&gt;&lt;img src=&quot;&#x2F;posts&#x2F;lerobot_10.webp&quot; alt=&quot;Wrist camera printing&quot; &#x2F;&gt;&lt;&#x2F;p&gt;
+&lt;p&gt;&lt;img src=&quot;&#x2F;posts&#x2F;lerobot_17.webp&quot; alt=&quot;New setup data visualization&quot; &#x2F;&gt;&lt;&#x2F;p&gt;
+&lt;p&gt;&lt;strong&gt;Training Workflow:&lt;&#x2F;strong&gt;
+This didn&#x27;t train, but I had to run it twice because I didn&#x27;t upload it to hf the first time, and the Colab kernel closed.&lt;&#x2F;p&gt;
+&lt;p&gt;&lt;img src=&quot;&#x2F;posts&#x2F;lerobot_15.webp&quot; alt=&quot;Wandb &quot; &#x2F;&gt;
+&lt;img src=&quot;&#x2F;posts&#x2F;lerobot_16.webp&quot; alt=&quot;Wandb results&quot; &#x2F;&gt;&lt;&#x2F;p&gt;
+&lt;p&gt;&lt;strong&gt;Results:&lt;&#x2F;strong&gt;&lt;&#x2F;p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Training time:&lt;&#x2F;strong&gt; 2h 16m 19s (successful training)&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;strong&gt;Cost:&lt;&#x2F;strong&gt; $4.66 (inclusive of training I lost)&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;strong&gt;Performance:&lt;&#x2F;strong&gt; IT MOVED T! It had around a ~75% success rate.&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;hr &#x2F;&gt;
+&lt;p&gt;&lt;em&gt;Warning: the following is &lt;strong&gt;completely&lt;&#x2F;strong&gt; autonomous&lt;&#x2F;em&gt;
+&lt;img src=&quot;&#x2F;posts&#x2F;lerobot_11.webp&quot; alt=&quot;3rd Attempt take 1&quot; &#x2F;&gt;
+&lt;img src=&quot;&#x2F;posts&#x2F;lerobot_12.webp&quot; alt=&quot;3rd Attempt take 2&quot; &#x2F;&gt;
+&lt;img src=&quot;&#x2F;posts&#x2F;lerobot_13.webp&quot; alt=&quot;3rd Attempt take 3&quot; &#x2F;&gt;
+&lt;img src=&quot;&#x2F;posts&#x2F;lerobot_14.webp&quot; alt=&quot;3rd Attempt take 4 (only failed one)&quot; &#x2F;&gt;&lt;&#x2F;p&gt;
+&lt;h3 id=&quot;recap&quot;&gt;Recap&lt;&#x2F;h3&gt;
+&lt;p&gt;Wow. This was such an amazing feeling to see that arm work and truly opens my eyes for the breakthroughs that are coming to civilization.&lt;&#x2F;p&gt;
+&lt;p&gt;Obviously, my arm isn&#x27;t perfect. But the trajectory is heading towards a world where you verbally tell your robot to do &lt;strong&gt;anything&lt;&#x2F;strong&gt; and it can do it for you.&lt;&#x2F;p&gt;
+&lt;ul&gt;
+&lt;li&gt;&quot;do my laundry&quot;&lt;&#x2F;li&gt;
+&lt;li&gt;&quot;organize my room&quot;&lt;&#x2F;li&gt;
+&lt;li&gt;&quot;clean the bathroom&quot;&lt;&#x2F;li&gt;
+&lt;li&gt;&quot;inventory the fridge&quot;&lt;&#x2F;li&gt;
+&lt;li&gt;&quot;make me a healthy pb banana smoothie&quot;&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;p&gt;are just a few supremely useful examples that if they were removed would make living just more enjoyable.&lt;&#x2F;p&gt;
+&lt;p&gt;I discussed with my friend what an initial requirement would be a consumer robot and we came up with the following:&lt;&#x2F;p&gt;
+&lt;ul&gt;
+&lt;li&gt;puts dishes in dishwasher&lt;&#x2F;li&gt;
+&lt;li&gt;folds laundry&lt;&#x2F;li&gt;
+&lt;li&gt;gets you a beer (or kombucha for my fellow dd&#x27;s)&lt;&#x2F;li&gt;
+&lt;li&gt;&amp;lt; $1000&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;h2 id=&quot;q-a&quot;&gt;Q&amp;amp;A&lt;&#x2F;h2&gt;
+&lt;p&gt;&lt;strong&gt;Q:&lt;&#x2F;strong&gt; My brother asked a good question - why do we need both a leader and follower arm? Why can&#x27;t you just guide a single arm directly?&lt;&#x2F;p&gt;
+&lt;p&gt;&lt;strong&gt;A:&lt;&#x2F;strong&gt; We&#x27;re using a Vision-Language-Action (VLA) model that learns from visual demonstrations. Having a human hand directly in the scene would interfere with the visual encoding, as the model would learn to expect human hands during execution. The leader-follower setup keeps the demonstration space clean while still capturing natural human movements.&lt;&#x2F;p&gt;
+&lt;hr &#x2F;&gt;
+&lt;h2 id=&quot;next-steps&quot;&gt;Next Steps&lt;&#x2F;h2&gt;
+&lt;ul&gt;
+&lt;li&gt;Explore more complex manipulation tasks&lt;&#x2F;li&gt;
+&lt;li&gt;Explore ugraded arm (bent sheet metal)&lt;&#x2F;li&gt;
+&lt;li&gt;Explore custom camera setup (small claw-mounted)&lt;&#x2F;li&gt;
+&lt;li&gt;Explore better motors
+&lt;ul&gt;
+&lt;li&gt;Ones that are stronger, faster, lighter&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+</content>
+        
+    </entry>
+    <entry xml:lang="en">
+        <title>Plumeria</title>
+        <published>2025-04-01T00:00:00+00:00</published>
+        <updated>2025-04-01T00:00:00+00:00</updated>
+        
+        <author>
+          <name>
+            
+              Unknown
+            
+          </name>
+        </author>
+        
+        <link rel="alternate" type="text/html" href="https://abenstirling.com/plumeria/"/>
+        <id>https://abenstirling.com/plumeria/</id>
+        
+        <content type="html" xml:base="https://abenstirling.com/plumeria/">&lt;p&gt;Perfect date plans.&lt;&#x2F;p&gt;
+&lt;p&gt;&lt;a href=&quot;#&quot;&gt;Learn More →&lt;&#x2F;a&gt;&lt;&#x2F;p&gt;
+</content>
+        
+    </entry>
+    <entry xml:lang="en">
+        <title>Vibe Security</title>
+        <published>2025-04-01T00:00:00+00:00</published>
+        <updated>2025-04-01T00:00:00+00:00</updated>
+        
+        <author>
+          <name>
+            
+              Unknown
+            
+          </name>
+        </author>
+        
+        <link rel="alternate" type="text/html" href="https://abenstirling.com/vibe-security/"/>
+        <id>https://abenstirling.com/vibe-security/</id>
+        
+        <content type="html" xml:base="https://abenstirling.com/vibe-security/">&lt;p&gt;The whole idea of this came from when &lt;a href=&quot;..&#x2F;plumeria&quot;&gt;Plumeria&lt;&#x2F;a&gt; was &quot;hacked&quot; one evening.&lt;&#x2F;p&gt;
+&lt;p&gt;What I mean by hacked is two things:&lt;&#x2F;p&gt;
+&lt;ol&gt;
+&lt;li&gt;Click-jacking&lt;&#x2F;li&gt;
+&lt;li&gt;Rate-limiting
+(some friends were spamming the request endpoint)&lt;&#x2F;li&gt;
+&lt;&#x2F;ol&gt;
+&lt;p&gt;How my workflow went to solve the problem:&lt;&#x2F;p&gt;
+&lt;pre&gt;&lt;code&gt;vulnerability memo -&amp;gt; ai fixes backend -&amp;gt; ai tests backend
+&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;I was blown away at how fast it fixed it. Since these security problems are likely common, the LLMs probably have great references on how to fix.&lt;&#x2F;p&gt;
+&lt;p&gt;Given I had a vibe hackathon coming up, I thought it would be a great hack: a security scanner for all the other vibe coded applications.&lt;&#x2F;p&gt;
+&lt;p&gt;My general plan was to follow the guidance from &lt;a rel=&quot;external&quot; href=&quot;https:&#x2F;&#x2F;docs.replit.com&#x2F;tutorials&#x2F;vibe-code-security-checklist&quot;&gt;this blog from replit&lt;&#x2F;a&gt; in an automated&lt;&#x2F;p&gt;
+&lt;pre&gt;&lt;code&gt;put in url -&amp;gt; run tests -&amp;gt; give score (results too)
+&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+</content>
+        
+    </entry>
+    <entry xml:lang="en">
+        <title>Botion Heavyweight</title>
+        <published>2025-02-01T00:00:00+00:00</published>
+        <updated>2025-02-01T00:00:00+00:00</updated>
+        
+        <author>
+          <name>
+            
+              Unknown
+            
+          </name>
+        </author>
+        
+        <link rel="alternate" type="text/html" href="https://abenstirling.com/botion-heavyweight/"/>
+        <id>https://abenstirling.com/botion-heavyweight/</id>
+        
+        <content type="html" xml:base="https://abenstirling.com/botion-heavyweight/">&lt;p&gt;1lb battlebot. Built in 1 week.&lt;&#x2F;p&gt;
+&lt;p&gt;&lt;a href=&quot;#&quot;&gt;Learn More →&lt;&#x2F;a&gt;&lt;&#x2F;p&gt;
+</content>
+        
+    </entry>
+    <entry xml:lang="en">
+        <title>Circuit Generator</title>
+        <published>2024-03-01T00:00:00+00:00</published>
+        <updated>2024-03-01T00:00:00+00:00</updated>
+        
+        <author>
+          <name>
+            
+              Unknown
+            
+          </name>
+        </author>
+        
+        <link rel="alternate" type="text/html" href="https://abenstirling.com/circuit-generator/"/>
+        <id>https://abenstirling.com/circuit-generator/</id>
+        
+        <content type="html" xml:base="https://abenstirling.com/circuit-generator/">&lt;p&gt;CNN for creating simple LCR circuits from a set of components.&lt;&#x2F;p&gt;
+&lt;p&gt;&lt;a href=&quot;#&quot;&gt;Learn More →&lt;&#x2F;a&gt;&lt;&#x2F;p&gt;
+</content>
+        
+    </entry>
+    <entry xml:lang="en">
+        <title>BotionNFC</title>
+        <published>2024-02-01T00:00:00+00:00</published>
+        <updated>2024-02-01T00:00:00+00:00</updated>
+        
+        <author>
+          <name>
+            
+              Unknown
+            
+          </name>
+        </author>
+        
+        <link rel="alternate" type="text/html" href="https://abenstirling.com/botionnfc/"/>
+        <id>https://abenstirling.com/botionnfc/</id>
+        
+        <content type="html" xml:base="https://abenstirling.com/botionnfc/">&lt;p&gt;Simplest NFC programming app. Open-source and available on the App Store.&lt;&#x2F;p&gt;
+&lt;p&gt;&lt;a href=&quot;#&quot;&gt;Learn More →&lt;&#x2F;a&gt;&lt;&#x2F;p&gt;
+</content>
+        
+    </entry>
+    <entry xml:lang="en">
+        <title>Opentag</title>
+        <published>2024-01-01T00:00:00+00:00</published>
+        <updated>2024-01-01T00:00:00+00:00</updated>
+        
+        <author>
+          <name>
+            
+              Unknown
+            
+          </name>
+        </author>
+        
+        <link rel="alternate" type="text/html" href="https://abenstirling.com/opentag/"/>
+        <id>https://abenstirling.com/opentag/</id>
+        
+        <content type="html" xml:base="https://abenstirling.com/opentag/">&lt;p&gt;Open source alternative to Apple&#x27;s AirTags, providing a customizable and privacy-focused solution for tracking belongings using Ultra-Wideband technology.&lt;&#x2F;p&gt;
+&lt;p&gt;&lt;a href=&quot;#&quot;&gt;Learn More →&lt;&#x2F;a&gt;&lt;&#x2F;p&gt;
+</content>
+        
+    </entry>
+    <entry xml:lang="en">
+        <title>Botion Cards</title>
+        <published>2023-09-01T00:00:00+00:00</published>
+        <updated>2023-09-01T00:00:00+00:00</updated>
+        
+        <author>
+          <name>
+            
+              Unknown
+            
+          </name>
+        </author>
+        
+        <link rel="alternate" type="text/html" href="https://abenstirling.com/botion-cards/"/>
+        <id>https://abenstirling.com/botion-cards/</id>
+        
+        <content type="html" xml:base="https://abenstirling.com/botion-cards/">&lt;p&gt;I wanted to fuse my electronic design with networking, so I made a NFC-powered business card.&lt;&#x2F;p&gt;
+&lt;p&gt;I have also published the &lt;a rel=&quot;external&quot; href=&quot;https:&#x2F;&#x2F;abenstirling.com&#x2F;posts&#x2F;botionnfc&#x2F;&quot;&gt;app to program them&lt;&#x2F;a&gt;, available on the App Store.&lt;&#x2F;p&gt;
+&lt;p&gt;I was excited to see the &lt;a rel=&quot;external&quot; href=&quot;https:&#x2F;&#x2F;jacobsschool.ucsd.edu&#x2F;envision&#x2F;team-building&quot;&gt;Envision Makerspace&lt;&#x2F;a&gt; pilot them for their team building events!&lt;&#x2F;p&gt;
+&lt;p&gt;I have currently archived them due to my lack of marketing abilities, but will make them for my favorite co-workers in the future.&lt;&#x2F;p&gt;
+</content>
+        
+    </entry>
+    <entry xml:lang="en">
+        <title>Split Keyboard</title>
+        <published>2023-06-01T00:00:00+00:00</published>
+        <updated>2023-06-01T00:00:00+00:00</updated>
+        
+        <author>
+          <name>
+            
+              Unknown
+            
+          </name>
+        </author>
+        
+        <link rel="alternate" type="text/html" href="https://abenstirling.com/split-keyboard/"/>
+        <id>https://abenstirling.com/split-keyboard/</id>
+        
+        <content type="html" xml:base="https://abenstirling.com/split-keyboard/">&lt;p&gt;I built a split keyboard with my friend
+&lt;a rel=&quot;external&quot; href=&quot;https:&#x2F;&#x2F;github.com&#x2F;AriYoung00&quot;&gt;Ari&lt;&#x2F;a&gt;.&lt;&#x2F;p&gt;
+&lt;hr &#x2F;&gt;
+&lt;h3 id=&quot;bom&quot;&gt;BOM&lt;&#x2F;h3&gt;
+&lt;table&gt;&lt;thead&gt;&lt;tr&gt;&lt;th&gt;Part&lt;&#x2F;th&gt;&lt;th&gt;Link&lt;&#x2F;th&gt;&lt;th&gt;Price&lt;&#x2F;th&gt;&lt;&#x2F;tr&gt;&lt;&#x2F;thead&gt;&lt;tbody&gt;
+&lt;tr&gt;&lt;td&gt;Switches&lt;&#x2F;td&gt;&lt;td&gt;https:&#x2F;&#x2F;www.amazon.com&#x2F;Matcha-Switches-Mechanical-Keyboard-Linear&#x2F;dp&#x2F;B0BJ2266X4&lt;&#x2F;td&gt;&lt;td&gt;$20&lt;&#x2F;td&gt;&lt;&#x2F;tr&gt;
+&lt;tr&gt;&lt;td&gt;Stablizers&lt;&#x2F;td&gt;&lt;td&gt;https:&#x2F;&#x2F;www.amazon.com&#x2F;GLORIOUS-Stabilizer-Mechanical-Keyboards-Compatible&#x2F;dp&#x2F;B09MZKFLXP&#x2F;&lt;&#x2F;td&gt;&lt;td&gt;$16&lt;&#x2F;td&gt;&lt;&#x2F;tr&gt;
+&lt;tr&gt;&lt;td&gt;Caps&lt;&#x2F;td&gt;&lt;td&gt;https:&#x2F;&#x2F;www.amazon.com&#x2F;Guffercty-kred-Keycaps-Keyboards-Mechanical&#x2F;dp&#x2F;B0B48RDDZT&lt;&#x2F;td&gt;&lt;td&gt;$20&lt;&#x2F;td&gt;&lt;&#x2F;tr&gt;
+&lt;tr&gt;&lt;td&gt;Wood&lt;&#x2F;td&gt;&lt;td&gt;https:&#x2F;&#x2F;www.walmart.com&#x2F;ip&#x2F;Wenge-Exotic-Hardwood-Turning-Stock-3-4-x-3-x-24&#x2F;150520201&lt;&#x2F;td&gt;&lt;td&gt;$37&lt;&#x2F;td&gt;&lt;&#x2F;tr&gt;
+&lt;tr&gt;&lt;td&gt;PCB&lt;&#x2F;td&gt;&lt;td&gt;https:&#x2F;&#x2F;keeb.io&#x2F;collections&#x2F;sinc&#x2F;products&#x2F;sinc-split-staggered-75-keyboard&lt;&#x2F;td&gt;&lt;td&gt;$85&lt;&#x2F;td&gt;&lt;&#x2F;tr&gt;
+&lt;tr&gt;&lt;td&gt;Cord&lt;&#x2F;td&gt;&lt;td&gt;https:&#x2F;&#x2F;keeb.io&#x2F;collections&#x2F;diy-parts&#x2F;products&#x2F;coiled-usb-c-to-usb-c-cable&lt;&#x2F;td&gt;&lt;td&gt;$4&lt;&#x2F;td&gt;&lt;&#x2F;tr&gt;
+&lt;tr&gt;&lt;td&gt;Rubber Feet&lt;&#x2F;td&gt;&lt;td&gt;https:&#x2F;&#x2F;www.amazon.com&#x2F;Self-Adhesive-Bumper-82-Piece-Spherical-Square&#x2F;dp&#x2F;B06XCLYL53&#x2F;&lt;&#x2F;td&gt;&lt;td&gt;$8&lt;&#x2F;td&gt;&lt;&#x2F;tr&gt;
+&lt;tr&gt;&lt;td&gt;&lt;&#x2F;td&gt;&lt;td&gt;GRAND TOTAL:&lt;&#x2F;td&gt;&lt;td&gt;~$190&lt;&#x2F;td&gt;&lt;&#x2F;tr&gt;
+&lt;&#x2F;tbody&gt;&lt;&#x2F;table&gt;
+&lt;hr &#x2F;&gt;
+&lt;p&gt;Below is a photo montage of the build!&lt;&#x2F;p&gt;
+&lt;p&gt;&lt;img src=&quot;&#x2F;images&#x2F;keeb_1.webp&quot; alt=&quot;Keyboard Build Process&quot; &#x2F;&gt;
+&lt;img src=&quot;&#x2F;images&#x2F;keeb_2.webp&quot; alt=&quot;Keyboard Build Process&quot; &#x2F;&gt;
+&lt;img src=&quot;&#x2F;images&#x2F;keeb_4.webp&quot; alt=&quot;Keyboard Build Process&quot; &#x2F;&gt;
+&lt;img src=&quot;&#x2F;images&#x2F;keeb_5.webp&quot; alt=&quot;Keyboard Build Process&quot; &#x2F;&gt;
+&lt;img src=&quot;&#x2F;images&#x2F;keeb_6.webp&quot; alt=&quot;Keyboard Build Process&quot; &#x2F;&gt;
+&lt;img src=&quot;&#x2F;images&#x2F;keeb_7.webp&quot; alt=&quot;Keyboard Build Process&quot; &#x2F;&gt;
+&lt;img src=&quot;&#x2F;images&#x2F;keeb_9.webp&quot; alt=&quot;Keyboard Build Process&quot; &#x2F;&gt;
+&lt;img src=&quot;&#x2F;images&#x2F;keeb_10.webp&quot; alt=&quot;Keyboard Build Process&quot; &#x2F;&gt;&lt;&#x2F;p&gt;
+</content>
+        
+    </entry>
+    <entry xml:lang="en">
+        <title>Coffee Table</title>
+        <published>2023-05-01T00:00:00+00:00</published>
+        <updated>2023-05-01T00:00:00+00:00</updated>
+        
+        <author>
+          <name>
+            
+              Unknown
+            
+          </name>
+        </author>
+        
+        <link rel="alternate" type="text/html" href="https://abenstirling.com/coffee-table/"/>
+        <id>https://abenstirling.com/coffee-table/</id>
+        
+        <content type="html" xml:base="https://abenstirling.com/coffee-table/">&lt;p&gt;I worked with the best welder I knew to pull off this beautiful piece of furniture.&lt;&#x2F;p&gt;
+</content>
+        
+    </entry>
+    <entry xml:lang="en">
+        <title>Pick-and-place machine</title>
+        <published>2023-04-01T00:00:00+00:00</published>
+        <updated>2023-04-01T00:00:00+00:00</updated>
+        
+        <author>
+          <name>
+            
+              Unknown
+            
+          </name>
+        </author>
+        
+        <link rel="alternate" type="text/html" href="https://abenstirling.com/pick-and-place-machine/"/>
+        <id>https://abenstirling.com/pick-and-place-machine/</id>
+        
+        <content type="html" xml:base="https://abenstirling.com/pick-and-place-machine/">&lt;p&gt;Custom pick-and-place machine for assembling PCBs.&lt;&#x2F;p&gt;
+&lt;p&gt;&lt;a href=&quot;#&quot;&gt;Learn More →&lt;&#x2F;a&gt;&lt;&#x2F;p&gt;
+</content>
+        
+    </entry>
+    <entry xml:lang="en">
+        <title>DeepWater Exploration</title>
+        <published>2022-01-01T00:00:00+00:00</published>
+        <updated>2022-01-01T00:00:00+00:00</updated>
+        
+        <author>
+          <name>
+            
+              Unknown
+            
+          </name>
+        </author>
+        
+        <link rel="alternate" type="text/html" href="https://abenstirling.com/deepwater-exploration/"/>
+        <id>https://abenstirling.com/deepwater-exploration/</id>
+        
+        <content type="html" xml:base="https://abenstirling.com/deepwater-exploration/">&lt;p&gt;Autonomous underwater vehicle designed for deep sea exploration and data collection, featuring advanced sensor integration and robust pressure housing.&lt;&#x2F;p&gt;
+&lt;p&gt;&lt;a href=&quot;#&quot;&gt;Learn More →&lt;&#x2F;a&gt;&lt;&#x2F;p&gt;
+</content>
+        
+    </entry>
+    <entry xml:lang="en">
+        <title>Autoprint</title>
+        <published>2021-06-01T00:00:00+00:00</published>
+        <updated>2021-06-01T00:00:00+00:00</updated>
+        
+        <author>
+          <name>
+            
+              Unknown
+            
+          </name>
+        </author>
+        
+        <link rel="alternate" type="text/html" href="https://abenstirling.com/autoprint/"/>
+        <id>https://abenstirling.com/autoprint/</id>
+        
+        <content type="html" xml:base="https://abenstirling.com/autoprint/">&lt;p&gt;We tried to simplify 3D printing. We developed a functional product and had an &lt;a rel=&quot;external&quot; href=&quot;https:&#x2F;&#x2F;www.kickstarter.com&#x2F;projects&#x2F;autoprint&#x2F;autoprint-one-3d-print-in-seconds?ref=discovery&amp;amp;term=autoprint&quot;&gt;unsuccessful Kickstarter campaign&lt;&#x2F;a&gt;.&lt;&#x2F;p&gt;
+</content>
+        
+    </entry>
+    <entry xml:lang="en">
+        <title>FRC Team NOMAD</title>
+        <published>2017-07-28T00:00:00+00:00</published>
+        <updated>2017-07-28T00:00:00+00:00</updated>
+        
+        <author>
+          <name>
+            
+              Unknown
+            
+          </name>
+        </author>
+        
+        <link rel="alternate" type="text/html" href="https://abenstirling.com/frc-robots/"/>
+        <id>https://abenstirling.com/frc-robots/</id>
+        
+        <content type="html" xml:base="https://abenstirling.com/frc-robots/">&lt;p&gt;In 2017, I was a freshman in high school.&lt;&#x2F;p&gt;
+&lt;p&gt;My parents heard about a family that was moving back from out of the country, and they their family was looking to start a team here.&lt;&#x2F;p&gt;
+&lt;p&gt;Initially, I didn&#x27;t really understand what it was about, so my parents encouraged me to pursue it.&lt;&#x2F;p&gt;
+&lt;p&gt;Then Kickoff for the 2018 season came around, and I was hooked. I mean I was really hooked.&lt;&#x2F;p&gt;
+&lt;p&gt;I started off on the mechanical team, where I was figuring out what CAD was and really how things go together in a robust way.&lt;&#x2F;p&gt;
+&lt;p&gt;The season ended, and we were the highest-ranked rookie team in our San Diego region.&lt;&#x2F;p&gt;
+&lt;p&gt;Then I led the mechanical team for the 2019 season, where we actually won the San Diego Regional.
+&lt;img src=&quot;&#x2F;posts&#x2F;frc_1.webp&quot; alt=&quot;FRC Team NOMAD&quot; &#x2F;&gt;&lt;&#x2F;p&gt;
+&lt;p&gt;I was the team captain for the 2020 season. I put in my mental reps that summer and learned a lot about how to lead a team, and what to focus on and what not to focus on.
+&lt;img src=&quot;&#x2F;posts&#x2F;frc_2.webp&quot; alt=&quot;FRC Team NOMAD&quot; &#x2F;&gt;
+&lt;img src=&quot;&#x2F;posts&#x2F;frc_3.webp&quot; alt=&quot;FRC Team NOMAD&quot; &#x2F;&gt;
+I put in ~300 hours that season, and we had a bot that could do the balanced climb which was practically all you needed to win in the earlier weeks. It could also shoot the balls into the high goal, which was a huge plus.
+&lt;img src=&quot;&#x2F;posts&#x2F;frc_4.webp&quot; alt=&quot;FRC Team NOMAD&quot; &#x2F;&gt;&lt;&#x2F;p&gt;
+&lt;p&gt;We didn&#x27;t get to compete because of BOVID-19. We went undefeated: &lt;code&gt;0-0-0&lt;&#x2F;code&gt;.
+&lt;img src=&quot;&#x2F;posts&#x2F;frc_5.webp&quot; alt=&quot;FRC Team NOMAD&quot; &#x2F;&gt;
+&lt;img src=&quot;&#x2F;posts&#x2F;frc_6.webp&quot; alt=&quot;FRC Team NOMAD&quot; &#x2F;&gt;&lt;&#x2F;p&gt;
+&lt;p&gt;I was the team captain for the following season, and really focused on making training materials for the new members. I also made a lot of videos to help them understand the game and how to play it.&lt;&#x2F;p&gt;
+&lt;p&gt;I was finally moving on at this point... it was a bittersweet moment. I had been with the team for 4 years, and I didn&#x27;t have a satisfying success to end on. But this honestly might have been better because it is still driving me to prove myself as an engineer and leader.&lt;&#x2F;p&gt;
+&lt;p&gt;&lt;img src=&quot;&#x2F;posts&#x2F;frc_7.webp&quot; alt=&quot;FRC Team NOMAD&quot; &#x2F;&gt;
+I am still best friends with many of my teammates, and am eternally grateful for the experience. Go NOMAD!&lt;&#x2F;p&gt;
+</content>
+        
+    </entry>
+</feed>

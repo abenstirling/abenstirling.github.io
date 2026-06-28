@@ -1,0 +1,355 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <!-- Google tag (gtag.js) -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-3YPTGE6JH6"></script>
+        <script>
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'G-3YPTGE6JH6');
+        </script>
+        <meta charset="UTF-8">
+        <meta content="IE=edge" http-equiv="X-UA-Compatible"/>
+        <meta content="text/html; charset=UTF-8" http-equiv="content-type"/>
+        <meta content="width=device-width, initial-scale=1" name="viewport"/>
+
+        
+        
+        
+
+        
+
+        
+
+        
+
+        
+        
+        
+
+        <title>Ben Stirling - traces</title>
+        
+        <meta name="title" content="Ben Stirling - traces">
+        
+        
+        <meta name="generator" content="Zola v0.16.1">
+
+        <meta property="og:type" content="website">
+        <meta property="og:url" content="https://abenstirling.com/traces/">
+        <meta property="og:site_name" content="">
+        <meta property="og:title" content="Ben Stirling - traces">
+        
+        
+
+        
+        
+        <meta property="twitter:card" content="summary_large_image">
+        <meta property="twitter:url" content="https://abenstirling.com/traces/">
+        <meta property="twitter:title" content="Ben Stirling - traces">
+        
+        
+        
+        
+        <link rel="canonical" href="https://abenstirling.com/traces/">
+        <link rel="shortcut icon" type="image/x-icon" href="https://abenstirling.com/images/logo.ico">
+        <script type="application/ld+json">
+            {
+                
+                "url":"https://abenstirling.com/traces/",
+                "@type":"WebSite",
+                "headline":"Ben Stirling - traces",
+                "name":"Ben Stirling - traces",
+                
+                "@context":"https://schema.org"
+            }
+        </script>
+        
+        
+        
+        <link rel="alternate" type="application/atom+xml" title="RSS" href="https://abenstirling.com/atom.xml">
+        
+        
+
+        <link rel="stylesheet" href="https://abenstirling.com/style.css"/>
+        <link rel="stylesheet" href="https://abenstirling.com/custom.css"/>
+        
+    </head>
+    <body theme="auto">
+        <div class="w">
+            <header>
+                
+                
+<p><a href="..">..</a>/traces</p>
+<p class="post-meta">
+    <time datetime="2026-04-01">2026-04-01</time>
+</p>
+<h1>traces</h1>
+
+            </header>
+            <main class="page-content" aria-label="Content">
+                
+
+
+
+<p>TO-DO:</p>
+<ul>
+<li><input disabled="" type="checkbox"/>
+add in the links / photos</li>
+<li><input disabled="" type="checkbox"/>
+discuss w/ nicco</li>
+<li><input disabled="" type="checkbox"/>
+get traces in a state to open-source
+<ul>
+<li><input disabled="" type="checkbox"/>
+remove the website</li>
+<li><input disabled="" type="checkbox"/>
+remove the stripe</li>
+<li><input disabled="" type="checkbox"/>
+publish for a new repo</li>
+<li><input disabled="" type="checkbox"/>
+have the following
+<ul>
+<li><input disabled="" type="checkbox"/>
+mcp
+<ul>
+<li><input disabled="" type="checkbox"/>
+w/ w/o agent</li>
+</ul>
+</li>
+<li><input disabled="" type="checkbox"/>
+kicad extension working</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p>I have been getting back into hardware again. It is so frustrating its fun.</p>
+<p>I've noticed some pain-points in the the process, and developed a tool with a friend that is quite useful.</p>
+<p>I believe there are two valuable aspects to PCB design that can be automated with:</p>
+<ol>
+<li>Part sourcing</li>
+<li>Semantic Rule Check (SRC)</li>
+</ol>
+<p><strong>traces</strong> is four pieces that form one loop: the <strong>mcp</strong> grounds an LLM in real supplier data so it can actually find parts, the <strong>KiCad extension</strong> uses that to populate your schematic so it becomes the source of truth, a tuned <strong>agent</strong> makes the sourcing cheap and fast enough to feel instant, and the <strong>SRC</strong> reads the now-complete schematic to catch the semantic bugs ERC can't. Source the parts → fill the schematic → check the schematic.</p>
+<h3 id="part-sourcing">Part Sourcing</h3>
+<hr />
+<p>LLMs are horrible at finding parts for a project, mostly because all the part information are hosted on a few distributor sites that these labs weren't able to train on.</p>
+<p>Let us say there are three main suppliers for electronic parts:</p>
+<ul>
+<li>Digikey</li>
+<li>Mouser</li>
+<li>LCSC</li>
+</ul>
+<p>The idea: ground a LLM query with real data from the supplier site.</p>
+<p>This is the <strong>traces mcp</strong>.</p>
+<p>It is very simple. You connect your LLM to the mcp, and ask it for a part.</p>
+<p>Ok very useful. <strong>Use it- its open-source.</strong></p>
+<p>Wouldn't it be nice if it could just populate the information so you can use the schematic as the source of truth so you didn't have to run around copy/pasting data...</p>
+<h3 id="kicad-extension">KiCad Extension</h3>
+<hr />
+<p>Imagine if your schematic was fully reconciled:</p>
+<ul>
+<li>each part had a</li>
+<li>each part had a datasheet downloaded locally</li>
+<li>each part had a price</li>
+</ul>
+<p>If you don't have all the information filled, don't worry. Press <code>Source</code> and</p>
+<p>![[Pasted image 20260620174134.png]]</p>
+<p>But you might have noticed, there needs to be a LLM to run the query in order to fill the proper information?</p>
+<h3 id="traces-agent-eval">traces agent / eval</h3>
+<hr />
+<p>That <code>Source</code> button has to call <em>something</em>. The first version handed the request to a general-purpose Claude agent and let it drive the supplier APIs.</p>
+<p>It worked, but it was ~$0.10 per part. That doesn't scale when a board has 80 parts.</p>
+<p>Oh, and it could take up to a minute per part. Horrid. I don't have to have taste to know that is trash UX — if anything loads for more than 5 seconds my intuition is that it's borked.</p>
+<p>So we treated model choice as a benchmark instead of a default. The sourcing work is small and well-defined — take a natural-language request, call a supplier tool, return a ranked in-stock part — so a frontier model is overkill. OpenRouter let us swap models behind one API and race them on the exact same workload:</p>
+<pre><code data-lang="python"># bench.py — (model id, why test it, approx $/Mtok in/out)
+MODELS = [
+    (&quot;google/gemini-3.1-flash-lite&quot;,             &quot;Fast, cheap, Google-native tools, 1M ctx&quot;,  &quot;$0.25 / $1.50&quot;),
+    (&quot;google/gemini-3-flash-preview&quot;,            &quot;More accurate than Lite, agentic focus&quot;,    &quot;$0.50 / $3&quot;),
+    (&quot;deepseek/deepseek-v4-flash&quot;,               &quot;Best non-Google cheap MCP executor&quot;,        &quot;~$0.13 / ~$0.26&quot;),
+    (&quot;qwen/qwen3-coder-flash&quot;,                   &quot;Code/tool agentic workflows&quot;,               &quot;$0.195 / $0.975&quot;),
+    (&quot;x-ai/grok-4.1-fast&quot;,                       &quot;Strong real-world tool calling, 2M ctx&quot;,    &quot;~$1.25 / $2.50&quot;),
+    (&quot;mistralai/mistral-small-3.2-24b-instruct&quot;, &quot;Very cheap, function calling + structured&quot;, &quot;$0.075 / $0.20&quot;),
+    (&quot;openai/gpt-oss-120b&quot;,                      &quot;Cheap planner/validator/JSON-repair&quot;,       &quot;~$0.039 / ~$0.18&quot;),
+    (&quot;z-ai/glm-4.6&quot;,                             &quot;Purpose-built-ish for tool use, mid tier&quot;,  &quot;~$0.50 / ~$2.00&quot;),
+    (&quot;inclusionai/ring-2.6-1t&quot;,                  &quot;Long-horizon tool agent&quot;,                   &quot;~$0.075 / $0.625&quot;),
+    (&quot;google/gemini-3.5-flash&quot;,                  &quot;Higher-end Google Flash lane&quot;,              &quot;~$1.50 / $9&quot;),
+]
+</code></pre>
+<p>The things we cared about, in order: <strong>accuracy, then cost, then speed.</strong></p>
+<p>The harness spins up an isolated API + worker pair per model (unique queue and port so it never collides with a running stack), then runs the same sourcing eval <code>TRIES</code> times. The eval sources one real part — an <code>STM32G491C</code> in <code>LQFP48</code> — across all three suppliers (JLCPCB, Digi-Key, Mouser):</p>
+<pre><code data-lang="python"># eval.py
+TIMEOUT_S = 30   # hard cutoff — job is killed after this
+SLOW_S    = 15   # pass/fail threshold
+
+PART = &quot;STM32G491C&quot;
+FOOTPRINT = &quot;LQFP48&quot;
+</code></pre>
+<p>A try "passes" only if it returns a real part number <em>under</em> the 15s threshold; a timeout counts as the full 30s, so flaky or slow models sink to the bottom automatically. Models are ranked by total wall time across all tries, accuracy as the tiebreak:</p>
+<pre><code data-lang="python">ranked = sorted(results, key=lambda r: (r[&quot;grand_total&quot;], -r[&quot;total_passed&quot;]))
+</code></pre>
+<p>Our results:</p>
+<table><thead><tr><th>#</th><th>Model</th><th style="text-align: right">Avg/try</th><th style="text-align: center">Passed</th><th>$/Mtok (in/out)</th></tr></thead><tbody>
+<tr><td><em>TODO: paste the bench leaderboard output here</em></td><td></td><td style="text-align: right"></td><td style="text-align: center"></td><td></td></tr>
+</tbody></table>
+<p>Net effect: dropping from a general-purpose agent to a benchmarked Flash-class model gave us a <strong>~2 order-of-magnitude improvement in both cost and latency per part</strong> — from ~$0.10 and up-to-a-minute down to fractions of a cent and a couple of seconds.</p>
+<h3 id="semantic-rule-check-src">Semantic Rule Check (SRC)</h3>
+<hr />
+<p>You already run a Design Rule Check (DRC) and Electrical Rule Check (ERC). Both are mechanical: spacing, connectivity, unconnected pins. Neither one reads your design.</p>
+<p>I would like to propose a third: the <strong>Semantic Rule Check (SRC)</strong> — the class of bugs that pass DRC and ERC clean but are still wrong.</p>
+<p>LLMs are good at language, so why not just have it find</p>
+<ul>
+<li>rotated a usb-c connector 180* and now the <code>d+</code> is connected to the <code>d-</code>![[Pasted image 20260620172340.png]]</li>
+<li>you change a netlist label from <code>CAN_RXD</code> to <code>CAN_RX</code> and don't update all instances</li>
+<li>check the rating of the passives for power-related things</li>
+</ul>
+<h2 id="ok-those-are-basic-imagine-if-the">Ok those are basic. Imagine if the</h2>
+<p>Why now?</p>
+<ol>
+<li>KiCad is becoming widely adopted as a free and open-source EDA that is super capable</li>
+<li>It is a local program with a CLI, and its files are just plain text</li>
+<li><strong>You can use an agent like Claude Code or Codex to actually make the changes once they are detected!</strong></li>
+</ol>
+<h3 id="looking-forward">Looking Forward</h3>
+<hr />
+<p>"Automating electrical engineering" would be the natural progression of these ideas.</p>
+<p>Economically, this is a juicy opportunity, and the value shows up in two places.</p>
+<p><strong>The tools are expensive.</strong> A seat of Altium runs ~$4k–$10k/yr; Siemens (Xpedition / Capital) is enterprise-quote territory north of that. The market already pays a lot for software that helps engineers not make mistakes — and none of it reads the design the way an LLM can.</p>
+<p><strong>The mistakes are more expensive than the tools.</strong> The real cost isn't the license, it's the respin. Walk one through:</p>
+<ul>
+<li>A semantic bug — a flipped USB-C connector, an underrated cap on a power rail — passes DRC and ERC clean and ships.</li>
+<li>You catch it on the bench. Now you eat a new fab + assembly run and the lead time that comes with it: call it ~2–4 weeks of slip plus ~10–20 hours of engineering time to diagnose, fix, and re-review at $100/hr.</li>
+<li>If it slipped into a production batch instead — say 1,000 boards at ~$100 of raw material each — that's up to <strong>$100k of inventory</strong> at risk over a single net-name typo.</li>
+</ul>
+<p>So the bet is simple: an SRC that runs in seconds against a fully-populated schematic is cheap insurance against a five-figure mistake. That's the whole pitch.</p>
+<p>Electrical engineers are smart, and their jobs are complicated.</p>
+<p>To list a few of the main roles of their jobs:</p>
+<ul>
+<li><strong>supply chain management</strong></li>
+<li><strong>update / create PCB designs</strong></li>
+<li>physically testing</li>
+</ul>
+<p>The implications of a tool that ensures accuracy of PCB design likely means that there will be a consolidation of chips, biasing on ones that:</p>
+<ol>
+<li>have accessible information (datasheet, footprint, availability)</li>
+<li>have good data about them (i.e. ones on the internet that people use)</li>
+</ol>
+
+
+            </main>
+            <footer>
+                
+<p class="taxonomies">
+
+</p>
+
+                
+                <p>&copy; Ben Stirling 2025</p>
+            </footer>
+        </div>
+        <script>
+            // Add image captions from alt text
+            document.addEventListener('DOMContentLoaded', function() {
+                const images = document.querySelectorAll('.w img[alt]');
+
+                images.forEach(function(img) {
+                    if (img.closest('.project-card')) return;
+                    const altText = img.getAttribute('alt');
+                    if (altText && altText.trim() !== '') {
+                        const caption = document.createElement('div');
+                        caption.className = 'image-caption';
+                        caption.textContent = altText;
+                        
+                        // Insert caption after the image
+                        img.parentNode.insertBefore(caption, img.nextSibling);
+                    }
+                });
+                
+                // Add copy buttons to code blocks
+                const codeBlocks = document.querySelectorAll('pre code');
+                
+                codeBlocks.forEach(function(codeBlock) {
+                    const pre = codeBlock.parentElement;
+                    
+                    // Create copy button
+                    const copyButton = document.createElement('button');
+                    copyButton.className = 'copy-button';
+                    copyButton.textContent = 'Copy';
+                    
+                    // Add click handler
+                    copyButton.addEventListener('click', function() {
+                        const text = codeBlock.textContent;
+                        
+                        navigator.clipboard.writeText(text).then(function() {
+                            copyButton.textContent = 'Copied!';
+                            copyButton.classList.add('copied');
+                            
+                            setTimeout(function() {
+                                copyButton.textContent = 'Copy';
+                                copyButton.classList.remove('copied');
+                            }, 2000);
+                        }).catch(function() {
+                            // Fallback for older browsers
+                            const textArea = document.createElement('textarea');
+                            textArea.value = text;
+                            document.body.appendChild(textArea);
+                            textArea.select();
+                            document.execCommand('copy');
+                            document.body.removeChild(textArea);
+                            
+                            copyButton.textContent = 'Copied!';
+                            copyButton.classList.add('copied');
+                            
+                            setTimeout(function() {
+                                copyButton.textContent = 'Copy';
+                                copyButton.classList.remove('copied');
+                            }, 2000);
+                        });
+                    });
+                    
+                    // Add button to pre element
+                    pre.appendChild(copyButton);
+                });
+            });
+            
+            // Share post function
+            function sharePost() {
+                const shareIcon = document.querySelector('.share-icon');
+                const shareText = document.querySelector('.share-text');
+                const shareButton = document.querySelector('.share-button');
+                const currentUrl = window.location.href;
+                
+                navigator.clipboard.writeText(currentUrl).then(function() {
+                    shareIcon.style.display = 'none';
+                    shareText.style.display = 'inline';
+                    shareButton.classList.add('shared');
+                    
+                    setTimeout(function() {
+                        shareIcon.style.display = 'inline';
+                        shareText.style.display = 'none';
+                        shareButton.classList.remove('shared');
+                    }, 2000);
+                }).catch(function() {
+                    // Fallback for older browsers
+                    const textArea = document.createElement('textarea');
+                    textArea.value = currentUrl;
+                    document.body.appendChild(textArea);
+                    textArea.select();
+                    document.execCommand('copy');
+                    document.body.removeChild(textArea);
+                    
+                    shareIcon.style.display = 'none';
+                    shareText.style.display = 'inline';
+                    shareButton.classList.add('shared');
+                    
+                    setTimeout(function() {
+                        shareIcon.style.display = 'inline';
+                        shareText.style.display = 'none';
+                        shareButton.classList.remove('shared');
+                    }, 2000);
+                });
+            }
+        </script>
+    </body>
+</html>

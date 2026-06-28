@@ -1,0 +1,273 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <!-- Google tag (gtag.js) -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-3YPTGE6JH6"></script>
+        <script>
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'G-3YPTGE6JH6');
+        </script>
+        <meta charset="UTF-8">
+        <meta content="IE=edge" http-equiv="X-UA-Compatible"/>
+        <meta content="text/html; charset=UTF-8" http-equiv="content-type"/>
+        <meta content="width=device-width, initial-scale=1" name="viewport"/>
+
+        
+        
+        
+
+        
+
+        
+
+        
+
+        
+        
+        
+
+        <title>Ben Stirling - B-24 Gym Pass</title>
+        
+        <meta name="title" content="Ben Stirling - B-24 Gym Pass">
+        
+        
+        <meta name="generator" content="Zola v0.16.1">
+
+        <meta property="og:type" content="website">
+        <meta property="og:url" content="https://abenstirling.com/b24-gym-pass/">
+        <meta property="og:site_name" content="">
+        <meta property="og:title" content="Ben Stirling - B-24 Gym Pass">
+        
+        
+
+        
+        
+        <meta property="twitter:card" content="summary_large_image">
+        <meta property="twitter:url" content="https://abenstirling.com/b24-gym-pass/">
+        <meta property="twitter:title" content="Ben Stirling - B-24 Gym Pass">
+        
+        
+        
+        
+        <link rel="canonical" href="https://abenstirling.com/b24-gym-pass/">
+        <link rel="shortcut icon" type="image/x-icon" href="https://abenstirling.com/images/logo.ico">
+        <script type="application/ld+json">
+            {
+                
+                "url":"https://abenstirling.com/b24-gym-pass/",
+                "@type":"WebSite",
+                "headline":"Ben Stirling - B-24 Gym Pass",
+                "name":"Ben Stirling - B-24 Gym Pass",
+                
+                "@context":"https://schema.org"
+            }
+        </script>
+        
+        
+        
+        <link rel="alternate" type="application/atom+xml" title="RSS" href="https://abenstirling.com/atom.xml">
+        
+        
+
+        <link rel="stylesheet" href="https://abenstirling.com/style.css"/>
+        <link rel="stylesheet" href="https://abenstirling.com/custom.css"/>
+        
+    </head>
+    <body theme="auto">
+        <div class="w">
+            <header>
+                
+                
+<p><a href="..">..</a>/b24-gym-pass</p>
+<p class="post-meta">
+    <time datetime="2026-02-01">2026-02-01</time>
+</p>
+<h1>B-24 Gym Pass</h1>
+
+            </header>
+            <main class="page-content" aria-label="Content">
+                
+
+
+
+<p>I have a 24 hour subscription, and checking in really sucks.</p>
+<p>My options are as follows:</p>
+<ol>
+<li>Use 24 hour app (laggy &amp; bad UI)</li>
+<li>Scan my fingerprint and type my phone number on a keypad (ew)</li>
+</ol>
+<p>One day, I looked at my pass and noticed that it was a QR code.</p>
+<p><img src="/posts/b24_1.webp" alt="Example pass" /></p>
+<p>We are going to use this <a rel="external" href="https://www.24hourfitness.com/programs/24go">example pass</a>, to make sure I can still use mine and for you to make your own if you are interested.</p>
+<p>I used another phone to scan the contents of the QR code to see if we could reverse engineer it!</p>
+<p><img src="/posts/b24_2.webp" alt="scanning the qr code" /></p>
+<p>If we look at the content of the QR code we get the following:</p>
+<pre><code data-lang="jsx">{&quot;SR&quot;:&quot;24GO&quot;,&quot;TP&quot;:&quot;P&quot;,&quot;AP&quot;:&quot;1.84.1&quot;,&quot;DT&quot;:1768963389103,&quot;MB&quot;:&quot;MBR123456&quot;,&quot;OS&quot;:&quot;iOS&quot;,&quot;DI&quot;:&quot;a7f3e8c2-91b4-4d6f-b5a2-3c9e7f1d4b6a&quot;}
+</code></pre>
+<p>Ok this is interesting!</p>
+<p>Key things:</p>
+<ul>
+<li><code>DT</code> (presumably datetime)</li>
+<li><code>MB</code> (member id, something I see on the app too, likely not to change)</li>
+</ul>
+<p>I scanned it twice, one a few seconds later than the other and noticed that only the <code>DT</code> changed, and it got a bit larger.</p>
+<h2 id="unix-timestamp">Unix Timestamp</h2>
+<p>A <a rel="external" href="https://en.wikipedia.org/wiki/Unix_time">unix timestamp</a> is a universal timestamp that number of non-leap seconds passed since <code>1970-01-01</code>.</p>
+<p>This is critical because I would guess that the reason why 24 hour has a whole app is to make sure that you can’t have a “stale” qr code that you pass around to your gym buddies.</p>
+<p>I realized something:</p>
+<ul>
+<li>24 checks for <code>time.now</code> &gt; <code>DT</code> + ~1 min to make sure its a fresh pass</li>
+<li>BUT do they check for the <code>time.now</code> &lt; <code>DT</code>???</li>
+</ul>
+<p>So if I set the <code>DT</code> variable, say 2 years in the future, would that just be valid because its just not more than a minute in the past?</p>
+<h2 id="qr-code">QR Code</h2>
+<p>This is a simple python script:</p>
+<pre><code data-lang="jsx">import json, time, qrcode
+DT = int((time.time() + 63072000) * 1000)
+qrcode.make(json.dumps({&quot;SR&quot;:&quot;24GO&quot;,&quot;TP&quot;:&quot;P&quot;,&quot;AP&quot;:&quot;1.84.1&quot;,&quot;DT&quot;:DT,&quot;MB&quot;:&quot;MBR123456&quot;,&quot;OS&quot;:&quot;iOS&quot;,&quot;DI&quot;:&quot;a7f3e8c2-91b4-4d6f-b5a2-3c9e7f1d4b6a&quot;})).save(&quot;gym_pass.png&quot;) 
+</code></pre>
+<p>Single line to run:</p>
+<pre><code data-lang="jsx">uv run --with qrcode[pil] qr.py
+</code></pre>
+<p><img src="/posts/b24_3.webp" alt="our pass qr code, from the future" /></p>
+<h2 id="apple-wallet">Apple Wallet</h2>
+<p>I wanted to setup an application as follows:</p>
+<pre><code data-lang="jsx">scan pass -&gt; generate qr code -&gt; add to pass -&gt; download
+</code></pre>
+<p>But you can't make a dynamic QR code with <code>.pkpass</code> aka apple wallet, so that sucks.</p>
+<p>But since I wasn’t sure about renewing my apple subscription PLUS <a rel="external" href="https://www.npmjs.com/package/react-native-passkit-wallet">react-native-passkit-wallet</a>
+wasn't a trivial setup I decided to go the simplest past forward to get a gym pass in my wallet.</p>
+<p>I used <a rel="external" href="https://apps.apple.com/us/app/pass2u-wallet-add-store-card/id1142473931">Pass2U Wallet</a>. It took ~30 seconds and it looks like this:</p>
+<p><img src="/images/b24gympass_cover.webp" alt="B-24 Gym Pass" /></p>
+<h2 id="the-test">The Test</h2>
+<p>I walked into 24 hour after a week of stalling.</p>
+<p>I was actually afraid I was gonna get banned, somehow.</p>
+<p>But in the end, I walked up. Scanned it, the dude working there said welcome in and yeah it works!</p>
+<h2 id="was-it-worth-it">Was it worth it?</h2>
+<p>Yes, for 3 reasons:</p>
+<ul>
+<li>I deleted the app</li>
+<li>There is joy for me just being the fastest 24 hour member to sign in</li>
+<li>Successfully reverse engineered it</li>
+</ul>
+<p>good thing i don’t go to la fitness, cause they hash that \s</p>
+
+
+            </main>
+            <footer>
+                
+<p class="taxonomies">
+
+</p>
+
+                
+                <p>&copy; Ben Stirling 2025</p>
+            </footer>
+        </div>
+        <script>
+            // Add image captions from alt text
+            document.addEventListener('DOMContentLoaded', function() {
+                const images = document.querySelectorAll('.w img[alt]');
+
+                images.forEach(function(img) {
+                    if (img.closest('.project-card')) return;
+                    const altText = img.getAttribute('alt');
+                    if (altText && altText.trim() !== '') {
+                        const caption = document.createElement('div');
+                        caption.className = 'image-caption';
+                        caption.textContent = altText;
+                        
+                        // Insert caption after the image
+                        img.parentNode.insertBefore(caption, img.nextSibling);
+                    }
+                });
+                
+                // Add copy buttons to code blocks
+                const codeBlocks = document.querySelectorAll('pre code');
+                
+                codeBlocks.forEach(function(codeBlock) {
+                    const pre = codeBlock.parentElement;
+                    
+                    // Create copy button
+                    const copyButton = document.createElement('button');
+                    copyButton.className = 'copy-button';
+                    copyButton.textContent = 'Copy';
+                    
+                    // Add click handler
+                    copyButton.addEventListener('click', function() {
+                        const text = codeBlock.textContent;
+                        
+                        navigator.clipboard.writeText(text).then(function() {
+                            copyButton.textContent = 'Copied!';
+                            copyButton.classList.add('copied');
+                            
+                            setTimeout(function() {
+                                copyButton.textContent = 'Copy';
+                                copyButton.classList.remove('copied');
+                            }, 2000);
+                        }).catch(function() {
+                            // Fallback for older browsers
+                            const textArea = document.createElement('textarea');
+                            textArea.value = text;
+                            document.body.appendChild(textArea);
+                            textArea.select();
+                            document.execCommand('copy');
+                            document.body.removeChild(textArea);
+                            
+                            copyButton.textContent = 'Copied!';
+                            copyButton.classList.add('copied');
+                            
+                            setTimeout(function() {
+                                copyButton.textContent = 'Copy';
+                                copyButton.classList.remove('copied');
+                            }, 2000);
+                        });
+                    });
+                    
+                    // Add button to pre element
+                    pre.appendChild(copyButton);
+                });
+            });
+            
+            // Share post function
+            function sharePost() {
+                const shareIcon = document.querySelector('.share-icon');
+                const shareText = document.querySelector('.share-text');
+                const shareButton = document.querySelector('.share-button');
+                const currentUrl = window.location.href;
+                
+                navigator.clipboard.writeText(currentUrl).then(function() {
+                    shareIcon.style.display = 'none';
+                    shareText.style.display = 'inline';
+                    shareButton.classList.add('shared');
+                    
+                    setTimeout(function() {
+                        shareIcon.style.display = 'inline';
+                        shareText.style.display = 'none';
+                        shareButton.classList.remove('shared');
+                    }, 2000);
+                }).catch(function() {
+                    // Fallback for older browsers
+                    const textArea = document.createElement('textarea');
+                    textArea.value = currentUrl;
+                    document.body.appendChild(textArea);
+                    textArea.select();
+                    document.execCommand('copy');
+                    document.body.removeChild(textArea);
+                    
+                    shareIcon.style.display = 'none';
+                    shareText.style.display = 'inline';
+                    shareButton.classList.add('shared');
+                    
+                    setTimeout(function() {
+                        shareIcon.style.display = 'inline';
+                        shareText.style.display = 'none';
+                        shareButton.classList.remove('shared');
+                    }, 2000);
+                });
+            }
+        </script>
+    </body>
+</html>

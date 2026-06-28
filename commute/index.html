@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>Home - Commute.Site</title>
+    <meta name="description" content="A simple and free way to calculate the commute times of employees for your corporate office.">
+    <link rel="icon" type="image/png" sizes="100x100" href="assets/img/commute.png">
+    <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=ABeeZee">
+    <link rel="stylesheet" href="assets/fonts/font-awesome.min.css">
+    <link rel="stylesheet" href="assets/css/Contact-Form-Clean.css">
+    <link rel="stylesheet" href="assets/css/Features-Boxed.css">
+    <link rel="stylesheet" href="assets/css/Highlight-Clean.css">
+    <link rel="stylesheet" href="assets/css/Modern-Contact-Form.css">
+</head>
+
+<body>
+    <nav class="navbar navbar-light navbar-expand bg-light navigation-clean">
+        <div class="container"><a class="navbar-brand" href="./">Commute.Site</a><button data-toggle="collapse" class="navbar-toggler" data-target="#navcol-1"></button>
+            <div class="collapse navbar-collapse" id="navcol-1"><a class="btn btn-primary active ml-auto" role="button" href="./about.html">About</a></div>
+        </div>
+    </nav>
+    <div class="highlight-clean" style="padding: 13px;">
+        <div class="container">
+            <div class="intro">
+                <h2 class="text-center" style="width: 500;"><br><strong>A simple and free way to calculate commute times of employees for your corporate office</strong><br><br></h2>
+                <p class="text-center" style="padding: 0;width: 500;">Ideal for office relocations, commercial real estate, etc.</p>
+            </div>
+            <div class="buttons"></div>
+        </div>
+    </div>
+    <section class="text-center features-icons bg-light text-center" style="height: 100;width: 100;padding: 0;">
+        <section class="getintouch"></section>
+        <h3 class="text-center m-auto"></h3><span>&nbsp;</span><span>&nbsp;</span><span>&nbsp;</span><span>&nbsp;</span>
+        <div class="container">
+            <div class="row justify-content-center order-2">
+                <div class="col">
+                    <div class="row">
+                        <div class="col-lg-6 my-auto h-100 text-center text-lg-left">
+                            <h3 class="text-center">Step 1</h3>
+                            <h5 class="text-center">Enter the desired office location</h5><div><input id="autocomplete_search" name="autocomplete_search" type="text" class="form-control"
+                            placeholder="Search" /><br></div></div>
+                        <div class="col">
+                            <h3>Step 2</h3>
+                            <h5 class="text-center">Upload a spreadsheet (.xlsx, .xls). Must be formatted like <a href="https://docs.google.com/spreadsheets/d/1gyuukNpPN8qOW5ln0yRWoZKEhO_z50koAtTd__0VMnM/edit?usp=sharing" target="_blank">this example</a></h5><div><input type="file" id="excelfile" />
+                    <input class="button1" style="background-color:  #4daade; /* Green */
+                    border: none;
+                    color: white;
+                    padding: 8px 10px;
+                    border-radius: 10px;
+                    text-align: center;
+                    text-decoration: none;
+                    display: inline-block;
+                    font-size: 16px;
+                    margin: 4px 2px;
+                    transition-duration: 0.4s;
+                    cursor: pointer;" type="button" id="viewfile2" value="Process" onclick="processEverything()" />
+                    </div>
+                </div>
+            </div>
+        </div>
+        <section></section>
+    </section>
+    <section class="showcase"></section>
+    <div class="highlight-clean" style="padding-bottom: 0;"><div><center><div class="col-12">
+                <div id="averageBlock" style="width:100%; display:none;">
+                    <input style="
+  background-color:  #4daade; /* Green */
+  border: none;
+  color: white;
+  padding: 8px 10px;
+  border-radius: 10px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  transition-duration: 0.4s;
+  cursor: pointer;" type="button" onclick="print();"value="Generate PDF"/>
+                    <br>
+                    <br>
+                    <h3>Average Commute Time</h3>
+                    <h4 id="avg"></h4>
+                    <br>
+                </div>
+            </div>
+            <div class="col-12">
+                <div id="mapContainer" style="height:450px;width:50%; display:none;">
+                    <div id="map" style="height:300px"></div>
+                </div>
+            </div>
+            <div class="col-12">
+                <div id="chartContainer" style="display: none;">
+                    <h3>Commute Times</h3>
+                    <div id="canvas-holder" style="width:50%">
+                        <canvas id="chart-area"></canvas>
+                    </div>
+                </div>
+            </div>
+    </center>
+<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.7.7/xlsx.core.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xls/0.7.4-a/xls.core.min.js"></script>
+    <!--<script type="text/javascript"
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAg_q3Ool-Xsh6yeCK6f3ORxQ80eyz5JCU&amp;libraries=places">
+        </script>-->
+
+    <script src="scripts/Chart.js"></script>
+    <script src="scripts/xlsxReader.js"></script>
+    <script src="scripts/results.js"></script>
+    <script scr="scripts/process.js"></script>
+
+    <script
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAg_q3Ool-Xsh6yeCK6f3ORxQ80eyz5JCU&amp;callback=initMap&amp;libraries=places&amp;v=weekly"
+        defer></script>
+<script>
+    var place;
+    var exampleTimes = [4.5, 6, 10, 15, 19, 22, 27, 32, 41, 55]
+    /*window.onload = function () {
+        displayAsPieChart(exampleTimes);
+    };*/
+
+
+    //google.maps.event.addDomListener(window, 'load', initialize);
+    window.onload = initialize;
+    function initialize() {
+        var input = document.getElementById('autocomplete_search');
+        var autocomplete = new google.maps.places.Autocomplete(input);
+        autocomplete.addListener('place_changed', function () {
+            place = autocomplete.getPlace();
+            // place variable will have all the information you are looking for.
+            $('#lat').val(place.geometry['location'].lat());
+            $('#long').val(place.geometry['location'].lng());
+        });
+    }
+
+    function processEverything() {
+        upload(place);
+    }
+</script></div>
+        <div class="container">
+            <div class="intro">
+                <h2 class="text-center"></h2>
+            </div>
+            <div class="buttons"></div>
+        </div><div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.7.7/xlsx.core.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xls/0.7.4-a/xls.core.min.js"></script>
+    <!--<script type="text/javascript"
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAg_q3Ool-Xsh6yeCK6f3ORxQ80eyz5JCU&amp;libraries=places">
+        </script>-->
+
+    <script src="scripts/Chart.js"></script>
+    <script src="scripts/xlsxReader.js"></script>
+    <script src="scripts/results.js"></script>
+    <script scr="scripts/process.js"></script>
+
+    <script
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAg_q3Ool-Xsh6yeCK6f3ORxQ80eyz5JCU&amp;callback=initMap&amp;libraries=places&amp;v=weekly"
+        defer></script>
+    <script async defer src="https://scripts.simpleanalyticscdn.com/latest.js"></script>
+    <noscript><img src="https://queue.simpleanalyticscdn.com/noscript.gif" alt="" /></noscript>
+
+<script>
+    var place;
+    var exampleTimes = [4.5, 6, 10, 15, 19, 22, 27, 32, 41, 55]
+    /*window.onload = function () {
+        displayAsPieChart(exampleTimes);
+    };*/
+
+
+    //google.maps.event.addDomListener(window, 'load', initialize);
+    window.onload = initialize;
+    function initialize() {
+        var input = document.getElementById('autocomplete_search');
+        var autocomplete = new google.maps.places.Autocomplete(input);
+        autocomplete.addListener('place_changed', function () {
+            place = autocomplete.getPlace();
+            // place variable will have all the information you are looking for.
+            $('#lat').val(place.geometry['location'].lat());
+            $('#long').val(place.geometry['location'].lng());
+        });
+    }
+
+    function processEverything() {
+        upload(place);
+    }
+</script></div></div>
+    <footer class="footer bg-light">
+        <section></section>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 my-auto h-100 text-center text-lg-left">
+                    <ul class="list-inline text-center mb-2">
+                        <li class="list-inline-item"><a href="./about.html">About</a></li>
+                        <li class="list-inline-item"><span>⋅</span></li>
+                        <li class="list-inline-item"><a href="./contact.html">Contact</a></li>
+                        <li class="list-inline-item"><span>⋅</span></li>
+                        <li class="list-inline-item"><a href="./terms-of-use.html">Terms of &nbsp;Use</a></li>
+                        <li class="list-inline-item"><span>⋅</span></li>
+                        <li class="list-inline-item"><a href="./privacy-policy.html">Privacy Policy</a></li>
+                    </ul>
+                    <p class="text-center text-muted small mb-4 mb-lg-0">© Commute.Site 2020. All Rights Reserved.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <script src="assets/js/jquery.min.js"></script>
+    <script src="assets/bootstrap/js/bootstrap.min.js"></script>
+    <script src="assets/js/smart-forms.min.js"></script>
+    <script src="assets/js/scripts/Chart.js"></script>
+    <script src="assets/js/scripts/process.js"></script>
+    <script src="assets/js/scripts/results.js"></script>
+    <script src="assets/js/scripts/utils.js"></script>
+    <script src="assets/js/scripts/xlsxReader.js"></script>
+</body>
+
+</html>
