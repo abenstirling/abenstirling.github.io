@@ -3,6 +3,7 @@ sort_by = "date"
 +++
 
 # Ben Stirling
+<p class="homepage-quote">"If you belive in robots, robots will believe in you" - Jim Fan</p>
 
 <a href="https://github.com/abenstirling" target="_blank" rel="noopener noreferrer" class="social-icon" style="text-decoration: none; margin-right: 15px;">
 <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">

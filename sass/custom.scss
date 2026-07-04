@@ -34,10 +34,45 @@ body[theme="dark"] div.w main img {
     display: block !important;
 }
 
-// Fix YouTube videos in dark mode - prevent inversion
+.video-container {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    margin: 20px auto;
+}
+
+.video-container iframe {
+    width: 100%;
+    height: 100%;
+    border: 0;
+    border-radius: 12px;
+    display: block;
+}
+
+// Fix colorful embeds and emoji in dark mode by cancelling the page-wide inversion.
 body[theme="dark"] .video-container iframe,
-body[theme="auto"] .video-container iframe {
-    filter: invert(0) !important;
+body[theme="dark"] .emoji {
+    filter: invert(1) !important;
+}
+
+.emoji {
+    display: inline-block;
+}
+
+.homepage-quote {
+    margin-top: -0.75rem;
+    margin-bottom: 1rem;
+    color: #000;
+    font-family: inherit;
+    font-size: 0.85em;
+    font-style: italic;
+}
+
+@media (prefers-color-scheme: dark) {
+    body[theme="auto"] .video-container iframe,
+    body[theme="auto"] .emoji {
+        filter: invert(1) !important;
+    }
 }
 
 // Remove forward slashes from hr elements
