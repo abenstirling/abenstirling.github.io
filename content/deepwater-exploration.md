@@ -1,12 +1,10 @@
 +++
 title = "DeepWater Exploration"
 date = 2022-01-01
-collaborators = "Jiajer Ho, Brandon Stevens, Warren Chang"
-stats = "Issued Patent, Accepted Evonexus Incubator"
 +++
-I met the team shortly after we winded [Autoprint](../autoprint) down. 
+I met the team shortly after we wound [Autoprint](../autoprint) down. 
 
-It was really exciting product, and I understood the value-add from the robotics standpoint. `good data == good robot`
+It was a really exciting product, and I understood the value-add from the robotics standpoint. `good data == good robot`
 
 <div class="video-container">
   <iframe src="https://www.youtube.com/embed/f1E6d5LGqME" title="DeepWater Exploration video" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
@@ -19,7 +17,7 @@ Notable things:
 - demoed at [connect](https://connect.org/) in petco park 
 - accepted into the best startup accelerator in san diego, [EvoNexus](https://evonexus.org/)
 
-Also alot of fun, a higlight was going to the ROV Mate world championship in Torrance. 
+Also a lot of fun, a highlight was going to the ROV Mate world championship in Torrance. 
 ![DWE](/posts/deepwater_1.webp)
 
 ![DWE](/posts/deepwater_2.webp)

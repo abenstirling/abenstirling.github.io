@@ -1,7 +1,6 @@
 +++
 title = "B-24 Gym Pass"
 date = 2026-02-01
-status = "active"
 +++
 
 I have a 24 hour subscription, and checking in really sucks. 
@@ -36,7 +35,7 @@ I scanned it twice, one a few seconds later than the other and noticed that only
 
 ## Unix Timestamp
 
-A [unix timestamp](https://en.wikipedia.org/wiki/Unix_time) is a universal timestamp that number of non-leap seconds passed since `1970-01-01`. 
+A [unix timestamp](https://en.wikipedia.org/wiki/Unix_time) is a universal timestamp that counts the number of non-leap seconds passed since `1970-01-01`. 
 
 This is critical because I would guess that the reason why 24 hour has a whole app is to make sure that you can’t have a “stale” qr code that you pass around to your gym buddies. 
 
@@ -74,7 +73,7 @@ scan pass -> generate qr code -> add to pass -> download
 But you can't make a dynamic QR code with `.pkpass` aka apple wallet, so that sucks. 
 
 But since I wasn’t sure about renewing my apple subscription PLUS [react-native-passkit-wallet](https://www.npmjs.com/package/react-native-passkit-wallet)
- wasn't a trivial setup I decided to go the simplest past forward to get a gym pass in my wallet. 
+wasn't a trivial setup I decided to go the simplest path forward to get a gym pass in my wallet. 
 
 I used [Pass2U Wallet](https://apps.apple.com/us/app/pass2u-wallet-add-store-card/id1142473931). It took ~30 seconds and it looks like this: 
 

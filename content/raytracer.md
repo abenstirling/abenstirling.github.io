@@ -1,9 +1,6 @@
 +++
 title = "Raytracer"
 date = 2024-03-15
-collaborators = "Nicco Pompili"
-stats = "A grade"
-status = "completed"
 draft = true
 +++
 

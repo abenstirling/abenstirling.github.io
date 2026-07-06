@@ -1,9 +1,6 @@
 +++
 title = "Aeroknob"
 date = 2024-01-01
-collaborators = "Jiajer Ho"
-stats = "20+ units sold"
-status = "active"
 draft = true
 +++
 

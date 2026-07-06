@@ -1,14 +1,13 @@
 +++
 title = "Fingie"
 date = 2026-03-01
-status = "active"
 +++
 
 Typing passwords sucks. 
 
 I have two issues: 
 - I really like having my laptop docked 
-- I like mechancial keyboards 
+- I like mechanical keyboards 
 
 These two desires keep me gated from access to Apple's fingerprint to autofill passwords! Unfair.
 

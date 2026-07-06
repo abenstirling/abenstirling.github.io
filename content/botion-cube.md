@@ -1,9 +1,6 @@
 +++
 title = "Botion Cube"
 date = 2024-03-01
-collaborators = "Anshal Jain, Daniel Weng, Pranav Mehta"
-stats = "A+ Grade"
-status = "completed"
 draft = true
 +++
 

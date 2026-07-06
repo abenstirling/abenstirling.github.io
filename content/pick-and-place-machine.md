@@ -1,13 +1,12 @@
 +++
 title = "Pick-and-place machine"
 date = 2023-04-01
-status = "completed"
 +++
 My goals for 2023 were the following: 
 - get good at PCB design 
 - get good at app development 
 
-Following some of the first PCBs I made, I realized how time consuming and difficult it is to make them by hand. First of all, you can't even trust your design because at first you don't know 
+Following some of the first PCBs I made, I realized how time consuming and difficult it is to make them by hand. First of all, you can't even trust your design. Second of all, you can't trust your assembly. Third of all, you can't trust your software! 
 
 I had been following [Stephen Hawes](https://www.youtube.com/@stephen_hawes) on youtube since 2020, and he was a big driver on why I studied computer engineering. I love the fusion between hardware and software. 
 
@@ -36,4 +35,4 @@ I actually got some contract engineering work doing pnp work, which paid off for
 
 Some highlights: 
 - got kicked out of the makerspace for being too cool (taking up space making cool stuff)
-- started an unoffical pick-and-place club of uc san diego that got 100 unnofficial members, including Stephen Hawes <span class="emoji">😂</span>
+- started an unofficial pick-and-place club of uc san diego that got 100 unofficial members, including Stephen Hawes <span class="emoji">😂</span>

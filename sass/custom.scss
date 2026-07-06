@@ -88,13 +88,17 @@ hr:after {
 pre {
     position: relative;
     border-radius: 8px !important;
-    overflow: hidden;
+    overflow-x: auto;
+    overflow-y: hidden;
 }
 
 pre code {
     border-radius: 8px !important;
     position: relative;
     padding-top: 2.5rem !important;
+    white-space: pre !important;
+    word-break: normal !important;
+    overflow-wrap: normal !important;
 }
 
 // Copy button styling

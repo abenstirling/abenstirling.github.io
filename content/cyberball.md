@@ -2,11 +2,6 @@
 title = 'ECE115: Cyberball'
 date = 2024-04-21
 draft = true
-
-[extra]
-[extra.cover]
-    image = "/posts/cyberball_cover.webp"
-    relative = true
 +++
 
 ## Cyberball - The Cybertruck-Inspired Pinball Machine

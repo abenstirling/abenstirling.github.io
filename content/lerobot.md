@@ -1,12 +1,6 @@
 +++
 title = 'LeRobot'
 date = 2025-06-15
-draft = false
-
-[extra]
-[extra.cover]
-    image = "/images/lerobot_cover.webp"
-    relative = true
 +++
 
 I took a break from robotics after a machine learning project on [semantic navigation](https://github.com/abenstirling/SemanticNavigation). 
@@ -38,7 +32,7 @@ Let me define goals for this project:
 
 **Move-T** is my challenge. The goal is to place the red T on the yellow outline. 
 
-How is something like this possible to do? How 
+How is something like this possible to do?
 
 The magic is in the ACT (Action Chunking Transformer) model that we are training. It takes human demonstration data from teleoperated robots and trains a transformer model to predict sequences of future actions (called 'action chunks') rather than single actions, which reduces error accumulation and enables precise manipulation tasks with minimal training data. I have a picture below that somewhat explains it, but to learn more you can read about [the ALOHA setup](https://tonyzhaozh.github.io/aloha/). 
 
@@ -182,7 +176,7 @@ I discussed with my friend what an initial requirement would be a consumer robot
 
 ## Next Steps
 - Explore more complex manipulation tasks
-- Explore ugraded arm (bent sheet metal)
+- Explore upgraded arm (bent sheet metal)
 - Explore custom camera setup (small claw-mounted)
 - Explore better motors 
     - Ones that are stronger, faster, lighter

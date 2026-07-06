@@ -1,8 +1,6 @@
 +++
 title = "commute.site"
 date = 2019-07-28
-collaborators = "Sam McDowell"
-status = "complete"
 draft = true
 +++
 

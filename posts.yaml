@@ -7,7 +7,7 @@ projects:
       color: "#1B9C85"
     date: "2025-04-01"
     image: ./images/vibe_cover.webp
-    link: https://vibesecurity.co
+    link: https://github.com/abenstirling/VibeSecurity
     collaborators:
       - name: "Eugene Van Der Watt"
         linkedin: "https://www.linkedin.com/in/eugene-van-der-watt-8593a52a8/"
@@ -189,18 +189,6 @@ projects:
       - value: "A"
         unit: "grade"
 
-  - id: coffee-table
-    title: Coffee Table
-    description: I worked with the best welder I knew to pull off this beautiful piece of furniture.
-    status:
-      label: completed
-      color: "#2C7865"
-    date: "2023-05-01"
-    image: ./images/coffeetable_cover.webp
-    collaborators:
-      - name: "Caytre Ede"
-        linkedin: "https://www.linkedin.com/in/caytre-e-6b110b20b/"
-
   - id: botion-nfc
     title: BotionNFC
     description: Simplest NFC programming app. Open-source and available on the App Store.
@@ -209,7 +197,7 @@ projects:
       color: "#2C7865"
     date: "2024-02-01"
     image: ./images/botionnfc_cover.webp
-    link: "https://apps.apple.com/us/app/botionnfc/id6476791734"
+    link: "https://github.com/abenstirling/BotionNFC"
 
   - id: botion
     title: Botion
