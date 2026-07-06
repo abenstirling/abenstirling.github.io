@@ -1,6 +1,9 @@
 +++
 title = "traces"
 date = 2026-04-01
+
+[extra.cover]
+image = "/posts/traces.webp"
 +++
 I have been getting back into hardware again. It is so frustrating its fun. 
 

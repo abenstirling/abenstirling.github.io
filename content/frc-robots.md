@@ -1,6 +1,9 @@
 +++
 title = 'FRC Team NOMAD'
 date = 2017-07-28
+
+[extra.cover]
+image = "/posts/frc_cover.webp"
 +++
 
 In 2017, I was a freshman in high school.

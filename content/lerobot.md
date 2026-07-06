@@ -1,6 +1,9 @@
 +++
 title = 'LeRobot'
 date = 2025-06-15
+
+[extra.cover]
+image = "/images/lerobot_cover.webp"
 +++
 
 I took a break from robotics after a machine learning project on [semantic navigation](https://github.com/abenstirling/SemanticNavigation). 
