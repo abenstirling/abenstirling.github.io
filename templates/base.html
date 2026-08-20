@@ -14,39 +14,39 @@
         <meta content="text/html; charset=UTF-8" http-equiv="content-type"/>
         <meta content="width=device-width, initial-scale=1" name="viewport"/>
 
-        {% if page %}
+        {% if page is defined %}
         {% set title = "Ben Stirling - " ~ page.title %}
         {% else %}
         {% set title = "Ben Stirling" %}
         {% endif %}
 
-        {% if page.extra.author %}
+        {% if page is defined and page.extra.author %}
         {% set author = page.extra.author %}
-        {% elif section.extra.author %}
+        {% elif section is defined and section.extra.author %}
         {% set author = section.extra.author %}
         {% elif config.extra.author %}
         {% set author = config.extra.author %}
         {% endif %}
 
-        {% if page.description %}
+        {% if page is defined and page.description %}
         {% set description = page.description | truncate(length=150) %}
-        {% elif section.description %}
+        {% elif section is defined and section.description %}
         {% set description = section.description | truncate(length=150) %}
         {% elif config.description %}
         {% set description = config.description | truncate(length=150) %}
         {% endif %}
 
-        {% if page.extra.image %}
+        {% if page is defined and page.extra.image %}
         {% set image = get_url(path=page.extra.image, trailing_slash=false) %}
-        {% elif section.extra.image %}
+        {% elif section is defined and section.extra.image %}
         {% set image = get_url(path=section.extra.image, trailing_slash=false) %}
         {% elif config.extra.logo %}
         {% set image = get_url(path=config.extra.logo, trailing_slash=false) %}
         {% endif %}
 
-        {% if page.permalink %}
+        {% if page is defined and page.permalink %}
         {% set url = page.permalink %}
-        {% elif section.permalink %}
+        {% elif section is defined and section.permalink %}
         {% set url = section.permalink %}
         {% elif config.base_url %}
         {% set url = config.base_url %}
@@ -92,11 +92,11 @@
             }
         </script>
         {% endblock metatags %}
-        {% if config.generate_feed %}
         {% block feed %}
+        {% if config.generate_feeds %}
         <link rel="alternate" type="application/atom+xml" title="RSS" href="{{ get_url(path="atom.xml", trailing_slash=false) }}">
-        {% endblock feed %}
         {% endif %}
+        {% endblock feed %}
 {% block css %}
         <link rel="stylesheet" href="{{ get_url(path='style.css', trailing_slash=false) | safe }}"/>
         <link rel="stylesheet" href="{{ get_url(path='custom.css', trailing_slash=false) | safe }}"/>
