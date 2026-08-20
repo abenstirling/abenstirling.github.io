@@ -1,0 +1,236 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <!-- Google tag (gtag.js) -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-3YPTGE6JH6"></script>
+        <script>
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'G-3YPTGE6JH6');
+        </script>
+        <meta charset="UTF-8">
+        <meta content="IE=edge" http-equiv="X-UA-Compatible"/>
+        <meta content="text/html; charset=UTF-8" http-equiv="content-type"/>
+        <meta content="width=device-width, initial-scale=1" name="viewport"/>
+
+        
+        
+        
+
+        
+
+        
+
+        
+
+        
+        
+        
+
+        <title>Ben Stirling - Pick-and-place machine</title>
+        
+        <meta name="title" content="Ben Stirling - Pick-and-place machine">
+        
+        
+        <meta name="generator" content="Zola v0.16.1">
+
+        <meta property="og:type" content="website">
+        <meta property="og:url" content="https://abenstirling.com/pick-and-place-machine/">
+        <meta property="og:site_name" content="">
+        <meta property="og:title" content="Ben Stirling - Pick-and-place machine">
+        
+        
+
+        
+        
+        <meta property="twitter:card" content="summary_large_image">
+        <meta property="twitter:url" content="https://abenstirling.com/pick-and-place-machine/">
+        <meta property="twitter:title" content="Ben Stirling - Pick-and-place machine">
+        
+        
+        
+        
+        <link rel="canonical" href="https://abenstirling.com/pick-and-place-machine/">
+        <link rel="icon" type="image/png" href="https://abenstirling.com/images/favicon.png">
+        <script type="application/ld+json">
+            {
+                
+                "url":"https://abenstirling.com/pick-and-place-machine/",
+                "@type":"WebSite",
+                "headline":"Ben Stirling - Pick-and-place machine",
+                "name":"Ben Stirling - Pick-and-place machine",
+                
+                "@context":"https://schema.org"
+            }
+        </script>
+        
+        
+        
+        <link rel="alternate" type="application/atom+xml" title="RSS" href="https://abenstirling.com/atom.xml">
+        
+        
+
+        <link rel="stylesheet" href="https://abenstirling.com/style.css"/>
+        <link rel="stylesheet" href="https://abenstirling.com/custom.css"/>
+        
+    </head>
+    <body theme="auto">
+        <div class="w">
+            <header>
+                
+                
+<p><a href="..">..</a>/pick-and-place-machine</p>
+<p class="post-meta">
+    <time datetime="2023-04-01">2023-04-01</time>
+</p>
+<h1>Pick-and-place machine</h1>
+
+            </header>
+            <main class="page-content" aria-label="Content">
+                
+
+
+
+<p>My goals for 2023 were the following:</p>
+<ul>
+<li>get good at PCB design</li>
+<li>get good at app development</li>
+</ul>
+<p>Following some of the first PCBs I made, I realized how time consuming and difficult it is to make them by hand. First of all, you can't even trust your design. Second of all, you can't trust your assembly. Third of all, you can't trust your software!</p>
+<p>I had been following <a rel="external" href="https://www.youtube.com/@stephen_hawes">Stephen Hawes</a> on youtube since 2020, and he was a big driver on why I studied computer engineering. I love the fusion between hardware and software.</p>
+<p>Anyways, he open-sourced the <a rel="external" href="https://github.com/opulo-inc/lumenpnp">lumen pnp</a>. I was cheap and built it myself, but you should order it from him.</p>
+<p>On a whim during finals weeks, I ordered all the parts and started building. I printed all the parts in one night, taking up 15 prusa minis.</p>
+<p><img src="/posts/pnp_1.webp" alt="pnp" /></p>
+<p><img src="/posts/pnp_2.webp" alt="pnp" /></p>
+<p><img src="/posts/pnp_3.webp" alt="pnp" /></p>
+<p><img src="/posts/pnp_4.webp" alt="pnp" /></p>
+<p><img src="/posts/pnp_5.webp" alt="pnp" /></p>
+<p>Integration hell was real, but it was mostly my mechanics. I switched to a new version that had linear rails, and that solved a LOT of my software bugs.</p>
+<div class="video-container">
+  <iframe src="https://www.youtube.com/embed/K3m6R3-U0Sc" title="Pick-and-place machine video" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+</div>
+<p>I actually got some contract engineering work doing pnp work, which paid off for the material costs (not time).</p>
+<p>Some highlights:</p>
+<ul>
+<li>got kicked out of the makerspace for being too cool (taking up space making cool stuff)</li>
+<li>started an unofficial pick-and-place club of uc san diego that got 100 unofficial members, including Stephen Hawes <span class="emoji">😂</span></li>
+</ul>
+
+
+            </main>
+            <footer>
+                
+<p class="taxonomies">
+
+</p>
+
+                
+                <p>&copy; Ben Stirling 2025</p>
+            </footer>
+        </div>
+        <script>
+            // Add image captions from alt text
+            document.addEventListener('DOMContentLoaded', function() {
+                const images = document.querySelectorAll('.w img[alt]');
+
+                images.forEach(function(img) {
+                    if (img.closest('.project-card')) return;
+                    const altText = img.getAttribute('alt');
+                    if (altText && altText.trim() !== '') {
+                        const caption = document.createElement('div');
+                        caption.className = 'image-caption';
+                        caption.textContent = altText;
+                        
+                        // Insert caption after the image
+                        img.parentNode.insertBefore(caption, img.nextSibling);
+                    }
+                });
+                
+                // Add copy buttons to code blocks
+                const codeBlocks = document.querySelectorAll('pre code');
+                
+                codeBlocks.forEach(function(codeBlock) {
+                    const pre = codeBlock.parentElement;
+                    
+                    // Create copy button
+                    const copyButton = document.createElement('button');
+                    copyButton.className = 'copy-button';
+                    copyButton.textContent = 'Copy';
+                    
+                    // Add click handler
+                    copyButton.addEventListener('click', function() {
+                        const text = codeBlock.textContent;
+                        
+                        navigator.clipboard.writeText(text).then(function() {
+                            copyButton.textContent = 'Copied!';
+                            copyButton.classList.add('copied');
+                            
+                            setTimeout(function() {
+                                copyButton.textContent = 'Copy';
+                                copyButton.classList.remove('copied');
+                            }, 2000);
+                        }).catch(function() {
+                            // Fallback for older browsers
+                            const textArea = document.createElement('textarea');
+                            textArea.value = text;
+                            document.body.appendChild(textArea);
+                            textArea.select();
+                            document.execCommand('copy');
+                            document.body.removeChild(textArea);
+                            
+                            copyButton.textContent = 'Copied!';
+                            copyButton.classList.add('copied');
+                            
+                            setTimeout(function() {
+                                copyButton.textContent = 'Copy';
+                                copyButton.classList.remove('copied');
+                            }, 2000);
+                        });
+                    });
+                    
+                    // Add button to pre element
+                    pre.appendChild(copyButton);
+                });
+            });
+            
+            // Share post function
+            function sharePost() {
+                const shareIcon = document.querySelector('.share-icon');
+                const shareText = document.querySelector('.share-text');
+                const shareButton = document.querySelector('.share-button');
+                const currentUrl = window.location.href;
+                
+                navigator.clipboard.writeText(currentUrl).then(function() {
+                    shareIcon.style.display = 'none';
+                    shareText.style.display = 'inline';
+                    shareButton.classList.add('shared');
+                    
+                    setTimeout(function() {
+                        shareIcon.style.display = 'inline';
+                        shareText.style.display = 'none';
+                        shareButton.classList.remove('shared');
+                    }, 2000);
+                }).catch(function() {
+                    // Fallback for older browsers
+                    const textArea = document.createElement('textarea');
+                    textArea.value = currentUrl;
+                    document.body.appendChild(textArea);
+                    textArea.select();
+                    document.execCommand('copy');
+                    document.body.removeChild(textArea);
+                    
+                    shareIcon.style.display = 'none';
+                    shareText.style.display = 'inline';
+                    shareButton.classList.add('shared');
+                    
+                    setTimeout(function() {
+                        shareIcon.style.display = 'inline';
+                        shareText.style.display = 'none';
+                        shareButton.classList.remove('shared');
+                    }, 2000);
+                });
+            }
+        </script>
+    </body>
+</html>

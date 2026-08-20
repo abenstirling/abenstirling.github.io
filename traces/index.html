@@ -1,0 +1,322 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <!-- Google tag (gtag.js) -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-3YPTGE6JH6"></script>
+        <script>
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'G-3YPTGE6JH6');
+        </script>
+        <meta charset="UTF-8">
+        <meta content="IE=edge" http-equiv="X-UA-Compatible"/>
+        <meta content="text/html; charset=UTF-8" http-equiv="content-type"/>
+        <meta content="width=device-width, initial-scale=1" name="viewport"/>
+
+        
+        
+        
+
+        
+
+        
+
+        
+
+        
+        
+        
+
+        <title>Ben Stirling - traces</title>
+        
+        <meta name="title" content="Ben Stirling - traces">
+        
+        
+        <meta name="generator" content="Zola v0.16.1">
+
+        <meta property="og:type" content="website">
+        <meta property="og:url" content="https://abenstirling.com/traces/">
+        <meta property="og:site_name" content="">
+        <meta property="og:title" content="Ben Stirling - traces">
+        
+        
+
+        
+        
+        <meta property="twitter:card" content="summary_large_image">
+        <meta property="twitter:url" content="https://abenstirling.com/traces/">
+        <meta property="twitter:title" content="Ben Stirling - traces">
+        
+        
+        
+        
+        <link rel="canonical" href="https://abenstirling.com/traces/">
+        <link rel="icon" type="image/png" href="https://abenstirling.com/images/favicon.png">
+        <script type="application/ld+json">
+            {
+                
+                "url":"https://abenstirling.com/traces/",
+                "@type":"WebSite",
+                "headline":"Ben Stirling - traces",
+                "name":"Ben Stirling - traces",
+                
+                "@context":"https://schema.org"
+            }
+        </script>
+        
+        
+        
+        <link rel="alternate" type="application/atom+xml" title="RSS" href="https://abenstirling.com/atom.xml">
+        
+        
+
+        <link rel="stylesheet" href="https://abenstirling.com/style.css"/>
+        <link rel="stylesheet" href="https://abenstirling.com/custom.css"/>
+        
+    </head>
+    <body theme="auto">
+        <div class="w">
+            <header>
+                
+                
+<p><a href="..">..</a>/traces</p>
+<p class="post-meta">
+    <time datetime="2026-04-01">2026-04-01</time>
+</p>
+<h1>traces</h1>
+
+            </header>
+            <main class="page-content" aria-label="Content">
+                
+
+
+
+<p>I have been getting back into hardware again. It is so frustrating its fun.</p>
+<p>I've noticed some pain-points in the the process, and developed a tool with a friend that is quite useful.</p>
+<p>I believe there are two valuable aspects to PCB design that can be automated with:</p>
+<ol>
+<li>Part sourcing</li>
+<li>Semantic Rule Check (SRC)</li>
+</ol>
+<p><strong>traces</strong> is four pieces that form one loop: the <strong>mcp</strong> grounds an LLM in real supplier data so it can actually find parts, the <strong>KiCad extension</strong> uses that to populate your schematic so it becomes the source of truth, a tuned <strong>agent</strong> makes the sourcing cheap and fast enough to feel instant, and the <strong>SRC</strong> reads the now-complete schematic to catch the semantic bugs ERC can't. Source the parts → fill the schematic → check the schematic.</p>
+<h3 id="part-sourcing">Part Sourcing</h3>
+<p>LLMs are horrible at finding parts for a project, mostly because all the part information are hosted on a few distributor sites that these labs weren't able to train on.</p>
+<p>Let us say there are three main suppliers for electronic parts:</p>
+<ul>
+<li>Digikey</li>
+<li>Mouser</li>
+<li>LCSC</li>
+</ul>
+<p>The idea: ground a LLM query with real data from the supplier site.</p>
+<p>This is the <strong>traces mcp</strong>.</p>
+<p>It is very simple. You connect your LLM to the mcp, and ask it for a part.</p>
+<p>Ok very useful. <strong><a rel="external" href="https://github.com/usetraces/traces">Use it- its open-source.</a></strong></p>
+<p>Wouldn't it be nice if it could just populate the information so you can use the schematic as the source of truth so you didn't have to run around copy/pasting data...</p>
+<h3 id="kicad-extension">KiCad Extension</h3>
+<p>Imagine if your schematic was fully reconciled:</p>
+<ul>
+<li>each symbol has a real part associated with it</li>
+<li>each part has a supplier associated with it</li>
+<li>each part has a qty available</li>
+<li>each part has a datasheet downloaded locally</li>
+<li>each part has a price</li>
+</ul>
+<p>We built a kicad extension where you can do this automatically while still being in your eda.</p>
+<p>If you don't have all the information filled, don't worry. Press <code>Source</code> and it will go through, one by one, until your schematic is complete!</p>
+<p><img src="/posts/traces_source_button.webp" alt="traces" /></p>
+<p>But you might have noticed, there needs to be a LLM to run the query in order to fill the proper information?</p>
+<h3 id="traces-agent-eval">traces agent / eval</h3>
+<p>That <code>Source</code> button has to call <em>something</em>. The first version handed the request to a general-purpose Claude agent and let it drive the supplier APIs.</p>
+<p>It worked, but it was ~$0.10 per part. That doesn't scale when a board has 80 parts.</p>
+<p>Oh, and it could take up to a minute per part. Horrid. I don't have to have taste to know that is trash UX — if anything loads for more than 5 seconds my intuition is that it's borked.</p>
+<p>So we treated model choice as a benchmark instead of a default. The sourcing work is small and well-defined — take a natural-language request, call a supplier tool, return a ranked in-stock part — so a frontier model is overkill. Everything runs behind one OpenAI-compatible API, so the same agent races a local model and a handful of OpenRouter models on the exact same workload:</p>
+<pre><code data-lang="python"># bench.py — &quot;ollama/&quot; routes to the local model; everything else is OpenRouter
+MODELS = [
+    {&quot;id&quot;: &quot;ollama/gemma4&quot;,                &quot;price&quot;: (0.00, 0.00)},   # local, free
+    {&quot;id&quot;: &quot;google/gemini-3.5-flash&quot;,      &quot;price&quot;: (1.50, 9.00)},
+    {&quot;id&quot;: &quot;openai/gpt-5-mini&quot;,            &quot;price&quot;: (0.25, 2.00)},
+    {&quot;id&quot;: &quot;anthropic/claude-haiku-4.5&quot;,   &quot;price&quot;: (1.00, 5.00)},
+    {&quot;id&quot;: &quot;google/gemini-3.1-flash-lite&quot;, &quot;price&quot;: (0.25, 1.50)},   # what the extension ships
+    {&quot;id&quot;: &quot;qwen/qwen3-235b-a22b-2507&quot;,    &quot;price&quot;: (0.09, 0.10)},   # one Chinese model
+]
+</code></pre>
+<p>The things we cared about, in order: <strong>accuracy, then speed, then price.</strong> Each model runs the same three JLCPCB searches — a <code>100nF X7R 0402</code>, a <code>10k 1% 0603</code>, and a <code>low-Rds N-channel MOSFET in SOT-23</code> — three trials each, 54 sourcing calls in total. JLCPCB/LCSC needs no supplier key, so the only cost is the LLM itself. A run "passes" if the winning part matches the request on keywords and footprint, and models are ranked accuracy → median latency → avg cost.</p>
+<p>Our results — 6 models × 3 cases × 3 trials:</p>
+<table><thead><tr><th>Model</th><th style="text-align: center">Accuracy</th><th style="text-align: right">Median speed</th><th style="text-align: right">Avg $/run</th></tr></thead><tbody>
+<tr><td><code>google/gemini-3.1-flash-lite</code> <em>(shipped default)</em></td><td style="text-align: center">100%</td><td style="text-align: right"><strong>5.6s</strong></td><td style="text-align: right">$0.00059</td></tr>
+<tr><td><code>anthropic/claude-haiku-4.5</code></td><td style="text-align: center">100%</td><td style="text-align: right">7.4s</td><td style="text-align: right">$0.00394</td></tr>
+<tr><td><code>qwen/qwen3-235b-a22b-2507</code></td><td style="text-align: center">100%</td><td style="text-align: right">8.0s</td><td style="text-align: right"><strong>$0.00018</strong></td></tr>
+<tr><td><code>openai/gpt-5-mini</code></td><td style="text-align: center">100%</td><td style="text-align: right">20.9s</td><td style="text-align: right">$0.00240</td></tr>
+<tr><td><code>ollama/gemma4</code> <em>(local)</em></td><td style="text-align: center">100%</td><td style="text-align: right">44.7s</td><td style="text-align: right"><strong>$0.00</strong></td></tr>
+<tr><td><code>google/gemini-3.5-flash</code></td><td style="text-align: center">44%</td><td style="text-align: right">18.8s</td><td style="text-align: right">$0.00796</td></tr>
+</tbody></table>
+<p>A few takeaways. The shipped default (<code>gemini-3.1-flash-lite</code>) is the fastest <em>and</em> the most accurate cloud option — the cheap Flash model wins outright. <code>qwen3-235b</code> is nearly as good for ~3× less. The local <code>gemma4</code> matches on accuracy at literally $0, just ~8× slower — so you can run the whole thing offline with no key at all. And bigger isn't better: <code>gemini-3.5-flash</code>, the priciest model here, was the <em>only</em> one to whiff accuracy.</p>
+<p>Net effect: swapping a general-purpose agent for a benchmarked Flash-class model took us from <del>$0.10 and up-to-a-minute per part down to **</del>$0.0006 and under six seconds** — roughly two orders of magnitude cheaper and ~10× faster.</p>
+<h3 id="semantic-rule-check-src">Semantic Rule Check (SRC)</h3>
+<p>You already run a Design Rule Check (DRC) and Electrical Rule Check (ERC). Both are mechanical: spacing, connectivity, unconnected pins. Neither one reads your design.</p>
+<p>I would like to propose a third: the <strong>Semantic Rule Check (SRC)</strong> — the class of bugs that pass DRC and ERC clean but are still wrong.</p>
+<p>LLMs are good at language, so why not just have it find</p>
+<ul>
+<li>rotated a usb-c connector 180* and now the <code>d+</code> is connected to the <code>d-</code></li>
+</ul>
+<p><img src="/posts/traces_usb_c_bug.webp" alt="traces" /></p>
+<ul>
+<li>you change a netlist label from <code>CAN_RXD</code> to <code>CAN_RX</code> and don't update all instances</li>
+<li>check the rating of the passives for power-related things</li>
+</ul>
+<p>Ok those are basic. Imagine if the SRC could read the full schematic in context and flag the weird stuff that only becomes obvious when you understand what the circuit is supposed to do:</p>
+<ul>
+<li>flag a motor driver whose current limit is below the motor's stall current</li>
+<li>catch an IMU placed far from the mechanical center when the design assumes clean motion data</li>
+<li>notice a battery charger configured for the wrong cell chemistry or charge current</li>
+<li>warn when an I2C pullup is missing, duplicated too many times, or tied to the wrong voltage rail</li>
+</ul>
+<p>Why now?</p>
+<ol>
+<li>KiCad is becoming widely adopted as a free and open-source EDA that is super capable</li>
+<li>It is a local program with a CLI, and its files are just plain text</li>
+<li><strong>You can use an agent like Claude Code or Codex to actually make the changes once they are detected!</strong></li>
+</ol>
+<h3 id="looking-forward">Looking Forward</h3>
+<p>"Automating electrical engineering" would be the natural progression of these ideas.</p>
+<p>Economically, this is a juicy opportunity, and the value shows up in two places.</p>
+<p><strong>The tools are expensive.</strong> A seat of Altium runs ~$4k–$10k/yr; Siemens (Xpedition / Capital) is enterprise-quote territory north of that. The market already pays a lot for software that helps engineers not make mistakes — and none of it reads the design the way an LLM can.</p>
+<p><strong>The mistakes are more expensive than the tools.</strong> The real cost isn't the license, it's the respin. Walk one through:</p>
+<ul>
+<li>A semantic bug — a flipped USB-C connector, an underrated cap on a power rail — passes DRC and ERC clean and ships.</li>
+<li>You catch it on the bench. Now you eat a new fab + assembly run and the lead time that comes with it: call it ~2–4 weeks of slip plus ~10–20 hours of engineering time to diagnose, fix, and re-review at $100/hr.</li>
+<li>If it slipped into a production batch instead — say 1,000 boards at ~$100 of raw material each — that's up to <strong>$100k of inventory</strong> at risk over a single net-name typo.</li>
+</ul>
+<p>So the bet is simple: an SRC that runs in seconds against a fully-populated schematic is cheap insurance against a five-figure mistake. That's the whole pitch.</p>
+<p>Electrical engineers are smart, and their jobs are complicated.</p>
+<p>To list a few of the main roles of their jobs:</p>
+<ul>
+<li><strong>supply chain management</strong></li>
+<li><strong>update / create PCB designs</strong></li>
+<li>physically testing</li>
+</ul>
+<p>The implications of a tool that ensures accuracy of PCB design likely means that there will be a consolidation of chips, biasing on ones that:</p>
+<ol>
+<li>have accessible information (datasheet, footprint, availability)</li>
+<li>have good data about them (i.e. ones on the internet that people use)</li>
+</ol>
+<p>I am excited for the future of electronic design, and hope traces lays a foundation for what it might look like.</p>
+
+
+            </main>
+            <footer>
+                
+<p class="taxonomies">
+
+</p>
+
+                
+                <p>&copy; Ben Stirling 2025</p>
+            </footer>
+        </div>
+        <script>
+            // Add image captions from alt text
+            document.addEventListener('DOMContentLoaded', function() {
+                const images = document.querySelectorAll('.w img[alt]');
+
+                images.forEach(function(img) {
+                    if (img.closest('.project-card')) return;
+                    const altText = img.getAttribute('alt');
+                    if (altText && altText.trim() !== '') {
+                        const caption = document.createElement('div');
+                        caption.className = 'image-caption';
+                        caption.textContent = altText;
+                        
+                        // Insert caption after the image
+                        img.parentNode.insertBefore(caption, img.nextSibling);
+                    }
+                });
+                
+                // Add copy buttons to code blocks
+                const codeBlocks = document.querySelectorAll('pre code');
+                
+                codeBlocks.forEach(function(codeBlock) {
+                    const pre = codeBlock.parentElement;
+                    
+                    // Create copy button
+                    const copyButton = document.createElement('button');
+                    copyButton.className = 'copy-button';
+                    copyButton.textContent = 'Copy';
+                    
+                    // Add click handler
+                    copyButton.addEventListener('click', function() {
+                        const text = codeBlock.textContent;
+                        
+                        navigator.clipboard.writeText(text).then(function() {
+                            copyButton.textContent = 'Copied!';
+                            copyButton.classList.add('copied');
+                            
+                            setTimeout(function() {
+                                copyButton.textContent = 'Copy';
+                                copyButton.classList.remove('copied');
+                            }, 2000);
+                        }).catch(function() {
+                            // Fallback for older browsers
+                            const textArea = document.createElement('textarea');
+                            textArea.value = text;
+                            document.body.appendChild(textArea);
+                            textArea.select();
+                            document.execCommand('copy');
+                            document.body.removeChild(textArea);
+                            
+                            copyButton.textContent = 'Copied!';
+                            copyButton.classList.add('copied');
+                            
+                            setTimeout(function() {
+                                copyButton.textContent = 'Copy';
+                                copyButton.classList.remove('copied');
+                            }, 2000);
+                        });
+                    });
+                    
+                    // Add button to pre element
+                    pre.appendChild(copyButton);
+                });
+            });
+            
+            // Share post function
+            function sharePost() {
+                const shareIcon = document.querySelector('.share-icon');
+                const shareText = document.querySelector('.share-text');
+                const shareButton = document.querySelector('.share-button');
+                const currentUrl = window.location.href;
+                
+                navigator.clipboard.writeText(currentUrl).then(function() {
+                    shareIcon.style.display = 'none';
+                    shareText.style.display = 'inline';
+                    shareButton.classList.add('shared');
+                    
+                    setTimeout(function() {
+                        shareIcon.style.display = 'inline';
+                        shareText.style.display = 'none';
+                        shareButton.classList.remove('shared');
+                    }, 2000);
+                }).catch(function() {
+                    // Fallback for older browsers
+                    const textArea = document.createElement('textarea');
+                    textArea.value = currentUrl;
+                    document.body.appendChild(textArea);
+                    textArea.select();
+                    document.execCommand('copy');
+                    document.body.removeChild(textArea);
+                    
+                    shareIcon.style.display = 'none';
+                    shareText.style.display = 'inline';
+                    shareButton.classList.add('shared');
+                    
+                    setTimeout(function() {
+                        shareIcon.style.display = 'inline';
+                        shareText.style.display = 'none';
+                        shareButton.classList.remove('shared');
+                    }, 2000);
+                });
+            }
+        </script>
+    </body>
+</html>
