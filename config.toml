@@ -14,4 +14,4 @@ build_search_index = true
 
 [extra]
 # Put all your custom variables here
-favicon = "/images/logo.ico"
+favicon = "/images/favicon.png"

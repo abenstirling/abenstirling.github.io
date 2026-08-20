@@ -76,7 +76,7 @@
         {% endif %}
         
         <link rel="canonical" href="{{ url | safe }}">
-        {% if config.extra.favicon %}<link rel="shortcut icon" type="image/x-icon" href="{{ get_url(path=config.extra.favicon, trailing_slash=false) }}">{% endif %}
+        {% if config.extra.favicon %}<link rel="icon" type="image/png" href="{{ get_url(path=config.extra.favicon, trailing_slash=false) }}">{% endif %}
         <script type="application/ld+json">
             {
                 {% if description %}"description":"{{ description | safe }}",{% endif %}
