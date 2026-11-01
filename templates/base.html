@@ -1,0 +1,237 @@
+<!doctype html>
+<html lang="{{ lang }}">
+    <head>
+        <!-- Google tag (gtag.js) -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-3YPTGE6JH6"></script>
+        <script>
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'G-3YPTGE6JH6');
+        </script>
+        <meta charset="UTF-8">
+        <meta content="IE=edge" http-equiv="X-UA-Compatible"/>
+        <meta content="text/html; charset=UTF-8" http-equiv="content-type"/>
+        <meta content="width=device-width, initial-scale=1" name="viewport"/>
+
+        {% if page is defined %}
+        {% set title = "Ben Stirling - " ~ page.title %}
+        {% else %}
+        {% set title = "Ben Stirling" %}
+        {% endif %}
+
+        {% if page is defined and page.extra.author %}
+        {% set author = page.extra.author %}
+        {% elif section is defined and section.extra.author %}
+        {% set author = section.extra.author %}
+        {% elif config.extra.author %}
+        {% set author = config.extra.author %}
+        {% endif %}
+
+        {% if page is defined and page.description %}
+        {% set description = page.description | truncate(length=150) %}
+        {% elif section is defined and section.description %}
+        {% set description = section.description | truncate(length=150) %}
+        {% elif config.description %}
+        {% set description = config.description | truncate(length=150) %}
+        {% endif %}
+
+        {% if page is defined and page.extra.image %}
+        {% set image = get_url(path=page.extra.image, trailing_slash=false) %}
+        {% elif section is defined and section.extra.image %}
+        {% set image = get_url(path=section.extra.image, trailing_slash=false) %}
+        {% elif config.extra.logo %}
+        {% set image = get_url(path=config.extra.logo, trailing_slash=false) %}
+        {% endif %}
+
+        {% if page is defined and page.permalink %}
+        {% set url = page.permalink %}
+        {% elif section is defined and section.permalink %}
+        {% set url = section.permalink %}
+        {% elif config.base_url %}
+        {% set url = config.base_url %}
+        {% endif %}
+
+        {% if title %}<title>{{ title }}</title>{% endif %}
+        {% block metatags %}
+        {% if title %}<meta name="title" content="{{ title }}">{% endif %}
+        {% if author %}<meta name="author" content="{{ author }}">{% endif %}
+        {% if description %}<meta name="description" content="{{ description }}">{% endif %}
+        <meta name="generator" content="Zola v0.16.1">
+
+        <meta property="og:type" content="website">
+        <meta property="og:url" content="{{ url | safe }}">
+        {% if title %}<meta property="og:site_name" content="{{ config.title }}">{% endif %}
+        {% if title %}<meta property="og:title" content="{{ title }}">{% endif %}
+        {% if description %}<meta property="og:description" content="{{ description }}">{% endif %}
+        {% if image %}<meta property="og:image" content="{{ image }}">{% endif %}
+
+        {% set twitter_card = config.extra.twitter_card | default(value=true) %}
+        {% if twitter_card != false %}
+        <meta property="twitter:card" content="summary_large_image">
+        <meta property="twitter:url" content="{{ url | safe }}">
+        {% if title %}<meta property="twitter:title" content="{{ title }}">{% endif %}
+        {% if description %}<meta property="twitter:description" content="{{ description }}">{% endif %}
+        {% if image %}<meta property="twitter:image" content="{{ image }}">{% endif %}
+        {% endif %}
+        
+        <link rel="canonical" href="{{ url | safe }}">
+        {% if config.extra.favicon %}<link rel="icon" type="image/png" href="{{ get_url(path=config.extra.favicon, trailing_slash=false) }}">{% endif %}
+        <script type="application/ld+json">
+            {
+                {% if description %}"description":"{{ description | safe }}",{% endif %}
+                "url":"{{ url | safe }}",
+                "@type":"WebSite",
+                {% if title %}"headline":"{{ title | safe }}",{% endif %}
+                {% if title %}"name":"{{ title | safe }}",{% endif %}
+                {% if author %}"author":{
+                    "@type":"Person",
+                    "name":"{{ author | safe }}"
+                },{% endif %}
+                "@context":"https://schema.org"
+            }
+        </script>
+        {% endblock metatags %}
+        {% block feed %}
+        {% if config.generate_feeds %}
+        <link rel="alternate" type="application/atom+xml" title="RSS" href="{{ get_url(path="atom.xml", trailing_slash=false) }}">
+        {% endif %}
+        {% endblock feed %}
+{% block css %}
+        <link rel="stylesheet" href="{{ get_url(path='style.css', trailing_slash=false) | safe }}"/>
+        <link rel="stylesheet" href="{{ get_url(path='custom.css', trailing_slash=false) | safe }}"/>
+        {% endblock css %}
+    </head>
+    <body theme="auto">
+        <div class="w">
+            <header>
+                {% if config.extra.header_nav %}
+                <nav>
+                    {% for nav_item in config.extra.header_nav %}
+                    <a href="{{ nav_item.url | safe }}" {% if nav_item.new_tab %}target="_blank" rel="noreferrer noopener"{% endif %}>{{ nav_item.name }}</a>
+                    {% endfor %}
+                </nav>
+                {% endif %}
+                {% block header %}{% if title %}<h1>{{ config.title }}</h1>{% endif %}{% endblock header %}
+            </header>
+            <main class="page-content" aria-label="Content">
+                {% block content %}{% endblock content %}
+            </main>
+            {% if page is defined or config.extra.footer_nav %}
+            <footer>
+                {% block footer %}{% endblock footer %}
+                {% if config.extra.footer_nav %}
+                <nav>
+                    {% for nav_item in config.extra.footer_nav %}
+                    <a href="{{ nav_item.url | safe }}">{{ nav_item.name }}</a>
+                    {% endfor %}
+                </nav>
+                {% endif %}
+            </footer>
+            {% endif %}
+        </div>
+        <script>
+            // Add image captions from alt text
+            document.addEventListener('DOMContentLoaded', function() {
+                const images = document.querySelectorAll('.w img[alt]');
+
+                images.forEach(function(img) {
+                    if (img.closest('.project-card')) return;
+                    const altText = img.getAttribute('alt');
+                    if (altText && altText.trim() !== '') {
+                        const caption = document.createElement('div');
+                        caption.className = 'image-caption';
+                        caption.textContent = altText;
+                        
+                        // Insert caption after the image
+                        img.parentNode.insertBefore(caption, img.nextSibling);
+                    }
+                });
+                
+                // Add copy buttons to code blocks
+                const codeBlocks = document.querySelectorAll('pre code');
+                
+                codeBlocks.forEach(function(codeBlock) {
+                    const pre = codeBlock.parentElement;
+                    
+                    // Create copy button
+                    const copyButton = document.createElement('button');
+                    copyButton.className = 'copy-button';
+                    copyButton.textContent = 'Copy';
+                    
+                    // Add click handler
+                    copyButton.addEventListener('click', function() {
+                        const text = codeBlock.textContent;
+                        
+                        navigator.clipboard.writeText(text).then(function() {
+                            copyButton.textContent = 'Copied!';
+                            copyButton.classList.add('copied');
+                            
+                            setTimeout(function() {
+                                copyButton.textContent = 'Copy';
+                                copyButton.classList.remove('copied');
+                            }, 2000);
+                        }).catch(function() {
+                            // Fallback for older browsers
+                            const textArea = document.createElement('textarea');
+                            textArea.value = text;
+                            document.body.appendChild(textArea);
+                            textArea.select();
+                            document.execCommand('copy');
+                            document.body.removeChild(textArea);
+                            
+                            copyButton.textContent = 'Copied!';
+                            copyButton.classList.add('copied');
+                            
+                            setTimeout(function() {
+                                copyButton.textContent = 'Copy';
+                                copyButton.classList.remove('copied');
+                            }, 2000);
+                        });
+                    });
+                    
+                    // Add button to pre element
+                    pre.appendChild(copyButton);
+                });
+            });
+            
+            // Share post function
+            function sharePost() {
+                const shareIcon = document.querySelector('.share-icon');
+                const shareText = document.querySelector('.share-text');
+                const shareButton = document.querySelector('.share-button');
+                const currentUrl = window.location.href;
+                
+                navigator.clipboard.writeText(currentUrl).then(function() {
+                    shareIcon.style.display = 'none';
+                    shareText.style.display = 'inline';
+                    shareButton.classList.add('shared');
+                    
+                    setTimeout(function() {
+                        shareIcon.style.display = 'inline';
+                        shareText.style.display = 'none';
+                        shareButton.classList.remove('shared');
+                    }, 2000);
+                }).catch(function() {
+                    // Fallback for older browsers
+                    const textArea = document.createElement('textarea');
+                    textArea.value = currentUrl;
+                    document.body.appendChild(textArea);
+                    textArea.select();
+                    document.execCommand('copy');
+                    document.body.removeChild(textArea);
+                    
+                    shareIcon.style.display = 'none';
+                    shareText.style.display = 'inline';
+                    shareButton.classList.add('shared');
+                    
+                    setTimeout(function() {
+                        shareIcon.style.display = 'inline';
+                        shareText.style.display = 'none';
+                        shareButton.classList.remove('shared');
+                    }, 2000);
+                });
+            }
+        </script>
+    </body>
+</html>

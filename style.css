@@ -1,0 +1,185 @@
+/* Critical styles for initial render */
+@font-face {
+    font-family: 'Geist Mono';
+    src: url('/fonts/GeistMono-VariableFont_wght.ttf') format('truetype');
+    font-weight: 100 900;
+    font-style: normal;
+    font-display: swap;
+}
+
+body {
+    font-family: 'Geist Mono', monospace;
+    line-height: 1.6;
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    /* Prevent layout shifts during font loading */
+    font-display: swap;
+    /* Enforce dark mode with better contrast */
+    background-color: #121212;
+    color: #ffffff;
+}
+
+/* Critical layout containers */
+main {
+    flex: 1;
+    padding: 2rem 1rem;
+    max-width: 1200px;
+    margin: 0 auto;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+/* Critical header styles */
+header {
+    padding: 1rem;
+    text-align: center;
+    position: relative;
+}
+
+.main-title-container {
+    min-height: 3.5rem;
+    margin: 0;
+}
+
+.main-title {
+    font-size: 2.5rem;
+    font-weight: 400;
+    line-height: 1.1;
+    letter-spacing: -0.01em;
+    margin: 0;
+}
+
+.subtitle {
+    font-size: 1.25rem;
+    color: #fff;
+    font-weight: 500;
+    margin: 0.5rem 0 0;
+}
+
+/* Critical social icons */
+.social-icons-container {
+    min-height: 2rem;
+    margin: 2rem 0;
+    display: flex;
+    justify-content: center;
+    gap: 1.5rem;
+}
+
+.social-icon {
+    font-size: 1.6rem;
+    color: #4F00CB;
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+.social-icon:hover {
+    color: #4F00CB;
+}
+
+/* Critical project card styles */
+.project-image-container {
+    aspect-ratio: 1/1;
+    width: 100%;
+    max-width: 400px;
+    position: relative;
+    background-color: #242424;
+    margin-bottom: 1rem;
+}
+
+.project-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.project-card {
+    max-width: 400px;
+    border: 1px solid #333333;
+    border-radius: 0.5rem;
+    padding: 1rem;
+    background-color: #242424;
+    margin-bottom: 2rem;
+}
+
+/* Critical grid layout */
+.projects-grid {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2rem;
+}
+
+@media (min-width: 1024px) {
+    .projects-grid {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 400px));
+        gap: 3rem;
+        justify-content: center;
+    }
+}
+
+/* Fix link colors for project cards - use black so it inverts to white */
+a.project-card,
+a.project-card:link,
+a.project-card:visited,
+a.project-card:hover,
+a.project-card:active {
+    color: #000000 !important;
+    text-decoration: none !important;
+}
+
+a.project-card:hover .project-title {
+    color: #4F00CB !important;
+}
+
+.project-title {
+    font-weight: bold;
+    color: #000000 !important; /* Black inverts to white */
+    margin-bottom: 5px;
+}
+
+.project-date {
+    color: #aaaaaa !important;
+    font-size: 0.9em;
+    margin-bottom: 10px;
+}
+
+/* Style images in post content - override theme styles */
+body main img,
+body .page-content img,
+body main.page-content img,
+.w main img,
+.w img,
+main img,
+img {
+    max-width: 100% !important;
+    height: auto !important;
+    border-radius: 12px !important;
+    margin: 20px auto !important;
+    padding: 8px !important;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.3) !important;
+    display: block !important;
+    background-color: #1a1a1a !important;
+}
+
+/* Force image styles with maximum specificity */
+html body[theme] .w main img,
+html body[theme="auto"] .w main img,
+html body[theme="dark"] .w main img,
+html body .w main.page-content img,
+html body .w img {
+    max-width: 100% !important;
+    height: auto !important;
+    border-radius: 12px !important;
+    margin: 20px auto !important;
+    padding: 8px !important;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.3) !important;
+    display: block !important;
+    background-color: #1a1a1a !important;
+}
+
+/* Load non-critical styles asynchronously */
+@import url('style/non-critical.css') print;
